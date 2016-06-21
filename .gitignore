@@ -1,0 +1,14 @@
+# OS related files
+.directory
+
+# ctags file
+tags
+
+# temporary files
+*.swp
+*.swo
+*.swn
+*~
+*.bak
+*.ignore
+
