@@ -11,62 +11,34 @@ import (
 )
 
 type ObjectConfig struct {
-	AllowNat              string `json:"allowNat"`
-	AllowSnat             string `json:"allowSnat"`
-	FullPath              string `json:"fullPath"`
-	Generation            int64  `json:"generation"`
-	IgnorePersistedWeight string `json:"ignorePersistedWeight"`
-	IpTosToClient         string `json:"ipTosToClient"`
-	IpTosToServer         string `json:"ipTosToServer"`
-	Kind                  string `json:"kind"`
-	LinkQosToClient       string `json:"linkQosToClient"`
-	LinkQosToServer       string `json:"linkQosToServer"`
-	LoadBalancingMode     string `json:"loadBalancingMode"`
+	AllowNat              string `json:"allowNat,omitempty"`
+	AllowSnat             string `json:"allowSnat,omitempty"`
+	FullPath              string `json:"fullPath,omitempty"`
+	Generation            int64  `json:"generation,omitempty"`
+	IgnorePersistedWeight string `json:"ignorePersistedWeight,omitempty"`
+	IpTosToClient         string `json:"ipTosToClient,omitempty"`
+	IpTosToServer         string `json:"ipTosToServer,omitempty"`
+	Kind                  string `json:"kind,omitempty"`
+	LinkQosToClient       string `json:"linkQosToClient,omitempty"`
+	LinkQosToServer       string `json:"linkQosToServer,omitempty"`
+	LoadBalancingMode     string `json:"loadBalancingMode,omitempty"`
 	MembersReference      struct {
-		IsSubcollection bool   `json:"isSubcollection"`
-		Link            string `json:"link"`
-	} `json:"membersReference"`
-	MinActiveMembers       int64  `json:"minActiveMembers"`
-	MinUpMembers           int64  `json:"minUpMembers"`
-	MinUpMembersAction     string `json:"minUpMembersAction"`
-	MinUpMembersChecking   string `json:"minUpMembersChecking"`
-	Monitor                string `json:"monitor"`
-	Name                   string `json:"name"`
-	QueueDepthLimit        int64  `json:"queueDepthLimit"`
-	QueueOnConnectionLimit string `json:"queueOnConnectionLimit"`
-	QueueTimeLimit         int64  `json:"queueTimeLimit"`
-	ReselectTries          int64  `json:"reselectTries"`
-	SelfLink               string `json:"selfLink"`
-	ServiceDownAction      string `json:"serviceDownAction"`
-	SlowRampTime           int64  `json:"slowRampTime"`
-}
-
-type PoolMembersConfig struct {
-	Items []struct {
-		Address         string `json:"address"`
-		ConnectionLimit int64  `json:"connectionLimit"`
-		DynamicRatio    int64  `json:"dynamicRatio"`
-		Ephemeral       string `json:"ephemeral"`
-		Fqdn            struct {
-			Autopopulate string `json:"autopopulate"`
-		} `json:"fqdn"`
-		FullPath       string `json:"fullPath"`
-		Generation     int64  `json:"generation"`
-		InheritProfile string `json:"inheritProfile"`
-		Kind           string `json:"kind"`
-		Logging        string `json:"logging"`
-		Monitor        string `json:"monitor"`
-		Name           string `json:"name"`
-		Partition      string `json:"partition"`
-		PriorityGroup  int64  `json:"priorityGroup"`
-		RateLimit      string `json:"rateLimit"`
-		Ratio          int64  `json:"ratio"`
-		SelfLink       string `json:"selfLink"`
-		Session        string `json:"session"`
-		State          string `json:"state"`
-	} `json:"items"`
-	Kind     string `json:"kind"`
-	SelfLink string `json:"selfLink"`
+		IsSubcollection bool   `json:"isSubcollection,omitempty"`
+		Link            string `json:"link,omitempty"`
+	} `json:"membersReference,omitempty"`
+	MinActiveMembers       int64  `json:"minActiveMembers,omitempty"`
+	MinUpMembers           int64  `json:"minUpMembers,omitempty"`
+	MinUpMembersAction     string `json:"minUpMembersAction,omitempty"`
+	MinUpMembersChecking   string `json:"minUpMembersChecking,omitempty"`
+	Monitor                string `json:"monitor,omitempty"`
+	Name                   string `json:"name,omitempty"`
+	QueueDepthLimit        int64  `json:"queueDepthLimit,omitempty"`
+	QueueOnConnectionLimit string `json:"queueOnConnectionLimit,omitempty"`
+	QueueTimeLimit         int64  `json:"queueTimeLimit,omitempty"`
+	ReselectTries          int64  `json:"reselectTries,omitempty"`
+	SelfLink               string `json:"selfLink,omitempty"`
+	ServiceDownAction      string `json:"serviceDownAction,omitempty"`
+	SlowRampTime           int64  `json:"slowRampTime,omitempty"`
 }
 
 const PoolEndpoint = "/pool"
