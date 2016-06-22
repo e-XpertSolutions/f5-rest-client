@@ -13,59 +13,59 @@ import (
 
 // VirtualServerConfig holds a list of virtual server configuration.
 type VirtualServerConfig struct {
-	Items    []VirtualServerConfigItem `json:"items"`
-	Kind     string                    `json:"kind"`
-	SelfLink string                    `json:"selfLink"`
+	Items    []VirtualServerConfigItem `json:"items,omitempty"`
+	Kind     string                    `json:"kind,omitempty"`
+	SelfLink string                    `json:"selfLink,omitempty"`
 }
 
 // VirtualServerConfigItem  holds the configuration of a single virtual server.
 type VirtualServerConfigItem struct {
-	AddressStatus     string `json:"addressStatus"`
-	AutoLasthop       string `json:"autoLasthop"`
-	CmpEnabled        string `json:"cmpEnabled"`
-	ConnectionLimit   int64  `json:"connectionLimit"`
-	Description       string `json:"description"`
-	Destination       string `json:"destination"`
-	Disabled          bool   `json:"disabled"`
-	Enabled           bool   `json:"enabled"`
-	FullPath          string `json:"fullPath"`
-	Generation        int64  `json:"generation"`
-	GtmScore          int64  `json:"gtmScore"`
-	IPProtocol        string `json:"ipProtocol"`
-	Kind              string `json:"kind"`
-	Mask              string `json:"mask"`
-	Mirror            string `json:"mirror"`
-	MobileAppTunnel   string `json:"mobileAppTunnel"`
-	Name              string `json:"name"`
-	Nat64             string `json:"nat64"`
-	Partition         string `json:"partition"`
+	AddressStatus     string `json:"addressStatus,omitempty"`
+	AutoLasthop       string `json:"autoLasthop,omitempty"`
+	CmpEnabled        string `json:"cmpEnabled,omitempty"`
+	ConnectionLimit   int64  `json:"connectionLimit,omitempty"`
+	Description       string `json:"description,omitempty"`
+	Destination       string `json:"destination,omitempty"`
+	Disabled          bool   `json:"disabled,omitempty"`
+	Enabled           bool   `json:"enabled,omitempty"`
+	FullPath          string `json:"fullPath,omitempty"`
+	Generation        int64  `json:"generation,omitempty"`
+	GtmScore          int64  `json:"gtmScore,omitempty"`
+	IPProtocol        string `json:"ipProtocol,omitempty"`
+	Kind              string `json:"kind,omitempty"`
+	Mask              string `json:"mask,omitempty"`
+	Mirror            string `json:"mirror,omitempty"`
+	MobileAppTunnel   string `json:"mobileAppTunnel,omitempty"`
+	Name              string `json:"name,omitempty"`
+	Nat64             string `json:"nat64,omitempty"`
+	Partition         string `json:"partition,omitempty"`
 	PoliciesReference struct {
-		IsSubcollection bool   `json:"isSubcollection"`
-		Link            string `json:"link"`
-	} `json:"policiesReference"`
-	Pool              string `json:"pool"`
+		IsSubcollection bool   `json:"isSubcollection,omitempty"`
+		Link            string `json:"link,omitempty"`
+	} `json:"policiesReference,omitempty"`
+	Pool              string `json:"pool,omitempty"`
 	ProfilesReference struct {
-		IsSubcollection bool   `json:"isSubcollection"`
-		Link            string `json:"link"`
-	} `json:"profilesReference"`
-	RateLimit                string   `json:"rateLimit"`
-	RateLimitDstMask         int64    `json:"rateLimitDstMask"`
-	RateLimitMode            string   `json:"rateLimitMode"`
-	RateLimitSrcMask         int64    `json:"rateLimitSrcMask"`
-	Rules                    []string `json:"rules"`
-	SelfLink                 string   `json:"selfLink"`
-	Source                   string   `json:"source"`
+		IsSubcollection bool   `json:"isSubcollection,omitempty"`
+		Link            string `json:"link,omitempty"`
+	} `json:"profilesReference,omitempty"`
+	RateLimit                string   `json:"rateLimit,omitempty"`
+	RateLimitDstMask         int64    `json:"rateLimitDstMask,omitempty"`
+	RateLimitMode            string   `json:"rateLimitMode,omitempty"`
+	RateLimitSrcMask         int64    `json:"rateLimitSrcMask,omitempty"`
+	Rules                    []string `json:"rules,omitempty"`
+	SelfLink                 string   `json:"selfLink,omitempty"`
+	Source                   string   `json:"source,omitempty"`
 	SourceAddressTranslation struct {
-		Type string `json:"type"`
-	} `json:"sourceAddressTranslation"`
-	SourcePort       string   `json:"sourcePort"`
-	SynCookieStatus  string   `json:"synCookieStatus"`
-	TranslateAddress string   `json:"translateAddress"`
-	TranslatePort    string   `json:"translatePort"`
-	Vlans            []string `json:"vlans"`
-	VlansDisabled    bool     `json:"vlansDisabled"`
-	VlansEnabled     bool     `json:"vlansEnabled"`
-	VsIndex          int64    `json:"vsIndex"`
+		Type string `json:"type,omitempty"`
+	} `json:"sourceAddressTranslation,omitempty"`
+	SourcePort       string   `json:"sourcePort,omitempty"`
+	SynCookieStatus  string   `json:"synCookieStatus,omitempty"`
+	TranslateAddress string   `json:"translateAddress,omitempty"`
+	TranslatePort    string   `json:"translatePort,omitempty"`
+	Vlans            []string `json:"vlans,omitempty"`
+	VlansDisabled    bool     `json:"vlansDisabled,omitempty"`
+	VlansEnabled     bool     `json:"vlansEnabled,omitempty"`
+	VsIndex          int64    `json:"vsIndex,omitempty"`
 }
 
 // VirtualEndpoint represents the REST resource for managing virtual server.
