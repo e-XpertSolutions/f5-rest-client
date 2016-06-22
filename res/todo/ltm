@@ -1,4 +1,4 @@
- Add-iRuleToVirtualServer
+Add-iRuleToVirtualServer
 Add-PoolMember
 Disable-PoolMember
 Enable-PoolMember
