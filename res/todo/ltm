@@ -17,9 +17,9 @@ Get-PoolMembers
 Get-PoolMemberStatus
 Get-PoolsForMember
 Get-StatusShape
-Get-VirtualServer
-Get-VirtualServeriRuleCollection
-Get-VirtualServerList
+--Get-VirtualServer
+--Get-VirtualServeriRuleCollection
+--Get-VirtualServerList
 New-Pool
 New-VirtualServer
 Remove-iRuleFromVirtualServer
