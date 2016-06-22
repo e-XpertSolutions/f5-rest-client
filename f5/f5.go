@@ -99,8 +99,16 @@ func (c *Client) DisableCertCheck() {
 
 // MakeRequest creates a request with headers appropriately set to make
 // authenticated requests. This method must be called for every new request.
-func (c Client) MakeRequest(method, restPath string) (*http.Request, error) {
-	req, err := http.NewRequest(method, c.makeURL(restPath), nil)
+func (c Client) MakeRequest(method, restPath string, data interface{}) (*http.Request, error) {
+	var buf *bytes.Buffer
+	if data != nil {
+		bs, err := json.Marshal(data)
+		if err != nil {
+			return nil, fmt.Errorf("failed to marshal data into json: %v", err)
+		}
+		buf = bytes.NewBuffer(bs)
+	}
+	req, err := http.NewRequest(method, c.makeURL(restPath), buf)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create F5 authenticated request: %v", err)
 	}
