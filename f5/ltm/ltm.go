@@ -26,6 +26,6 @@ func New(c f5.Client) LTM {
 }
 
 // Virtual returns a VirtualResource configured to query tm/ltm/virtual API.virtual API.
-func (ltm LTM) Virtual() VirtualResource {
-	return ltm.virtual
+func (ltm LTM) Virtual() *VirtualResource {
+	return &ltm.virtual
 }
