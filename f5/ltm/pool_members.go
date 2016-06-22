@@ -5,9 +5,10 @@
 package ltm
 
 import (
-	"e-xpert_solutions/f5-rest-client/f5"
 	"encoding/json"
 	"net/http"
+
+	"e-xpert_solutions/f5-rest-client/f5"
 )
 
 type PoolMembersConfig struct {
