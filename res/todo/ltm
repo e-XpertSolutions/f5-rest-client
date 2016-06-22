@@ -7,9 +7,9 @@ Get-CurrentConnectionCount
 Get-F5session
 Get-F5Status
 Get-iRuleCollection
-Get-Pool
-Get-PoolList
-Get-PoolMember
+--Get-Pool
+--Get-PoolList
+--Get-PoolMember
 Get-PoolMemberCollection
 Get-PoolMemberDescription
 Get-PoolMemberIP
@@ -20,10 +20,10 @@ Get-StatusShape
 --Get-VirtualServer
 --Get-VirtualServeriRuleCollection
 --Get-VirtualServerList
-New-Pool
+-New-Pool
 New-VirtualServer
 Remove-iRuleFromVirtualServer
-Remove-Pool
+-Remove-Pool
 Remove-PoolMember
 Remove-ProfileRamCache
 Remove-VirtualServer
