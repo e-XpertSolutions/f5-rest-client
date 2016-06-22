@@ -5,6 +5,7 @@
 package f5
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -26,4 +27,17 @@ func NewRequestError(body io.Reader) (*RequestError, error) {
 		return nil, fmt.Errorf("failed to decode request error: %v", err)
 	}
 	return &reqErr, nil
+}
+
+// Error implements the errors.Error interface
+func (err RequestError) Error() string {
+	return fmt.Sprintf("%s (code: %d)", err.Message, err.Code)
+}
+
+func (err RequestError) String() string {
+	buf := bytes.NewBufferString(err.Error())
+	for _, es := range err.ErrStack {
+		buf.WriteString("\n   " + es)
+	}
+	return buf.String()
 }
