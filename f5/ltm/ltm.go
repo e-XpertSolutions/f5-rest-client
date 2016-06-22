@@ -14,16 +14,18 @@ const BasePath = "mgmt/tm/ltm"
 type LTM struct {
 	c f5.Client
 
-	virtual VirtualResource
-	pool    PoolResource
+	virtual     VirtualResource
+	pool        PoolResource
+	poolMembers PoolMembersResource
 }
 
 // New creates a new LTM client.
 func New(c f5.Client) LTM {
 	return LTM{
-		c:       c,
-		virtual: VirtualResource{c: c},
-		pool:    PoolResource{c: c},
+		c:           c,
+		virtual:     VirtualResource{c: c},
+		pool:        PoolResource{c: c},
+		poolMembers: PoolMembersResource{c: c},
 	}
 }
 
@@ -35,4 +37,9 @@ func (ltm LTM) Virtual() *VirtualResource {
 // Pool returns a PoolResource configured to query /tm/ltm/pool API.
 func (ltm LTM) Pool() *PoolResource {
 	return &ltm.pool
+}
+
+// Pool returns a PoolResource configured to query /tm/ltm/pool API.
+func (ltm LTM) PoolMembers() *PoolMembersResource {
+	return &ltm.poolMembers
 }
