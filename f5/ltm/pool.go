@@ -17,8 +17,8 @@ type ObjectConfig struct {
 	FullPath              string `json:"fullPath,omitempty"`
 	Generation            int64  `json:"generation,omitempty"`
 	IgnorePersistedWeight string `json:"ignorePersistedWeight,omitempty"`
-	IpTosToClient         string `json:"ipTosToClient,omitempty"`
-	IpTosToServer         string `json:"ipTosToServer,omitempty"`
+	IPTosToClient         string `json:"ipTosToClient,omitempty"`
+	IPTosToServer         string `json:"ipTosToServer,omitempty"`
 	Kind                  string `json:"kind,omitempty"`
 	LinkQosToClient       string `json:"linkQosToClient,omitempty"`
 	LinkQosToServer       string `json:"linkQosToServer,omitempty"`
