@@ -15,6 +15,7 @@ type LTM struct {
 	c f5.Client
 
 	virtual     VirtualResource
+	rule        RuleResource
 	pool        PoolResource
 	poolMembers PoolMembersResource
 }
@@ -24,6 +25,7 @@ func New(c f5.Client) LTM {
 	return LTM{
 		c:           c,
 		virtual:     VirtualResource{c: c},
+		rule:        RuleResource{c: c},
 		pool:        PoolResource{c: c},
 		poolMembers: PoolMembersResource{c: c},
 	}
@@ -32,6 +34,11 @@ func New(c f5.Client) LTM {
 // Virtual returns a VirtualResource configured to query tm/ltm/virtual API.
 func (ltm LTM) Virtual() *VirtualResource {
 	return &ltm.virtual
+}
+
+// Rule returns a RuleResource configured to query tm/ltm/rule API.
+func (ltm LTM) Rule() *RuleResource {
+	return &ltm.rule
 }
 
 // Pool returns a PoolResource configured to query /tm/ltm/pool API.
