@@ -68,22 +68,6 @@ type VirtualServerConfigItem struct {
 	VsIndex          int64    `json:"vsIndex,omitempty"`
 }
 
-// A Rule holds an iRule configuration.
-type Rule struct {
-	Action              string `json:"action,omitempty"`
-	AppService          string `json:"appService,omitempty"`
-	DefinitionChecksum  string `json:"definitionChecksum,omitempty"`
-	DefinitionSignature string `json:"definitionSignature,omitempty"`
-	Hidden              bool   `json:"hidden,omitempty"`
-	ignoreVerification  string `json:"ignoreVerification,omitempty"`
-	NoDelete            bool   `json:"noDelete,omitempty"`
-	NoWrite             bool   `json:"noWrite,omitempty"`
-	TMPartition         string `json:"tmPartition,omitempty"`
-	Plugin              string `json:"plugin,omitempty"`
-	PublicCert          string `json:"publicCert,omitempty"`
-	signingKey          string `json:"signingKey,omitempty"`
-}
-
 // VirtualEndpoint represents the REST resource for managing virtual server.
 const VirtualEndpoint = "/virtual"
 
