@@ -68,6 +68,22 @@ type VirtualServerConfigItem struct {
 	VsIndex          int64    `json:"vsIndex,omitempty"`
 }
 
+// A Rule holds an iRule configuration.
+type Rule struct {
+	Action              string `json:"action,omitempty"`
+	AppService          string `json:"appService,omitempty"`
+	DefinitionChecksum  string `json:"definitionChecksum,omitempty"`
+	DefinitionSignature string `json:"definitionSignature,omitempty"`
+	Hidden              bool   `json:"hidden,omitempty"`
+	ignoreVerification  string `json:"ignoreVerification,omitempty"`
+	NoDelete            bool   `json:"noDelete,omitempty"`
+	NoWrite             bool   `json:"noWrite,omitempty"`
+	TMPartition         string `json:"tmPartition,omitempty"`
+	Plugin              string `json:"plugin,omitempty"`
+	PublicCert          string `json:"publicCert,omitempty"`
+	signingKey          string `json:"signingKey,omitempty"`
+}
+
 // VirtualEndpoint represents the REST resource for managing virtual server.
 const VirtualEndpoint = "/virtual"
 
@@ -147,6 +163,19 @@ func (vr *VirtualResource) Edit(id string, item VirtualServerConfigItem) error {
 // Delete a single server configuration identified by id.
 func (vr *VirtualResource) Delete(id string) error {
 	resp, err := vr.doRequest("DELETE", id, nil)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	if err := vr.readError(resp); err != nil {
+		return err
+	}
+	return nil
+}
+
+// AddRule adds an iRule to the virtual server identified by id.
+func (vr *VirtualResource) AddRule(id string, rule Rule) error {
+	resp, err := vr.doRequest("POST", id+"/rule", rule)
 	if err != nil {
 		return err
 	}
