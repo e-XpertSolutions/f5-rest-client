@@ -6,7 +6,7 @@ Get-AllPoolMembersStatus
 Get-CurrentConnectionCount
 Get-F5session
 Get-F5Status
-Get-iRuleCollection
+--Get-iRuleCollection
 --Get-Pool
 --Get-PoolList
 --Get-PoolMember
