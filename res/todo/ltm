@@ -1,5 +1,5 @@
 --Add-iRuleToVirtualServer
-Add-PoolMember
+--Add-PoolMember
 Disable-PoolMember
 Enable-PoolMember
 Get-AllPoolMembersStatus
@@ -22,9 +22,9 @@ Get-StatusShape
 --Get-VirtualServerList
 --New-Pool
 --New-VirtualServer
-Remove-iRuleFromVirtualServer
+--Remove-iRuleFromVirtualServer
 --Remove-Pool
-Remove-PoolMember
+--Remove-PoolMember
 Remove-ProfileRamCache
 --Remove-VirtualServer
 Set-PoolMemberDescription
