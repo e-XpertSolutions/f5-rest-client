@@ -173,6 +173,24 @@ func (vr *VirtualResource) Delete(id string) error {
 	return nil
 }
 
+// Rules gets the iRules configuration for a virtual server identified by id.
+func (vr *VirtualResource) Rules(id string) ([]Rule, error) {
+	resp, err := vr.doRequest("GET", id+"/rule", nil)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if err := vr.readError(resp); err != nil {
+		return nil, err
+	}
+	var rules []Rule
+	dec := json.NewDecoder(resp.Body)
+	if err := dec.Decode(&rules); err != nil {
+		return nil, err
+	}
+	return rules, nil
+}
+
 // AddRule adds an iRule to the virtual server identified by id.
 func (vr *VirtualResource) AddRule(id string, rule Rule) error {
 	resp, err := vr.doRequest("POST", id+"/rule", rule)
