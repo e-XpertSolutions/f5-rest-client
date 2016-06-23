@@ -29,7 +29,7 @@ type Rule struct {
 // RuleEndpoint represents the REST resource for managing iRule configurations.
 const RuleEndpoint = "/rule"
 
-// A RuleResources provides an API to manage iRule configurations.
+// A RuleResource provides an API to manage iRule configurations.
 type RuleResource struct {
 	c f5.Client
 }

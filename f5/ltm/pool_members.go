@@ -11,12 +11,14 @@ import (
 	"e-xpert_solutions/f5-rest-client/f5"
 )
 
+// A PoolMembersConfig holds a list of pool members configuration.
 type PoolMembersConfig struct {
 	Items    []PoolMembersConfigItem `json:"items,omitempty"`
 	Kind     string                  `json:"kind,omitempty"`
 	SelfLink string                  `json:"selfLink,omitempty"`
 }
 
+// A PoolMembersConfigItem holds the configuration for the members of a pool.
 type PoolMembersConfigItem struct {
 	Address         string `json:"address,omitempty"`
 	ConnectionLimit int64  `json:"connectionLimit,omitempty"`
@@ -41,12 +43,15 @@ type PoolMembersConfigItem struct {
 	State          string `json:"state,omitempty"`
 }
 
+// PoolMembersEndpoint represents the REST resource for managing pool members.
 const PoolMembersEndpoint = "/pool_members"
 
+// PoolMembersResource provides an API to manage pool members configuration.
 type PoolMembersResource struct {
 	c f5.Client
 }
 
+// ListAll lists all the pool members configurations.
 func (pmr *PoolMembersResource) ListAll() (*PoolMembersConfig, error) {
 	resp, err := pmr.doRequest("GET", "", nil)
 	if err != nil {
@@ -64,6 +69,7 @@ func (pmr *PoolMembersResource) ListAll() (*PoolMembersConfig, error) {
 	return &poolMembersConfig, nil
 }
 
+// Get a single pool members configuration identified by id.
 func (pmr *PoolMembersResource) Get(id string) (*PoolMembersConfigItem, error) {
 	resp, err := pmr.doRequest("GET", id, nil)
 	if err != nil {
@@ -81,6 +87,7 @@ func (pmr *PoolMembersResource) Get(id string) (*PoolMembersConfigItem, error) {
 	return &item, nil
 }
 
+// Create a new pool members configuration.
 func (pmr *PoolMembersResource) Create(item PoolMembersConfigItem) error {
 	resp, err := pmr.doRequest("POST", "", item)
 	if err != nil {
@@ -93,6 +100,7 @@ func (pmr *PoolMembersResource) Create(item PoolMembersConfigItem) error {
 	return nil
 }
 
+// Edit a pool members configuration indentified by id.
 func (pmr *PoolMembersResource) Edit(id string, item PoolMembersConfigItem) error {
 	resp, err := pmr.doRequest("PUT", id, item)
 	if err != nil {
@@ -105,6 +113,7 @@ func (pmr *PoolMembersResource) Edit(id string, item PoolMembersConfigItem) erro
 	return nil
 }
 
+// Delete a single pool members configuration identified by id.
 func (pmr *PoolMembersResource) Delete(id string) error {
 	resp, err := pmr.doRequest("DELETE", id, nil)
 	if err != nil {

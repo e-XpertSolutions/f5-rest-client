@@ -77,7 +77,7 @@ const VirtualEndpoint = "/virtual"
 type VirtualResponse struct {
 }
 
-// VirtualResource provides API to manage virtual server configurations.
+// VirtualResource provides an API to manage virtual server configurations.
 type VirtualResource struct {
 	c f5.Client
 }
