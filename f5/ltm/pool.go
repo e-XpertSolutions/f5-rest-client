@@ -11,6 +11,7 @@ import (
 	"e-xpert_solutions/f5-rest-client/f5"
 )
 
+// An ObjectConfig hold the configuration for a pool.
 type ObjectConfig struct {
 	AllowNat              string `json:"allowNat,omitempty"`
 	AllowSnat             string `json:"allowSnat,omitempty"`
@@ -42,12 +43,15 @@ type ObjectConfig struct {
 	SlowRampTime           int64  `json:"slowRampTime,omitempty"`
 }
 
+// PoolEndpoint represents the REST resource for managing a pool.
 const PoolEndpoint = "/pool"
 
+// A PoolResource provides API to manage pool configuration.
 type PoolResource struct {
 	c f5.Client
 }
 
+// ListAll lists all the pool configurations.
 func (pr *PoolResource) ListAll() ([]ObjectConfig, error) {
 	resp, err := pr.doRequest("GET", "", nil)
 	if err != nil {
@@ -65,6 +69,7 @@ func (pr *PoolResource) ListAll() ([]ObjectConfig, error) {
 	return objConfList, nil
 }
 
+// Get a single pool configuration identified by id.
 func (pr *PoolResource) Get(id string) (*ObjectConfig, error) {
 	resp, err := pr.doRequest("GET", id, nil)
 	if err != nil {
@@ -82,6 +87,7 @@ func (pr *PoolResource) Get(id string) (*ObjectConfig, error) {
 	return &objConf, nil
 }
 
+// Create a new pool configuration.
 func (pr *PoolResource) Create(objConf ObjectConfig) error {
 	resp, err := pr.doRequest("POST", "", objConf)
 	if err != nil {
@@ -94,6 +100,7 @@ func (pr *PoolResource) Create(objConf ObjectConfig) error {
 	return nil
 }
 
+// Edit a pool configuration identified by id.
 func (pr *PoolResource) Edit(id string, objConf ObjectConfig) error {
 	resp, err := pr.doRequest("PUT", id, objConf)
 	if err != nil {
@@ -106,6 +113,7 @@ func (pr *PoolResource) Edit(id string, objConf ObjectConfig) error {
 	return nil
 }
 
+// Delete a single pool configuration identified by id.
 func (pr *PoolResource) Delete(id string) error {
 	resp, err := pr.doRequest("DELETE", id, nil)
 	if err != nil {
@@ -118,6 +126,7 @@ func (pr *PoolResource) Delete(id string) error {
 	return nil
 }
 
+// GetMembers gets all the members associated to the pool identified by id.
 func (pr *PoolResource) GetMembers(id string) (*PoolMembersConfig, error) {
 	resp, err := pr.doRequest("GET", id+"/members", nil)
 	if err != nil {
