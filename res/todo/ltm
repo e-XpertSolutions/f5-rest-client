@@ -20,11 +20,11 @@ Get-StatusShape
 --Get-VirtualServer
 --Get-VirtualServeriRuleCollection
 --Get-VirtualServerList
--New-Pool
-New-VirtualServer
+--New-Pool
+--New-VirtualServer
 Remove-iRuleFromVirtualServer
--Remove-Pool
+--Remove-Pool
 Remove-PoolMember
 Remove-ProfileRamCache
-Remove-VirtualServer
+--Remove-VirtualServer
 Set-PoolMemberDescription
