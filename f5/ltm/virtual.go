@@ -188,6 +188,19 @@ func (vr *VirtualResource) AddRule(id string, rule Rule) error {
 	return nil
 }
 
+// RemoveRule removes a single  iRule from the virtual server identified by id.
+func (vr *VirtualResource) RemoveRule(vsID, ruleID string) error {
+	resp, err := vr.doRequest("DELETE", vsID+"/rule/"+ruleID, nil)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	if err := vr.readError(resp); err != nil {
+		return err
+	}
+	return nil
+}
+
 // doRequest creates and send HTTP request using the F5 client.
 //
 // TODO(gilliek): decorate errors
