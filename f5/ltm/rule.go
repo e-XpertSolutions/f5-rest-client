@@ -17,13 +17,13 @@ type Rule struct {
 	DefinitionChecksum  string `json:"definitionChecksum,omitempty"`
 	DefinitionSignature string `json:"definitionSignature,omitempty"`
 	Hidden              bool   `json:"hidden,omitempty"`
-	ignoreVerification  string `json:"ignoreVerification,omitempty"`
+	IgnoreVerification  string `json:"ignoreVerification,omitempty"`
 	NoDelete            bool   `json:"noDelete,omitempty"`
 	NoWrite             bool   `json:"noWrite,omitempty"`
 	TMPartition         string `json:"tmPartition,omitempty"`
 	Plugin              string `json:"plugin,omitempty"`
 	PublicCert          string `json:"publicCert,omitempty"`
-	signingKey          string `json:"signingKey,omitempty"`
+	SigningKey          string `json:"signingKey,omitempty"`
 }
 
 const RuleEndpoint = "/rule"
