@@ -8,6 +8,49 @@ import "e-xpert_solutions/f5-rest-client/f5"
 
 const BasePath = "mgmt/tm/net"
 
-type Net struct {
+type NET struct {
 	c f5.Client
+
+	inet        InetResource
+	route       RouteResource
+	vlan        VlanResource
+	self        SelfResource
+	routeDomain RouteDomainResource
+}
+
+// New creates a new NET client.
+func New(c f5.Client) NET {
+	return NET{
+		c:           c,
+		inet:        InetResource{c: c},
+		route:       RouteResource{c: c},
+		vlan:        VlanResource{c: c},
+		self:        SelfResource{c: c},
+		routeDomain: RouteDomainResource{c: c},
+	}
+}
+
+// Inet returns a InetResource configured to query tm/net/interface API.
+func (net NET) Inet() *InetResource {
+	return &net.inet
+}
+
+// Route returns a RouteResource configured to query tm/net/route API.
+func (net NET) Route() *RouteResource {
+	return &net.route
+}
+
+// Vlan returns a VlanResource configured to query /tm/net/vlan API.
+func (net NET) Vlan() *VlanResource {
+	return &net.vlan
+}
+
+// Self returns a SelfResource configured to query /tm/net/self API.
+func (net NET) Self() *SelfResource {
+	return &net.self
+}
+
+// RouteDomain returns a RouteDomainResource configured to query /tm/net/route-domain API.
+func (net NET) RouteDomain() *SelfResource {
+	return &net.self
 }
