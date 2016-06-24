@@ -4,12 +4,7 @@
 
 package ltm
 
-import (
-	"encoding/json"
-	"net/http"
-
-	"e-xpert_solutions/f5-rest-client/f5"
-)
+import "e-xpert_solutions/f5-rest-client/f5"
 
 // A PoolConfigList holds a list of PoolConfig.
 type PoolConfigList struct {
@@ -60,17 +55,8 @@ type PoolResource struct {
 
 // ListAll lists all the pool configurations.
 func (pr *PoolResource) ListAll() (*PoolConfigList, error) {
-	resp, err := pr.doRequest("GET", "", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	if err := pr.readError(resp); err != nil {
-		return nil, err
-	}
 	var list PoolConfigList
-	dec := json.NewDecoder(resp.Body)
-	if err := dec.Decode(&list); err != nil {
+	if err := pr.c.ReadQuery(BasePath+PoolEndpoint, &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
@@ -78,43 +64,24 @@ func (pr *PoolResource) ListAll() (*PoolConfigList, error) {
 
 // Get a single pool configuration identified by id.
 func (pr *PoolResource) Get(id string) (*PoolConfig, error) {
-	resp, err := pr.doRequest("GET", id, nil)
-	if err != nil {
+	var item PoolConfig
+	if err := pr.c.ReadQuery(BasePath + PoolEndpoint + "/" + id); err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
-	if err := pr.readError(resp); err != nil {
-		return nil, err
-	}
-	var objConf PoolConfig
-	dec := json.NewDecoder(resp.Body)
-	if err := dec.Decode(&objConf); err != nil {
-		return nil, err
-	}
-	return &objConf, nil
+	return &item, nil
 }
 
 // Create a new pool configuration.
-func (pr *PoolResource) Create(objConf PoolConfig) error {
-	resp, err := pr.doRequest("POST", "", objConf)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-	if err := pr.readError(resp); err != nil {
+func (pr *PoolResource) Create(item PoolConfig) error {
+	if err := pr.c.ModQuery("POST", BasePath+PoolEndpoint, item); err != nil {
 		return err
 	}
 	return nil
 }
 
 // Edit a pool configuration identified by id.
-func (pr *PoolResource) Edit(id string, objConf PoolConfig) error {
-	resp, err := pr.doRequest("PUT", id, objConf)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-	if err := pr.readError(resp); err != nil {
+func (pr *PoolResource) Edit(id string, item PoolConfig) error {
+	if err := pr.c.ModQuery("PUT", BasePath+PoolEndpoint+"/"+id, item); err != nil {
 		return err
 	}
 	return nil
@@ -122,12 +89,7 @@ func (pr *PoolResource) Edit(id string, objConf PoolConfig) error {
 
 // Delete a single pool configuration identified by id.
 func (pr *PoolResource) Delete(id string) error {
-	resp, err := pr.doRequest("DELETE", id, nil)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-	if err := pr.readError(resp); err != nil {
+	if err := pr.c.ModQuery("DELETE", BasePath+PoolEndpoint+"/"+id, nil); err != nil {
 		return err
 	}
 	return nil
@@ -135,47 +97,9 @@ func (pr *PoolResource) Delete(id string) error {
 
 // GetMembers gets all the members associated to the pool identified by id.
 func (pr *PoolResource) GetMembers(id string) (*PoolMembersConfigList, error) {
-	resp, err := pr.doRequest("GET", id+"/members", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	if err := pr.readError(resp); err != nil {
-		return nil, err
-	}
 	var poolMembersConfig PoolMembersConfigList
-	dec := json.NewDecoder(resp.Body)
-	if err := dec.Decode(&poolMembersConfig); err != nil {
+	if err := pr.c.ReadQuery(BasePath+PoolEndpoint+"/"+id+"/"+members, &poolMembersConfig); err != nil {
 		return nil, err
 	}
-	return &poolMembersConfig, nil
-}
-
-// doRequest creates and send HTTP request using the F5 client.
-//
-// TODO(gilliek): decorate errors
-func (pr *PoolResource) doRequest(method, id string, data interface{}) (*http.Response, error) {
-	req, err := pr.c.MakeRequest(method, BasePath+PoolEndpoint+"/"+id, data)
-	if err != nil {
-		return nil, err
-	}
-	resp, err := pr.c.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	return resp, nil
-}
-
-// readError reads request error object from a HTTP response.
-//
-// TODO(gilliek): move this function into F5 package.
-func (pr *PoolResource) readError(resp *http.Response) error {
-	if resp.StatusCode >= 400 {
-		errResp, err := f5.NewRequestError(resp.Body)
-		if err != nil {
-			return err
-		}
-		return errResp
-	}
-	return nil
+	return &poolMembersConfig
 }
