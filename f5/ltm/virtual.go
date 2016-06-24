@@ -11,15 +11,15 @@ import (
 	"e-xpert_solutions/f5-rest-client/f5"
 )
 
-// VirtualServerConfig holds a list of virtual server configuration.
-type VirtualServerConfig struct {
-	Items    []VirtualServerConfigItem `json:"items,omitempty"`
-	Kind     string                    `json:"kind,omitempty"`
-	SelfLink string                    `json:"selfLink,omitempty"`
+// VirtualServerConfigList holds a list of virtual server configuration.
+type VirtualServerConfigList struct {
+	Items    []VirtualServerConfig `json:"items,omitempty"`
+	Kind     string                `json:"kind,omitempty"`
+	SelfLink string                `json:"selfLink,omitempty"`
 }
 
-// VirtualServerConfigItem  holds the configuration of a single virtual server.
-type VirtualServerConfigItem struct {
+// VirtualServerConfig holds the configuration of a single virtual server.
+type VirtualServerConfig struct {
 	AddressStatus     string `json:"addressStatus,omitempty"`
 	AutoLasthop       string `json:"autoLasthop,omitempty"`
 	CmpEnabled        string `json:"cmpEnabled,omitempty"`
@@ -83,7 +83,7 @@ type VirtualResource struct {
 }
 
 // ListAll lists all the virtual server configurations.
-func (vr *VirtualResource) ListAll() (*VirtualServerConfig, error) {
+func (vr *VirtualResource) ListAll() (*VirtualServerConfigList, error) {
 	resp, err := vr.doRequest("GET", "", nil)
 	if err != nil {
 		return nil, err
@@ -92,7 +92,7 @@ func (vr *VirtualResource) ListAll() (*VirtualServerConfig, error) {
 	if err := vr.readError(resp); err != nil {
 		return nil, err
 	}
-	var vsc VirtualServerConfig
+	var vsc VirtualServerConfigList
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&vsc); err != nil {
 		return nil, err
@@ -101,7 +101,7 @@ func (vr *VirtualResource) ListAll() (*VirtualServerConfig, error) {
 }
 
 // Get a single virtual server configurations identified by id.
-func (vr *VirtualResource) Get(id string) (*VirtualServerConfigItem, error) {
+func (vr *VirtualResource) Get(id string) (*VirtualServerConfig, error) {
 	resp, err := vr.doRequest("GET", id, nil)
 	if err != nil {
 		return nil, err
@@ -110,7 +110,7 @@ func (vr *VirtualResource) Get(id string) (*VirtualServerConfigItem, error) {
 	if err := vr.readError(resp); err != nil {
 		return nil, err
 	}
-	var vsci VirtualServerConfigItem
+	var vsci VirtualServerConfig
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&vsci); err != nil {
 		return nil, err
@@ -119,7 +119,7 @@ func (vr *VirtualResource) Get(id string) (*VirtualServerConfigItem, error) {
 }
 
 // Create a new virtual server configuration.
-func (vr *VirtualResource) Create(item VirtualServerConfigItem) error {
+func (vr *VirtualResource) Create(item VirtualServerConfig) error {
 	resp, err := vr.doRequest("POST", "", item)
 	if err != nil {
 		return err
@@ -132,7 +132,7 @@ func (vr *VirtualResource) Create(item VirtualServerConfigItem) error {
 }
 
 // Edit a virtual server configuration identified by id.
-func (vr *VirtualResource) Edit(id string, item VirtualServerConfigItem) error {
+func (vr *VirtualResource) Edit(id string, item VirtualServerConfig) error {
 	resp, err := vr.doRequest("PUT", id, item)
 	if err != nil {
 		return err

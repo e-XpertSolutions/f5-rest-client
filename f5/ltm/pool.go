@@ -11,8 +11,15 @@ import (
 	"e-xpert_solutions/f5-rest-client/f5"
 )
 
-// An ObjectConfig hold the configuration for a pool.
-type ObjectConfig struct {
+// A PoolConfigList holds a list of PoolConfig.
+type PoolConfigList struct {
+	Items    []VirtualServerConfig `json:"items,omitempty"`
+	Kind     string                `json:"kind,omitempty"`
+	SelfLink string                `json:"selfLink,omitempty"`
+}
+
+// A PoolConfig hold the configuration for a pool.
+type PoolConfig struct {
 	AllowNat              string `json:"allowNat,omitempty"`
 	AllowSnat             string `json:"allowSnat,omitempty"`
 	FullPath              string `json:"fullPath,omitempty"`
@@ -52,7 +59,7 @@ type PoolResource struct {
 }
 
 // ListAll lists all the pool configurations.
-func (pr *PoolResource) ListAll() ([]ObjectConfig, error) {
+func (pr *PoolResource) ListAll() (*PoolConfigList, error) {
 	resp, err := pr.doRequest("GET", "", nil)
 	if err != nil {
 		return nil, err
@@ -61,16 +68,16 @@ func (pr *PoolResource) ListAll() ([]ObjectConfig, error) {
 	if err := pr.readError(resp); err != nil {
 		return nil, err
 	}
-	var objConfList []ObjectConfig
+	var list PoolConfigList
 	dec := json.NewDecoder(resp.Body)
-	if err := dec.Decode(&objConfList); err != nil {
+	if err := dec.Decode(&list); err != nil {
 		return nil, err
 	}
-	return objConfList, nil
+	return &list, nil
 }
 
 // Get a single pool configuration identified by id.
-func (pr *PoolResource) Get(id string) (*ObjectConfig, error) {
+func (pr *PoolResource) Get(id string) (*PoolConfig, error) {
 	resp, err := pr.doRequest("GET", id, nil)
 	if err != nil {
 		return nil, err
@@ -79,7 +86,7 @@ func (pr *PoolResource) Get(id string) (*ObjectConfig, error) {
 	if err := pr.readError(resp); err != nil {
 		return nil, err
 	}
-	var objConf ObjectConfig
+	var objConf PoolConfig
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&objConf); err != nil {
 		return nil, err
@@ -88,7 +95,7 @@ func (pr *PoolResource) Get(id string) (*ObjectConfig, error) {
 }
 
 // Create a new pool configuration.
-func (pr *PoolResource) Create(objConf ObjectConfig) error {
+func (pr *PoolResource) Create(objConf PoolConfig) error {
 	resp, err := pr.doRequest("POST", "", objConf)
 	if err != nil {
 		return err
@@ -101,7 +108,7 @@ func (pr *PoolResource) Create(objConf ObjectConfig) error {
 }
 
 // Edit a pool configuration identified by id.
-func (pr *PoolResource) Edit(id string, objConf ObjectConfig) error {
+func (pr *PoolResource) Edit(id string, objConf PoolConfig) error {
 	resp, err := pr.doRequest("PUT", id, objConf)
 	if err != nil {
 		return err
@@ -127,7 +134,7 @@ func (pr *PoolResource) Delete(id string) error {
 }
 
 // GetMembers gets all the members associated to the pool identified by id.
-func (pr *PoolResource) GetMembers(id string) (*PoolMembersConfig, error) {
+func (pr *PoolResource) GetMembers(id string) (*PoolMembersConfigList, error) {
 	resp, err := pr.doRequest("GET", id+"/members", nil)
 	if err != nil {
 		return nil, err
@@ -136,7 +143,7 @@ func (pr *PoolResource) GetMembers(id string) (*PoolMembersConfig, error) {
 	if err := pr.readError(resp); err != nil {
 		return nil, err
 	}
-	var poolMembersConfig PoolMembersConfig
+	var poolMembersConfig PoolMembersConfigList
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&poolMembersConfig); err != nil {
 		return nil, err

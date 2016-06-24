@@ -11,15 +11,15 @@ import (
 	"e-xpert_solutions/f5-rest-client/f5"
 )
 
-// A PoolMembersConfig holds a list of pool members configuration.
-type PoolMembersConfig struct {
-	Items    []PoolMembersConfigItem `json:"items,omitempty"`
-	Kind     string                  `json:"kind,omitempty"`
-	SelfLink string                  `json:"selfLink,omitempty"`
+// A PoolMembersConfigList holds a list of pool members configuration.
+type PoolMembersConfigList struct {
+	Items    []PoolMembersConfig `json:"items,omitempty"`
+	Kind     string              `json:"kind,omitempty"`
+	SelfLink string              `json:"selfLink,omitempty"`
 }
 
-// A PoolMembersConfigItem holds the configuration for the members of a pool.
-type PoolMembersConfigItem struct {
+// A PoolMembersConfig holds the configuration for the members of a pool.
+type PoolMembersConfig struct {
 	Address         string `json:"address,omitempty"`
 	ConnectionLimit int64  `json:"connectionLimit,omitempty"`
 	DynamicRatio    int64  `json:"dynamicRatio,omitempty"`
@@ -52,7 +52,7 @@ type PoolMembersResource struct {
 }
 
 // ListAll lists all the pool members configurations.
-func (pmr *PoolMembersResource) ListAll() (*PoolMembersConfig, error) {
+func (pmr *PoolMembersResource) ListAll() (*PoolMembersConfigList, error) {
 	resp, err := pmr.doRequest("GET", "", nil)
 	if err != nil {
 		return nil, err
@@ -61,7 +61,7 @@ func (pmr *PoolMembersResource) ListAll() (*PoolMembersConfig, error) {
 	if err := pmr.readError(resp); err != nil {
 		return nil, err
 	}
-	var poolMembersConfig PoolMembersConfig
+	var poolMembersConfig PoolMembersConfigList
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&poolMembersConfig); err != nil {
 		return nil, err
@@ -70,7 +70,7 @@ func (pmr *PoolMembersResource) ListAll() (*PoolMembersConfig, error) {
 }
 
 // Get a single pool members configuration identified by id.
-func (pmr *PoolMembersResource) Get(id string) (*PoolMembersConfigItem, error) {
+func (pmr *PoolMembersResource) Get(id string) (*PoolMembersConfig, error) {
 	resp, err := pmr.doRequest("GET", id, nil)
 	if err != nil {
 		return nil, err
@@ -79,7 +79,7 @@ func (pmr *PoolMembersResource) Get(id string) (*PoolMembersConfigItem, error) {
 	if err := pmr.readError(resp); err != nil {
 		return nil, err
 	}
-	var item PoolMembersConfigItem
+	var item PoolMembersConfig
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&item); err != nil {
 		return nil, err
@@ -88,7 +88,7 @@ func (pmr *PoolMembersResource) Get(id string) (*PoolMembersConfigItem, error) {
 }
 
 // Create a new pool members configuration.
-func (pmr *PoolMembersResource) Create(item PoolMembersConfigItem) error {
+func (pmr *PoolMembersResource) Create(item PoolMembersConfig) error {
 	resp, err := pmr.doRequest("POST", "", item)
 	if err != nil {
 		return err
@@ -101,7 +101,7 @@ func (pmr *PoolMembersResource) Create(item PoolMembersConfigItem) error {
 }
 
 // Edit a pool members configuration indentified by id.
-func (pmr *PoolMembersResource) Edit(id string, item PoolMembersConfigItem) error {
+func (pmr *PoolMembersResource) Edit(id string, item PoolMembersConfig) error {
 	resp, err := pmr.doRequest("PUT", id, item)
 	if err != nil {
 		return err

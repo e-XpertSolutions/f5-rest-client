@@ -10,6 +10,13 @@ import (
 	"net/http"
 )
 
+// A RuleList holds a list of iRule configurations.
+type RuleList struct {
+	Items    []Rule `json:"items,omitempty"`
+	Kind     string `json:"kind,omitempty"`
+	SelfLink string `json:"selfLink,omitempty"`
+}
+
 // A Rule holds an iRule configuration.
 type Rule struct {
 	Action              string `json:"action,omitempty"`
@@ -35,7 +42,7 @@ type RuleResource struct {
 }
 
 // ListAll lists all the iRule configurations.
-func (rr *RuleResource) ListAll() ([]Rule, error) {
+func (rr *RuleResource) ListAll() (*RuleList, error) {
 	resp, err := rr.doRequest("GET", "", nil)
 	if err != nil {
 		return nil, err
@@ -44,12 +51,12 @@ func (rr *RuleResource) ListAll() ([]Rule, error) {
 	if err := rr.readError(resp); err != nil {
 		return nil, err
 	}
-	var rules []Rule
+	var rules RuleList
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&rules); err != nil {
 		return nil, err
 	}
-	return rules, nil
+	return &rules, nil
 }
 
 // Get a single iRule configuration identified by id.
