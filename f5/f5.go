@@ -9,6 +9,7 @@ import (
 	"bytes"
 	"crypto/tls"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"strings"
@@ -130,6 +131,64 @@ func (c Client) MakeRequest(method, restPath string, data interface{}) (*http.Re
 //    https://golang.org/pkg/net/http/#Client.Do
 func (c Client) Do(req *http.Request) (*http.Response, error) {
 	return c.c.Do(req)
+}
+
+// SendRequest is a shortcut for MakeRequest() + Do() + ReadError().
+func (c Client) SendRequest(method, restPath string, data interface{}) (*http.Response, error) {
+	req, err := pr.c.MakeRequest(method, BasePath+PoolEndpoint+"/"+id, data)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := pr.c.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if err := c.ReadError(resp); err != nil {
+		resp.Body.Close()
+		return nil, err
+	}
+	return resp, nil
+}
+
+// ReadQuery performs a GET query and unmarshal the response (from JSON) into outputData.
+//
+// outputData must be a pointer.
+func (c Client) ReadQuery(restPath string, outputData interface{}) error {
+	resp, err := c.SendRequest("GET", restPath, nil)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	dec := json.NewDecoder(resp.Body)
+	if err := dec.Decode(outputData); err != nil {
+		return err
+	}
+	return nil
+}
+
+// ModQuery performs a modification query such as POST, PUT or DELETE.
+func (c Client) ModQuery(method, restPath string, inputData interface{}) error {
+	if method != "POST" && method != "PUT" && method != "DELETE" {
+		return errors.New("invalid method " + method)
+	}
+	resp, err := c.SendRequest(method, restPath, inputData)
+	if err != nil {
+		return err
+	}
+	resp.Body.Close()
+	return nil
+}
+
+// ReadError checks if a HTTP response contains an error and returns it.
+func (c Client) ReadError(resp *http.Response) error {
+	if resp.StatusCode >= 400 {
+		errResp, err := NewRequestError(resp.Body)
+		if err != nil {
+			return err
+		}
+		return errResp
+	}
+	return nil
 }
 
 // makeURL creates an URL from the client base URL and a given REST path. What
