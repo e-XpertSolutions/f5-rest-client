@@ -65,7 +65,7 @@ func (pr *PoolResource) ListAll() (*PoolConfigList, error) {
 // Get a single pool configuration identified by id.
 func (pr *PoolResource) Get(id string) (*PoolConfig, error) {
 	var item PoolConfig
-	if err := pr.c.ReadQuery(BasePath + PoolEndpoint + "/" + id); err != nil {
+	if err := pr.c.ReadQuery(BasePath+PoolEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
@@ -98,8 +98,8 @@ func (pr *PoolResource) Delete(id string) error {
 // GetMembers gets all the members associated to the pool identified by id.
 func (pr *PoolResource) GetMembers(id string) (*PoolMembersConfigList, error) {
 	var poolMembersConfig PoolMembersConfigList
-	if err := pr.c.ReadQuery(BasePath+PoolEndpoint+"/"+id+"/"+members, &poolMembersConfig); err != nil {
+	if err := pr.c.ReadQuery(BasePath+PoolEndpoint+"/"+id+"/members", &poolMembersConfig); err != nil {
 		return nil, err
 	}
-	return &poolMembersConfig
+	return &poolMembersConfig, nil
 }
