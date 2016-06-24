@@ -41,3 +41,11 @@ func (err RequestError) String() string {
 	}
 	return buf.String()
 }
+
+// IsRequestError reports whether err is a RequestError.
+func IsRequestError(err error) bool {
+	if _, ok := err.(RequestError); ok {
+		return true
+	}
+	return false
+}
