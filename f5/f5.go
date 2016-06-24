@@ -135,11 +135,11 @@ func (c Client) Do(req *http.Request) (*http.Response, error) {
 
 // SendRequest is a shortcut for MakeRequest() + Do() + ReadError().
 func (c Client) SendRequest(method, restPath string, data interface{}) (*http.Response, error) {
-	req, err := pr.c.MakeRequest(method, BasePath+PoolEndpoint+"/"+id, data)
+	req, err := c.MakeRequest(method, restPath, data)
 	if err != nil {
 		return nil, err
 	}
-	resp, err := pr.c.Do(req)
+	resp, err := c.Do(req)
 	if err != nil {
 		return nil, err
 	}
