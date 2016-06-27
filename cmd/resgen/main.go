@@ -152,7 +152,7 @@ func parseConfig(path string) (*config, error) {
 }
 
 var (
-	cfgPath   = flag.String("c", "genres.conf", "configuration file path")
+	cfgPath   = flag.String("c", "resgen.conf", "configuration file path")
 	outputDir = flag.String("o", ".", "output directory")
 	pkgName   = flag.String("p", "foo", "package name")
 )
