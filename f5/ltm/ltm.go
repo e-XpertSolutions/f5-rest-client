@@ -18,6 +18,7 @@ type LTM struct {
 	rule        RuleResource
 	pool        PoolResource
 	poolMembers PoolMembersResource
+	node        NodeResource
 }
 
 // New creates a new LTM client.
@@ -28,6 +29,7 @@ func New(c f5.Client) LTM {
 		rule:        RuleResource{c: c},
 		pool:        PoolResource{c: c},
 		poolMembers: PoolMembersResource{c: c},
+		node:        NodeResource{c: c},
 	}
 }
 
@@ -49,4 +51,9 @@ func (ltm LTM) Pool() *PoolResource {
 // PoolMembers returns a PoolResource configured to query /tm/ltm/pool API.
 func (ltm LTM) PoolMembers() *PoolMembersResource {
 	return &ltm.poolMembers
+}
+
+// Node returns a NodeResource configured to query /tm/ltm/node API.
+func (ltm LTM) Node() *NodeResource {
+	return &ltm.node
 }
