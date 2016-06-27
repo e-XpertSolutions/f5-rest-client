@@ -15,29 +15,29 @@ type TrunkList struct {
 
 // A Trunk hold the configuration for a trunk.
 type Trunk struct {
-	Bandwidth           int      `json:"bandwidth"`
-	CfgMbrCount         int      `json:"cfgMbrCount"`
-	DistributionHash    string   `json:"distributionHash"`
-	FullPath            string   `json:"fullPath"`
-	Generation          int      `json:"generation"`
-	ID                  int      `json:"id"`
-	Interfaces          []string `json:"interfaces"`
+	Bandwidth           int      `json:"bandwidth,omitempty"`
+	CfgMbrCount         int      `json:"cfgMbrCount,omitempty"`
+	DistributionHash    string   `json:"distributionHash,omitempty"`
+	FullPath            string   `json:"fullPath,omitempty"`
+	Generation          int      `json:"generation,omitempty"`
+	ID                  int      `json:"id,omitempty"`
+	Interfaces          []string `json:"interfaces,omitempty"`
 	InterfacesReference []struct {
-		Link string `json:"link"`
-	} `json:"interfacesReference"`
-	Kind             string `json:"kind"`
-	Lacp             string `json:"lacp"`
-	LacpMode         string `json:"lacpMode"`
-	LacpTimeout      string `json:"lacpTimeout"`
-	LinkSelectPolicy string `json:"linkSelectPolicy"`
-	MacAddress       string `json:"macAddress"`
-	Media            string `json:"media"`
-	Name             string `json:"name"`
-	QinqEthertype    string `json:"qinqEthertype"`
-	SelfLink         string `json:"selfLink"`
-	Stp              string `json:"stp"`
-	Type             string `json:"type"`
-	WorkingMbrCount  int    `json:"workingMbrCount"`
+		Link string `json:"link,omitempty"`
+	} `json:"interfacesReference,omitempty"`
+	Kind             string `json:"kind,omitempty"`
+	Lacp             string `json:"lacp,omitempty"`
+	LacpMode         string `json:"lacpMode,omitempty"`
+	LacpTimeout      string `json:"lacpTimeout,omitempty"`
+	LinkSelectPolicy string `json:"linkSelectPolicy,omitempty"`
+	MacAddress       string `json:"macAddress,omitempty"`
+	Media            string `json:"media,omitempty"`
+	Name             string `json:"name,omitempty"`
+	QinqEthertype    string `json:"qinqEthertype,omitempty"`
+	SelfLink         string `json:"selfLink,omitempty"`
+	Stp              string `json:"stp,omitempty"`
+	Type             string `json:"type,omitempty"`
+	WorkingMbrCount  int    `json:"workingMbrCount,omitempty"`
 }
 
 // TrunkEndpoint represents the REST resource for managing a trunk.
