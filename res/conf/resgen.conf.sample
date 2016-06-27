@@ -1,0 +1,8 @@
+{
+    "base_url": "https://f5-big-ip-url",
+    "username": "user",
+    "password": "password",
+    "api": {
+        "MonitorDiameter": { "rest_path": "mgmt/tm/ltm/monitor/diameter", "endpoint": "/monitor/diameter" },
+    }
+}
