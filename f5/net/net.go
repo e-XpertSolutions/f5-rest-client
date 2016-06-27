@@ -16,6 +16,7 @@ type NET struct {
 	vlan        VlanResource
 	self        SelfResource
 	routeDomain RouteDomainResource
+	trunk       TrunkResource
 }
 
 // New creates a new NET client.
@@ -27,6 +28,7 @@ func New(c f5.Client) NET {
 		vlan:        VlanResource{c: c},
 		self:        SelfResource{c: c},
 		routeDomain: RouteDomainResource{c: c},
+		trunk:       TrunkResource{c: c},
 	}
 }
 
@@ -51,6 +53,11 @@ func (net NET) Self() *SelfResource {
 }
 
 // RouteDomain returns a RouteDomainResource configured to query /tm/net/route-domain API.
-func (net NET) RouteDomain() *SelfResource {
-	return &net.self
+func (net NET) RouteDomain() *RouteDomainResource {
+	return &net.routeDomain
+}
+
+// RouteDomain returns a RouteDomainResource configured to query /tm/net/route-domain API.
+func (net NET) Trunk() *TrunkResource {
+	return &net.trunk
 }
