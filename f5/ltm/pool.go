@@ -8,9 +8,9 @@ import "e-xpert_solutions/f5-rest-client/f5"
 
 // A PoolConfigList holds a list of PoolConfig.
 type PoolConfigList struct {
-	Items    []VirtualServerConfig `json:"items,omitempty"`
-	Kind     string                `json:"kind,omitempty"`
-	SelfLink string                `json:"selfLink,omitempty"`
+	Items    []PoolConfig `json:"items,omitempty"`
+	Kind     string       `json:"kind,omitempty"`
+	SelfLink string       `json:"selfLink,omitempty"`
 }
 
 // A PoolConfig hold the configuration for a pool.
