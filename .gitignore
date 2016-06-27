@@ -12,3 +12,6 @@ tags
 *.bak
 *.ignore
 
+# config file
+*.conf
+!*.conf.sample
