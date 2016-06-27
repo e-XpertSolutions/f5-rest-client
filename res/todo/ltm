@@ -28,3 +28,10 @@ Get-StatusShape
 Remove-ProfileRamCache
 --Remove-VirtualServer
 Set-PoolMemberDescription
+Nodes
+Monitor
+ClientSSL
+Data-Group
+Persistence
+Profile
+iFiles
