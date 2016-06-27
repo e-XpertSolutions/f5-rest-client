@@ -15,3 +15,7 @@ tags
 # config file
 *.conf
 !*.conf.sample
+
+# bin
+resgen
+resgen.exe
