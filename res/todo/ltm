@@ -28,7 +28,7 @@ Get-StatusShape
 Remove-ProfileRamCache
 --Remove-VirtualServer
 Set-PoolMemberDescription
-Nodes
+--Nodes
 Monitor
 ClientSSL
 Data-Group
