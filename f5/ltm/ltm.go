@@ -130,7 +130,7 @@ func (ltm LTM) Pool() *PoolResource {
 	return &ltm.pool
 }
 
-// PoolMembers returns a PoolResource configured to query /tm/ltm/pool API.
+// PoolMembers returns a PoolMembersResource configured to query /tm/ltm/pool API.
 func (ltm LTM) PoolMembers() *PoolMembersResource {
 	return &ltm.poolMembers
 }
