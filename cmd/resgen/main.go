@@ -49,7 +49,7 @@ type {{ .Name }}Resource struct {
 	c f5.Client
 }
 
-func (r *{{ .Name }}Resource) ListAll() (*{{ .Name }}Config, error) {
+func (r *{{ .Name }}Resource) ListAll() (*{{ .Name }}ConfigList, error) {
 	var list {{ .Name }}ConfigList
 	if err := r.c.ReadQuery(BasePath+{{ .Name }}Endpoint, &list); err != nil {
 		return nil, err
@@ -123,8 +123,12 @@ func renderTemplate(outputDir string, data templateData) error {
 var re = regexp.MustCompile("Items \\[\\]struct \\{(.*)\\} `json:\"items\"`")
 
 func findItemDef(s string) string {
+	log.Print("s = ", s)
 	matches := re.FindAllStringSubmatch(strings.Replace(s, "\n", "<°BREAK°>", -1), -1)
-	return strings.Replace(matches[0][1], "<°BREAK°>", "\n", -1)
+	if len(matches) > 0 && len(matches[0]) > 1 {
+		return strings.Replace(matches[0][1], "<°BREAK°>", "\n", -1)
+	}
+	return ""
 }
 
 type config struct {
