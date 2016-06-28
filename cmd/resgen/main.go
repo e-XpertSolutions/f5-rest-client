@@ -129,10 +129,68 @@ func renderTemplate(outputDir string, data templateData) error {
 	return nil
 }
 
+const tmplClient = `/* Client structure definition code:
+{{ range $name, $type:= .Fields }}
+{{ $name }} {{ $type }}{{ end }}
+*/
+
+/* Constructor initialization code:
+{{ range $name, $type:= .Fields }}
+{{ $name }}: {{ $type }}{c: c},{{ end }}
+*/
+
+/* Accessors definition code:
+{{ $receiverName := .ClientReceiver }}{{ $receiverType := .ClientType }}
+{{ range $name, $type:= .Fields }}
+// {{ $name }} returns a configured {{ $type }}.
+func ({{ $receiverName }} {{ $receiverType }}) {{ ucfirst $name }}() *{{ $type }} {
+	return &{{ $receiverName }}.{{ $name }}
+}
+{{ end }}
+*/
+`
+
+func UCFirst(s string) string {
+	if len(s) < 2 {
+		return strings.ToUpper(s)
+	}
+	return strings.ToUpper(string(s[0])) + s[1:]
+}
+
+func LCFirst(s string) string {
+	if len(s) < 2 {
+		return strings.ToLower(s)
+	}
+	return strings.ToLower(string(s[0])) + s[1:]
+}
+
+var tc = template.Must(template.New("client").Funcs(template.FuncMap{"ucfirst": UCFirst}).Parse(tmplClient))
+
+type clientTemplateData struct {
+	ClientReceiver string
+	ClientType     string
+	Fields         map[string]string
+}
+
+func renderClientTemplate(outputDir string, data clientTemplateData) error {
+	path := filepath.Join(outputDir, strings.ToLower(data.ClientType)+".go.part")
+	if _, err := os.Stat(path); err == nil {
+		return errors.New(path + " already exists")
+	}
+	f, err := os.Create(path)
+	if err != nil {
+		return fmt.Errorf("failed to create output file '%s' for %s client: %v", path, data.ClientType, err)
+	}
+	defer f.Close()
+	if err := tc.Execute(f, data); err != nil {
+		return fmt.Errorf("failed to render template for %s client: %v", data.ClientType, err)
+	}
+	return nil
+}
+
 var re = regexp.MustCompile("Items \\[\\]struct \\{(.*)\\} `json:\"items\"`")
 
 func findItemDef(s string) string {
-	log.Print("s = ", s)
 	matches := re.FindAllStringSubmatch(strings.Replace(s, "\n", "<°BREAK°>", -1), -1)
 	if len(matches) > 0 && len(matches[0]) > 1 {
 		return strings.Replace(matches[0][1], "<°BREAK°>", "\n", -1)
@@ -141,10 +199,12 @@ func findItemDef(s string) string {
 }
 
 type config struct {
-	BaseURL  string `json:"base_url"`
-	User     string `json:"username"`
-	Password string `json:"password"`
-	API      map[string]struct {
+	BaseURL        string `json:"base_url"`
+	User           string `json:"username"`
+	Password       string `json:"password"`
+	ClientReceiver string `json:"client_receiver"`
+	ClientType     string `json:"client_type"`
+	API            map[string]struct {
 		RESTPath string `json:"rest_path"`
 		Endpoint string `json:"endpoint"`
 	} `json:"api"`
@@ -190,6 +250,12 @@ func main() {
 	}
 	f5Client.DisableCertCheck()
 
+	clientData := clientTemplateData{
+		ClientReceiver: cfg.ClientReceiver,
+		ClientType:     cfg.ClientType,
+		Fields:         make(map[string]string),
+	}
+
 	for name, settings := range cfg.API {
 		req, err := f5Client.MakeRequest("GET", settings.RESTPath, nil)
 		if err != nil {
@@ -216,5 +282,10 @@ func main() {
 		if err := renderTemplate(*outputDir, data); err != nil {
 			log.Print("failed to render template: ", err)
 		}
+		clientData.Fields[LCFirst(name)] = name + "Resource"
+	}
+
+	if err := renderClientTemplate(*outputDir, clientData); err != nil {
+		log.Print("failed to generate client code: ", err)
 	}
 }
