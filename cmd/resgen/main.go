@@ -32,23 +32,28 @@ package {{ .Pkg }}
 
 import "e-xpert_solutions/f5-rest-client/f5"
 
+// {{ .Name }}ConfigList holds a list of {{ .Name }} configuration.
 type {{ .Name }}ConfigList struct {
 	Items []{{ .Name }}Config ` + "`json:\"items\"`" + `
 	Kind string ` + "`json:\"kind\"`" + `
 	SelfLink string ` + "`json:\"selflink\"`" + `
 }
 
+// {{ .Name }}Config holds the configuration of a single {{ .Name }}.
 type {{ .Name }}Config struct {
 	{{ .ItemDef }}
 }
 
 
+// {{ .Name }}Endpoint represents the REST resource for managing {{ .Name }}.
 const {{ .Name }}Endpoint = "{{ .Endpoint }}"
 
+// {{ .Name }}Resource provides an API to manage {{ .Name }} configurations.
 type {{ .Name }}Resource struct {
 	c f5.Client
 }
 
+// ListAll  lists all the {{ .Name }} configurations.
 func (r *{{ .Name }}Resource) ListAll() (*{{ .Name }}ConfigList, error) {
 	var list {{ .Name }}ConfigList
 	if err := r.c.ReadQuery(BasePath+{{ .Name }}Endpoint, &list); err != nil {
@@ -57,6 +62,7 @@ func (r *{{ .Name }}Resource) ListAll() (*{{ .Name }}ConfigList, error) {
 	return &list, nil
 }
 
+// Get a single {{ .Name }} configuration identified by id.
 func (r *{{ .Name }}Resource) Get(id string) (*{{ .Name }}Config, error) {
 	var item {{ .Name }}Config
 	if err := r.c.ReadQuery(BasePath+{{ .Name }}Endpoint, &item); err != nil {
@@ -65,6 +71,7 @@ func (r *{{ .Name }}Resource) Get(id string) (*{{ .Name }}Config, error) {
 	return &item, nil
 }
 
+// Create a new {{ .Name }} configuration.
 func (r *{{ .Name }}Resource) Create(item {{ .Name }}Config) error {
 	if err := r.c.ModQuery("POST", BasePath + {{ .Name }}Endpoint, item); err != nil {
 		return err
@@ -72,6 +79,7 @@ func (r *{{ .Name }}Resource) Create(item {{ .Name }}Config) error {
 	return nil
 }
 
+// Edit a {{ .Name }} configuration identified by id.
 func (r *{{ .Name }}Resource) Edit(id string, item {{ .Name }}Config) error {
 	if err := r.c.ModQuery("PUT", BasePath + {{ .Name }}Endpoint + "/" + id, item); err != nil {
 		return err
@@ -79,6 +87,7 @@ func (r *{{ .Name }}Resource) Edit(id string, item {{ .Name }}Config) error {
 	return nil
 }
 
+// Delete a single {{ .Name }} configuration identified by id.
 func (r *{{ .Name }}Resource) Delete(id string) error {
 	if err := r.c.ModQuery("DELETE", BasePath + {{ .Name }}Endpoint + "/"+id, nil); err != nil {
 		return err
