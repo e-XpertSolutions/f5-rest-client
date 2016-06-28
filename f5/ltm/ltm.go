@@ -19,6 +19,47 @@ type LTM struct {
 	pool        PoolResource
 	poolMembers PoolMembersResource
 	node        NodeResource
+
+	monitorDiameter         MonitorDiameterResource
+	monitorDNS              MonitorDNSResource
+	monitorExternal         MonitorExternalResource
+	monitorFirepass         MonitorFirepassResource
+	monitorFTP              MonitorFTPResource
+	monitorGatewayICMP      MonitorGatewayICMPResource
+	monitorHTTP             MonitorHTTPResource
+	monitorHTTPS            MonitorHTTPSResource
+	monitorICMP             MonitorICMPResource
+	monitorIMAP             MonitorIMAPResource
+	monitorInband           MonitorInbandResource
+	monitorLDAP             MonitorLDAPResource
+	monitorModuleScore      MonitorModuleScoreResource
+	monitorMSSQL            MonitorMSSQLResource
+	monitorMySQL            MonitorMySQLResource
+	monitorNNTP             MonitorNNTPResource
+	monitorNone             MonitorNoneResource
+	monitorOracle           MonitorOracleResource
+	monitorPOP3             MonitorPOP3Resource
+	monitorPostgreSQL       MonitorPostgreSQLResource
+	monitorRadiusAccounting MonitorRadiusAccountingResource
+	monitorRadius           MonitorRadiusResource
+	monitorRealServer       MonitorRealServerResource
+	monitorRPC              MonitorRPCResource
+	monitorSASP             MonitorSASPResource
+	monitorScripted         MonitorScriptedResource
+	monitorSIP              MonitorSIPResource
+	monitorSMB              MonitorSMBResource
+	monitorSMTP             MonitorSMTPResource
+	monitorSNMPData         MonitorSNMPDataResource
+	monitorSNMPDCABase      MonitorSNMPDCABaseResource
+	monitorSNMPDCA          MonitorSNMPDCAResource
+	monitorSOAP             MonitorSOAPResource
+	monitorTCPEcho          MonitorTCPEchoResource
+	monitorTCP              MonitorTCPResource
+	monitorTCPHalfOpen      MonitorTCPHalfOpenResource
+	monitorUDP              MonitorUDPResource
+	monitorVirtualLocation  MonitorVirtualLocationResource
+	monitorWAP              MonitorWAPResource
+	monitorWMI              MonitorWMIResource
 }
 
 // New creates a new LTM client.
@@ -30,6 +71,47 @@ func New(c f5.Client) LTM {
 		pool:        PoolResource{c: c},
 		poolMembers: PoolMembersResource{c: c},
 		node:        NodeResource{c: c},
+
+		monitorDiameter:         MonitorDiameterResource{c: c},
+		monitorDNS:              MonitorDNSResource{c: c},
+		monitorExternal:         MonitorExternalResource{c: c},
+		monitorFirepass:         MonitorFirepassResource{c: c},
+		monitorFTP:              MonitorFTPResource{c: c},
+		monitorGatewayICMP:      MonitorGatewayICMPResource{c: c},
+		monitorHTTP:             MonitorHTTPResource{c: c},
+		monitorHTTPS:            MonitorHTTPSResource{c: c},
+		monitorICMP:             MonitorICMPResource{c: c},
+		monitorIMAP:             MonitorIMAPResource{c: c},
+		monitorInband:           MonitorInbandResource{c: c},
+		monitorLDAP:             MonitorLDAPResource{c: c},
+		monitorModuleScore:      MonitorModuleScoreResource{c: c},
+		monitorMSSQL:            MonitorMSSQLResource{c: c},
+		monitorMySQL:            MonitorMySQLResource{c: c},
+		monitorNNTP:             MonitorNNTPResource{c: c},
+		monitorNone:             MonitorNoneResource{c: c},
+		monitorOracle:           MonitorOracleResource{c: c},
+		monitorPOP3:             MonitorPOP3Resource{c: c},
+		monitorPostgreSQL:       MonitorPostgreSQLResource{c: c},
+		monitorRadiusAccounting: MonitorRadiusAccountingResource{c: c},
+		monitorRadius:           MonitorRadiusResource{c: c},
+		monitorRealServer:       MonitorRealServerResource{c: c},
+		monitorRPC:              MonitorRPCResource{c: c},
+		monitorSASP:             MonitorSASPResource{c: c},
+		monitorScripted:         MonitorScriptedResource{c: c},
+		monitorSIP:              MonitorSIPResource{c: c},
+		monitorSMB:              MonitorSMBResource{c: c},
+		monitorSMTP:             MonitorSMTPResource{c: c},
+		monitorSNMPData:         MonitorSNMPDataResource{c: c},
+		monitorSNMPDCABase:      MonitorSNMPDCABaseResource{c: c},
+		monitorSNMPDCA:          MonitorSNMPDCAResource{c: c},
+		monitorSOAP:             MonitorSOAPResource{c: c},
+		monitorTCPEcho:          MonitorTCPEchoResource{c: c},
+		monitorTCP:              MonitorTCPResource{c: c},
+		monitorTCPHalfOpen:      MonitorTCPHalfOpenResource{c: c},
+		monitorUDP:              MonitorUDPResource{c: c},
+		monitorVirtualLocation:  MonitorVirtualLocationResource{c: c},
+		monitorWAP:              MonitorWAPResource{c: c},
+		monitorWMI:              MonitorWMIResource{c: c},
 	}
 }
 
@@ -56,4 +138,164 @@ func (ltm LTM) PoolMembers() *PoolMembersResource {
 // Node returns a NodeResource configured to query /tm/ltm/node API.
 func (ltm LTM) Node() *NodeResource {
 	return &ltm.node
+}
+
+func (ltm LTM) MonitorDiameter() *MonitorDiameterResource {
+	return &ltm.monitorDiameter
+}
+
+func (ltm LTM) MonitorDNS() *MonitorDNSResource {
+	return &ltm.monitorDNS
+}
+
+func (ltm LTM) MonitorExternal() *MonitorExternalResource {
+	return &ltm.monitorExternal
+}
+
+func (ltm LTM) MonitorFirepass() *MonitorFirepassResource {
+	return &ltm.monitorFirepass
+}
+
+func (ltm LTM) MonitorFTP() *MonitorFTPResource {
+	return &ltm.monitorFTP
+}
+
+func (ltm LTM) MonitorGatewayICMP() *MonitorGatewayICMPResource {
+	return &ltm.monitorGatewayICMP
+}
+
+func (ltm LTM) MonitorHTTP() *MonitorHTTPResource {
+	return &ltm.monitorHTTP
+}
+
+func (ltm LTM) MonitorHTTPS() *MonitorHTTPSResource {
+	return &ltm.monitorHTTPS
+}
+
+func (ltm LTM) MonitorICMP() *MonitorICMPResource {
+	return &ltm.monitorICMP
+}
+
+func (ltm LTM) MonitorIMAP() *MonitorIMAPResource {
+	return &ltm.monitorIMAP
+}
+
+func (ltm LTM) MonitorInband() *MonitorInbandResource {
+	return &ltm.monitorInband
+}
+
+func (ltm LTM) MonitorLDAP() *MonitorLDAPResource {
+	return &ltm.monitorLDAP
+}
+
+func (ltm LTM) MonitorModuleScore() *MonitorModuleScoreResource {
+	return &ltm.monitorModuleScore
+}
+
+func (ltm LTM) MonitorMSSQL() *MonitorMSSQLResource {
+	return &ltm.monitorMSSQL
+}
+
+func (ltm LTM) MonitorMySQL() *MonitorMySQLResource {
+	return &ltm.monitorMySQL
+}
+
+func (ltm LTM) MonitorNNTP() *MonitorNNTPResource {
+	return &ltm.monitorNNTP
+}
+
+func (ltm LTM) MonitorNone() *MonitorNoneResource {
+	return &ltm.monitorNone
+}
+
+func (ltm LTM) MonitorOracle() *MonitorOracleResource {
+	return &ltm.monitorOracle
+}
+
+func (ltm LTM) MonitorPOP3() *MonitorPOP3Resource {
+	return &ltm.monitorPOP3
+}
+
+func (ltm LTM) MonitorPostgreSQL() *MonitorPostgreSQLResource {
+	return &ltm.monitorPostgreSQL
+}
+
+func (ltm LTM) MonitorRadiusAccounting() *MonitorRadiusAccountingResource {
+	return &ltm.monitorRadiusAccounting
+}
+
+func (ltm LTM) MonitorRadius() *MonitorRadiusResource {
+	return &ltm.monitorRadius
+}
+
+func (ltm LTM) MonitorRealServer() *MonitorRealServerResource {
+	return &ltm.monitorRealServer
+}
+
+func (ltm LTM) MonitorRPC() *MonitorRPCResource {
+	return &ltm.monitorRPC
+}
+
+func (ltm LTM) MonitorSASP() *MonitorSASPResource {
+	return &ltm.monitorSASP
+}
+
+func (ltm LTM) MonitorScripted() *MonitorScriptedResource {
+	return &ltm.monitorScripted
+}
+
+func (ltm LTM) MonitorSIP() *MonitorSIPResource {
+	return &ltm.monitorSIP
+}
+
+func (ltm LTM) MonitorSMB() *MonitorSMBResource {
+	return &ltm.monitorSMB
+}
+
+func (ltm LTM) MonitorSMTP() *MonitorSMTPResource {
+	return &ltm.monitorSMTP
+}
+
+func (ltm LTM) MonitorSNMPData() *MonitorSNMPDataResource {
+	return &ltm.monitorSNMPData
+}
+
+func (ltm LTM) MonitorSNMPDCABase() *MonitorSNMPDCABaseResource {
+	return &ltm.monitorSNMPDCABase
+}
+
+func (ltm LTM) MonitorSNMPDCA() *MonitorSNMPDCAResource {
+	return &ltm.monitorSNMPDCA
+}
+
+func (ltm LTM) MonitorSOAP() *MonitorSOAPResource {
+	return &ltm.monitorSOAP
+}
+
+func (ltm LTM) MonitorTCPEcho() *MonitorTCPEchoResource {
+	return &ltm.monitorTCPEcho
+}
+
+func (ltm LTM) MonitorTCP() *MonitorTCPResource {
+	return &ltm.monitorTCP
+}
+
+func (ltm LTM) MonitorTCPHalfOpen() *MonitorTCPHalfOpenResource {
+	return &ltm.monitorTCPHalfOpen
+}
+
+func (ltm LTM) MonitorUDP() *MonitorUDPResource {
+	return &ltm.monitorUDP
+}
+
+func (ltm LTM) MonitorVirtualLocation() *MonitorVirtualLocationResource {
+	return &ltm.monitorVirtualLocation
+}
+
+func (ltm LTM) MonitorWAP() *MonitorWAPResource {
+	return &ltm.monitorWAP
+}
+
+func (ltm LTM) MonitorWMI() *MonitorWMIResource {
+	return &ltm.monitorWMI
 }
