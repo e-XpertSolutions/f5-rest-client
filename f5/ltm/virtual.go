@@ -100,7 +100,7 @@ func (vr *VirtualResource) ListAll() (*VirtualServerConfigList, error) {
 	return &vsc, nil
 }
 
-// Get a single virtual server configurations identified by id.
+// Get a single virtual server configuration identified by id.
 func (vr *VirtualResource) Get(id string) (*VirtualServerConfig, error) {
 	resp, err := vr.doRequest("GET", id, nil)
 	if err != nil {
