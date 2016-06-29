@@ -7,8 +7,8 @@ package ltm_test
 import (
 	"log"
 
-	"e-xpert_solutions/f5-rest-client/f5"
-	"e-xpert_solutions/f5-rest-client/f5/ltm"
+	"github.com/e-XpertSolutions/f5-rest-client/f5"
+	"github.com/e-XpertSolutions/f5-rest-client/f5/ltm"
 )
 
 func Example() {

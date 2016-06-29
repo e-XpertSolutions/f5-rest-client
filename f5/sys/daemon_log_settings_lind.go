@@ -4,7 +4,7 @@
 
 package sys
 
-import "e-xpert_solutions/f5-rest-client/f5"
+import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // DaemonLogSettingsLindConfigList holds a list of DaemonLogSettingsLind configuration.
 type DaemonLogSettingsLindConfigList struct {

@@ -4,7 +4,7 @@
 
 package sys
 
-import "e-xpert_solutions/f5-rest-client/f5"
+import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // ICallConfigList holds a list of ICall configuration.
 type ICallConfigList struct {

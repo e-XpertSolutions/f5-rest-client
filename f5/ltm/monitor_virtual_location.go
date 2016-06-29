@@ -4,7 +4,7 @@
 
 package ltm
 
-import "e-xpert_solutions/f5-rest-client/f5"
+import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type MonitorVirtualLocationConfigList struct {
 	Items    []MonitorVirtualLocationConfig `json:"items"`

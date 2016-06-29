@@ -21,7 +21,7 @@ import (
 
 	gojson "github.com/ChimeraCoder/gojson"
 
-	"e-xpert_solutions/f5-rest-client/f5"
+	"github.com/e-XpertSolutions/f5-rest-client/f5"
 )
 
 var tmpl = `// Copyright e-Xpert Solutions SA. All rights reserved.
@@ -30,7 +30,7 @@ var tmpl = `// Copyright e-Xpert Solutions SA. All rights reserved.
 
 package {{ .Pkg }}
 
-import "e-xpert_solutions/f5-rest-client/f5"
+import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // {{ .Name }}ConfigList holds a list of {{ .Name }} configuration.
 type {{ .Name }}ConfigList struct {

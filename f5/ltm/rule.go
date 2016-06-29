@@ -5,7 +5,7 @@
 package ltm
 
 import (
-	"e-xpert_solutions/f5-rest-client/f5"
+	"github.com/e-XpertSolutions/f5-rest-client/f5"
 	"encoding/json"
 	"net/http"
 )

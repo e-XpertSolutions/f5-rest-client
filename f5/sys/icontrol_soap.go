@@ -4,7 +4,7 @@
 
 package sys
 
-import "e-xpert_solutions/f5-rest-client/f5"
+import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // IControlSOAPConfigList holds a list of IControlSOAP configuration.
 type IControlSOAPConfigList struct {

@@ -5,7 +5,7 @@
 // Package ltm provides a REST client for the /tm/ltm F5 BigIP API.
 package ltm
 
-import "e-xpert_solutions/f5-rest-client/f5"
+import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // BasePath is the base path of the ltm API.
 const BasePath = "mgmt/tm/ltm"

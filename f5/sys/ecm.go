@@ -4,7 +4,7 @@
 
 package sys
 
-import "e-xpert_solutions/f5-rest-client/f5"
+import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // ECMConfigList holds a list of ECM configuration.
 type ECMConfigList struct {

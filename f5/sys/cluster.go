@@ -4,7 +4,7 @@
 
 package sys
 
-import "e-xpert_solutions/f5-rest-client/f5"
+import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // ClusterConfigList holds a list of Cluster configuration.
 type ClusterConfigList struct {
