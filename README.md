@@ -54,9 +54,11 @@ func main() {
 - [x] Manage Cluster Management (/cm)
 - [x] Manage interfaces, vlan, trunk, self ip, route, route domains (/net)
 - [x] Manage system related stuffs (/sys)
+- [ ] Manage firewall, WAF and DOS profiles (/security)
 - [ ] Manage virtualization features (/vcmp)
 - [ ] Manage access policies (/apm)
 - [ ] Manage DNS and global load balancing servers (/gtm)
+- [ ] Add support for analytics read-only API (/analytics)
 - [ ] Add support for results pagination
 - [ ] Add support for transaction
 
