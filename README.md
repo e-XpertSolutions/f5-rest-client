@@ -1,6 +1,7 @@
 # f5-rest-client
 
 [![GoDoc](https://godoc.org/github.com/e-XpertSolutions/f5-rest-client/f5?status.png)](http://godoc.org/github.com/e-XpertSolutions/f5-rest-client/f5)
+[![License](https://img.shields.io/badge/license-BSD%203--Clause-yellow.svg?style=flat)](https://github.com/e-XpertSolutions/f5-rest-client/blob/master/LICENSE)
 
 f5-rest-client implements a REST client to query the F5 Big IP API.
 
