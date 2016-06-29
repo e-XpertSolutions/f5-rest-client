@@ -17,7 +17,16 @@ go get -u github.com/e-XpertSolutions/f5-rest-client/f5
 
 ## Features
 
-
+- [x] Add support for HTTP Basic Authentication
+- [x] Add support for token based authentication
+- [ ] Add support for authentication through external providers
+- [x] Manage Virtual Server, pool, node, irules, monitors (/ltm)
+- [x] Manage Cluster Management (/cm)
+- [x] Manage interfaces, vlan, trunk, self ip, route, route domains (/net)
+- [x] Manage system related stuffs (/sys)
+- [ ] Manage virtualization features (/vcmp)
+- [ ] Manage access policies (/apm)
+- [ ] Manage DNS and global load balancing servers (/gtm)
 
 ## Contributing
 
