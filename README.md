@@ -14,6 +14,35 @@ go get -u github.com/e-XpertSolutions/f5-rest-client/f5
 
 ## Usage
 
+```go
+package main
+
+import (
+	"log"
+
+	"github.com/e-XpertSolutions/f5-rest-client/f5"
+	"github.com/e-XpertSolutions/f5-rest-client/f5/ltm"
+)
+
+func main() {
+	// setup F5 BigIP client
+	f5Client, err := f5.NewBasicClient("https://url-to-bigip", "user", "password")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// setup client for the LTM API
+	ltmClient := ltm.New(*f5Client)
+
+	// query the /ltm/virtual API
+	vsConfigList, err := ltmClient.Virtual().ListAll()
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Print(vsConfigList)
+}
+```
+
 
 ## Features
 
