@@ -57,6 +57,8 @@ func main() {
 - [ ] Manage virtualization features (/vcmp)
 - [ ] Manage access policies (/apm)
 - [ ] Manage DNS and global load balancing servers (/gtm)
+- [ ] Add support for results pagination
+- [ ] Add support for transaction
 
 ## Contributing
 
