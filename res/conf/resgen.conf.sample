@@ -2,6 +2,8 @@
     "base_url": "https://f5-big-ip-url",
     "username": "user",
     "password": "password",
+    "client_receiver": "ltm",
+    "client_type": "LTM",
     "api": {
         "MonitorDiameter": { "rest_path": "mgmt/tm/ltm/monitor/diameter", "endpoint": "/monitor/diameter" },
     }
