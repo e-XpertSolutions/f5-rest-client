@@ -4,7 +4,8 @@
     "password": "password",
     "client_receiver": "ltm",
     "client_type": "LTM",
+    "module": "ltm",
     "api": {
-        "MonitorDiameter": { "rest_path": "mgmt/tm/ltm/monitor/diameter", "endpoint": "/monitor/diameter" },
+        "MonitorDiameter": "rest_path": "mgmt/tm/ltm/monitor/diameter"
     }
 }
