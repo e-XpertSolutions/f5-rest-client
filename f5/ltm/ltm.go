@@ -7,10 +7,10 @@ package ltm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// BasePath is the base path of the ltm API.
+// BasePath is the base path of the LTM API.
 const BasePath = "mgmt/tm/ltm"
 
-// LTM implement a REST client for the F5 BigIP LTM API.
+// LTM implements a REST client for the F5 BigIP LTM API.
 type LTM struct {
 	c f5.Client
 
