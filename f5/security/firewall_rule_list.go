@@ -15,6 +15,16 @@ type FirewallRuleListConfigList struct {
 
 // FirewallRuleListConfig holds the configuration of a single FirewallRuleList.
 type FirewallRuleListConfig struct {
+	FullPath       string `json:"fullPath"`
+	Generation     int    `json:"generation"`
+	Kind           string `json:"kind"`
+	Name           string `json:"name"`
+	Partition      string `json:"partition"`
+	RulesReference struct {
+		IsSubcollection bool   `json:"isSubcollection"`
+		Link            string `json:"link"`
+	} `json:"rulesReference"`
+	SelfLink string `json:"selfLink"`
 }
 
 // FirewallRuleListEndpoint represents the REST resource for managing FirewallRuleList.

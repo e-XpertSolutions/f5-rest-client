@@ -15,6 +15,15 @@ type IPIntelligencePolicyConfigList struct {
 
 // IPIntelligencePolicyConfig holds the configuration of a single IPIntelligencePolicy.
 type IPIntelligencePolicyConfig struct {
+	DefaultAction                   string `json:"defaultAction"`
+	DefaultLogBlacklistHitOnly      string `json:"defaultLogBlacklistHitOnly"`
+	DefaultLogBlacklistWhitelistHit string `json:"defaultLogBlacklistWhitelistHit"`
+	FullPath                        string `json:"fullPath"`
+	Generation                      int    `json:"generation"`
+	Kind                            string `json:"kind"`
+	Name                            string `json:"name"`
+	Partition                       string `json:"partition"`
+	SelfLink                        string `json:"selfLink"`
 }
 
 // IPIntelligencePolicyEndpoint represents the REST resource for managing IPIntelligencePolicy.

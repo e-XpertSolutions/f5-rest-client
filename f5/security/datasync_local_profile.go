@@ -15,6 +15,21 @@ type DatasyncLocalProfileConfigList struct {
 
 // DatasyncLocalProfileConfig holds the configuration of a single DatasyncLocalProfile.
 type DatasyncLocalProfileConfig struct {
+	BufSize         int    `json:"bufSize"`
+	DsArea          string `json:"dsArea"`
+	FullPath        string `json:"fullPath"`
+	GenPauseSec     int    `json:"genPauseSec"`
+	GenTimeoutSec   int    `json:"genTimeoutSec"`
+	Generation      int    `json:"generation"`
+	KeepConfFiles   int    `json:"keepConfFiles"`
+	Kind            string `json:"kind"`
+	MaxGenRows      string `json:"maxGenRows"`
+	MinCPUPercent   int    `json:"minCpuPercent"`
+	MinMemMb        int    `json:"minMemMb"`
+	Name            string `json:"name"`
+	OfflineUntilGen string `json:"offlineUntilGen"`
+	RowsBulk        int    `json:"rowsBulk"`
+	SelfLink        string `json:"selfLink"`
 }
 
 // DatasyncLocalProfileEndpoint represents the REST resource for managing DatasyncLocalProfile.

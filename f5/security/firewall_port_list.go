@@ -15,6 +15,15 @@ type FirewallPortListConfigList struct {
 
 // FirewallPortListConfig holds the configuration of a single FirewallPortList.
 type FirewallPortListConfig struct {
+	FullPath   string `json:"fullPath"`
+	Generation int    `json:"generation"`
+	Kind       string `json:"kind"`
+	Name       string `json:"name"`
+	Partition  string `json:"partition"`
+	Ports      []struct {
+		Name string `json:"name"`
+	} `json:"ports"`
+	SelfLink string `json:"selfLink"`
 }
 
 // FirewallPortListEndpoint represents the REST resource for managing FirewallPortList.

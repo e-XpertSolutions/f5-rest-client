@@ -15,6 +15,9 @@ type DatasyncConfigList struct {
 
 // DatasyncConfig holds the configuration of a single Datasync.
 type DatasyncConfig struct {
+	Reference struct {
+		Link string `json:"link"`
+	} `json:"reference"`
 }
 
 // DatasyncEndpoint represents the REST resource for managing Datasync.

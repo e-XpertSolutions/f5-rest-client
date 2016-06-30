@@ -15,6 +15,14 @@ type IPIntelligenseBlacklistCategoryConfigList struct {
 
 // IPIntelligenseBlacklistCategoryConfig holds the configuration of a single IPIntelligenseBlacklistCategory.
 type IPIntelligenseBlacklistCategoryConfig struct {
+	BlMatchDirection string `json:"blMatchDirection"`
+	Description      string `json:"description"`
+	FullPath         string `json:"fullPath"`
+	Generation       int    `json:"generation"`
+	Kind             string `json:"kind"`
+	Name             string `json:"name"`
+	Partition        string `json:"partition"`
+	SelfLink         string `json:"selfLink"`
 }
 
 // IPIntelligenseBlacklistCategoryEndpoint represents the REST resource for managing IPIntelligenseBlacklistCategory.

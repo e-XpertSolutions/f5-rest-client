@@ -15,6 +15,9 @@ type IPIntelligenceConfigList struct {
 
 // IPIntelligenceConfig holds the configuration of a single IPIntelligence.
 type IPIntelligenceConfig struct {
+	Reference struct {
+		Link string `json:"link"`
+	} `json:"reference"`
 }
 
 // IPIntelligenceEndpoint represents the REST resource for managing IPIntelligence.

@@ -15,6 +15,9 @@ type DOSConfigList struct {
 
 // DOSConfig holds the configuration of a single DOS.
 type DOSConfig struct {
+	Reference struct {
+		Link string `json:"link"`
+	} `json:"reference"`
 }
 
 // DOSEndpoint represents the REST resource for managing DOS.

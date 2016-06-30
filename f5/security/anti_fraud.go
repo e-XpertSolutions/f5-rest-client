@@ -15,6 +15,9 @@ type AntiFraudConfigList struct {
 
 // AntiFraudConfig holds the configuration of a single AntiFraud.
 type AntiFraudConfig struct {
+	Reference struct {
+		Link string `json:"link"`
+	} `json:"reference"`
 }
 
 // AntiFraudEndpoint represents the REST resource for managing AntiFraud.

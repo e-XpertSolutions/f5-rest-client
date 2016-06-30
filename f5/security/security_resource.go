@@ -15,6 +15,9 @@ type SecurityConfigList struct {
 
 // SecurityConfig holds the configuration of a single Security.
 type SecurityConfig struct {
+	Reference struct {
+		Link string `json:"link"`
+	} `json:"reference"`
 }
 
 // SecurityEndpoint represents the REST resource for managing Security.

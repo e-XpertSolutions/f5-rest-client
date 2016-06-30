@@ -15,6 +15,17 @@ type LogProfileConfigList struct {
 
 // LogProfileConfig holds the configuration of a single LogProfile.
 type LogProfileConfig struct {
+	ApplicationReference struct {
+		IsSubcollection bool   `json:"isSubcollection"`
+		Link            string `json:"link"`
+	} `json:"applicationReference"`
+	Description string `json:"description"`
+	FullPath    string `json:"fullPath"`
+	Generation  int    `json:"generation"`
+	Kind        string `json:"kind"`
+	Name        string `json:"name"`
+	Partition   string `json:"partition"`
+	SelfLink    string `json:"selfLink"`
 }
 
 // LogProfileEndpoint represents the REST resource for managing LogProfile.

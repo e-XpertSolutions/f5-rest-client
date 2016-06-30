@@ -15,6 +15,9 @@ type LogConfigList struct {
 
 // LogConfig holds the configuration of a single Log.
 type LogConfig struct {
+	Reference struct {
+		Link string `json:"link"`
+	} `json:"reference"`
 }
 
 // LogEndpoint represents the REST resource for managing Log.

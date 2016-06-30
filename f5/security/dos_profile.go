@@ -15,6 +15,16 @@ type DOSProfileConfigList struct {
 
 // DOSProfileConfig holds the configuration of a single DOSProfile.
 type DOSProfileConfig struct {
+	ApplicationReference struct {
+		IsSubcollection bool   `json:"isSubcollection"`
+		Link            string `json:"link"`
+	} `json:"applicationReference"`
+	FullPath   string `json:"fullPath"`
+	Generation int    `json:"generation"`
+	Kind       string `json:"kind"`
+	Name       string `json:"name"`
+	Partition  string `json:"partition"`
+	SelfLink   string `json:"selfLink"`
 }
 
 // DOSProfileEndpoint represents the REST resource for managing DOSProfile.

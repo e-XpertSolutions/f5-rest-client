@@ -15,6 +15,13 @@ type LogStorageFieldConfigList struct {
 
 // LogStorageFieldConfig holds the configuration of a single LogStorageField.
 type LogStorageFieldConfig struct {
+	Format     string `json:"format"`
+	FullPath   string `json:"fullPath"`
+	Generation int    `json:"generation"`
+	ID         int    `json:"id"`
+	Kind       string `json:"kind"`
+	Name       string `json:"name"`
+	SelfLink   string `json:"selfLink"`
 }
 
 // LogStorageFieldEndpoint represents the REST resource for managing LogStorageField.

@@ -15,6 +15,9 @@ type FirewallConfigList struct {
 
 // FirewallConfig holds the configuration of a single Firewall.
 type FirewallConfig struct {
+	Reference struct {
+		Link string `json:"link"`
+	} `json:"reference"`
 }
 
 // FirewallEndpoint represents the REST resource for managing Firewall.

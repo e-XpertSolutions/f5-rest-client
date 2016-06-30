@@ -15,6 +15,9 @@ type AnalyticsConfigList struct {
 
 // AnalyticsConfig holds the configuration of a single Analytics.
 type AnalyticsConfig struct {
+	Reference struct {
+		Link string `json:"link"`
+	} `json:"reference"`
 }
 
 // AnalyticsEndpoint represents the REST resource for managing Analytics.

@@ -15,6 +15,25 @@ type DatasyncGlobalProfileConfigList struct {
 
 // DatasyncGlobalProfileConfig holds the configuration of a single DatasyncGlobalProfile.
 type DatasyncGlobalProfileConfig struct {
+	ActivationEpoch   string `json:"activationEpoch"`
+	CreateTimestamp   int    `json:"createTimestamp"`
+	DeactivationEpoch string `json:"deactivationEpoch"`
+	FullPath          string `json:"fullPath"`
+	Generation        int    `json:"generation"`
+	GraceTime         string `json:"graceTime"`
+	Kind              string `json:"kind"`
+	MasterKey         string `json:"masterKey"`
+	MaxRows           string `json:"maxRows"`
+	MinRows           string `json:"minRows"`
+	Name              string `json:"name"`
+	Partition         string `json:"partition"`
+	RegenInterval     string `json:"regenInterval"`
+	RegenTimeOffset   string `json:"regenTimeOffset"`
+	RsaBits           string `json:"rsaBits"`
+	RsaExp            string `json:"rsaExp"`
+	SelfLink          string `json:"selfLink"`
+	SubPath           string `json:"subPath"`
+	Table             string `json:"table"`
 }
 
 // DatasyncGlobalProfileEndpoint represents the REST resource for managing DatasyncGlobalProfile.
