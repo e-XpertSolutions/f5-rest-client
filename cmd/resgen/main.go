@@ -162,7 +162,7 @@ const tmplClient = `/* Client structure definition code:
 /* Accessors definition code:
 {{ $receiverName := .ClientReceiver }}{{ $receiverType := .ClientType }}
 {{ range $name, $type:= .Fields }}
-// {{ $name }} returns a configured {{ $type }}.
+// {{ ucfirst $name }} returns a configured {{ $type }}.
 func ({{ $receiverName }} {{ $receiverType }}) {{ ucfirst $name }}() *{{ $type }} {
 	return &{{ $receiverName }}.{{ $name }}
 }
@@ -219,15 +219,13 @@ func findItemDef(s string) string {
 }
 
 type config struct {
-	BaseURL        string `json:"base_url"`
-	User           string `json:"username"`
-	Password       string `json:"password"`
-	ClientReceiver string `json:"client_receiver"`
-	ClientType     string `json:"client_type"`
-	API            map[string]struct {
-		RESTPath string `json:"rest_path"`
-		Endpoint string `json:"endpoint"`
-	} `json:"api"`
+	BaseURL        string            `json:"base_url"`
+	User           string            `json:"username"`
+	Password       string            `json:"password"`
+	ClientReceiver string            `json:"client_receiver"`
+	ClientType     string            `json:"client_type"`
+	Module         string            `json:"module"`
+	API            map[string]string `json:"api"`
 }
 
 func parseConfig(path string) (*config, error) {
@@ -242,6 +240,14 @@ func parseConfig(path string) (*config, error) {
 		return nil, fmt.Errorf("failed to parse config file: %v", err)
 	}
 	return &cfg, nil
+}
+
+func findEndpoint(restPath, module string) string {
+	idx := strings.Index(restPath, module)
+	if idx == -1 {
+		return restPath
+	}
+	return restPath[idx+len(module):]
 }
 
 var (
@@ -276,28 +282,28 @@ func main() {
 		Fields:         make(map[string]string),
 	}
 
-	for name, settings := range cfg.API {
-		req, err := f5Client.MakeRequest("GET", settings.RESTPath, nil)
+	for name, restPath := range cfg.API {
+		req, err := f5Client.MakeRequest("GET", restPath, nil)
 		if err != nil {
-			log.Print("failed to create http request", settings.RESTPath, ": ", err)
+			log.Print("failed to create http request", restPath, ": ", err)
 			continue
 		}
 		resp, err := f5Client.Do(req)
 		if err != nil {
-			log.Print("failed to query ", settings.RESTPath, ": ", err)
+			log.Print("failed to query ", restPath, ": ", err)
 			continue
 		}
 		defer resp.Body.Close()
 		listDef, err := gojson.Generate(resp.Body, name, *pkgName)
 		if err != nil {
-			log.Print("failed to generate structure for ", settings.RESTPath, ": ", err)
+			log.Print("failed to generate structure for ", restPath, ": ", err)
 			continue
 		}
 		data := templateData{
 			Name:     name,
 			ItemDef:  findItemDef(string(listDef)),
 			Pkg:      *pkgName,
-			Endpoint: settings.Endpoint,
+			Endpoint: findEndpoint(restPath, cfg.Module),
 		}
 		if err := renderTemplate(*outputDir, data); err != nil {
 			log.Print("failed to render template: ", err)
