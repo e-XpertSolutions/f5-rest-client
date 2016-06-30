@@ -105,8 +105,28 @@ type templateData struct {
 	Endpoint string
 }
 
+func isCapital(b byte) bool {
+	return strings.ToUpper(string(b)) == string(b)
+}
+
+func uppertCamelToUnderscore(s string) string {
+	if len(s) < 2 {
+		return strings.ToLower(s)
+	}
+	buf := bytes.NewBufferString(strings.ToLower(string(s[0])))
+	for i := 1; i < len(s); i++ {
+		if isCapital(s[i]) {
+			if !isCapital(s[i-1]) || (i != len(s)-1 && !isCapital(s[i+1])) {
+				buf.WriteString("_")
+			}
+		}
+		buf.WriteString(strings.ToLower(string(s[i])))
+	}
+	return buf.String()
+}
+
 func renderTemplate(outputDir string, data templateData) error {
-	path := filepath.Join(outputDir, strings.ToLower(data.Name)+".go")
+	path := filepath.Join(outputDir, uppertCamelToUnderscore(data.Name)+".go")
 	if _, err := os.Stat(path); err == nil {
 		return errors.New(path + " already exists")
 	}
