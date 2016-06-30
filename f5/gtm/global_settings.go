@@ -15,6 +15,9 @@ type GlobalSettingsConfigList struct {
 
 // GlobalSettingsConfig holds the configuration of a single GlobalSettings.
 type GlobalSettingsConfig struct {
+	Reference struct {
+		Link string `json:"link"`
+	} `json:"reference"`
 }
 
 // GlobalSettingsEndpoint represents the REST resource for managing GlobalSettings.

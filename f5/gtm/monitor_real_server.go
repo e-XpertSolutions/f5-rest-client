@@ -15,6 +15,20 @@ type MonitorRealServerConfigList struct {
 
 // MonitorRealServerConfig holds the configuration of a single MonitorRealServer.
 type MonitorRealServerConfig struct {
+	Agent              string `json:"agent"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	Method             string `json:"method"`
+	Metrics            string `json:"metrics"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	ProbeTimeout       int    `json:"probeTimeout"`
+	SelfLink           string `json:"selfLink"`
+	Timeout            int    `json:"timeout"`
+	TmCommand          string `json:"tmCommand"`
 }
 
 // MonitorRealServerEndpoint represents the REST resource for managing MonitorRealServer.

@@ -15,6 +15,9 @@ type PoolConfigList struct {
 
 // PoolConfig holds the configuration of a single Pool.
 type PoolConfig struct {
+	Reference struct {
+		Link string `json:"link"`
+	} `json:"reference"`
 }
 
 // PoolEndpoint represents the REST resource for managing Pool.

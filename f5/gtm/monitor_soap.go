@@ -15,6 +15,20 @@ type MonitorSOAPConfigList struct {
 
 // MonitorSOAPConfig holds the configuration of a single MonitorSOAP.
 type MonitorSOAPConfig struct {
+	Debug              string `json:"debug"`
+	Destination        string `json:"destination"`
+	ExpectFault        string `json:"expectFault"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	ProbeTimeout       int    `json:"probeTimeout"`
+	Protocol           string `json:"protocol"`
+	SelfLink           string `json:"selfLink"`
+	Timeout            int    `json:"timeout"`
 }
 
 // MonitorSOAPEndpoint represents the REST resource for managing MonitorSOAP.

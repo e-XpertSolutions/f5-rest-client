@@ -15,6 +15,17 @@ type MonitorExternalConfigList struct {
 
 // MonitorExternalConfig holds the configuration of a single MonitorExternal.
 type MonitorExternalConfig struct {
+	Destination        string `json:"destination"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	ProbeTimeout       int    `json:"probeTimeout"`
+	SelfLink           string `json:"selfLink"`
+	Timeout            int    `json:"timeout"`
 }
 
 // MonitorExternalEndpoint represents the REST resource for managing MonitorExternal.

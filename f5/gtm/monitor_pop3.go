@@ -15,6 +15,18 @@ type MonitorPOP3ConfigList struct {
 
 // MonitorPOP3Config holds the configuration of a single MonitorPOP3.
 type MonitorPOP3Config struct {
+	Debug              string `json:"debug"`
+	Destination        string `json:"destination"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	ProbeTimeout       int    `json:"probeTimeout"`
+	SelfLink           string `json:"selfLink"`
+	Timeout            int    `json:"timeout"`
 }
 
 // MonitorPOP3Endpoint represents the REST resource for managing MonitorPOP3.

@@ -15,6 +15,19 @@ type MonitorMySQLConfigList struct {
 
 // MonitorMySQLConfig holds the configuration of a single MonitorMySQL.
 type MonitorMySQLConfig struct {
+	Count              string `json:"count"`
+	Debug              string `json:"debug"`
+	Destination        string `json:"destination"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	ProbeTimeout       int    `json:"probeTimeout"`
+	SelfLink           string `json:"selfLink"`
+	Timeout            int    `json:"timeout"`
 }
 
 // MonitorMySQLEndpoint represents the REST resource for managing MonitorMySQL.

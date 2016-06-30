@@ -15,6 +15,21 @@ type MonitorFirepassConfigList struct {
 
 // MonitorFirepassConfig holds the configuration of a single MonitorFirepass.
 type MonitorFirepassConfig struct {
+	Cipherlist         string `json:"cipherlist"`
+	ConcurrencyLimit   int    `json:"concurrencyLimit"`
+	Destination        string `json:"destination"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	MaxLoadAverage     int    `json:"maxLoadAverage"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	ProbeTimeout       int    `json:"probeTimeout"`
+	SelfLink           string `json:"selfLink"`
+	Timeout            int    `json:"timeout"`
+	Username           string `json:"username"`
 }
 
 // MonitorFirepassEndpoint represents the REST resource for managing MonitorFirepass.

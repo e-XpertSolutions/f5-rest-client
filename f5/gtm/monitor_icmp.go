@@ -15,6 +15,20 @@ type MonitorICMPConfigList struct {
 
 // MonitorICMPConfig holds the configuration of a single MonitorICMP.
 type MonitorICMPConfig struct {
+	Destination        string `json:"destination"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	ProbeAttempts      int    `json:"probeAttempts"`
+	ProbeInterval      int    `json:"probeInterval"`
+	ProbeTimeout       int    `json:"probeTimeout"`
+	SelfLink           string `json:"selfLink"`
+	Timeout            int    `json:"timeout"`
+	Transparent        string `json:"transparent"`
 }
 
 // MonitorICMPEndpoint represents the REST resource for managing MonitorICMP.

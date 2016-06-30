@@ -15,6 +15,22 @@ type MonitorSNMPConfigList struct {
 
 // MonitorSNMPConfig holds the configuration of a single MonitorSNMP.
 type MonitorSNMPConfig struct {
+	Community          string `json:"community"`
+	Destination        string `json:"destination"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	Port               int    `json:"port"`
+	ProbeAttempts      int    `json:"probeAttempts"`
+	ProbeInterval      int    `json:"probeInterval"`
+	ProbeTimeout       int    `json:"probeTimeout"`
+	SelfLink           string `json:"selfLink"`
+	Timeout            int    `json:"timeout"`
+	Version            string `json:"version"`
 }
 
 // MonitorSNMPEndpoint represents the REST resource for managing MonitorSNMP.

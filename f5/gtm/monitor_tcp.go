@@ -15,6 +15,19 @@ type MonitorTCPConfigList struct {
 
 // MonitorTCPConfig holds the configuration of a single MonitorTCP.
 type MonitorTCPConfig struct {
+	Destination        string `json:"destination"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	ProbeTimeout       int    `json:"probeTimeout"`
+	Reverse            string `json:"reverse"`
+	SelfLink           string `json:"selfLink"`
+	Timeout            int    `json:"timeout"`
+	Transparent        string `json:"transparent"`
 }
 
 // MonitorTCPEndpoint represents the REST resource for managing MonitorTCP.

@@ -15,6 +15,23 @@ type MonitorWMIConfigList struct {
 
 // MonitorWMIConfig holds the configuration of a single MonitorWMI.
 type MonitorWMIConfig struct {
+	Agent              string `json:"agent"`
+	Destination        string `json:"destination"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	Method             string `json:"method"`
+	Metrics            string `json:"metrics"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	Post               string `json:"post"`
+	ProbeTimeout       int    `json:"probeTimeout"`
+	SelfLink           string `json:"selfLink"`
+	Timeout            int    `json:"timeout"`
+	TmCommand          string `json:"tmCommand"`
+	URL                string `json:"url"`
 }
 
 // MonitorWMIEndpoint represents the REST resource for managing MonitorWMI.

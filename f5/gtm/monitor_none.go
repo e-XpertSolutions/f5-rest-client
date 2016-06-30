@@ -15,6 +15,19 @@ type MonitorNoneConfigList struct {
 
 // MonitorNoneConfig holds the configuration of a single MonitorNone.
 type MonitorNoneConfig struct {
+	Destination        string `json:"destination"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	ProbeTimeout       int    `json:"probeTimeout"`
+	SelfLink           string `json:"selfLink"`
+	TimeUntilUp        int    `json:"timeUntilUp"`
+	Timeout            int    `json:"timeout"`
+	UpInterval         int    `json:"upInterval"`
 }
 
 // MonitorNoneEndpoint represents the REST resource for managing MonitorNone.

@@ -15,6 +15,20 @@ type MonitorSIPConfigList struct {
 
 // MonitorSIPConfig holds the configuration of a single MonitorSIP.
 type MonitorSIPConfig struct {
+	Compatibility      string `json:"compatibility"`
+	Debug              string `json:"debug"`
+	Destination        string `json:"destination"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	Mode               string `json:"mode"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	ProbeTimeout       int    `json:"probeTimeout"`
+	SelfLink           string `json:"selfLink"`
+	Timeout            int    `json:"timeout"`
 }
 
 // MonitorSIPEndpoint represents the REST resource for managing MonitorSIP.

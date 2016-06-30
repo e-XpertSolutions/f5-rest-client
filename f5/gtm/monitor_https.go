@@ -15,6 +15,22 @@ type MonitorHTTPSConfigList struct {
 
 // MonitorHTTPSConfig holds the configuration of a single MonitorHTTPS.
 type MonitorHTTPSConfig struct {
+	Cipherlist         string `json:"cipherlist"`
+	Compatibility      string `json:"compatibility"`
+	Destination        string `json:"destination"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	ProbeTimeout       int    `json:"probeTimeout"`
+	Reverse            string `json:"reverse"`
+	SelfLink           string `json:"selfLink"`
+	Send               string `json:"send"`
+	Timeout            int    `json:"timeout"`
+	Transparent        string `json:"transparent"`
 }
 
 // MonitorHTTPSEndpoint represents the REST resource for managing MonitorHTTPS.

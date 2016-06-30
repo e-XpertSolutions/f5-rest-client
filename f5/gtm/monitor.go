@@ -15,6 +15,9 @@ type MonitorConfigList struct {
 
 // MonitorConfig holds the configuration of a single Monitor.
 type MonitorConfig struct {
+	Reference struct {
+		Link string `json:"link"`
+	} `json:"reference"`
 }
 
 // MonitorEndpoint represents the REST resource for managing Monitor.

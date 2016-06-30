@@ -15,6 +15,17 @@ type MonitorBigIPConfigList struct {
 
 // MonitorBigIPConfig holds the configuration of a single MonitorBigIP.
 type MonitorBigIPConfig struct {
+	AggregateDynamicRatios string `json:"aggregateDynamicRatios"`
+	Destination            string `json:"destination"`
+	FullPath               string `json:"fullPath"`
+	Generation             int    `json:"generation"`
+	IgnoreDownResponse     string `json:"ignoreDownResponse"`
+	Interval               int    `json:"interval"`
+	Kind                   string `json:"kind"`
+	Name                   string `json:"name"`
+	Partition              string `json:"partition"`
+	SelfLink               string `json:"selfLink"`
+	Timeout                int    `json:"timeout"`
 }
 
 // MonitorBigIPEndpoint represents the REST resource for managing MonitorBigIP.

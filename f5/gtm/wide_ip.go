@@ -15,6 +15,9 @@ type WideIPConfigList struct {
 
 // WideIPConfig holds the configuration of a single WideIP.
 type WideIPConfig struct {
+	Reference struct {
+		Link string `json:"link"`
+	} `json:"reference"`
 }
 
 // WideIPEndpoint represents the REST resource for managing WideIP.

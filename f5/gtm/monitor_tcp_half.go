@@ -15,6 +15,20 @@ type MonitorTCPHalfConfigList struct {
 
 // MonitorTCPHalfConfig holds the configuration of a single MonitorTCPHalf.
 type MonitorTCPHalfConfig struct {
+	Destination        string `json:"destination"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	ProbeAttempts      int    `json:"probeAttempts"`
+	ProbeInterval      int    `json:"probeInterval"`
+	ProbeTimeout       int    `json:"probeTimeout"`
+	SelfLink           string `json:"selfLink"`
+	Timeout            int    `json:"timeout"`
+	Transparent        string `json:"transparent"`
 }
 
 // MonitorTCPHalfEndpoint represents the REST resource for managing MonitorTCPHalf.

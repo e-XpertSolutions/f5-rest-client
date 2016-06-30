@@ -15,6 +15,16 @@ type MonitorBigIPLinkConfigList struct {
 
 // MonitorBigIPLinkConfig holds the configuration of a single MonitorBigIPLink.
 type MonitorBigIPLinkConfig struct {
+	Destination        string `json:"destination"`
+	FullPath           string `json:"fullPath"`
+	Generation         int    `json:"generation"`
+	IgnoreDownResponse string `json:"ignoreDownResponse"`
+	Interval           int    `json:"interval"`
+	Kind               string `json:"kind"`
+	Name               string `json:"name"`
+	Partition          string `json:"partition"`
+	SelfLink           string `json:"selfLink"`
+	Timeout            int    `json:"timeout"`
 }
 
 // MonitorBigIPLinkEndpoint represents the REST resource for managing MonitorBigIPLink.
