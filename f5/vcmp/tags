@@ -5,5 +5,72 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 BasePath	vcmp.go	/^const BasePath = "mgmt\/tm\/vcmp"$/;"	c
+Create	guest.go	/^func (r *GuestResource) Create(item GuestConfig) error {$/;"	f
+Create	health.go	/^func (r *HealthResource) Create(item HealthConfig) error {$/;"	f
+Create	traffic_profile.go	/^func (r *TrafficProfileResource) Create(item TrafficProfileConfig) error {$/;"	f
+Create	vcmp_resource.go	/^func (r *VCMPResource) Create(item VCMPConfig) error {$/;"	f
+Create	virtual_disk.go	/^func (r *VirtualDiskResource) Create(item VirtualDiskConfig) error {$/;"	f
+Create	virtual_disk_template.go	/^func (r *VirtualDiskTemplateResource) Create(item VirtualDiskTemplateConfig) error {$/;"	f
+Delete	guest.go	/^func (r *GuestResource) Delete(id string) error {$/;"	f
+Delete	health.go	/^func (r *HealthResource) Delete(id string) error {$/;"	f
+Delete	traffic_profile.go	/^func (r *TrafficProfileResource) Delete(id string) error {$/;"	f
+Delete	vcmp_resource.go	/^func (r *VCMPResource) Delete(id string) error {$/;"	f
+Delete	virtual_disk.go	/^func (r *VirtualDiskResource) Delete(id string) error {$/;"	f
+Delete	virtual_disk_template.go	/^func (r *VirtualDiskTemplateResource) Delete(id string) error {$/;"	f
+Edit	guest.go	/^func (r *GuestResource) Edit(id string, item GuestConfig) error {$/;"	f
+Edit	health.go	/^func (r *HealthResource) Edit(id string, item HealthConfig) error {$/;"	f
+Edit	traffic_profile.go	/^func (r *TrafficProfileResource) Edit(id string, item TrafficProfileConfig) error {$/;"	f
+Edit	vcmp_resource.go	/^func (r *VCMPResource) Edit(id string, item VCMPConfig) error {$/;"	f
+Edit	virtual_disk.go	/^func (r *VirtualDiskResource) Edit(id string, item VirtualDiskConfig) error {$/;"	f
+Edit	virtual_disk_template.go	/^func (r *VirtualDiskTemplateResource) Edit(id string, item VirtualDiskTemplateConfig) error {$/;"	f
+Get	guest.go	/^func (r *GuestResource) Get(id string) (*GuestConfig, error) {$/;"	f
+Get	health.go	/^func (r *HealthResource) Get(id string) (*HealthConfig, error) {$/;"	f
+Get	traffic_profile.go	/^func (r *TrafficProfileResource) Get(id string) (*TrafficProfileConfig, error) {$/;"	f
+Get	vcmp_resource.go	/^func (r *VCMPResource) Get(id string) (*VCMPConfig, error) {$/;"	f
+Get	virtual_disk.go	/^func (r *VirtualDiskResource) Get(id string) (*VirtualDiskConfig, error) {$/;"	f
+Get	virtual_disk_template.go	/^func (r *VirtualDiskTemplateResource) Get(id string) (*VirtualDiskTemplateConfig, error) {$/;"	f
+Guest	vcmp.go	/^func (vcmp VCMP) Guest() *GuestResource {$/;"	f
+GuestConfig	guest.go	/^type GuestConfig struct {$/;"	t
+GuestConfigList	guest.go	/^type GuestConfigList struct {$/;"	t
+GuestEndpoint	guest.go	/^const GuestEndpoint = "\/guest"$/;"	c
+GuestResource	guest.go	/^type GuestResource struct {$/;"	t
+Health	vcmp.go	/^func (vcmp VCMP) Health() *HealthResource {$/;"	f
+HealthConfig	health.go	/^type HealthConfig struct {$/;"	t
+HealthConfigList	health.go	/^type HealthConfigList struct {$/;"	t
+HealthEndpoint	health.go	/^const HealthEndpoint = "\/health"$/;"	c
+HealthResource	health.go	/^type HealthResource struct {$/;"	t
+ListAll	guest.go	/^func (r *GuestResource) ListAll() (*GuestConfigList, error) {$/;"	f
+ListAll	health.go	/^func (r *HealthResource) ListAll() (*HealthConfigList, error) {$/;"	f
+ListAll	traffic_profile.go	/^func (r *TrafficProfileResource) ListAll() (*TrafficProfileConfigList, error) {$/;"	f
+ListAll	vcmp_resource.go	/^func (r *VCMPResource) ListAll() (*VCMPConfigList, error) {$/;"	f
+ListAll	virtual_disk.go	/^func (r *VirtualDiskResource) ListAll() (*VirtualDiskConfigList, error) {$/;"	f
+ListAll	virtual_disk_template.go	/^func (r *VirtualDiskTemplateResource) ListAll() (*VirtualDiskTemplateConfigList, error) {$/;"	f
+New	vcmp.go	/^func New(c f5.Client) VCMP {$/;"	f
+TrafficProfile	vcmp.go	/^func (vcmp VCMP) TrafficProfile() *TrafficProfileResource {$/;"	f
+TrafficProfileConfig	traffic_profile.go	/^type TrafficProfileConfig struct {$/;"	t
+TrafficProfileConfigList	traffic_profile.go	/^type TrafficProfileConfigList struct {$/;"	t
+TrafficProfileEndpoint	traffic_profile.go	/^const TrafficProfileEndpoint = "\/traffic-profile"$/;"	c
+TrafficProfileResource	traffic_profile.go	/^type TrafficProfileResource struct {$/;"	t
+VCMP	vcmp.go	/^func (vcmp VCMP) VCMP() *VCMPResource {$/;"	f
 VCMP	vcmp.go	/^type VCMP struct {$/;"	t
+VCMPConfig	vcmp_resource.go	/^type VCMPConfig struct {$/;"	t
+VCMPConfigList	vcmp_resource.go	/^type VCMPConfigList struct {$/;"	t
+VCMPEndpoint	vcmp_resource.go	/^const VCMPEndpoint = ""$/;"	c
+VCMPResource	vcmp_resource.go	/^type VCMPResource struct {$/;"	t
+VirtualDisk	vcmp.go	/^func (vcmp VCMP) VirtualDisk() *VirtualDiskResource {$/;"	f
+VirtualDiskConfig	virtual_disk.go	/^type VirtualDiskConfig struct {$/;"	t
+VirtualDiskConfigList	virtual_disk.go	/^type VirtualDiskConfigList struct {$/;"	t
+VirtualDiskEndpoint	virtual_disk.go	/^const VirtualDiskEndpoint = "\/virtual-disk"$/;"	c
+VirtualDiskResource	virtual_disk.go	/^type VirtualDiskResource struct {$/;"	t
+VirtualDiskTemplate	vcmp.go	/^func (vcmp VCMP) VirtualDiskTemplate() *VirtualDiskTemplateResource {$/;"	f
+VirtualDiskTemplateConfig	virtual_disk_template.go	/^type VirtualDiskTemplateConfig struct {$/;"	t
+VirtualDiskTemplateConfigList	virtual_disk_template.go	/^type VirtualDiskTemplateConfigList struct {$/;"	t
+VirtualDiskTemplateEndpoint	virtual_disk_template.go	/^const VirtualDiskTemplateEndpoint = "\/virtual-disk-template"$/;"	c
+VirtualDiskTemplateResource	virtual_disk_template.go	/^type VirtualDiskTemplateResource struct {$/;"	t
+vcmp	guest.go	/^package vcmp$/;"	p
+vcmp	health.go	/^package vcmp$/;"	p
+vcmp	traffic_profile.go	/^package vcmp$/;"	p
 vcmp	vcmp.go	/^package vcmp$/;"	p
+vcmp	vcmp_resource.go	/^package vcmp$/;"	p
+vcmp	virtual_disk.go	/^package vcmp$/;"	p
+vcmp	virtual_disk_template.go	/^package vcmp$/;"	p
