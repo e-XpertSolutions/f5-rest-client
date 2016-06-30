@@ -15,6 +15,24 @@ type GuestConfigList struct {
 
 // GuestConfig holds the configuration of a single Guest.
 type GuestConfig struct {
+	AllowedSlots      int    `json:"allowedSlots"`
+	AppService        string `json:"appService"`
+	AssignedSlots     int    `json:"assignedSlots"`
+	CoresPerSlot      int    `json:"coresPerSlot"`
+	Hostname          string `json:"hostname"`
+	InitialHotfix     string `json:"initialHotfix"`
+	InitialImage      string `json:"initialImage"`
+	ManagementGW      string `json:"managementGw"`
+	ManagementIP      string `json:"managementIp"`
+	ManagementNetwork string `json:"managementNetwork"`
+	MinSlots          int    `json:"minSlots"`
+	PreferredSLots    int    `json:"preferredSlots"`
+	Slots             int    `json:"slots"`
+	SSLMode           string `json:"sslMode"`
+	State             string `json:"state"`
+	SymUnitKey        string `json:"symUnitKey"`
+	TrafficProfile    string `json:"trafficProfile"`
+	VirtualDisk       string `json:"virtualDisk"`
 }
 
 // GuestEndpoint represents the REST resource for managing Guest.

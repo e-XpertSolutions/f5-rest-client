@@ -15,6 +15,7 @@ type VirtualDiskConfigList struct {
 
 // VirtualDiskConfig holds the configuration of a single VirtualDisk.
 type VirtualDiskConfig struct {
+	OperatingSystem string `json:"operatingSystem"`
 }
 
 // VirtualDiskEndpoint represents the REST resource for managing VirtualDisk.

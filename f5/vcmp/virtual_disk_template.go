@@ -15,6 +15,8 @@ type VirtualDiskTemplateConfigList struct {
 
 // VirtualDiskTemplateConfig holds the configuration of a single VirtualDiskTemplate.
 type VirtualDiskTemplateConfig struct {
+	ISOVersion      string `json:"isoVersion"`
+	OperatingSystem string `json:"operatingSystem"`
 }
 
 // VirtualDiskTemplateEndpoint represents the REST resource for managing VirtualDiskTemplate.

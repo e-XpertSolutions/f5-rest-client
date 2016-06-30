@@ -15,6 +15,8 @@ type TrafficProfileConfigList struct {
 
 // TrafficProfileConfig holds the configuration of a single TrafficProfile.
 type TrafficProfileConfig struct {
+	AppService   string `json:"appService"`
+	ColorPolicer string `json:"colorPolicer"`
 }
 
 // TrafficProfileEndpoint represents the REST resource for managing TrafficProfile.
