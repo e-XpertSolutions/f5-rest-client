@@ -144,6 +144,34 @@ func (vr *VirtualResource) Edit(id string, item VirtualServerConfig) error {
 	return nil
 }
 
+// Enabling a virtual server item identified by id.
+func (vr *VirtualResource) Enable(id string) error {
+	item := VirtualServerConfig{Enabled: true}
+	resp, err := vr.doRequest("PUT", id, item)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	if err := vr.readError(resp); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Disabling a virtual server item identified by id.
+func (vr *VirtualResource) Disable(id string) error {
+	item := VirtualServerConfig{Disabled: true}
+	resp, err := vr.doRequest("PUT", id, item)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	if err := vr.readError(resp); err != nil {
+		return err
+	}
+	return nil
+}
+
 // Delete a single server configuration identified by id.
 func (vr *VirtualResource) Delete(id string) error {
 	resp, err := vr.doRequest("DELETE", id, nil)
