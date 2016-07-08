@@ -73,6 +73,30 @@ func (nr *NodeResource) Edit(id string, item NodeConfig) error {
 	return nil
 }
 
+func (nr *NodeResource) Enable(id string) error {
+	item := NodeConfig{Session: "unchecked", State: "user-enabled"}
+	if err := nr.c.ModQuery("PUT", BasePath+NodeEndpoint+"/"+id, item); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (nr *NodeResource) Disable(id string) error {
+	item := NodeConfig{Session: "unchecked", State: "user-disabled"}
+	if err := nr.c.ModQuery("PUT", BasePath+NodeEndpoint+"/"+id, item); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (nr *NodeResource) ForceOffline(id string) error {
+	item := NodeConfig{Session: "user-down", State: "user-disabled"}
+	if err := nr.c.ModQuery("PUT", BasePath+NodeEndpoint+"/"+id, item); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (nr *NodeResource) Delete(id string) error {
 	if err := nr.c.ModQuery("DELETE", BasePath+NodeEndpoint+"/"+id, nil); err != nil {
 		return err
