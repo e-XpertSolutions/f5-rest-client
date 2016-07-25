@@ -6,13 +6,6 @@ package sys
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// DNSConfigList holds a list of DNS configuration.
-type DNSConfigList struct {
-	Items    []DNSConfig `json:"items"`
-	Kind     string      `json:"kind"`
-	SelfLink string      `json:"selflink"`
-}
-
 // DNSConfig holds the configuration of a single DNS.
 type DNSConfig struct {
 	Kind         string   `json:"kind,omitempty"`
@@ -32,12 +25,29 @@ type DNSResource struct {
 }
 
 // Show display the current DNS configurations.
-func (r *DNSResource) Show() (*DNSConfigList, error) {
-	var list DNSConfigList
+func (r *DNSResource) Show() (*DNSConfig, error) {
+	var list DNSConfig
 	if err := r.c.ReadQuery(BasePath+DNSEndpoint, &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
+}
+
+func (r *DNSResource) AddNameServers(ns ...string) error {
+	if len(ns) == 0 {
+		return nil
+	}
+	var item DNSConfig
+	if err := r.c.ReadQuery(BasePath+DNSEndpoint, &item); err != nil {
+		return err
+	}
+
+	item.NameServers = append(item.NameServers, ns...)
+
+	if err := r.c.ModQuery("PUT", BasePath+DNSEndpoint, item); err != nil {
+		return err
+	}
+	return nil
 }
 
 // Edit the DNS configuration
