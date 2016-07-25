@@ -11,9 +11,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
 	"strings"
 )
+
+const UploadRESTPath = "/mgmt/shared/file-transfer/uploads"
 
 // An authFunc is function responsible for setting necessary headers to
 // perform authenticated requests.
@@ -118,6 +121,20 @@ func (c Client) MakeRequest(method, restPath string, data interface{}) (*http.Re
 		return nil, fmt.Errorf("failed to create F5 authenticated request: %v", err)
 	}
 	req.Header.Add("Accept", "application/json")
+	c.makeAuth(req)
+	return req, nil
+}
+
+func (c Client) MakeUploadRequest(restPath string, r io.Reader, filesize int64) (*http.Request, error) {
+	if filesize > 512*1024 {
+		return nil, fmt.Errorf("file larger than %d are not yet supported", 512*1024)
+	}
+	req, err := http.NewRequest("POST", c.makeURL(restPath), r)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create F5 authenticated request: %v", err)
+	}
+	req.Header.Add("Accept", "application/json")
+	req.Header.Set("Content-Range", fmt.Sprintf("%d-%d/%d", 0, filesize-1, filesize))
 	c.makeAuth(req)
 	return req, nil
 }
