@@ -18,7 +18,7 @@ type LogConfig struct {
 }
 
 // LogEndpoint represents the REST resource for managing Log.
-const LogEndpoint = "/tm/sys/log"
+const LogEndpoint = "/log"
 
 // LogResource provides an API to manage Log configurations.
 type LogResource struct {
