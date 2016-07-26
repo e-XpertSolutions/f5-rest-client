@@ -6,19 +6,20 @@ package sys
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// NTPConfigList holds a list of NTP configuration.
-type NTPConfigList struct {
-	Items    []NTPConfig `json:"items"`
-	Kind     string      `json:"kind"`
-	SelfLink string      `json:"selflink"`
-}
-
 // NTPConfig holds the configuration of a single NTP.
 type NTPConfig struct {
+	Kind              string `json:"kind"`
+	RestrictReference struct {
+		IsSubcollection bool   `json:"isSubcollection"`
+		Link            string `json:"link"`
+	} `json:"restrictReference"`
+	SelfLink string   `json:"selfLink"`
+	Servers  []string `json:"servers"`
+	Timezone string   `json:"timezone"`
 }
 
 // NTPEndpoint represents the REST resource for managing NTP.
-const NTPEndpoint = "/tm/sys/ntp"
+const NTPEndpoint = "/ntp"
 
 // NTPResource provides an API to manage NTP configurations.
 type NTPResource struct {
@@ -26,29 +27,12 @@ type NTPResource struct {
 }
 
 // ListAll  lists all the NTP configurations.
-func (r *NTPResource) ListAll() (*NTPConfigList, error) {
-	var list NTPConfigList
+func (r *NTPResource) Show() (*NTPConfig, error) {
+	var list NTPConfig
 	if err := r.c.ReadQuery(BasePath+NTPEndpoint, &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
-}
-
-// Get a single NTP configuration identified by id.
-func (r *NTPResource) Get(id string) (*NTPConfig, error) {
-	var item NTPConfig
-	if err := r.c.ReadQuery(BasePath+NTPEndpoint, &item); err != nil {
-		return nil, err
-	}
-	return &item, nil
-}
-
-// Create a new NTP configuration.
-func (r *NTPResource) Create(item NTPConfig) error {
-	if err := r.c.ModQuery("POST", BasePath+NTPEndpoint, item); err != nil {
-		return err
-	}
-	return nil
 }
 
 // Edit a NTP configuration identified by id.
@@ -59,9 +43,18 @@ func (r *NTPResource) Edit(id string, item NTPConfig) error {
 	return nil
 }
 
-// Delete a single NTP configuration identified by id.
-func (r *NTPResource) Delete(id string) error {
-	if err := r.c.ModQuery("DELETE", BasePath+NTPEndpoint+"/"+id, nil); err != nil {
+func (r *NTPResource) AddServers(rs ...string) error {
+	if len(rs) == 0 {
+		return nil
+	}
+	var item NTPConfig
+	if err := r.c.ReadQuery(BasePath+NTPEndpoint, &item); err != nil {
+		return err
+	}
+
+	item.Servers = append(item.Servers, rs...)
+
+	if err := r.c.ModQuery("PUT", BasePath+NTPEndpoint, item); err != nil {
 		return err
 	}
 	return nil
