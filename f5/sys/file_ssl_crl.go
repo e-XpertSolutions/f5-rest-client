@@ -4,7 +4,15 @@
 
 package sys
 
-import "github.com/e-XpertSolutions/f5-rest-client/f5"
+import (
+	"fmt"
+	"io/ioutil"
+	"log"
+	"os"
+	"path/filepath"
+
+	"github.com/e-XpertSolutions/f5-rest-client/f5"
+)
 
 // FileSSLCRLConfigList holds a list of FileSSLCRL configuration.
 type FileSSLCRLConfigList struct {
@@ -18,7 +26,7 @@ type FileSSLCRLConfig struct {
 }
 
 // FileSSLCRLEndpoint represents the REST resource for managing FileSSLCRL.
-const FileSSLCRLEndpoint = "/tm/sys/file/ssl-crl"
+const FileSSLCRLEndpoint = "/file/ssl-crl"
 
 // FileSSLCRLResource provides an API to manage FileSSLCRL configurations.
 type FileSSLCRLResource struct {
@@ -44,18 +52,73 @@ func (r *FileSSLCRLResource) Get(id string) (*FileSSLCRLConfig, error) {
 }
 
 // Create a new FileSSLCRL configuration.
-func (r *FileSSLCRLResource) Create(item FileSSLCRLConfig) error {
-	if err := r.c.ModQuery("POST", BasePath+FileSSLCRLEndpoint, item); err != nil {
-		return err
+func (r *FileSSLCRLResource) Create(name, path string) error {
+	info, err := os.Stat(path)
+	if err != nil {
+		return fmt.Errorf("failed to gather information about '%s': %v", path, err)
 	}
+	f, err := os.Open(path)
+	if err != nil {
+		return fmt.Errorf("failed to read file from path: %v", err)
+	}
+	defer f.Close()
+
+	req, err := r.c.MakeUploadRequest(f5.UploadRESTPath+"/"+filepath.Base(path), f, info.Size())
+	if err != nil {
+		return fmt.Errorf("failed to create upload request: %v", err)
+	}
+	resp, err := r.c.Do(req)
+	if err != nil {
+		return fmt.Errorf("failed to upload file '%s': %v", path, err)
+	}
+	defer resp.Body.Close()
+
+	bs, _ := ioutil.ReadAll(resp.Body)
+	log.Print("DEBUG resp=", string(bs))
+
+	data := map[string]string{
+		"name":        name,
+		"source-path": "file://localhost/var/config/rest/downloads/" + filepath.Base(path),
+	}
+	if err := r.c.ModQuery("POST", BasePath+FileSSLCRLEndpoint, data); err != nil {
+		return fmt.Errorf("failed to create FileSSLCRL configuration: %v", err)
+	}
+
 	return nil
 }
 
 // Edit a FileSSLCRL configuration identified by id.
-func (r *FileSSLCRLResource) Edit(id string, item FileSSLCRLConfig) error {
-	if err := r.c.ModQuery("PUT", BasePath+FileSSLCRLEndpoint+"/"+id, item); err != nil {
-		return err
+func (r *FileSSLCRLResource) Edit(id, path string) error {
+	info, err := os.Stat(path)
+	if err != nil {
+		return fmt.Errorf("failed to gather information about '%s': %v", path, err)
 	}
+	f, err := os.Open(path)
+	if err != nil {
+		return fmt.Errorf("failed to read file from path: %v", err)
+	}
+	defer f.Close()
+
+	req, err := r.c.MakeUploadRequest(f5.UploadRESTPath+"/"+filepath.Base(path), f, info.Size())
+	if err != nil {
+		return fmt.Errorf("failed to create upload request: %v", err)
+	}
+	resp, err := r.c.Do(req)
+	if err != nil {
+		return fmt.Errorf("failed to upload file '%s': %v", path, err)
+	}
+	defer resp.Body.Close()
+
+	bs, _ := ioutil.ReadAll(resp.Body)
+	log.Print("DEBUG resp=", string(bs))
+
+	data := map[string]string{
+		"source-path": "file://localhost/var/config/rest/downloads/" + filepath.Base(path),
+	}
+	if err := r.c.ModQuery("PUT", BasePath+FileSSLCRLEndpoint+"/"+id, data); err != nil {
+		return fmt.Errorf("failed to create FileSSLCRL configuration: %v", err)
+	}
+
 	return nil
 }
 
