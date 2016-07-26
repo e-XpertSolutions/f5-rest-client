@@ -110,7 +110,7 @@ func (r *FileSSLCertResource) Create(name, path string) error {
 		"source-path": "file://localhost/var/config/rest/downloads/" + filepath.Base(path),
 	}
 	if err := r.c.ModQuery("POST", BasePath+FileSSLCertEndpoint, data); err != nil {
-		return fmt.Errorf("failed to create SSL certificate configuration: %v", err)
+		return fmt.Errorf("failed to create FileSSLCert configuration: %v", err)
 	}
 
 	return nil
@@ -145,7 +145,7 @@ func (r *FileSSLCertResource) Edit(id, path string) error {
 		"source-path": "file://localhost/var/config/rest/downloads/" + filepath.Base(path),
 	}
 	if err := r.c.ModQuery("PUT", BasePath+FileSSLCertEndpoint+"/"+id, data); err != nil {
-		return fmt.Errorf("failed to create ifile configuration: %v", err)
+		return fmt.Errorf("failed to create FileSSLCert configuration: %v", err)
 	}
 
 	return nil
