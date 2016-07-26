@@ -8,14 +8,14 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // NTPConfig holds the configuration of a single NTP.
 type NTPConfig struct {
-	Kind              string `json:"kind"`
+	Kind              string `json:"kind,omitempty"`
 	RestrictReference struct {
-		IsSubcollection bool   `json:"isSubcollection"`
-		Link            string `json:"link"`
-	} `json:"restrictReference"`
-	SelfLink string   `json:"selfLink"`
-	Servers  []string `json:"servers"`
-	Timezone string   `json:"timezone"`
+		IsSubcollection bool   `json:"isSubcollection,omitempty"`
+		Link            string `json:"link,omitempty"`
+	} `json:"restrictReference,omitempty"`
+	SelfLink string   `json:"selfLink,omitempty"`
+	Servers  []string `json:"servers,omitempty"`
+	Timezone string   `json:"timezone,omitempty"`
 }
 
 // NTPEndpoint represents the REST resource for managing NTP.
