@@ -4,7 +4,15 @@
 
 package sys
 
-import "github.com/e-XpertSolutions/f5-rest-client/f5"
+import (
+	"fmt"
+	"io/ioutil"
+	"log"
+	"os"
+	"path/filepath"
+
+	"github.com/e-XpertSolutions/f5-rest-client/f5"
+)
 
 // FileSSLKeyConfigList holds a list of FileSSLKey configuration.
 type FileSSLKeyConfigList struct {
@@ -37,7 +45,7 @@ type FileSSLKeyConfig struct {
 }
 
 // FileSSLKeyEndpoint represents the REST resource for managing FileSSLKey.
-const FileSSLKeyEndpoint = "/tm/sys/file/ssl-key"
+const FileSSLKeyEndpoint = "/file/ssl-key"
 
 // FileSSLKeyResource provides an API to manage FileSSLKey configurations.
 type FileSSLKeyResource struct {
@@ -63,18 +71,73 @@ func (r *FileSSLKeyResource) Get(id string) (*FileSSLKeyConfig, error) {
 }
 
 // Create a new FileSSLKey configuration.
-func (r *FileSSLKeyResource) Create(item FileSSLKeyConfig) error {
-	if err := r.c.ModQuery("POST", BasePath+FileSSLKeyEndpoint, item); err != nil {
-		return err
+func (r *FileSSLKeyResource) Create(name, path string) error {
+	info, err := os.Stat(path)
+	if err != nil {
+		return fmt.Errorf("failed to gather information about '%s': %v", path, err)
 	}
+	f, err := os.Open(path)
+	if err != nil {
+		return fmt.Errorf("failed to read file from path: %v", err)
+	}
+	defer f.Close()
+
+	req, err := r.c.MakeUploadRequest(f5.UploadRESTPath+"/"+filepath.Base(path), f, info.Size())
+	if err != nil {
+		return fmt.Errorf("failed to create upload request: %v", err)
+	}
+	resp, err := r.c.Do(req)
+	if err != nil {
+		return fmt.Errorf("failed to upload file '%s': %v", path, err)
+	}
+	defer resp.Body.Close()
+
+	bs, _ := ioutil.ReadAll(resp.Body)
+	log.Print("DEBUG resp=", string(bs))
+
+	data := map[string]string{
+		"name":        name,
+		"source-path": "file://localhost/var/config/rest/downloads/" + filepath.Base(path),
+	}
+	if err := r.c.ModQuery("POST", BasePath+FileSSLKeyEndpoint, data); err != nil {
+		return fmt.Errorf("failed to create FileSSLCRL configuration: %v", err)
+	}
+
 	return nil
 }
 
 // Edit a FileSSLKey configuration identified by id.
-func (r *FileSSLKeyResource) Edit(id string, item FileSSLKeyConfig) error {
-	if err := r.c.ModQuery("PUT", BasePath+FileSSLKeyEndpoint+"/"+id, item); err != nil {
-		return err
+func (r *FileSSLKeyResource) Edit(id, path string) error {
+	info, err := os.Stat(path)
+	if err != nil {
+		return fmt.Errorf("failed to gather information about '%s': %v", path, err)
 	}
+	f, err := os.Open(path)
+	if err != nil {
+		return fmt.Errorf("failed to read file from path: %v", err)
+	}
+	defer f.Close()
+
+	req, err := r.c.MakeUploadRequest(f5.UploadRESTPath+"/"+filepath.Base(path), f, info.Size())
+	if err != nil {
+		return fmt.Errorf("failed to create upload request: %v", err)
+	}
+	resp, err := r.c.Do(req)
+	if err != nil {
+		return fmt.Errorf("failed to upload file '%s': %v", path, err)
+	}
+	defer resp.Body.Close()
+
+	bs, _ := ioutil.ReadAll(resp.Body)
+	log.Print("DEBUG resp=", string(bs))
+
+	data := map[string]string{
+		"source-path": "file://localhost/var/config/rest/downloads/" + filepath.Base(path),
+	}
+	if err := r.c.ModQuery("PUT", BasePath+FileSSLKeyEndpoint+"/"+id, data); err != nil {
+		return fmt.Errorf("failed to create FileSSLCRL configuration: %v", err)
+	}
+
 	return nil
 }
 
