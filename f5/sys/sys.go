@@ -58,7 +58,6 @@ type Sys struct {
 	fPGAInfo                            FPGAInfoResource
 	failover                            FailoverResource
 	featureModule                       FeatureModuleResource
-	file                                FileResource
 	fileApacheSSLCert                   FileApacheSSLCertResource
 	fileApacheSSLCertBundleCertificates FileApacheSSLCertBundleCertificatesResource
 	fileBrowserCapabilitiesDB           FileBrowserCapabilitiesDBResource
@@ -193,7 +192,6 @@ func New(c f5.Client) Sys {
 		fPGAInfo:                            FPGAInfoResource{c: c},
 		failover:                            FailoverResource{c: c},
 		featureModule:                       FeatureModuleResource{c: c},
-		file:                                FileResource{c: c},
 		fileApacheSSLCert:                   FileApacheSSLCertResource{c: c},
 		fileApacheSSLCertBundleCertificates: FileApacheSSLCertBundleCertificatesResource{c: c},
 		fileBrowserCapabilitiesDB:           FileBrowserCapabilitiesDBResource{c: c},
@@ -511,11 +509,6 @@ func (sys Sys) Failover() *FailoverResource {
 // featureModule returns a configured FeatureModuleResource.
 func (sys Sys) FeatureModule() *FeatureModuleResource {
 	return &sys.featureModule
-}
-
-// file returns a configured FileResource.
-func (sys Sys) File() *FileResource {
-	return &sys.file
 }
 
 // fileApacheSSLCert returns a configured FileApacheSSLCertResource.
