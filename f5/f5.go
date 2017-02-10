@@ -45,11 +45,11 @@ func NewBasicClient(baseURL, user, password string) (*Client, error) {
 // NewTokenClient creates a new F5 client with token based authentication.
 //
 // baseURL is the base URL of the F5 API server.
-func NewTokenClient(baseURL, user, password, loginRef string, sslCheck bool) (*Client, error) {
+func NewTokenClient(baseURL, user, password, loginProvName string, sslCheck bool) (*Client, error) {
 	c := Client{c: http.Client{}, baseURL: baseURL}
 
 	// Negociate token with a pair of username/password.
-	data, err := json.Marshal(map[string]string{"username": user, "password": password, "loginReference": loginRef})
+	data, err := json.Marshal(map[string]string{"username": user, "password": password, "loginProviderName": loginProvName})
 	if err != nil {
 		return nil, fmt.Errorf("failed to create token client (cannot marshal user credentials): %v", err)
 	}
