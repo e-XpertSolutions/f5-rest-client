@@ -96,6 +96,30 @@ func (r *FileSSLCertResource) ListExpired() (*FileSSLCertConfigList, error) {
 	return &expConfigList, nil
 }
 
+// ListExpiring lists all expiring certificates.
+func (r *FileSSLCertResource) ListExpiring(sec int64) (*FileSSLCertConfigList, error) {
+	var list FileSSLCertConfigList
+	if err := r.c.ReadQuery(BasePath+FileSSLCertEndpoint, &list); err != nil {
+		return nil, err
+	}
+
+	var expiringList []FileSSLCertConfig
+
+	for _, cert := range list.Items {
+		if time.Now().After(time.Unix(cert.ExpirationDate-sec, 0)) && time.Now().Before(time.Unix(cert.ExpirationDate, 0)) {
+			expiringList = append(expiringList, cert)
+		}
+	}
+
+	expConfigList := FileSSLCertConfigList{
+		Items:    expiringList,
+		Kind:     list.Kind,
+		SelfLink: list.SelfLink,
+	}
+
+	return &expConfigList, nil
+}
+
 // Get a single FileSSLCert configuration identified by id.
 func (r *FileSSLCertResource) Get(id string) (*FileSSLCertConfig, error) {
 	var item FileSSLCertConfig
