@@ -10,6 +10,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/e-XpertSolutions/f5-rest-client/f5"
 )
@@ -32,7 +33,7 @@ type FileSSLCertConfig struct {
 	Checksum                string `json:"checksum"`
 	CreateTime              string `json:"createTime"`
 	CreatedBy               string `json:"createdBy"`
-	ExpirationDate          int    `json:"expirationDate"`
+	ExpirationDate          int64  `json:"expirationDate"`
 	ExpirationString        string `json:"expirationString"`
 	FullPath                string `json:"fullPath"`
 	Generation              int    `json:"generation"`
@@ -69,6 +70,30 @@ func (r *FileSSLCertResource) ListAll() (*FileSSLCertConfigList, error) {
 		return nil, err
 	}
 	return &list, nil
+}
+
+// ListExpired lists all expired certificates.
+func (r *FileSSLCertResource) ListExpired() (*FileSSLCertConfigList, error) {
+	var list FileSSLCertConfigList
+	if err := r.c.ReadQuery(BasePath+FileSSLCertEndpoint, &list); err != nil {
+		return nil, err
+	}
+
+	var expiredList []FileSSLCertConfig
+
+	for _, cert := range list.Items {
+		if time.Now().After(time.Unix(cert.ExpirationDate, 0)) {
+			expiredList = append(expiredList, cert)
+		}
+	}
+
+	expConfigList := FileSSLCertConfigList{
+		Items:    expiredList,
+		Kind:     list.Kind,
+		SelfLink: list.SelfLink,
+	}
+
+	return &expConfigList, nil
 }
 
 // Get a single FileSSLCert configuration identified by id.
