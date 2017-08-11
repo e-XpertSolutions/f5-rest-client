@@ -21,7 +21,7 @@ type SoftwareConfig struct {
 }
 
 // SoftwareEndpoint represents the REST resource for managing Software.
-const SoftwareEndpoint = "/tm/sys/software"
+const SoftwareEndpoint = "/software"
 
 // SoftwareResource provides an API to manage Software configurations.
 type SoftwareResource struct {

@@ -30,7 +30,7 @@ type SoftwareHotfixConfig struct {
 }
 
 // SoftwareHotfixEndpoint represents the REST resource for managing SoftwareHotfix.
-const SoftwareHotfixEndpoint = "/tm/sys/software/hotfix"
+const SoftwareHotfixEndpoint = "/software/hotfix"
 
 // SoftwareHotfixResource provides an API to manage SoftwareHotfix configurations.
 type SoftwareHotfixResource struct {

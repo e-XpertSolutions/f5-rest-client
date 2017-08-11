@@ -31,7 +31,7 @@ type SoftwareImageConfig struct {
 }
 
 // SoftwareImageEndpoint represents the REST resource for managing SoftwareImage.
-const SoftwareImageEndpoint = "/tm/sys/software/image"
+const SoftwareImageEndpoint = "/software/image"
 
 // SoftwareImageResource provides an API to manage SoftwareImage configurations.
 type SoftwareImageResource struct {

@@ -18,7 +18,7 @@ type SoftwareUpdateStatusConfig struct {
 }
 
 // SoftwareUpdateStatusEndpoint represents the REST resource for managing SoftwareUpdateStatus.
-const SoftwareUpdateStatusEndpoint = "/tm/sys/software/update-status"
+const SoftwareUpdateStatusEndpoint = "/software/update-status"
 
 // SoftwareUpdateStatusResource provides an API to manage SoftwareUpdateStatus configurations.
 type SoftwareUpdateStatusResource struct {
