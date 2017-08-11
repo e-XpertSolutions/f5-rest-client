@@ -28,7 +28,7 @@ type DaemonHAConfig struct {
 }
 
 // DaemonHAEndpoint represents the REST resource for managing DaemonHA.
-const DaemonHAEndpoint = "/tm/sys/daemon-ha"
+const DaemonHAEndpoint = "/daemon-ha"
 
 // DaemonHAResource provides an API to manage DaemonHA configurations.
 type DaemonHAResource struct {

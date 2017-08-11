@@ -18,7 +18,7 @@ type AOMConfig struct {
 }
 
 // AOMEndpoint represents the REST resource for managing AOM.
-const AOMEndpoint = "/tm/sys/aom"
+const AOMEndpoint = "/aom"
 
 // AOMResource provides an API to manage AOM configurations.
 type AOMResource struct {

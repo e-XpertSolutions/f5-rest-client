@@ -18,7 +18,7 @@ type ICallEventConfig struct {
 }
 
 // ICallEventEndpoint represents the REST resource for managing ICallEvent.
-const ICallEventEndpoint = "/tm/sys/icall/event"
+const ICallEventEndpoint = "/icall/event"
 
 // ICallEventResource provides an API to manage ICallEvent configurations.
 type ICallEventResource struct {

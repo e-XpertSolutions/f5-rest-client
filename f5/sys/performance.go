@@ -18,7 +18,7 @@ type PerformanceConfig struct {
 }
 
 // PerformanceEndpoint represents the REST resource for managing Performance.
-const PerformanceEndpoint = "/tm/sys/performance"
+const PerformanceEndpoint = "/performance"
 
 // PerformanceResource provides an API to manage Performance configurations.
 type PerformanceResource struct {

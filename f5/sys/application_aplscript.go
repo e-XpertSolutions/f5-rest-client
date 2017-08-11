@@ -29,7 +29,7 @@ type ApplicationAPLScriptConfig struct {
 }
 
 // ApplicationAPLScriptEndpoint represents the REST resource for managing ApplicationAPLScript.
-const ApplicationAPLScriptEndpoint = "/tm/sys/application/apl-script"
+const ApplicationAPLScriptEndpoint = "/application/apl-script"
 
 // ApplicationAPLScriptResource provides an API to manage ApplicationAPLScript configurations.
 type ApplicationAPLScriptResource struct {

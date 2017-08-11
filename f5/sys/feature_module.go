@@ -24,7 +24,7 @@ type FeatureModuleConfig struct {
 }
 
 // FeatureModuleEndpoint represents the REST resource for managing FeatureModule.
-const FeatureModuleEndpoint = "/tm/sys/feature-module"
+const FeatureModuleEndpoint = "/feature-module"
 
 // FeatureModuleResource provides an API to manage FeatureModule configurations.
 type FeatureModuleResource struct {

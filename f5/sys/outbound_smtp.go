@@ -18,7 +18,7 @@ type OutboundSMTPConfig struct {
 }
 
 // OutboundSMTPEndpoint represents the REST resource for managing OutboundSMTP.
-const OutboundSMTPEndpoint = "/tm/sys/outbound-smtp"
+const OutboundSMTPEndpoint = "/outbound-smtp"
 
 // OutboundSMTPResource provides an API to manage OutboundSMTP configurations.
 type OutboundSMTPResource struct {

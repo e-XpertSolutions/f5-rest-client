@@ -18,7 +18,7 @@ type PPTPCallInfoConfig struct {
 }
 
 // PPTPCallInfoEndpoint represents the REST resource for managing PPTPCallInfo.
-const PPTPCallInfoEndpoint = "/tm/sys/pptp-call-info"
+const PPTPCallInfoEndpoint = "/pptp-call-info"
 
 // PPTPCallInfoResource provides an API to manage PPTPCallInfo configurations.
 type PPTPCallInfoResource struct {

@@ -18,7 +18,7 @@ type ConsoleConfig struct {
 }
 
 // ConsoleEndpoint represents the REST resource for managing Console.
-const ConsoleEndpoint = "/tm/sys/console"
+const ConsoleEndpoint = "/console"
 
 // ConsoleResource provides an API to manage Console configurations.
 type ConsoleResource struct {

@@ -21,7 +21,7 @@ type ICallConfig struct {
 }
 
 // ICallEndpoint represents the REST resource for managing ICall.
-const ICallEndpoint = "/tm/sys/icall"
+const ICallEndpoint = "/icall"
 
 // ICallResource provides an API to manage ICall configurations.
 type ICallResource struct {

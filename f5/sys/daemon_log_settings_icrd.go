@@ -18,7 +18,7 @@ type DaemonLogSettingsICRDConfig struct {
 }
 
 // DaemonLogSettingsICRDEndpoint represents the REST resource for managing DaemonLogSettingsICRD.
-const DaemonLogSettingsICRDEndpoint = "/tm/sys/daemon-log-settings/icrd"
+const DaemonLogSettingsICRDEndpoint = "/daemon-log-settings/icrd"
 
 // DaemonLogSettingsICRDResource provides an API to manage DaemonLogSettingsICRD configurations.
 type DaemonLogSettingsICRDResource struct {

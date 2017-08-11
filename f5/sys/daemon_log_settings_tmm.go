@@ -18,7 +18,7 @@ type DaemonLogSettingsTMMConfig struct {
 }
 
 // DaemonLogSettingsTMMEndpoint represents the REST resource for managing DaemonLogSettingsTMM.
-const DaemonLogSettingsTMMEndpoint = "/tm/sys/daemon-log-settings/tmm"
+const DaemonLogSettingsTMMEndpoint = "/daemon-log-settings/tmm"
 
 // DaemonLogSettingsTMMResource provides an API to manage DaemonLogSettingsTMM configurations.
 type DaemonLogSettingsTMMResource struct {

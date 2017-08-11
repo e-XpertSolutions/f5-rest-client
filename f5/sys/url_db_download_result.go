@@ -18,7 +18,7 @@ type URLDBDownloadResultConfig struct {
 }
 
 // URLDBDownloadResultEndpoint represents the REST resource for managing URLDBDownloadResult.
-const URLDBDownloadResultEndpoint = "/tm/sys/url-db/download-result"
+const URLDBDownloadResultEndpoint = "/url-db/download-result"
 
 // URLDBDownloadResultResource provides an API to manage URLDBDownloadResult configurations.
 type URLDBDownloadResultResource struct {

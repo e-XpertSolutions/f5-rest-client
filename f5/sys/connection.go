@@ -18,7 +18,7 @@ type ConnectionConfig struct {
 }
 
 // ConnectionEndpoint represents the REST resource for managing Connection.
-const ConnectionEndpoint = "/tm/sys/connection"
+const ConnectionEndpoint = "/connection"
 
 // ConnectionResource provides an API to manage Connection configurations.
 type ConnectionResource struct {

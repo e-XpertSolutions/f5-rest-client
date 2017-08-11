@@ -18,7 +18,7 @@ type FileSystemSSLCertConfig struct {
 }
 
 // FileSystemSSLCertEndpoint represents the REST resource for managing FileSystemSSLCert.
-const FileSystemSSLCertEndpoint = "/tm/sys/file/system-ssl-cert"
+const FileSystemSSLCertEndpoint = "/file/system-ssl-cert"
 
 // FileSystemSSLCertResource provides an API to manage FileSystemSSLCert configurations.
 type FileSystemSSLCertResource struct {

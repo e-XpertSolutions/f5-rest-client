@@ -26,7 +26,7 @@ type CryptoKeyConfig struct {
 }
 
 // CryptoKeyEndpoint represents the REST resource for managing CryptoKey.
-const CryptoKeyEndpoint = "/tm/sys/crypto/key"
+const CryptoKeyEndpoint = "/crypto/key"
 
 // CryptoKeyResource provides an API to manage CryptoKey configurations.
 type CryptoKeyResource struct {

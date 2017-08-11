@@ -18,7 +18,7 @@ type SNMPUsersConfig struct {
 }
 
 // SNMPUsersEndpoint represents the REST resource for managing SNMPUsers.
-const SNMPUsersEndpoint = "/tm/sys/snmp_users"
+const SNMPUsersEndpoint = "/snmp_users"
 
 // SNMPUsersResource provides an API to manage SNMPUsers configurations.
 type SNMPUsersResource struct {

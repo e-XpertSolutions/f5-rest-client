@@ -18,7 +18,7 @@ type AlertConfig struct {
 }
 
 // AlertEndpoint represents the REST resource for managing Alert.
-const AlertEndpoint = "/tm/sys/alert"
+const AlertEndpoint = "/alert"
 
 // AlertResource provides an API to manage Alert configurations.
 type AlertResource struct {

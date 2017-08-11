@@ -18,7 +18,7 @@ type CryptoClientConfig struct {
 }
 
 // CryptoClientEndpoint represents the REST resource for managing CryptoClient.
-const CryptoClientEndpoint = "/tm/sys/crypto/client"
+const CryptoClientEndpoint = "/crypto/client"
 
 // CryptoClientResource provides an API to manage CryptoClient configurations.
 type CryptoClientResource struct {

@@ -18,7 +18,7 @@ type RestrictedModuleConfig struct {
 }
 
 // RestrictedModuleEndpoint represents the REST resource for managing RestrictedModule.
-const RestrictedModuleEndpoint = "/tm/sys/restricted-module"
+const RestrictedModuleEndpoint = "/restricted-module"
 
 // RestrictedModuleResource provides an API to manage RestrictedModule configurations.
 type RestrictedModuleResource struct {

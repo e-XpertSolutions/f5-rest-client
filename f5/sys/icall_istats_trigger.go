@@ -18,7 +18,7 @@ type ICallIStatsTriggerConfig struct {
 }
 
 // ICallIStatsTriggerEndpoint represents the REST resource for managing ICallIStatsTrigger.
-const ICallIStatsTriggerEndpoint = "/tm/sys/icall/istats-trigger"
+const ICallIStatsTriggerEndpoint = "/icall/istats-trigger"
 
 // ICallIStatsTriggerResource provides an API to manage ICallIStatsTrigger configurations.
 type ICallIStatsTriggerResource struct {

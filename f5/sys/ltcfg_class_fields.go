@@ -18,7 +18,7 @@ type LTCFGClassFieldsConfig struct {
 }
 
 // LTCFGClassFieldsEndpoint represents the REST resource for managing LTCFGClassFields.
-const LTCFGClassFieldsEndpoint = "/tm/sys/ltcfg-class_fields"
+const LTCFGClassFieldsEndpoint = "/ltcfg-class_fields"
 
 // LTCFGClassFieldsResource provides an API to manage LTCFGClassFields configurations.
 type LTCFGClassFieldsResource struct {

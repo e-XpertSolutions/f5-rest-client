@@ -18,7 +18,7 @@ type FileSSLCertBundleCertificatesConfig struct {
 }
 
 // FileSSLCertBundleCertificatesEndpoint represents the REST resource for managing FileSSLCertBundleCertificates.
-const FileSSLCertBundleCertificatesEndpoint = "/tm/sys/file/ssl-cert_bundle-certificates"
+const FileSSLCertBundleCertificatesEndpoint = "/file/ssl-cert_bundle-certificates"
 
 // FileSSLCertBundleCertificatesResource provides an API to manage FileSSLCertBundleCertificates configurations.
 type FileSSLCertBundleCertificatesResource struct {

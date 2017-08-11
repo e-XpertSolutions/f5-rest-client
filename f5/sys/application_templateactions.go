@@ -18,7 +18,7 @@ type ApplicationTemplateActionsConfig struct {
 }
 
 // ApplicationTemplateActionsEndpoint represents the REST resource for managing ApplicationTemplateActions.
-const ApplicationTemplateActionsEndpoint = "/tm/sys/application/template_actions"
+const ApplicationTemplateActionsEndpoint = "/application/template_actions"
 
 // ApplicationTemplateActionsResource provides an API to manage ApplicationTemplateActions configurations.
 type ApplicationTemplateActionsResource struct {

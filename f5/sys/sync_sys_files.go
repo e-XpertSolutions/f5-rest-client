@@ -18,7 +18,7 @@ type SyncSysFilesConfig struct {
 }
 
 // SyncSysFilesEndpoint represents the REST resource for managing SyncSysFiles.
-const SyncSysFilesEndpoint = "/tm/sys/sync-sys-files"
+const SyncSysFilesEndpoint = "/sync-sys-files"
 
 // SyncSysFilesResource provides an API to manage SyncSysFiles configurations.
 type SyncSysFilesResource struct {

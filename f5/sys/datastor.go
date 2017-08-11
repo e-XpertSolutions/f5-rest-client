@@ -18,7 +18,7 @@ type DataStorConfig struct {
 }
 
 // DataStorEndpoint represents the REST resource for managing DataStor.
-const DataStorEndpoint = "/tm/sys/datastor"
+const DataStorEndpoint = "/datastor"
 
 // DataStorResource provides an API to manage DataStor configurations.
 type DataStorResource struct {

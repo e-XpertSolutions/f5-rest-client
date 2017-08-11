@@ -18,7 +18,7 @@ type CryptoServerConfig struct {
 }
 
 // CryptoServerEndpoint represents the REST resource for managing CryptoServer.
-const CryptoServerEndpoint = "/tm/sys/crypto/server"
+const CryptoServerEndpoint = "/crypto/server"
 
 // CryptoServerResource provides an API to manage CryptoServer configurations.
 type CryptoServerResource struct {

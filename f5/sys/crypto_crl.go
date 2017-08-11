@@ -18,7 +18,7 @@ type CryptoCRLConfig struct {
 }
 
 // CryptoCRLEndpoint represents the REST resource for managing CryptoCRL.
-const CryptoCRLEndpoint = "/tm/sys/crypto/crl"
+const CryptoCRLEndpoint = "/crypto/crl"
 
 // CryptoCRLResource provides an API to manage CryptoCRL configurations.
 type CryptoCRLResource struct {

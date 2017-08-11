@@ -18,7 +18,7 @@ type HTTPDConfig struct {
 }
 
 // HTTPDEndpoint represents the REST resource for managing HTTPD.
-const HTTPDEndpoint = "/tm/sys/httpd"
+const HTTPDEndpoint = "/httpd"
 
 // HTTPDResource provides an API to manage HTTPD configurations.
 type HTTPDResource struct {

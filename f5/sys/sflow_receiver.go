@@ -18,7 +18,7 @@ type SFlowReceiverConfig struct {
 }
 
 // SFlowReceiverEndpoint represents the REST resource for managing SFlowReceiver.
-const SFlowReceiverEndpoint = "/tm/sys/sflow/receiver"
+const SFlowReceiverEndpoint = "/sflow/receiver"
 
 // SFlowReceiverResource provides an API to manage SFlowReceiver configurations.
 type SFlowReceiverResource struct {

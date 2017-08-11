@@ -18,7 +18,7 @@ type FileApacheSSLCertBundleCertificatesConfig struct {
 }
 
 // FileApacheSSLCertBundleCertificatesEndpoint represents the REST resource for managing FileApacheSSLCertBundleCertificates.
-const FileApacheSSLCertBundleCertificatesEndpoint = "/tm/sys/file/apache-ssl-cert_bundle-certificates"
+const FileApacheSSLCertBundleCertificatesEndpoint = "/file/apache-ssl-cert_bundle-certificates"
 
 // FileApacheSSLCertBundleCertificatesResource provides an API to manage FileApacheSSLCertBundleCertificates configurations.
 type FileApacheSSLCertBundleCertificatesResource struct {

@@ -18,7 +18,7 @@ type LogRotateConfig struct {
 }
 
 // LogRotateEndpoint represents the REST resource for managing LogRotate.
-const LogRotateEndpoint = "/tm/sys/log-rotate"
+const LogRotateEndpoint = "/log-rotate"
 
 // LogRotateResource provides an API to manage LogRotate configurations.
 type LogRotateResource struct {

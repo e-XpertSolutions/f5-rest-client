@@ -32,7 +32,7 @@ type URLDBURLCategoryConfig struct {
 }
 
 // URLDBURLCategoryEndpoint represents the REST resource for managing URLDBURLCategory.
-const URLDBURLCategoryEndpoint = "/tm/sys/url-db/url-category"
+const URLDBURLCategoryEndpoint = "/url-db/url-category"
 
 // URLDBURLCategoryResource provides an API to manage URLDBURLCategory configurations.
 type URLDBURLCategoryResource struct {

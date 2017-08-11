@@ -31,7 +31,7 @@ type CryptoCertConfig struct {
 }
 
 // CryptoCertEndpoint represents the REST resource for managing CryptoCert.
-const CryptoCertEndpoint = "/tm/sys/crypto/cert"
+const CryptoCertEndpoint = "/crypto/cert"
 
 // CryptoCertResource provides an API to manage CryptoCert configurations.
 type CryptoCertResource struct {

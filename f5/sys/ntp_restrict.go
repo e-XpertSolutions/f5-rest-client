@@ -18,7 +18,7 @@ type NTPRestrictConfig struct {
 }
 
 // NTPRestrictEndpoint represents the REST resource for managing NTPRestrict.
-const NTPRestrictEndpoint = "/tm/sys/ntp_restrict"
+const NTPRestrictEndpoint = "/ntp_restrict"
 
 // NTPRestrictResource provides an API to manage NTPRestrict configurations.
 type NTPRestrictResource struct {

@@ -18,7 +18,7 @@ type FileDashboardViewsetConfig struct {
 }
 
 // FileDashboardViewsetEndpoint represents the REST resource for managing FileDashboardViewset.
-const FileDashboardViewsetEndpoint = "/tm/sys/file/dashboard-viewset"
+const FileDashboardViewsetEndpoint = "/file/dashboard-viewset"
 
 // FileDashboardViewsetResource provides an API to manage FileDashboardViewset configurations.
 type FileDashboardViewsetResource struct {

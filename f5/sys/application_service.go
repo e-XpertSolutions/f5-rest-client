@@ -18,7 +18,7 @@ type ApplicationServiceConfig struct {
 }
 
 // ApplicationServiceEndpoint represents the REST resource for managing ApplicationService.
-const ApplicationServiceEndpoint = "/tm/sys/application/service"
+const ApplicationServiceEndpoint = "/application/service"
 
 // ApplicationServiceResource provides an API to manage ApplicationService configurations.
 type ApplicationServiceResource struct {

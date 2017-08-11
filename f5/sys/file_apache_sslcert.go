@@ -18,7 +18,7 @@ type FileApacheSSLCertConfig struct {
 }
 
 // FileApacheSSLCertEndpoint represents the REST resource for managing FileApacheSSLCert.
-const FileApacheSSLCertEndpoint = "/tm/sys/file/apache-ssl-cert"
+const FileApacheSSLCertEndpoint = "/file/apache-ssl-cert"
 
 // FileApacheSSLCertResource provides an API to manage FileApacheSSLCert configurations.
 type FileApacheSSLCertResource struct {

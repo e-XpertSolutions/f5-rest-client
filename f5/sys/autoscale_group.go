@@ -18,7 +18,7 @@ type AutoscaleGroupConfig struct {
 }
 
 // AutoscaleGroupEndpoint represents the REST resource for managing AutoscaleGroup.
-const AutoscaleGroupEndpoint = "/tm/sys/autoscale-group"
+const AutoscaleGroupEndpoint = "/autoscale-group"
 
 // AutoscaleGroupResource provides an API to manage AutoscaleGroup configurations.
 type AutoscaleGroupResource struct {

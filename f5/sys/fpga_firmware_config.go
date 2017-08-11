@@ -18,7 +18,7 @@ type FPGAFirmwareConfigConfig struct {
 }
 
 // FPGAFirmwareConfigEndpoint represents the REST resource for managing FPGAFirmwareConfig.
-const FPGAFirmwareConfigEndpoint = "/tm/sys/fpga/firmware-config"
+const FPGAFirmwareConfigEndpoint = "/fpga/firmware-config"
 
 // FPGAFirmwareConfigResource provides an API to manage FPGAFirmwareConfig configurations.
 type FPGAFirmwareConfigResource struct {

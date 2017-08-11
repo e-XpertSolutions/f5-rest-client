@@ -18,7 +18,7 @@ type SMTPServerConfig struct {
 }
 
 // SMTPServerEndpoint represents the REST resource for managing SMTPServer.
-const SMTPServerEndpoint = "/tm/sys/smtp-server"
+const SMTPServerEndpoint = "/smtp-server"
 
 // SMTPServerResource provides an API to manage SMTPServer configurations.
 type SMTPServerResource struct {

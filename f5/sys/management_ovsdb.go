@@ -18,7 +18,7 @@ type ManagementOVSDBConfig struct {
 }
 
 // ManagementOVSDBEndpoint represents the REST resource for managing ManagementOVSDB.
-const ManagementOVSDBEndpoint = "/tm/sys/management-ovsdb"
+const ManagementOVSDBEndpoint = "/management-ovsdb"
 
 // ManagementOVSDBResource provides an API to manage ManagementOVSDB configurations.
 type ManagementOVSDBResource struct {

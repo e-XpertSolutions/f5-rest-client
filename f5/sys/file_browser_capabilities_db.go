@@ -18,7 +18,7 @@ type FileBrowserCapabilitiesDBConfig struct {
 }
 
 // FileBrowserCapabilitiesDBEndpoint represents the REST resource for managing FileBrowserCapabilitiesDB.
-const FileBrowserCapabilitiesDBEndpoint = "/tm/sys/file/browser-capabilities-db"
+const FileBrowserCapabilitiesDBEndpoint = "/file/browser-capabilities-db"
 
 // FileBrowserCapabilitiesDBResource provides an API to manage FileBrowserCapabilitiesDB configurations.
 type FileBrowserCapabilitiesDBResource struct {

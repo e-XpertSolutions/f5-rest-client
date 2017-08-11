@@ -28,7 +28,7 @@ type ECMCloudProviderConfig struct {
 }
 
 // ECMCloudProviderEndpoint represents the REST resource for managing ECMCloudProvider.
-const ECMCloudProviderEndpoint = "/tm/sys/ecm/cloud-provider"
+const ECMCloudProviderEndpoint = "/ecm/cloud-provider"
 
 // ECMCloudProviderResource provides an API to manage ECMCloudProvider configurations.
 type ECMCloudProviderResource struct {

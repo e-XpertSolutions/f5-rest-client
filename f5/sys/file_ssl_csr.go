@@ -18,7 +18,7 @@ type FileSSLCSRConfig struct {
 }
 
 // FileSSLCSREndpoint represents the REST resource for managing FileSSLCSR.
-const FileSSLCSREndpoint = "/tm/sys/file/ssl-csr"
+const FileSSLCSREndpoint = "/file/ssl-csr"
 
 // FileSSLCSRResource provides an API to manage FileSSLCSR configurations.
 type FileSSLCSRResource struct {

@@ -18,7 +18,7 @@ type FailoverConfig struct {
 }
 
 // FailoverEndpoint represents the REST resource for managing Failover.
-const FailoverEndpoint = "/tm/sys/failover"
+const FailoverEndpoint = "/failover"
 
 // FailoverResource provides an API to manage Failover configurations.
 type FailoverResource struct {

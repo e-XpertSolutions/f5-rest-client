@@ -18,7 +18,7 @@ type LTCFGInstanceFieldsConfig struct {
 }
 
 // LTCFGInstanceFieldsEndpoint represents the REST resource for managing LTCFGInstanceFields.
-const LTCFGInstanceFieldsEndpoint = "/tm/sys/ltcfg-instance_fields"
+const LTCFGInstanceFieldsEndpoint = "/ltcfg-instance_fields"
 
 // LTCFGInstanceFieldsResource provides an API to manage LTCFGInstanceFields configurations.
 type LTCFGInstanceFieldsResource struct {

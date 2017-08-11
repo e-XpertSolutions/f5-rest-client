@@ -32,7 +32,7 @@ type FolderConfig struct {
 }
 
 // FolderEndpoint represents the REST resource for managing Folder.
-const FolderEndpoint = "/tm/sys/folder"
+const FolderEndpoint = "/folder"
 
 // FolderResource provides an API to manage Folder configurations.
 type FolderResource struct {

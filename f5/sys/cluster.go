@@ -18,7 +18,7 @@ type ClusterConfig struct {
 }
 
 // ClusterEndpoint represents the REST resource for managing Cluster.
-const ClusterEndpoint = "/tm/sys/cluster"
+const ClusterEndpoint = "/cluster"
 
 // ClusterResource provides an API to manage Cluster configurations.
 type ClusterResource struct {

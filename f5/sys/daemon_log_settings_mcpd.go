@@ -18,7 +18,7 @@ type DaemonLogSettingsMCPDConfig struct {
 }
 
 // DaemonLogSettingsMCPDEndpoint represents the REST resource for managing DaemonLogSettingsMCPD.
-const DaemonLogSettingsMCPDEndpoint = "/tm/sys/daemon-log-settings/mcpd"
+const DaemonLogSettingsMCPDEndpoint = "/daemon-log-settings/mcpd"
 
 // DaemonLogSettingsMCPDResource provides an API to manage DaemonLogSettingsMCPD configurations.
 type DaemonLogSettingsMCPDResource struct {

@@ -32,7 +32,7 @@ type DiskApplicationVolumeConfig struct {
 }
 
 // DiskApplicationVolumeEndpoint represents the REST resource for managing DiskApplicationVolume.
-const DiskApplicationVolumeEndpoint = "/tm/sys/disk/application-volume"
+const DiskApplicationVolumeEndpoint = "/disk/application-volume"
 
 // DiskApplicationVolumeResource provides an API to manage DiskApplicationVolume configurations.
 type DiskApplicationVolumeResource struct {

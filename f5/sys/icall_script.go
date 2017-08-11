@@ -18,7 +18,7 @@ type ICallScriptConfig struct {
 }
 
 // ICallScriptEndpoint represents the REST resource for managing ICallScript.
-const ICallScriptEndpoint = "/tm/sys/icall/script"
+const ICallScriptEndpoint = "/icall/script"
 
 // ICallScriptResource provides an API to manage ICallScript configurations.
 type ICallScriptResource struct {

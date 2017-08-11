@@ -21,7 +21,7 @@ type ECMConfig struct {
 }
 
 // ECMEndpoint represents the REST resource for managing ECM.
-const ECMEndpoint = "/tm/sys/ecm"
+const ECMEndpoint = "/ecm"
 
 // ECMResource provides an API to manage ECM configurations.
 type ECMResource struct {

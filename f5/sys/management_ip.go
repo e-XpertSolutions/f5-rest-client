@@ -23,7 +23,7 @@ type ManagementIPConfig struct {
 }
 
 // ManagementIPEndpoint represents the REST resource for managing ManagementIP.
-const ManagementIPEndpoint = "/tm/sys/management-ip"
+const ManagementIPEndpoint = "/management-ip"
 
 // ManagementIPResource provides an API to manage ManagementIP configurations.
 type ManagementIPResource struct {

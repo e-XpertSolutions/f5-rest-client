@@ -18,7 +18,7 @@ type DaemonLogSettingsClusterdConfig struct {
 }
 
 // DaemonLogSettingsClusterdEndpoint represents the REST resource for managing DaemonLogSettingsClusterd.
-const DaemonLogSettingsClusterdEndpoint = "/tm/sys/daemon-log-settings/clusterd"
+const DaemonLogSettingsClusterdEndpoint = "/daemon-log-settings/clusterd"
 
 // DaemonLogSettingsClusterdResource provides an API to manage DaemonLogSettingsClusterd configurations.
 type DaemonLogSettingsClusterdResource struct {

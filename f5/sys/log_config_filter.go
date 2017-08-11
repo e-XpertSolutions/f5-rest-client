@@ -18,7 +18,7 @@ type LogConfigFilterConfig struct {
 }
 
 // LogConfigFilterEndpoint represents the REST resource for managing LogConfigFilter.
-const LogConfigFilterEndpoint = "/tm/sys/log-config/filter"
+const LogConfigFilterEndpoint = "/log-config/filter"
 
 // LogConfigFilterResource provides an API to manage LogConfigFilter configurations.
 type LogConfigFilterResource struct {

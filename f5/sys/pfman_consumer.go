@@ -18,7 +18,7 @@ type PFManConsumerConfig struct {
 }
 
 // PFManConsumerEndpoint represents the REST resource for managing PFManConsumer.
-const PFManConsumerEndpoint = "/tm/sys/pfman/consumer"
+const PFManConsumerEndpoint = "/pfman/consumer"
 
 // PFManConsumerResource provides an API to manage PFManConsumer configurations.
 type PFManConsumerResource struct {
