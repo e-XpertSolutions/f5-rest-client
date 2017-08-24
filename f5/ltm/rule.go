@@ -5,9 +5,10 @@
 package ltm
 
 import (
-	"github.com/e-XpertSolutions/f5-rest-client/f5"
 	"encoding/json"
 	"net/http"
+
+	"github.com/e-XpertSolutions/f5-rest-client/f5"
 )
 
 // A RuleList holds a list of iRule configurations.
@@ -120,7 +121,7 @@ func (rr *RuleResource) Delete(id string) error {
 //
 // TODO(gilliek): decorate errors
 func (rr *RuleResource) doRequest(method, id string, data interface{}) (*http.Response, error) {
-	req, err := rr.c.MakeRequest(method, BasePath+VirtualEndpoint+"/"+id, data)
+	req, err := rr.c.MakeRequest(method, BasePath+RuleEndpoint+"/"+id, data)
 	if err != nil {
 		return nil, err
 	}

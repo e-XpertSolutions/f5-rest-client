@@ -147,7 +147,7 @@ func (vr *VirtualResource) Edit(id string, item VirtualServerConfig) error {
 // Enabling a virtual server item identified by id.
 func (vr *VirtualResource) Enable(id string) error {
 	item := VirtualServerConfig{Enabled: true}
-	resp, err := vr.doRequest("PUT", id, item)
+	resp, err := vr.doRequest("PATCH", id, item)
 	if err != nil {
 		return err
 	}
@@ -161,7 +161,7 @@ func (vr *VirtualResource) Enable(id string) error {
 // Disabling a virtual server item identified by id.
 func (vr *VirtualResource) Disable(id string) error {
 	item := VirtualServerConfig{Disabled: true}
-	resp, err := vr.doRequest("PUT", id, item)
+	resp, err := vr.doRequest("PATCH", id, item)
 	if err != nil {
 		return err
 	}
