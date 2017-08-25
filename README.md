@@ -33,7 +33,7 @@ func main() {
 	}
 
 	// setup client for the LTM API
-	ltmClient := ltm.New(*f5Client)
+	ltmClient := ltm.New(f5Client)
 
 	// query the /ltm/virtual API
 	vsConfigList, err := ltmClient.Virtual().ListAll()
