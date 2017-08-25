@@ -28,7 +28,7 @@ type URLDBDownloadScheduleConfig struct {
 }
 
 // URLDBDownloadScheduleEndpoint represents the REST resource for managing URLDBDownloadSchedule.
-const URLDBDownloadScheduleEndpoint = "/tm/sys/url-db/download-schedule"
+const URLDBDownloadScheduleEndpoint = "/url-db/download-schedule"
 
 // URLDBDownloadScheduleResource provides an API to manage URLDBDownloadSchedule configurations.
 type URLDBDownloadScheduleResource struct {

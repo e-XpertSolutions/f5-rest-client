@@ -18,7 +18,7 @@ type CryptoPKCS12Config struct {
 }
 
 // CryptoPKCS12Endpoint represents the REST resource for managing CryptoPKCS12.
-const CryptoPKCS12Endpoint = "/tm/sys/crypto/pkcs12"
+const CryptoPKCS12Endpoint = "/crypto/pkcs12"
 
 // CryptoPKCS12Resource provides an API to manage CryptoPKCS12 configurations.
 type CryptoPKCS12Resource struct {

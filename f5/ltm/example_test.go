@@ -27,4 +27,14 @@ func Example() {
 		log.Fatal(err)
 	}
 	log.Print(vsConfigList)
+
+	node1 := ltm.NodeConfig{
+		Address: "1.1.1.1",
+		Name:    "my-node-1",
+	}
+
+	err = ltmClient.Node().Create(node1)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

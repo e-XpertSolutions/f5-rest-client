@@ -18,7 +18,7 @@ type ScriptdConfig struct {
 }
 
 // ScriptdEndpoint represents the REST resource for managing Scriptd.
-const ScriptdEndpoint = "/tm/sys/scriptd"
+const ScriptdEndpoint = "/scriptd"
 
 // ScriptdResource provides an API to manage Scriptd configurations.
 type ScriptdResource struct {

@@ -18,7 +18,7 @@ type SSHDConfig struct {
 }
 
 // SSHDEndpoint represents the REST resource for managing SSHD.
-const SSHDEndpoint = "/tm/sys/sshd"
+const SSHDEndpoint = "/sshd"
 
 // SSHDResource provides an API to manage SSHD configurations.
 type SSHDResource struct {

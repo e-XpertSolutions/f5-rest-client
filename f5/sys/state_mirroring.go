@@ -18,7 +18,7 @@ type StateMirroringConfig struct {
 }
 
 // StateMirroringEndpoint represents the REST resource for managing StateMirroring.
-const StateMirroringEndpoint = "/tm/sys/state-mirroring"
+const StateMirroringEndpoint = "/state-mirroring"
 
 // StateMirroringResource provides an API to manage StateMirroring configurations.
 type StateMirroringResource struct {

@@ -18,7 +18,7 @@ type HAGroupConfig struct {
 }
 
 // HAGroupEndpoint represents the REST resource for managing HAGroup.
-const HAGroupEndpoint = "/tm/sys/ha-group"
+const HAGroupEndpoint = "/ha-group"
 
 // HAGroupResource provides an API to manage HAGroup configurations.
 type HAGroupResource struct {

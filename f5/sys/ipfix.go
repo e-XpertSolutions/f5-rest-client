@@ -21,7 +21,7 @@ type IPFixConfig struct {
 }
 
 // IPFixEndpoint represents the REST resource for managing IPFix.
-const IPFixEndpoint = "/tm/sys/ipfix"
+const IPFixEndpoint = "/ipfix"
 
 // IPFixResource provides an API to manage IPFix configurations.
 type IPFixResource struct {

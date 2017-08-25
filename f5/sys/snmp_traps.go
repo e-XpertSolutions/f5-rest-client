@@ -18,7 +18,7 @@ type SNMPTrapsConfig struct {
 }
 
 // SNMPTrapsEndpoint represents the REST resource for managing SNMPTraps.
-const SNMPTrapsEndpoint = "/tm/sys/snmp_traps"
+const SNMPTrapsEndpoint = "/snmp_traps"
 
 // SNMPTrapsResource provides an API to manage SNMPTraps configurations.
 type SNMPTrapsResource struct {

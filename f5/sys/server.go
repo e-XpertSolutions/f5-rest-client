@@ -18,7 +18,7 @@ type ServerConfig struct {
 }
 
 // ServerEndpoint represents the REST resource for managing Server.
-const ServerEndpoint = "/tm/sys/service"
+const ServerEndpoint = "/service"
 
 // ServerResource provides an API to manage Server configurations.
 type ServerResource struct {

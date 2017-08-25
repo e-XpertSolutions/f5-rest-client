@@ -18,7 +18,7 @@ type SNMPCommunitiesConfig struct {
 }
 
 // SNMPCommunitiesEndpoint represents the REST resource for managing SNMPCommunities.
-const SNMPCommunitiesEndpoint = "/tm/sys/snmp_communities"
+const SNMPCommunitiesEndpoint = "/snmp_communities"
 
 // SNMPCommunitiesResource provides an API to manage SNMPCommunities configurations.
 type SNMPCommunitiesResource struct {

@@ -21,7 +21,7 @@ type DiskConfig struct {
 }
 
 // DiskEndpoint represents the REST resource for managing Disk.
-const DiskEndpoint = "/tm/sys/disk"
+const DiskEndpoint = "/disk"
 
 // DiskResource provides an API to manage Disk configurations.
 type DiskResource struct {

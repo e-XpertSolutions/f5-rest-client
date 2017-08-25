@@ -18,7 +18,7 @@ type SoftwareBlockDeviceImageConfig struct {
 }
 
 // SoftwareBlockDeviceImageEndpoint represents the REST resource for managing SoftwareBlockDeviceImage.
-const SoftwareBlockDeviceImageEndpoint = "/tm/sys/software/block-device-image"
+const SoftwareBlockDeviceImageEndpoint = "/software/block-device-image"
 
 // SoftwareBlockDeviceImageResource provides an API to manage SoftwareBlockDeviceImage configurations.
 type SoftwareBlockDeviceImageResource struct {

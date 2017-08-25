@@ -18,7 +18,7 @@ type FileDeviceCapabilitiesDBConfig struct {
 }
 
 // FileDeviceCapabilitiesDBEndpoint represents the REST resource for managing FileDeviceCapabilitiesDB.
-const FileDeviceCapabilitiesDBEndpoint = "/tm/sys/file/device-capabilities-db"
+const FileDeviceCapabilitiesDBEndpoint = "/file/device-capabilities-db"
 
 // FileDeviceCapabilitiesDBResource provides an API to manage FileDeviceCapabilitiesDB configurations.
 type FileDeviceCapabilitiesDBResource struct {

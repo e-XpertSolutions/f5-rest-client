@@ -18,7 +18,7 @@ type ClockConfig struct {
 }
 
 // ClockEndpoint represents the REST resource for managing Clock.
-const ClockEndpoint = "/tm/sys/clock"
+const ClockEndpoint = "/clock"
 
 // ClockResource provides an API to manage Clock configurations.
 type ClockResource struct {

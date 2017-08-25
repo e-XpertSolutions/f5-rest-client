@@ -18,7 +18,7 @@ type DiskDirectoryConfig struct {
 }
 
 // DiskDirectoryEndpoint represents the REST resource for managing DiskDirectory.
-const DiskDirectoryEndpoint = "/tm/sys/disk/directory"
+const DiskDirectoryEndpoint = "/disk/directory"
 
 // DiskDirectoryResource provides an API to manage DiskDirectory configurations.
 type DiskDirectoryResource struct {

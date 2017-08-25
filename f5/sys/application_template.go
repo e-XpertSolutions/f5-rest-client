@@ -33,7 +33,7 @@ type ApplicationTemplateConfig struct {
 }
 
 // ApplicationTemplateEndpoint represents the REST resource for managing ApplicationTemplate.
-const ApplicationTemplateEndpoint = "/tm/sys/application/template"
+const ApplicationTemplateEndpoint = "/application/template"
 
 // ApplicationTemplateResource provides an API to manage ApplicationTemplate configurations.
 type ApplicationTemplateResource struct {

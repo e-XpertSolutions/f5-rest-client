@@ -18,7 +18,7 @@ type SNMPConfig struct {
 }
 
 // SNMPEndpoint represents the REST resource for managing SNMP.
-const SNMPEndpoint = "/tm/sys/snmp"
+const SNMPEndpoint = "/snmp"
 
 // SNMPResource provides an API to manage SNMP configurations.
 type SNMPResource struct {

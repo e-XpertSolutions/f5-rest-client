@@ -28,7 +28,7 @@ type DiskLogicalDiskConfig struct {
 }
 
 // DiskLogicalDiskEndpoint represents the REST resource for managing DiskLogicalDisk.
-const DiskLogicalDiskEndpoint = "/tm/sys/disk/logical-disk"
+const DiskLogicalDiskEndpoint = "/disk/logical-disk"
 
 // DiskLogicalDiskResource provides an API to manage DiskLogicalDisk configurations.
 type DiskLogicalDiskResource struct {

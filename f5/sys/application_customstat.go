@@ -18,7 +18,7 @@ type ApplicationCustomStatConfig struct {
 }
 
 // ApplicationCustomStatEndpoint represents the REST resource for managing ApplicationCustomStat.
-const ApplicationCustomStatEndpoint = "/tm/sys/application/custom-stat"
+const ApplicationCustomStatEndpoint = "/application/custom-stat"
 
 // ApplicationCustomStatResource provides an API to manage ApplicationCustomStat configurations.
 type ApplicationCustomStatResource struct {

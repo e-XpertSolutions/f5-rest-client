@@ -18,7 +18,7 @@ type GlobalSettingsConfig struct {
 }
 
 // GlobalSettingsEndpoint represents the REST resource for managing GlobalSettings.
-const GlobalSettingsEndpoint = "/tm/sys/global-settings"
+const GlobalSettingsEndpoint = "/global-settings"
 
 // GlobalSettingsResource provides an API to manage GlobalSettings configurations.
 type GlobalSettingsResource struct {

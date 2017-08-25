@@ -18,7 +18,7 @@ type FileDataGroupConfig struct {
 }
 
 // FileDataGroupEndpoint represents the REST resource for managing FileDataGroup.
-const FileDataGroupEndpoint = "/tm/sys/file/data-group"
+const FileDataGroupEndpoint = "/file/data-group"
 
 // FileDataGroupResource provides an API to manage FileDataGroup configurations.
 type FileDataGroupResource struct {

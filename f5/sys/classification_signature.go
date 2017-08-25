@@ -18,7 +18,7 @@ type ClassificationSignatureConfig struct {
 }
 
 // ClassificationSignatureEndpoint represents the REST resource for managing ClassificationSignature.
-const ClassificationSignatureEndpoint = "/tm/sys/classification-signature"
+const ClassificationSignatureEndpoint = "/classification-signature"
 
 // ClassificationSignatureResource provides an API to manage ClassificationSignature configurations.
 type ClassificationSignatureResource struct {

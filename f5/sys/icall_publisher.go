@@ -18,7 +18,7 @@ type ICallPublisherConfig struct {
 }
 
 // ICallPublisherEndpoint represents the REST resource for managing ICallPublisher.
-const ICallPublisherEndpoint = "/tm/sys/icall/publisher"
+const ICallPublisherEndpoint = "/icall/publisher"
 
 // ICallPublisherResource provides an API to manage ICallPublisher configurations.
 type ICallPublisherResource struct {

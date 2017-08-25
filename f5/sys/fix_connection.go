@@ -18,7 +18,7 @@ type FixConnectionConfig struct {
 }
 
 // FixConnectionEndpoint represents the REST resource for managing FixConnection.
-const FixConnectionEndpoint = "/tm/sys/fix-connection"
+const FixConnectionEndpoint = "/fix-connection"
 
 // FixConnectionResource provides an API to manage FixConnection configurations.
 type FixConnectionResource struct {

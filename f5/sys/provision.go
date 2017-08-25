@@ -27,7 +27,7 @@ type ProvisionConfig struct {
 }
 
 // ProvisionEndpoint represents the REST resource for managing Provision.
-const ProvisionEndpoint = "/tm/sys/provision"
+const ProvisionEndpoint = "/provision"
 
 // ProvisionResource provides an API to manage Provision configurations.
 type ProvisionResource struct {

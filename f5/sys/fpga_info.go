@@ -18,7 +18,7 @@ type FPGAInfoConfig struct {
 }
 
 // FPGAInfoEndpoint represents the REST resource for managing FPGAInfo.
-const FPGAInfoEndpoint = "/tm/sys/fpga/info"
+const FPGAInfoEndpoint = "/fpga/info"
 
 // FPGAInfoResource provides an API to manage FPGAInfo configurations.
 type FPGAInfoResource struct {

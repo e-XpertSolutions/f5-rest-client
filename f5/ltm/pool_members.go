@@ -52,8 +52,8 @@ type PoolMembersResource struct {
 }
 
 // ListAll lists all the pool members configurations.
-func (pmr *PoolMembersResource) ListAll() (*PoolMembersConfigList, error) {
-	resp, err := pmr.doRequest("GET", "", nil)
+func (pmr *PoolMembersResource) ListAll(pool string) (*PoolMembersConfigList, error) {
+	resp, err := pmr.doRequest("GET", pool, "", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -70,8 +70,8 @@ func (pmr *PoolMembersResource) ListAll() (*PoolMembersConfigList, error) {
 }
 
 // Get a single pool members configuration identified by id.
-func (pmr *PoolMembersResource) Get(id string) (*PoolMembersConfig, error) {
-	resp, err := pmr.doRequest("GET", id, nil)
+func (pmr *PoolMembersResource) Get(pool string, id string) (*PoolMembersConfig, error) {
+	resp, err := pmr.doRequest("GET", pool, id, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -88,8 +88,8 @@ func (pmr *PoolMembersResource) Get(id string) (*PoolMembersConfig, error) {
 }
 
 // Create a new pool members configuration.
-func (pmr *PoolMembersResource) Create(item PoolMembersConfig) error {
-	resp, err := pmr.doRequest("POST", "", item)
+func (pmr *PoolMembersResource) Create(pool string, item PoolMembersConfig) error {
+	resp, err := pmr.doRequest("POST", pool, "", item)
 	if err != nil {
 		return err
 	}
@@ -101,8 +101,8 @@ func (pmr *PoolMembersResource) Create(item PoolMembersConfig) error {
 }
 
 // Edit a pool members configuration indentified by id.
-func (pmr *PoolMembersResource) Edit(id string, item PoolMembersConfig) error {
-	resp, err := pmr.doRequest("PUT", id, item)
+func (pmr *PoolMembersResource) Edit(pool string, id string, item PoolMembersConfig) error {
+	resp, err := pmr.doRequest("PUT", pool, id, item)
 	if err != nil {
 		return err
 	}
@@ -114,8 +114,8 @@ func (pmr *PoolMembersResource) Edit(id string, item PoolMembersConfig) error {
 }
 
 // Delete a single pool members configuration identified by id.
-func (pmr *PoolMembersResource) Delete(id string) error {
-	resp, err := pmr.doRequest("DELETE", id, nil)
+func (pmr *PoolMembersResource) Delete(pool string, id string) error {
+	resp, err := pmr.doRequest("DELETE", pool, id, nil)
 	if err != nil {
 		return err
 	}
@@ -129,8 +129,8 @@ func (pmr *PoolMembersResource) Delete(id string) error {
 // doRequest creates and send HTTP request using the F5 client.
 //
 // TODO(gilliek): decorate errors
-func (pmr *PoolMembersResource) doRequest(method, id string, data interface{}) (*http.Response, error) {
-	req, err := pmr.c.MakeRequest(method, BasePath+PoolEndpoint+"/"+id, data)
+func (pmr *PoolMembersResource) doRequest(method, pool string, id string, data interface{}) (*http.Response, error) {
+	req, err := pmr.c.MakeRequest(method, BasePath+PoolEndpoint+"/"+pool+PoolMembersEndpoint+"/"+id, data)
 	if err != nil {
 		return nil, err
 	}

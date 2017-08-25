@@ -27,7 +27,7 @@ type DBConfig struct {
 }
 
 // DBEndpoint represents the REST resource for managing DB.
-const DBEndpoint = "/tm/sys/db"
+const DBEndpoint = "/db"
 
 // DBResource provides an API to manage DB configurations.
 type DBResource struct {

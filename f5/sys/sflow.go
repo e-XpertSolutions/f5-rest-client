@@ -21,7 +21,7 @@ type SFlowConfig struct {
 }
 
 // SFlowEndpoint represents the REST resource for managing SFlow.
-const SFlowEndpoint = "/tm/sys/sflow"
+const SFlowEndpoint = "/sflow"
 
 // SFlowResource provides an API to manage SFlow configurations.
 type SFlowResource struct {

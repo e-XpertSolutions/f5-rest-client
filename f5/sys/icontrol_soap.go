@@ -18,7 +18,7 @@ type IControlSOAPConfig struct {
 }
 
 // IControlSOAPEndpoint represents the REST resource for managing IControlSOAP.
-const IControlSOAPEndpoint = "/tm/sys/icontrol-soap"
+const IControlSOAPEndpoint = "/icontrol-soap"
 
 // IControlSOAPResource provides an API to manage IControlSOAP configurations.
 type IControlSOAPResource struct {

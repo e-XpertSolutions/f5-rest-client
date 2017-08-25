@@ -21,7 +21,7 @@ type CryptoConfig struct {
 }
 
 // CryptoEndpoint represents the REST resource for managing Crypto.
-const CryptoEndpoint = "/tm/sys/crypto"
+const CryptoEndpoint = "/crypto"
 
 // CryptoResource provides an API to manage Crypto configurations.
 type CryptoResource struct {

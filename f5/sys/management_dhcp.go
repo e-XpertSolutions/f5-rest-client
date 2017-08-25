@@ -25,7 +25,7 @@ type ManagementDHCPConfig struct {
 }
 
 // ManagementDHCPEndpoint represents the REST resource for managing ManagementDHCP.
-const ManagementDHCPEndpoint = "/tm/sys/management-dhcp"
+const ManagementDHCPEndpoint = "/management-dhcp"
 
 // ManagementDHCPResource provides an API to manage ManagementDHCP configurations.
 type ManagementDHCPResource struct {

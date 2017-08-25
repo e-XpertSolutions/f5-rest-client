@@ -28,7 +28,7 @@ type LogConfigPublisherConfig struct {
 }
 
 // LogConfigPublisherEndpoint represents the REST resource for managing LogConfigPublisher.
-const LogConfigPublisherEndpoint = "/tm/sys/log-config/publisher"
+const LogConfigPublisherEndpoint = "/log-config/publisher"
 
 // LogConfigPublisherResource provides an API to manage LogConfigPublisher configurations.
 type LogConfigPublisherResource struct {

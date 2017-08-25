@@ -18,7 +18,7 @@ type SoftwareBlockDeviceHotfixConfig struct {
 }
 
 // SoftwareBlockDeviceHotfixEndpoint represents the REST resource for managing SoftwareBlockDeviceHotfix.
-const SoftwareBlockDeviceHotfixEndpoint = "/tm/sys/software/block-device-hotfix"
+const SoftwareBlockDeviceHotfixEndpoint = "/software/block-device-hotfix"
 
 // SoftwareBlockDeviceHotfixResource provides an API to manage SoftwareBlockDeviceHotfix configurations.
 type SoftwareBlockDeviceHotfixResource struct {

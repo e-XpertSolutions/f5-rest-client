@@ -18,7 +18,7 @@ type RAIDConfig struct {
 }
 
 // RAIDEndpoint represents the REST resource for managing RAID.
-const RAIDEndpoint = "/tm/sys/raid"
+const RAIDEndpoint = "/raid"
 
 // RAIDResource provides an API to manage RAID configurations.
 type RAIDResource struct {

@@ -18,7 +18,7 @@ type DaemonLogSettingsLindConfig struct {
 }
 
 // DaemonLogSettingsLindEndpoint represents the REST resource for managing DaemonLogSettingsLind.
-const DaemonLogSettingsLindEndpoint = "/tm/sys/daemon-log-settings/lind"
+const DaemonLogSettingsLindEndpoint = "/daemon-log-settings/lind"
 
 // DaemonLogSettingsLindResource provides an API to manage DaemonLogSettingsLind configurations.
 type DaemonLogSettingsLindResource struct {

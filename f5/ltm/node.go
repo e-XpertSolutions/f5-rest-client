@@ -13,28 +13,28 @@ type NodeConfigList struct {
 }
 
 type NodeConfig struct {
-	Address         string `json:"address"`
-	ConnectionLimit int    `json:"connectionLimit"`
-	DynamicRatio    int    `json:"dynamicRatio"`
-	Ephemeral       string `json:"ephemeral"`
+	Address         string `json:"address,omitempty"`
+	ConnectionLimit int    `json:"connectionLimit,omitempty"`
+	DynamicRatio    int    `json:"dynamicRatio,omitempty"`
+	Ephemeral       string `json:"ephemeral,omitempty"`
 	Fqdn            struct {
-		AddressFamily string `json:"addressFamily"`
-		Autopopulate  string `json:"autopopulate"`
-		DownInterval  int    `json:"downInterval"`
-		Interval      string `json:"interval"`
-	} `json:"fqdn"`
-	FullPath   string `json:"fullPath"`
-	Generation int    `json:"generation"`
-	Kind       string `json:"kind"`
-	Logging    string `json:"logging"`
-	Monitor    string `json:"monitor"`
-	Name       string `json:"name"`
-	Partition  string `json:"partition"`
-	RateLimit  string `json:"rateLimit"`
-	Ratio      int    `json:"ratio"`
-	SelfLink   string `json:"selfLink"`
-	Session    string `json:"session"`
-	State      string `json:"state"`
+		AddressFamily string `json:"addressFamily,omitempty"`
+		Autopopulate  string `json:"autopopulate,omitempty"`
+		DownInterval  int    `json:"downInterval,omitempty"`
+		Interval      string `json:"interval,omitempty"`
+	} `json:"fqdn,omitempty"`
+	FullPath   string `json:"fullPath,omitempty"`
+	Generation int    `json:"generation,omitempty"`
+	Kind       string `json:"kind,omitempty"`
+	Logging    string `json:"logging,omitempty"`
+	Monitor    string `json:"monitor,omitempty"`
+	Name       string `json:"name,omitempty"`
+	Partition  string `json:"partition,omitempty"`
+	RateLimit  string `json:"rateLimit,omitempty"`
+	Ratio      int    `json:"ratio,omitempty"`
+	SelfLink   string `json:"selfLink,omitempty"`
+	Session    string `json:"session,omitempty"`
+	State      string `json:"state,omitempty"`
 }
 
 const NodeEndpoint = "/node"

@@ -21,7 +21,7 @@ type URLDBConfig struct {
 }
 
 // URLDBEndpoint represents the REST resource for managing URLDB.
-const URLDBEndpoint = "/tm/sys/url-db"
+const URLDBEndpoint = "/url-db"
 
 // URLDBResource provides an API to manage URLDB configurations.
 type URLDBResource struct {

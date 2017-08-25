@@ -18,7 +18,7 @@ type AlertLCDConfig struct {
 }
 
 // AlertLCDEndpoint represents the REST resource for managing AlertLCD.
-const AlertLCDEndpoint = "/tm/sys/alert/lcd"
+const AlertLCDEndpoint = "/alert/lcd"
 
 // AlertLCDResource provides an API to manage AlertLCD configurations.
 type AlertLCDResource struct {

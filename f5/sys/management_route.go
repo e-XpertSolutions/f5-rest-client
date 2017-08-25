@@ -27,7 +27,7 @@ type ManagementRouteConfig struct {
 }
 
 // ManagementRouteEndpoint represents the REST resource for managing ManagementRoute.
-const ManagementRouteEndpoint = "/tm/sys/management-route"
+const ManagementRouteEndpoint = "/management-route"
 
 // ManagementRouteResource provides an API to manage ManagementRoute configurations.
 type ManagementRouteResource struct {

@@ -18,7 +18,7 @@ type LTCFGInstanceConfig struct {
 }
 
 // LTCFGInstanceEndpoint represents the REST resource for managing LTCFGInstance.
-const LTCFGInstanceEndpoint = "/tm/sys/ltcfg-instance"
+const LTCFGInstanceEndpoint = "/ltcfg-instance"
 
 // LTCFGInstanceResource provides an API to manage LTCFGInstance configurations.
 type LTCFGInstanceResource struct {

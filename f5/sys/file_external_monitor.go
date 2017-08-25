@@ -33,7 +33,7 @@ type FileExternalMonitorConfig struct {
 }
 
 // FileExternalMonitorEndpoint represents the REST resource for managing FileExternalMonitor.
-const FileExternalMonitorEndpoint = "/tm/sys/file/external-monitor"
+const FileExternalMonitorEndpoint = "/file/external-monitor"
 
 // FileExternalMonitorResource provides an API to manage FileExternalMonitor configurations.
 type FileExternalMonitorResource struct {

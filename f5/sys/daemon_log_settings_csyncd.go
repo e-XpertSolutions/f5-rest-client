@@ -18,7 +18,7 @@ type DaemonLogSettingsCsyncdConfig struct {
 }
 
 // DaemonLogSettingsCsyncdEndpoint represents the REST resource for managing DaemonLogSettingsCsyncd.
-const DaemonLogSettingsCsyncdEndpoint = "/tm/sys/daemon-log-settings/csyncd"
+const DaemonLogSettingsCsyncdEndpoint = "/daemon-log-settings/csyncd"
 
 // DaemonLogSettingsCsyncdResource provides an API to manage DaemonLogSettingsCsyncd configurations.
 type DaemonLogSettingsCsyncdResource struct {

@@ -21,7 +21,7 @@ type FPGAConfig struct {
 }
 
 // FPGAEndpoint represents the REST resource for managing FPGA.
-const FPGAEndpoint = "/tm/sys/fpga"
+const FPGAEndpoint = "/fpga"
 
 // FPGAResource provides an API to manage FPGA configurations.
 type FPGAResource struct {

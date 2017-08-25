@@ -18,7 +18,7 @@ type FileLWTunnelTBLConfig struct {
 }
 
 // FileLWTunnelTBLEndpoint represents the REST resource for managing FileLWTunnelTBL.
-const FileLWTunnelTBLEndpoint = "/tm/sys/file/lwtunneltbl"
+const FileLWTunnelTBLEndpoint = "/file/lwtunneltbl"
 
 // FileLWTunnelTBLResource provides an API to manage FileLWTunnelTBL configurations.
 type FileLWTunnelTBLResource struct {

@@ -18,7 +18,7 @@ type PFManConfig struct {
 }
 
 // PFManEndpoint represents the REST resource for managing PFMan.
-const PFManEndpoint = "/tm/sys/pfman"
+const PFManEndpoint = "/pfman"
 
 // PFManResource provides an API to manage PFMan configurations.
 type PFManResource struct {
