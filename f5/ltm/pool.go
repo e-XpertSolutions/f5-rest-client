@@ -15,17 +15,18 @@ type PoolConfigList struct {
 
 // A PoolConfig hold the configuration for a pool.
 type PoolConfig struct {
-	AllowNat              string `json:"allowNat,omitempty"`
-	AllowSnat             string `json:"allowSnat,omitempty"`
-	FullPath              string `json:"fullPath,omitempty"`
-	Generation            int64  `json:"generation,omitempty"`
-	IgnorePersistedWeight string `json:"ignorePersistedWeight,omitempty"`
-	IPTosToClient         string `json:"ipTosToClient,omitempty"`
-	IPTosToServer         string `json:"ipTosToServer,omitempty"`
-	Kind                  string `json:"kind,omitempty"`
-	LinkQosToClient       string `json:"linkQosToClient,omitempty"`
-	LinkQosToServer       string `json:"linkQosToServer,omitempty"`
-	LoadBalancingMode     string `json:"loadBalancingMode,omitempty"`
+	AllowNat              string   `json:"allowNat,omitempty"`
+	AllowSnat             string   `json:"allowSnat,omitempty"`
+	FullPath              string   `json:"fullPath,omitempty"`
+	Generation            int64    `json:"generation,omitempty"`
+	IgnorePersistedWeight string   `json:"ignorePersistedWeight,omitempty"`
+	IPTosToClient         string   `json:"ipTosToClient,omitempty"`
+	IPTosToServer         string   `json:"ipTosToServer,omitempty"`
+	Kind                  string   `json:"kind,omitempty"`
+	LinkQosToClient       string   `json:"linkQosToClient,omitempty"`
+	LinkQosToServer       string   `json:"linkQosToServer,omitempty"`
+	LoadBalancingMode     string   `json:"loadBalancingMode,omitempty"`
+	Members               []string `json:"members,omitempty"`
 	MembersReference      struct {
 		IsSubcollection bool   `json:"isSubcollection,omitempty"`
 		Link            string `json:"link,omitempty"`
