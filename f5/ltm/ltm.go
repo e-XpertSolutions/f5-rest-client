@@ -36,7 +36,6 @@ type LTM struct {
 	monitorMSSQL            MonitorMSSQLResource
 	monitorMySQL            MonitorMySQLResource
 	monitorNNTP             MonitorNNTPResource
-	monitorNone             MonitorNoneResource
 	monitorOracle           MonitorOracleResource
 	monitorPOP3             MonitorPOP3Resource
 	monitorPostgreSQL       MonitorPostgreSQLResource
@@ -88,7 +87,6 @@ func New(c *f5.Client) LTM {
 		monitorMSSQL:            MonitorMSSQLResource{c: c},
 		monitorMySQL:            MonitorMySQLResource{c: c},
 		monitorNNTP:             MonitorNNTPResource{c: c},
-		monitorNone:             MonitorNoneResource{c: c},
 		monitorOracle:           MonitorOracleResource{c: c},
 		monitorPOP3:             MonitorPOP3Resource{c: c},
 		monitorPostgreSQL:       MonitorPostgreSQLResource{c: c},
@@ -202,10 +200,6 @@ func (ltm LTM) MonitorMySQL() *MonitorMySQLResource {
 
 func (ltm LTM) MonitorNNTP() *MonitorNNTPResource {
 	return &ltm.monitorNNTP
-}
-
-func (ltm LTM) MonitorNone() *MonitorNoneResource {
-	return &ltm.monitorNone
 }
 
 func (ltm LTM) MonitorOracle() *MonitorOracleResource {
