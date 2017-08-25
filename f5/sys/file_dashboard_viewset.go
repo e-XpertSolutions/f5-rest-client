@@ -22,7 +22,7 @@ const FileDashboardViewsetEndpoint = "/tm/sys/file/dashboard-viewset"
 
 // FileDashboardViewsetResource provides an API to manage FileDashboardViewset configurations.
 type FileDashboardViewsetResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileDashboardViewset configurations.

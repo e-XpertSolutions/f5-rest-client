@@ -33,7 +33,7 @@ type MonitorFirepassConfig struct {
 const MonitorFirepassEndpoint = "/monitor/firepass"
 
 type MonitorFirepassResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorFirepassResource) ListAll() (*MonitorFirepassConfigList, error) {

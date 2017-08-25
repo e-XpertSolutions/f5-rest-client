@@ -22,7 +22,7 @@ const SNMPUsersEndpoint = "/tm/sys/snmp_users"
 
 // SNMPUsersResource provides an API to manage SNMPUsers configurations.
 type SNMPUsersResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SNMPUsers configurations.

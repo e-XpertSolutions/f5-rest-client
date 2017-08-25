@@ -22,7 +22,7 @@ const SNMPTrapsEndpoint = "/tm/sys/snmp_traps"
 
 // SNMPTrapsResource provides an API to manage SNMPTraps configurations.
 type SNMPTrapsResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SNMPTraps configurations.

@@ -22,7 +22,7 @@ const SettingsEndpoint = "/analytics/settings"
 
 // SettingsResource provides an API to manage Settings configurations.
 type SettingsResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Settings configurations.

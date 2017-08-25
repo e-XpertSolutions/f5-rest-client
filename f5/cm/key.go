@@ -39,7 +39,7 @@ const KeyEndpoint = "/key"
 
 // A KeyResource provides API to manage Keys configuration.
 type KeyResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the Key configurations.

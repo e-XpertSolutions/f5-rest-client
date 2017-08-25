@@ -22,7 +22,7 @@ const DOSProfileProtocolDNSEndpoint = "/dos/profile_protocol-dns"
 
 // DOSProfileProtocolDNSResource provides an API to manage DOSProfileProtocolDNS configurations.
 type DOSProfileProtocolDNSResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DOSProfileProtocolDNS configurations.

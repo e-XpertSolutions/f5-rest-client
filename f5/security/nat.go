@@ -22,7 +22,7 @@ const NATEndpoint = "/nat"
 
 // NATResource provides an API to manage NAT configurations.
 type NATResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the NAT configurations.

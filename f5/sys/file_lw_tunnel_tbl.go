@@ -22,7 +22,7 @@ const FileLWTunnelTBLEndpoint = "/tm/sys/file/lwtunneltbl"
 
 // FileLWTunnelTBLResource provides an API to manage FileLWTunnelTBL configurations.
 type FileLWTunnelTBLResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileLWTunnelTBL configurations.

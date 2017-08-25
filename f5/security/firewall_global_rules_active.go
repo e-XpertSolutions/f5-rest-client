@@ -22,7 +22,7 @@ const FirewallGlobalRulesActiveEndpoint = "/firewall/global-rules_active"
 
 // FirewallGlobalRulesActiveResource provides an API to manage FirewallGlobalRulesActive configurations.
 type FirewallGlobalRulesActiveResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallGlobalRulesActive configurations.

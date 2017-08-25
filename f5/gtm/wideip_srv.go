@@ -22,7 +22,7 @@ const WideipSrvEndpoint = "/wideip/srv"
 
 // WideipSrvResource provides an API to manage WideipSrv configurations.
 type WideipSrvResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the WideipSrv configurations.

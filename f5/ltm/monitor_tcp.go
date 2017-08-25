@@ -38,7 +38,7 @@ type MonitorTCPConfig struct {
 const MonitorTCPEndpoint = "/monitor/tcp"
 
 type MonitorTCPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorTCPResource) ListAll() (*MonitorTCPConfigList, error) {

@@ -22,7 +22,7 @@ const DeviceDeviceContextEndpoint = "/device/device-context"
 
 // DeviceDeviceContextResource provides an API to manage DeviceDeviceContext configurations.
 type DeviceDeviceContextResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DeviceDeviceContext configurations.

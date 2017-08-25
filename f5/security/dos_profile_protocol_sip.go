@@ -22,7 +22,7 @@ const DOSProfileProtocolSIPEndpoint = "/dos/profile_protocol-sip"
 
 // DOSProfileProtocolSIPResource provides an API to manage DOSProfileProtocolSIP configurations.
 type DOSProfileProtocolSIPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DOSProfileProtocolSIP configurations.

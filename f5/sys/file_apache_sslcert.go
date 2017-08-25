@@ -22,7 +22,7 @@ const FileApacheSSLCertEndpoint = "/tm/sys/file/apache-ssl-cert"
 
 // FileApacheSSLCertResource provides an API to manage FileApacheSSLCert configurations.
 type FileApacheSSLCertResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileApacheSSLCert configurations.

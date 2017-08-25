@@ -22,7 +22,7 @@ const LogRotateEndpoint = "/tm/sys/log-rotate"
 
 // LogRotateResource provides an API to manage LogRotate configurations.
 type LogRotateResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LogRotate configurations.

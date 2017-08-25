@@ -36,7 +36,7 @@ const URLDBURLCategoryEndpoint = "/tm/sys/url-db/url-category"
 
 // URLDBURLCategoryResource provides an API to manage URLDBURLCategory configurations.
 type URLDBURLCategoryResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the URLDBURLCategory configurations.

@@ -22,7 +22,7 @@ const WideipMxEndpoint = "/wideip/mx"
 
 // WideipMxResource provides an API to manage WideipMx configurations.
 type WideipMxResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the WideipMx configurations.

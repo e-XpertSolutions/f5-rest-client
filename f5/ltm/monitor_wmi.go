@@ -34,7 +34,7 @@ type MonitorWMIConfig struct {
 const MonitorWMIEndpoint = "/monitor/wmi"
 
 type MonitorWMIResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorWMIResource) ListAll() (*MonitorWMIConfigList, error) {

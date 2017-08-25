@@ -35,7 +35,7 @@ const MonitorOracleEndpoint = "/monitor/oracle"
 
 // MonitorOracleResource provides an API to manage MonitorOracle configurations.
 type MonitorOracleResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorOracle configurations.

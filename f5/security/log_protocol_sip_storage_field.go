@@ -22,7 +22,7 @@ const LogProtocolSIPStorageFieldEndpoint = "/log/protocol-sip-storage-field"
 
 // LogProtocolSIPStorageFieldResource provides an API to manage LogProtocolSIPStorageField configurations.
 type LogProtocolSIPStorageFieldResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LogProtocolSIPStorageField configurations.

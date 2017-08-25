@@ -25,7 +25,7 @@ const CryptoEndpoint = "/tm/sys/crypto"
 
 // CryptoResource provides an API to manage Crypto configurations.
 type CryptoResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Crypto configurations.

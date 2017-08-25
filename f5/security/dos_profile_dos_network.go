@@ -22,7 +22,7 @@ const DOSProfileDOSNetworkEndpoint = "/dos/profile_dos-network"
 
 // DOSProfileDOSNetworkResource provides an API to manage DOSProfileDOSNetwork configurations.
 type DOSProfileDOSNetworkResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DOSProfileDOSNetwork configurations.

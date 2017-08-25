@@ -35,7 +35,7 @@ const MonitorMSSQLEndpoint = "/monitor/mssql"
 
 // MonitorMSSQLResource provides an API to manage MonitorMSSQL configurations.
 type MonitorMSSQLResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorMSSQL configurations.

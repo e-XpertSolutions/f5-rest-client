@@ -22,7 +22,7 @@ const AntiFraudProfileUsersModesEndpoint = "/anti-fraud/profile_users_modes"
 
 // AntiFraudProfileUsersModesResource provides an API to manage AntiFraudProfileUsersModes configurations.
 type AntiFraudProfileUsersModesResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the AntiFraudProfileUsersModes configurations.

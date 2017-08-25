@@ -22,7 +22,7 @@ const IControlSOAPEndpoint = "/tm/sys/icontrol-soap"
 
 // IControlSOAPResource provides an API to manage IControlSOAP configurations.
 type IControlSOAPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the IControlSOAP configurations.

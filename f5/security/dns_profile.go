@@ -22,7 +22,7 @@ const DNSProfileEndpoint = "/dns/profile"
 
 // DNSProfileResource provides an API to manage DNSProfile configurations.
 type DNSProfileResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DNSProfile configurations.

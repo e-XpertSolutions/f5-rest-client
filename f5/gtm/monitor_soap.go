@@ -36,7 +36,7 @@ const MonitorSOAPEndpoint = "/monitor/soap"
 
 // MonitorSOAPResource provides an API to manage MonitorSOAP configurations.
 type MonitorSOAPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorSOAP configurations.

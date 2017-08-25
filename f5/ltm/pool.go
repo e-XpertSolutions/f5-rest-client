@@ -50,7 +50,7 @@ const PoolEndpoint = "/pool"
 
 // A PoolResource provides API to manage pool configuration.
 type PoolResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the pool configurations.

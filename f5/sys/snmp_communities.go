@@ -22,7 +22,7 @@ const SNMPCommunitiesEndpoint = "/tm/sys/snmp_communities"
 
 // SNMPCommunitiesResource provides an API to manage SNMPCommunities configurations.
 type SNMPCommunitiesResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SNMPCommunities configurations.

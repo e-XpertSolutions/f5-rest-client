@@ -32,7 +32,7 @@ type MonitorLDAPConfig struct {
 const MonitorLDAPEndpoint = "/monitor/ldap"
 
 type MonitorLDAPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorLDAPResource) ListAll() (*MonitorLDAPConfigList, error) {

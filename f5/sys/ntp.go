@@ -23,7 +23,7 @@ const NTPEndpoint = "/ntp"
 
 // NTPResource provides an API to manage NTP configurations.
 type NTPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the NTP configurations.

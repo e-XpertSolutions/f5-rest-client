@@ -22,7 +22,7 @@ const PoolAAAAMembersEndpoint = "/pool/aaaa_members"
 
 // PoolAAAAMembersResource provides an API to manage PoolAAAAMembers configurations.
 type PoolAAAAMembersResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the PoolAAAAMembers configurations.

@@ -22,7 +22,7 @@ const HTTPMandatoryHeaderEndpoint = "/http/mandatory-header"
 
 // HTTPMandatoryHeaderResource provides an API to manage HTTPMandatoryHeader configurations.
 type HTTPMandatoryHeaderResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the HTTPMandatoryHeader configurations.

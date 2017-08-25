@@ -32,7 +32,7 @@ const DiskLogicalDiskEndpoint = "/tm/sys/disk/logical-disk"
 
 // DiskLogicalDiskResource provides an API to manage DiskLogicalDisk configurations.
 type DiskLogicalDiskResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DiskLogicalDisk configurations.

@@ -57,7 +57,7 @@ const DeviceEndpoint = "/device"
 
 // A DeviceResource provides API to manage Devices configuration.
 type DeviceResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the Device configurations.

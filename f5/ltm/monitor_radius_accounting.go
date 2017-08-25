@@ -31,7 +31,7 @@ type MonitorRadiusAccountingConfig struct {
 const MonitorRadiusAccountingEndpoint = "/monitor/rarius-accounting"
 
 type MonitorRadiusAccountingResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorRadiusAccountingResource) ListAll() (*MonitorRadiusAccountingConfigList, error) {

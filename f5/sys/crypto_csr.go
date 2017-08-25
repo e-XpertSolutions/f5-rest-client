@@ -22,7 +22,7 @@ const CryptoCSREndpoint = "/tm/sys/crypto/csr"
 
 // CryptoCSRResource provides an API to manage CryptoCSR configurations.
 type CryptoCSRResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the CryptoCSR configurations.

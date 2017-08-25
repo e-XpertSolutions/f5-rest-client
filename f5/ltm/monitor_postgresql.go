@@ -32,7 +32,7 @@ type MonitorPostgreSQLConfig struct {
 const MonitorPostgreSQLEndpoint = "/monitor/postgresql"
 
 type MonitorPostgreSQLResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorPostgreSQLResource) ListAll() (*MonitorPostgreSQLConfigList, error) {

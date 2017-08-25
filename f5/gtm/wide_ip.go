@@ -25,7 +25,7 @@ const WideIPEndpoint = "/wideip"
 
 // WideIPResource provides an API to manage WideIP configurations.
 type WideIPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the WideIP configurations.

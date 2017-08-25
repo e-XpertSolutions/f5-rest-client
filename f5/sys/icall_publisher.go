@@ -22,7 +22,7 @@ const ICallPublisherEndpoint = "/tm/sys/icall/publisher"
 
 // ICallPublisherResource provides an API to manage ICallPublisher configurations.
 type ICallPublisherResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ICallPublisher configurations.

@@ -22,7 +22,7 @@ const FirewallFQDNInfoEndpoint = "/firewall/fqdn-info"
 
 // FirewallFQDNInfoResource provides an API to manage FirewallFQDNInfo configurations.
 type FirewallFQDNInfoResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallFQDNInfo configurations.

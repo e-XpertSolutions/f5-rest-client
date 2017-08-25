@@ -22,7 +22,7 @@ const RegionEndpoint = "/region"
 
 // RegionResource provides an API to manage Region configurations.
 type RegionResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Region configurations.

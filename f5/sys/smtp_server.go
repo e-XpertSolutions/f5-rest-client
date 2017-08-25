@@ -22,7 +22,7 @@ const SMTPServerEndpoint = "/tm/sys/smtp-server"
 
 // SMTPServerResource provides an API to manage SMTPServer configurations.
 type SMTPServerResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SMTPServer configurations.

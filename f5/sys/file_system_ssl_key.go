@@ -22,7 +22,7 @@ const FileSystemSSLKeyEndpoint = "/tm/sys/file/system-ssl-key"
 
 // FileSystemSSLKeyResource provides an API to manage FileSystemSSLKey configurations.
 type FileSystemSSLKeyResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileSystemSSLKey configurations.

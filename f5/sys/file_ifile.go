@@ -44,7 +44,7 @@ const FileIFileEndpoint = "/file/ifile"
 
 // FileIFileResource provides an API to manage FileIFile configurations.
 type FileIFileResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileIFile configurations.

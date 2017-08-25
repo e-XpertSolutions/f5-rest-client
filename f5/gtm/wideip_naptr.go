@@ -22,7 +22,7 @@ const WideipNaptrEndpoint = "/wideip/naptr"
 
 // WideipNaptrResource provides an API to manage WideipNaptr configurations.
 type WideipNaptrResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the WideipNaptr configurations.

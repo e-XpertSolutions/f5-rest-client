@@ -22,7 +22,7 @@ const PoolNAPTREndpoint = "/pool/naptr"
 
 // PoolNAPTRResource provides an API to manage PoolNAPTR configurations.
 type PoolNAPTRResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the PoolNAPTR configurations.

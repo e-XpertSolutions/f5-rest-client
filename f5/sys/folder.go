@@ -36,7 +36,7 @@ const FolderEndpoint = "/tm/sys/folder"
 
 // FolderResource provides an API to manage Folder configurations.
 type FolderResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Folder configurations.

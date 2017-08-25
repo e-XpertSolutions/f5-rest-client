@@ -22,7 +22,7 @@ const NATDestinationTranslationEndpoint = "/nat/destination-translation"
 
 // NATDestinationTranslationResource provides an API to manage NATDestinationTranslation configurations.
 type NATDestinationTranslationResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the NATDestinationTranslation configurations.

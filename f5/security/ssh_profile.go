@@ -22,7 +22,7 @@ const SSHProfileEndpoint = "/ssh/profile"
 
 // SSHProfileResource provides an API to manage SSHProfile configurations.
 type SSHProfileResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SSHProfile configurations.

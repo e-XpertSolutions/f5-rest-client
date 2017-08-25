@@ -22,7 +22,7 @@ const HTTPProfileEndpoint = "/http/profile"
 
 // HTTPProfileResource provides an API to manage HTTPProfile configurations.
 type HTTPProfileResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the HTTPProfile configurations.

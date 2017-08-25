@@ -22,7 +22,7 @@ const ListenerEndpoint = "/listener"
 
 // ListenerResource provides an API to manage Listener configurations.
 type ListenerResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Listener configurations.

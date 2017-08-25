@@ -22,7 +22,7 @@ const FileBrowserCapabilitiesDBEndpoint = "/tm/sys/file/browser-capabilities-db"
 
 // FileBrowserCapabilitiesDBResource provides an API to manage FileBrowserCapabilitiesDB configurations.
 type FileBrowserCapabilitiesDBResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileBrowserCapabilitiesDB configurations.

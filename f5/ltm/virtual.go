@@ -79,7 +79,7 @@ type VirtualResponse struct {
 
 // VirtualResource provides an API to manage virtual server configurations.
 type VirtualResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the virtual server configurations.

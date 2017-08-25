@@ -34,7 +34,7 @@ const RouteDomainEndpoint = "/route-domain"
 
 // A RouteDomainResource provides API to manage route domain configuration.
 type RouteDomainResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the route domain configurations.

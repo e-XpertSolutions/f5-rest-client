@@ -32,7 +32,7 @@ const DOSProfileEndpoint = "/dos/profile"
 
 // DOSProfileResource provides an API to manage DOSProfile configurations.
 type DOSProfileResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DOSProfile configurations.

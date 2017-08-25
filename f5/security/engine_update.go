@@ -22,7 +22,7 @@ const EngineUpdateEndpoint = "/anti-fraud/engine-update"
 
 // EngineUpdateResource provides an API to manage EngineUpdate configurations.
 type EngineUpdateResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the EngineUpdate configurations.

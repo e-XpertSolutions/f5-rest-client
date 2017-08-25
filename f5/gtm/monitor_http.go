@@ -36,7 +36,7 @@ const MonitorHTTPEndpoint = "/monitor/http"
 
 // MonitorHTTPResource provides an API to manage MonitorHTTP configurations.
 type MonitorHTTPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorHTTP configurations.

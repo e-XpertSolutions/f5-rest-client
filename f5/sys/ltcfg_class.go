@@ -22,7 +22,7 @@ const LTCFGClassEndpoint = "/tm/sys/ltcfg-class"
 
 // LTCFGClassResource provides an API to manage LTCFGClass configurations.
 type LTCFGClassResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LTCFGClass configurations.

@@ -25,7 +25,7 @@ const LicenseEndpoint = "/license"
 
 // LicenseResource provides an API to manage License configurations.
 type LicenseResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // Get list the License configurations.

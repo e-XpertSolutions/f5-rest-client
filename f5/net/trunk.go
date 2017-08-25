@@ -45,7 +45,7 @@ const TrunkEndpoint = "/trunk"
 
 // A TrunkResource provides API to manage trunks configuration.
 type TrunkResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the trunk configurations.

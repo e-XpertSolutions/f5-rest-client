@@ -38,7 +38,7 @@ const MonitorHTTPSEndpoint = "/monitor/https"
 
 // MonitorHTTPSResource provides an API to manage MonitorHTTPS configurations.
 type MonitorHTTPSResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorHTTPS configurations.

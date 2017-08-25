@@ -22,7 +22,7 @@ const SoftwareUpdateEndpoint = "/tm/sys/software/update"
 
 // SoftwareUpdateResource provides an API to manage SoftwareUpdate configurations.
 type SoftwareUpdateResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SoftwareUpdate configurations.

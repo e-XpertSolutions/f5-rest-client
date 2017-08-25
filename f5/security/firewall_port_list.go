@@ -31,7 +31,7 @@ const FirewallPortListEndpoint = "/firewall/port-list"
 
 // FirewallPortListResource provides an API to manage FirewallPortList configurations.
 type FirewallPortListResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallPortList configurations.

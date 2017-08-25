@@ -32,7 +32,7 @@ type MonitorMySQLConfig struct {
 const MonitorMySQLEndpoint = "/monitor/mysql"
 
 type MonitorMySQLResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorMySQLResource) ListAll() (*MonitorMySQLConfigList, error) {

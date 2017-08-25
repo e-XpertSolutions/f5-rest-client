@@ -22,7 +22,7 @@ const NTPRestrictEndpoint = "/tm/sys/ntp_restrict"
 
 // NTPRestrictResource provides an API to manage NTPRestrict configurations.
 type NTPRestrictResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the NTPRestrict configurations.

@@ -22,7 +22,7 @@ const CryptoClientEndpoint = "/tm/sys/crypto/client"
 
 // CryptoClientResource provides an API to manage CryptoClient configurations.
 type CryptoClientResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the CryptoClient configurations.

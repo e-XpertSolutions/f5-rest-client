@@ -40,7 +40,7 @@ const SoftwareVolumeEndpoint = "/tm/sys/software/volume"
 
 // SoftwareVolumeResource provides an API to manage SoftwareVolume configurations.
 type SoftwareVolumeResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SoftwareVolume configurations.

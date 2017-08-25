@@ -22,7 +22,7 @@ const ICallEventEndpoint = "/tm/sys/icall/event"
 
 // ICallEventResource provides an API to manage ICallEvent configurations.
 type ICallEventResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ICallEvent configurations.

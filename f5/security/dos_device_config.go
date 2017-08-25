@@ -22,7 +22,7 @@ const DOSDeviceConfigEndpoint = "/dos/device-config"
 
 // DOSDeviceConfigResource provides an API to manage DOSDeviceConfig configurations.
 type DOSDeviceConfigResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DOSDeviceConfig configurations.

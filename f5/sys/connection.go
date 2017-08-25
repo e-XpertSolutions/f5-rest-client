@@ -22,7 +22,7 @@ const ConnectionEndpoint = "/tm/sys/connection"
 
 // ConnectionResource provides an API to manage Connection configurations.
 type ConnectionResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Connection configurations.

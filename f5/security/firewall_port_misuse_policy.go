@@ -22,7 +22,7 @@ const FirewallPortMisusePolicyEndpoint = "/firewall/port-misuse-policy"
 
 // FirewallPortMisusePolicyResource provides an API to manage FirewallPortMisusePolicy configurations.
 type FirewallPortMisusePolicyResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallPortMisusePolicy configurations.

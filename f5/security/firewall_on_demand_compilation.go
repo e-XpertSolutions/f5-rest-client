@@ -22,7 +22,7 @@ const FirewallOnDemandCompilationEndpoint = "/firewall/on-demand-compilation"
 
 // FirewallOnDemandCompilationResource provides an API to manage FirewallOnDemandCompilation configurations.
 type FirewallOnDemandCompilationResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallOnDemandCompilation configurations.

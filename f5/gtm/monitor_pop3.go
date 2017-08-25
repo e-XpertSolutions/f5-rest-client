@@ -34,7 +34,7 @@ const MonitorPOP3Endpoint = "/monitor/pop3"
 
 // MonitorPOP3Resource provides an API to manage MonitorPOP3 configurations.
 type MonitorPOP3Resource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorPOP3 configurations.

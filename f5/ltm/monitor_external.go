@@ -30,7 +30,7 @@ type MonitorExternalConfig struct {
 const MonitorExternalEndpoint = "/monitor/external"
 
 type MonitorExternalResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorExternalResource) ListAll() (*MonitorExternalConfigList, error) {

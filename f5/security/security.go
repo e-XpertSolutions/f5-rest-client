@@ -9,7 +9,7 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 const BasePath = "mgmt/tm/security"
 
 type Security struct {
-	c f5.Client
+	c *f5.Client
 
 	analytics                                 AnalyticsResource
 	antiFraud                                 AntiFraudResource
@@ -106,7 +106,7 @@ type Security struct {
 	settings                                  SettingsResource
 }
 
-func New(c f5.Client) Security {
+func New(c *f5.Client) Security {
 	return Security{
 		c: c,
 

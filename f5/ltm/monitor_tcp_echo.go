@@ -36,7 +36,7 @@ type MonitorTCPEchoConfig struct {
 const MonitorTCPEchoEndpoint = "/monitor/tcp-echo"
 
 type MonitorTCPEchoResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorTCPEchoResource) ListAll() (*MonitorTCPEchoConfigList, error) {

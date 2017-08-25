@@ -18,7 +18,7 @@ type MonitorSNMPDataConfig struct {
 const MonitorSNMPDataEndpoint = "/monitor/snmp-data"
 
 type MonitorSNMPDataResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorSNMPDataResource) ListAll() (*MonitorSNMPDataConfigList, error) {

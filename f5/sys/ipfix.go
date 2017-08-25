@@ -25,7 +25,7 @@ const IPFixEndpoint = "/tm/sys/ipfix"
 
 // IPFixResource provides an API to manage IPFix configurations.
 type IPFixResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the IPFix configurations.

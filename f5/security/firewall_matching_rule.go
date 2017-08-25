@@ -22,7 +22,7 @@ const FirewallMatchingRuleEndpoint = "/firewall/matching-rule"
 
 // FirewallMatchingRuleResource provides an API to manage FirewallMatchingRule configurations.
 type FirewallMatchingRuleResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallMatchingRule configurations.

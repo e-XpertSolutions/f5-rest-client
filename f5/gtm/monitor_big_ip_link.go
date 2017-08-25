@@ -32,7 +32,7 @@ const MonitorBigIPLinkEndpoint = "/monitor/bigip-link"
 
 // MonitorBigIPLinkResource provides an API to manage MonitorBigIPLink configurations.
 type MonitorBigIPLinkResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorBigIPLink configurations.

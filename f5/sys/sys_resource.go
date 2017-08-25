@@ -25,7 +25,7 @@ const SysEndpoint = "/tm/sys"
 
 // SysResource provides an API to manage Sys configurations.
 type SysResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Sys configurations.

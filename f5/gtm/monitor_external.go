@@ -33,7 +33,7 @@ const MonitorExternalEndpoint = "/monitor/external"
 
 // MonitorExternalResource provides an API to manage MonitorExternal configurations.
 type MonitorExternalResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorExternal configurations.

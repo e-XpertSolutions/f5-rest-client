@@ -50,7 +50,7 @@ const InterfaceEndpoint = "/interface"
 
 // A InetResource provides an API to manage Interface configurations.
 type InetResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all interfaces configuration.

@@ -34,7 +34,7 @@ const MonitorscriptedEndpoint = "/monitor/scripted"
 
 // MonitorscriptedResource provides an API to manage Monitorscripted configurations.
 type MonitorscriptedResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Monitorscripted configurations.

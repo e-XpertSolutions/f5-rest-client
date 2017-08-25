@@ -22,7 +22,7 @@ const BotDefenseEndpoint = "/bot-defense"
 
 // BotDefenseResource provides an API to manage BotDefense configurations.
 type BotDefenseResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the BotDefense configurations.

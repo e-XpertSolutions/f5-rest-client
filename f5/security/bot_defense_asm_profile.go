@@ -22,7 +22,7 @@ const BotDefenseASMProfileEndpoint = "/bot-defense/asm-profile"
 
 // BotDefenseASMProfileResource provides an API to manage BotDefenseASMProfile configurations.
 type BotDefenseASMProfileResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the BotDefenseASMProfile configurations.

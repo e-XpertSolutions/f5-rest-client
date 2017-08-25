@@ -22,7 +22,7 @@ const SFlowReceiverEndpoint = "/tm/sys/sflow/receiver"
 
 // SFlowReceiverResource provides an API to manage SFlowReceiver configurations.
 type SFlowReceiverResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SFlowReceiver configurations.

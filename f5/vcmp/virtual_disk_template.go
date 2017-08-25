@@ -24,7 +24,7 @@ const VirtualDiskTemplateEndpoint = "/virtual-disk-template"
 
 // VirtualDiskTemplateResource provides an API to manage VirtualDiskTemplate configurations.
 type VirtualDiskTemplateResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the VirtualDiskTemplate configurations.

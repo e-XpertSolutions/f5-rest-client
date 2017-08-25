@@ -22,7 +22,7 @@ const ScriptdEndpoint = "/tm/sys/scriptd"
 
 // ScriptdResource provides an API to manage Scriptd configurations.
 type ScriptdResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Scriptd configurations.

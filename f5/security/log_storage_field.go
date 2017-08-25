@@ -29,7 +29,7 @@ const LogStorageFieldEndpoint = "/log/storage-field"
 
 // LogStorageFieldResource provides an API to manage LogStorageField configurations.
 type LogStorageFieldResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LogStorageField configurations.

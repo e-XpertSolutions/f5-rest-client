@@ -22,7 +22,7 @@ const DOSUDPPortlistEndpoint = "/dos/udp-portlist"
 
 // DOSUDPPortlistResource provides an API to manage DOSUDPPortlist configurations.
 type DOSUDPPortlistResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DOSUDPPortlist configurations.

@@ -33,7 +33,7 @@ const TrafficGroupEndpoint = "/traffic-group"
 
 // A TrafficGroupResource provides API to manage TrafficGroups configuration.
 type TrafficGroupResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the TrafficGroup configurations.

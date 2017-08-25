@@ -22,7 +22,7 @@ const FirewallGlobalRulesEndpoint = "/firewall/global-rules"
 
 // FirewallGlobalRulesResource provides an API to manage FirewallGlobalRules configurations.
 type FirewallGlobalRulesResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallGlobalRules configurations.

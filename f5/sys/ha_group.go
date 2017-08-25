@@ -22,7 +22,7 @@ const HAGroupEndpoint = "/tm/sys/ha-group"
 
 // HAGroupResource provides an API to manage HAGroup configurations.
 type HAGroupResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the HAGroup configurations.

@@ -22,7 +22,7 @@ const TopologyEndpoint = "/topology"
 
 // TopologyResource provides an API to manage Topology configurations.
 type TopologyResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Topology configurations.

@@ -28,7 +28,7 @@ const FeatureModuleEndpoint = "/tm/sys/feature-module"
 
 // FeatureModuleResource provides an API to manage FeatureModule configurations.
 type FeatureModuleResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FeatureModule configurations.

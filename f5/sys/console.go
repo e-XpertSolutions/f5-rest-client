@@ -22,7 +22,7 @@ const ConsoleEndpoint = "/tm/sys/console"
 
 // ConsoleResource provides an API to manage Console configurations.
 type ConsoleResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Console configurations.

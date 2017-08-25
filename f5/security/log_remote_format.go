@@ -22,7 +22,7 @@ const LogRemoteFormatEndpoint = "/log/remote-format"
 
 // LogRemoteFormatResource provides an API to manage LogRemoteFormat configurations.
 type LogRemoteFormatResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LogRemoteFormat configurations.

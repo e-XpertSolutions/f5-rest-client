@@ -22,7 +22,7 @@ const ServerEndpoint = "/tm/sys/service"
 
 // ServerResource provides an API to manage Server configurations.
 type ServerResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Server configurations.

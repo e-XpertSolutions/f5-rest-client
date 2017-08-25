@@ -32,7 +32,7 @@ type MonitorIMAPConfig struct {
 const MonitorIMAPEndpoint = "/monitor/imap"
 
 type MonitorIMAPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorIMAPResource) ListAll() (*MonitorIMAPConfigList, error) {

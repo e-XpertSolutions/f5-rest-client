@@ -33,7 +33,7 @@ type MonitorSOAPConfig struct {
 const MonitorSOAPEndpoint = "/monitor/soap"
 
 type MonitorSOAPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorSOAPResource) ListAll() (*MonitorSOAPConfigList, error) {

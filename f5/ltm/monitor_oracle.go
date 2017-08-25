@@ -33,7 +33,7 @@ type MonitorOracleConfig struct {
 const MonitorOracleEndpoint = "/monitor/oracle"
 
 type MonitorOracleResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorOracleResource) ListAll() (*MonitorOracleConfigList, error) {

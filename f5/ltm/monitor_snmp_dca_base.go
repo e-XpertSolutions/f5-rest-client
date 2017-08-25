@@ -29,7 +29,7 @@ type MonitorSNMPDCABaseConfig struct {
 const MonitorSNMPDCABaseEndpoint = "/monitor/snmp-dca-base"
 
 type MonitorSNMPDCABaseResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorSNMPDCABaseResource) ListAll() (*MonitorSNMPDCABaseConfigList, error) {

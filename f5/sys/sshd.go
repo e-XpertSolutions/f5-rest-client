@@ -22,7 +22,7 @@ const SSHDEndpoint = "/tm/sys/sshd"
 
 // SSHDResource provides an API to manage SSHD configurations.
 type SSHDResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SSHD configurations.

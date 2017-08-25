@@ -22,7 +22,7 @@ const SSHEndpoint = "/ssh"
 
 // SSHResource provides an API to manage SSH configurations.
 type SSHResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SSH configurations.

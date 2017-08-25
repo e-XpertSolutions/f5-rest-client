@@ -22,7 +22,7 @@ const FirewallGlobalFQDNPolicyEndpoint = "/firewall/global-fqdn-policy"
 
 // FirewallGlobalFQDNPolicyResource provides an API to manage FirewallGlobalFQDNPolicy configurations.
 type FirewallGlobalFQDNPolicyResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallGlobalFQDNPolicy configurations.

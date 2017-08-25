@@ -22,7 +22,7 @@ const ServerVirtualServersEndpoint = "/server_virtual-servers"
 
 // ServerVirtualServersResource provides an API to manage ServerVirtualServers configurations.
 type ServerVirtualServersResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ServerVirtualServers configurations.

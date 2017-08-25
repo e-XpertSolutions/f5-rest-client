@@ -40,7 +40,7 @@ type MonitorDNSConfig struct {
 const MonitorDNSEndpoint = "/monitor/dns"
 
 type MonitorDNSResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorDNSResource) ListAll() (*MonitorDNSConfigList, error) {

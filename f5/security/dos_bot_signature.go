@@ -22,7 +22,7 @@ const DOSBotSignatureEndpoint = "/dos/bot-signature"
 
 // DOSBotSignatureResource provides an API to manage DOSBotSignature configurations.
 type DOSBotSignatureResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DOSBotSignature configurations.

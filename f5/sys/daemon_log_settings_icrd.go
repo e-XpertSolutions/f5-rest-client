@@ -22,7 +22,7 @@ const DaemonLogSettingsICRDEndpoint = "/tm/sys/daemon-log-settings/icrd"
 
 // DaemonLogSettingsICRDResource provides an API to manage DaemonLogSettingsICRD configurations.
 type DaemonLogSettingsICRDResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DaemonLogSettingsICRD configurations.

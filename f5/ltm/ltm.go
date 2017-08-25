@@ -12,7 +12,7 @@ const BasePath = "mgmt/tm/ltm"
 
 // LTM implements a REST client for the F5 BigIP LTM API.
 type LTM struct {
-	c f5.Client
+	c *f5.Client
 
 	virtual     VirtualResource
 	rule        RuleResource
@@ -63,7 +63,7 @@ type LTM struct {
 }
 
 // New creates a new LTM client.
-func New(c f5.Client) LTM {
+func New(c *f5.Client) LTM {
 	return LTM{
 		c:           c,
 		virtual:     VirtualResource{c: c},

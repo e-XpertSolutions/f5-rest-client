@@ -22,7 +22,7 @@ const FailoverEndpoint = "/tm/sys/failover"
 
 // FailoverResource provides an API to manage Failover configurations.
 type FailoverResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Failover configurations.

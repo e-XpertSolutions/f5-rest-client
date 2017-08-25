@@ -22,7 +22,7 @@ const IPIntelligenceGlobalPolicyEndpoint = "/ip-intelligence/global-policy"
 
 // IPIntelligenceGlobalPolicyResource provides an API to manage IPIntelligenceGlobalPolicy configurations.
 type IPIntelligenceGlobalPolicyResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the IPIntelligenceGlobalPolicy configurations.

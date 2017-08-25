@@ -34,7 +34,7 @@ const MonitorWAPEndpoint = "/monitor/wap"
 
 // MonitorWAPResource provides an API to manage MonitorWAP configurations.
 type MonitorWAPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorWAP configurations.

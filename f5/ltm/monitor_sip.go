@@ -34,7 +34,7 @@ type MonitorSIPConfig struct {
 const MonitorSIPEndpoint = "/monitor/sip"
 
 type MonitorSIPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorSIPResource) ListAll() (*MonitorSIPConfigList, error) {

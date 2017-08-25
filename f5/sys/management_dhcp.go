@@ -29,7 +29,7 @@ const ManagementDHCPEndpoint = "/tm/sys/management-dhcp"
 
 // ManagementDHCPResource provides an API to manage ManagementDHCP configurations.
 type ManagementDHCPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ManagementDHCP configurations.

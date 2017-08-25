@@ -32,7 +32,7 @@ const IPFixElementEndpoint = "/tm/sys/ipfix/element"
 
 // IPFixElementResource provides an API to manage IPFixElement configurations.
 type IPFixElementResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the IPFixElement configurations.

@@ -22,7 +22,7 @@ const DataStorEndpoint = "/tm/sys/datastor"
 
 // DataStorResource provides an API to manage DataStor configurations.
 type DataStorResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DataStor configurations.

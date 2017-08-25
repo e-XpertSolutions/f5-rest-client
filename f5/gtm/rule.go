@@ -22,7 +22,7 @@ const RuleEndpoint = "/rule"
 
 // RuleResource provides an API to manage Rule configurations.
 type RuleResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Rule configurations.

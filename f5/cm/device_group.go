@@ -39,7 +39,7 @@ const DeviceGroupEndpoint = "/device-group"
 
 // A DeviceGroupResource provides API to manage DeviceGroups configuration.
 type DeviceGroupResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the DeviceGroup configurations.

@@ -9,7 +9,7 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 const BasePath = "mgmt/tm/gtm"
 
 type GTM struct {
-	c f5.Client
+	c *f5.Client
 
 	datacenter                      DatacenterResource
 	distributedApp                  DistributedAppResource
@@ -85,7 +85,7 @@ type GTM struct {
 }
 
 // New creates a new GTM client.
-func New(c f5.Client) GTM {
+func New(c *f5.Client) GTM {
 	return GTM{
 		c: c,
 

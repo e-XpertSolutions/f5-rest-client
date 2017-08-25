@@ -22,7 +22,7 @@ const DOSProfileApplicationEndpoint = "/dos/profile_application"
 
 // DOSProfileApplicationResource provides an API to manage DOSProfileApplication configurations.
 type DOSProfileApplicationResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DOSProfileApplication configurations.

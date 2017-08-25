@@ -36,7 +36,7 @@ const MonitorSIPEndpoint = "/monitor/sip"
 
 // MonitorSIPResource provides an API to manage MonitorSIP configurations.
 type MonitorSIPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorSIP configurations.

@@ -22,7 +22,7 @@ const GlobalSettingsGeneralEndpoint = "/global-settings/general"
 
 // GlobalSettingsGeneralResource provides an API to manage GlobalSettingsGeneral configurations.
 type GlobalSettingsGeneralResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the GlobalSettingsGeneral configurations.

@@ -31,7 +31,7 @@ type MonitorNoneConfig struct {
 const MonitorNoneEndpoint = "/monitor/none"
 
 type MonitorNoneResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorNoneResource) ListAll() (*MonitorNoneConfigList, error) {

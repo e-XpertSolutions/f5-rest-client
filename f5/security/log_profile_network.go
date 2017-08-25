@@ -22,7 +22,7 @@ const LogProfileNetworkEndpoint = "/log/profile_network"
 
 // LogProfileNetworkResource provides an API to manage LogProfileNetwork configurations.
 type LogProfileNetworkResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LogProfileNetwork configurations.

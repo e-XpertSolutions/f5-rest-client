@@ -22,7 +22,7 @@ const URLDBDownloadResultEndpoint = "/tm/sys/url-db/download-result"
 
 // URLDBDownloadResultResource provides an API to manage URLDBDownloadResult configurations.
 type URLDBDownloadResultResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the URLDBDownloadResult configurations.

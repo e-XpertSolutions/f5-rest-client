@@ -36,7 +36,7 @@ type MonitorICMPConfig struct {
 const MonitorICMPEndpoint = "/monitor/icmp"
 
 type MonitorICMPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorICMPResource) ListAll() (*MonitorICMPConfigList, error) {

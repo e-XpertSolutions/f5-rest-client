@@ -23,7 +23,7 @@ const VirtualDiskEndpoint = "/virtual-disk"
 
 // VirtualDiskResource provides an API to manage VirtualDisk configurations.
 type VirtualDiskResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the VirtualDisk configurations.

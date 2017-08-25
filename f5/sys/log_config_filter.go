@@ -22,7 +22,7 @@ const LogConfigFilterEndpoint = "/tm/sys/log-config/filter"
 
 // LogConfigFilterResource provides an API to manage LogConfigFilter configurations.
 type LogConfigFilterResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LogConfigFilter configurations.

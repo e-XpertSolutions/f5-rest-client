@@ -22,7 +22,7 @@ const ICallScriptEndpoint = "/tm/sys/icall/script"
 
 // ICallScriptResource provides an API to manage ICallScript configurations.
 type ICallScriptResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ICallScript configurations.

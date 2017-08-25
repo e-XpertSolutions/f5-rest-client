@@ -22,7 +22,7 @@ const RAIDEndpoint = "/tm/sys/raid"
 
 // RAIDResource provides an API to manage RAID configurations.
 type RAIDResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the RAID configurations.

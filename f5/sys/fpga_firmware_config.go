@@ -22,7 +22,7 @@ const FPGAFirmwareConfigEndpoint = "/tm/sys/fpga/firmware-config"
 
 // FPGAFirmwareConfigResource provides an API to manage FPGAFirmwareConfig configurations.
 type FPGAFirmwareConfigResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FPGAFirmwareConfig configurations.

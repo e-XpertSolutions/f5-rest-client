@@ -25,7 +25,7 @@ const AnalyticsEndpoint = "/analytics"
 
 // AnalyticsResource provides an API to manage Analytics configurations.
 type AnalyticsResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Analytics configurations.

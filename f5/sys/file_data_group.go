@@ -22,7 +22,7 @@ const FileDataGroupEndpoint = "/tm/sys/file/data-group"
 
 // FileDataGroupResource provides an API to manage FileDataGroup configurations.
 type FileDataGroupResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileDataGroup configurations.

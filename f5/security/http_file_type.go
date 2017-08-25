@@ -22,7 +22,7 @@ const HTTPFileTypeEndpoint = "/http/file-type"
 
 // HTTPFileTypeResource provides an API to manage HTTPFileType configurations.
 type HTTPFileTypeResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the HTTPFileType configurations.

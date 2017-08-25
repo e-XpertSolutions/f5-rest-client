@@ -22,7 +22,7 @@ const SoftwareBlockDeviceHotfixEndpoint = "/tm/sys/software/block-device-hotfix"
 
 // SoftwareBlockDeviceHotfixResource provides an API to manage SoftwareBlockDeviceHotfix configurations.
 type SoftwareBlockDeviceHotfixResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SoftwareBlockDeviceHotfix configurations.

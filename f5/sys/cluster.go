@@ -22,7 +22,7 @@ const ClusterEndpoint = "/tm/sys/cluster"
 
 // ClusterResource provides an API to manage Cluster configurations.
 type ClusterResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Cluster configurations.

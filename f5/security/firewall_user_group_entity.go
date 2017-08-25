@@ -22,7 +22,7 @@ const FirewallUserGroupEntityEndpoint = "/firewall/user-group-entity"
 
 // FirewallUserGroupEntityResource provides an API to manage FirewallUserGroupEntity configurations.
 type FirewallUserGroupEntityResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallUserGroupEntity configurations.

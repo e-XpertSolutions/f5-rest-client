@@ -22,7 +22,7 @@ const LTCFGInstanceEndpoint = "/tm/sys/ltcfg-instance"
 
 // LTCFGInstanceResource provides an API to manage LTCFGInstance configurations.
 type LTCFGInstanceResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LTCFGInstance configurations.

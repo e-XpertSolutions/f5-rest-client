@@ -38,7 +38,7 @@ const MonitorSNMPLinkEndpoint = "/monitor/snmp-link"
 
 // MonitorSNMPLinkResource provides an API to manage MonitorSNMPLink configurations.
 type MonitorSNMPLinkResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorSNMPLink configurations.

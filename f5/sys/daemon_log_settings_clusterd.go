@@ -22,7 +22,7 @@ const DaemonLogSettingsClusterdEndpoint = "/tm/sys/daemon-log-settings/clusterd"
 
 // DaemonLogSettingsClusterdResource provides an API to manage DaemonLogSettingsClusterd configurations.
 type DaemonLogSettingsClusterdResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DaemonLogSettingsClusterd configurations.

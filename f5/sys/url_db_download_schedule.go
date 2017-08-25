@@ -32,7 +32,7 @@ const URLDBDownloadScheduleEndpoint = "/tm/sys/url-db/download-schedule"
 
 // URLDBDownloadScheduleResource provides an API to manage URLDBDownloadSchedule configurations.
 type URLDBDownloadScheduleResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the URLDBDownloadSchedule configurations.

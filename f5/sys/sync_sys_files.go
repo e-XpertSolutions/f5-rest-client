@@ -22,7 +22,7 @@ const SyncSysFilesEndpoint = "/tm/sys/sync-sys-files"
 
 // SyncSysFilesResource provides an API to manage SyncSysFiles configurations.
 type SyncSysFilesResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SyncSysFiles configurations.

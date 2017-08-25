@@ -22,7 +22,7 @@ const NATPolicyEndpoint = "/nat/policy"
 
 // NATPolicyResource provides an API to manage NATPolicy configurations.
 type NATPolicyResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the NATPolicy configurations.

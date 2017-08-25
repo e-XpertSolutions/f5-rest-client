@@ -44,7 +44,7 @@ const CertEndpoint = "/cert"
 
 // A CertResource provides API to manage Certs configuration.
 type CertResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the Cert configurations.

@@ -22,7 +22,7 @@ const RestrictedModuleEndpoint = "/tm/sys/restricted-module"
 
 // RestrictedModuleResource provides an API to manage RestrictedModule configurations.
 type RestrictedModuleResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the RestrictedModule configurations.

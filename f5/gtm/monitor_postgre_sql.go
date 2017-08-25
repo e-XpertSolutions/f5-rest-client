@@ -35,7 +35,7 @@ const MonitorPostgreSQLEndpoint = "/monitor/postgresql"
 
 // MonitorPostgreSQLResource provides an API to manage MonitorPostgreSQL configurations.
 type MonitorPostgreSQLResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorPostgreSQL configurations.

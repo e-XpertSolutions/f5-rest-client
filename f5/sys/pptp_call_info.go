@@ -22,7 +22,7 @@ const PPTPCallInfoEndpoint = "/tm/sys/pptp-call-info"
 
 // PPTPCallInfoResource provides an API to manage PPTPCallInfo configurations.
 type PPTPCallInfoResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the PPTPCallInfo configurations.

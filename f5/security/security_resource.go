@@ -25,7 +25,7 @@ const SecurityEndpoint = ""
 
 // SecurityResource provides an API to manage Security configurations.
 type SecurityResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Security configurations.

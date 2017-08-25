@@ -22,7 +22,7 @@ const DistributedAppEndpoint = "/distributed-app"
 
 // DistributedAppResource provides an API to manage DistributedApp configurations.
 type DistributedAppResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DistributedApp configurations.

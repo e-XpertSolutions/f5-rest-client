@@ -22,7 +22,7 @@ const PoolMXMembersEndpoint = "/pool/mx_members"
 
 // PoolMXMembersResource provides an API to manage PoolMXMembers configurations.
 type PoolMXMembersResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the PoolMXMembers configurations.

@@ -22,7 +22,7 @@ const LTCFGInstanceFieldsEndpoint = "/tm/sys/ltcfg-instance_fields"
 
 // LTCFGInstanceFieldsResource provides an API to manage LTCFGInstanceFields configurations.
 type LTCFGInstanceFieldsResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LTCFGInstanceFields configurations.

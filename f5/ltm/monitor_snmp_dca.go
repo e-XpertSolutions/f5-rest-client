@@ -36,7 +36,7 @@ type MonitorSNMPDCAConfig struct {
 const MonitorSNMPDCAEndpoint = "/monitor/snmp-dca"
 
 type MonitorSNMPDCAResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorSNMPDCAResource) ListAll() (*MonitorSNMPDCAConfigList, error) {

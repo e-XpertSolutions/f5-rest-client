@@ -22,7 +22,7 @@ const VCMPEndpoint = ""
 
 // VCMPResource provides an API to manage VCMP configurations.
 type VCMPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the VCMP configurations.

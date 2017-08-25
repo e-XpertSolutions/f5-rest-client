@@ -22,7 +22,7 @@ const LogProtocolDNSStorageFieldEndpoint = "/log/protocol-dns-storage-field"
 
 // LogProtocolDNSStorageFieldResource provides an API to manage LogProtocolDNSStorageField configurations.
 type LogProtocolDNSStorageFieldResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LogProtocolDNSStorageField configurations.

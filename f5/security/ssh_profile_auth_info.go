@@ -22,7 +22,7 @@ const SSHProfileAuthInfoEndpoint = "/ssh/profile_auth-info"
 
 // SSHProfileAuthInfoResource provides an API to manage SSHProfileAuthInfo configurations.
 type SSHProfileAuthInfoResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SSHProfileAuthInfo configurations.

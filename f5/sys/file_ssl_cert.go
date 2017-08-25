@@ -59,7 +59,7 @@ const FileSSLCertEndpoint = "/file/ssl-cert"
 
 // FileSSLCertResource provides an API to manage FileSSLCert configurations.
 type FileSSLCertResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileSSLCert configurations.

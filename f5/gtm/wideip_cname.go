@@ -22,7 +22,7 @@ const WideipCnameEndpoint = "/wideip/cname"
 
 // WideipCnameResource provides an API to manage WideipCname configurations.
 type WideipCnameResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the WideipCname configurations.

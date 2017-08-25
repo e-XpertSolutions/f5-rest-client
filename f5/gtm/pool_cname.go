@@ -22,7 +22,7 @@ const PoolCNAMEEndpoint = "/pool/cname"
 
 // PoolCNAMEResource provides an API to manage PoolCNAME configurations.
 type PoolCNAMEResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the PoolCNAME configurations.

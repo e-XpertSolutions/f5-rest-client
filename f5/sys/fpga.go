@@ -25,7 +25,7 @@ const FPGAEndpoint = "/tm/sys/fpga"
 
 // FPGAResource provides an API to manage FPGA configurations.
 type FPGAResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FPGA configurations.

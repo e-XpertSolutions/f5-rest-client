@@ -30,7 +30,7 @@ const IPIntelligenseBlacklistCategoryEndpoint = "/ip-intelligence/blacklist-cate
 
 // IPIntelligenseBlacklistCategoryResource provides an API to manage IPIntelligenseBlacklistCategory configurations.
 type IPIntelligenseBlacklistCategoryResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the IPIntelligenseBlacklistCategory configurations.

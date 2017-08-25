@@ -22,7 +22,7 @@ const BlacklistPublisherCategoryEndpoint = "/blacklist-publisher/category"
 
 // BlacklistPublisherCategoryResource provides an API to manage BlacklistPublisherCategory configurations.
 type BlacklistPublisherCategoryResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the BlacklistPublisherCategory configurations.

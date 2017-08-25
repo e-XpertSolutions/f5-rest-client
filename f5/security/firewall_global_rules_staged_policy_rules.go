@@ -22,7 +22,7 @@ const FirewallGlobalRulesStagedPolicyRulesEndpoint = "/firewall/global-rules_sta
 
 // FirewallGlobalRulesStagedPolicyRulesResource provides an API to manage FirewallGlobalRulesStagedPolicyRules configurations.
 type FirewallGlobalRulesStagedPolicyRulesResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallGlobalRulesStagedPolicyRules configurations.

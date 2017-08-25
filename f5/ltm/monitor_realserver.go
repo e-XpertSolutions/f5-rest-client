@@ -31,7 +31,7 @@ type MonitorRealServerConfig struct {
 const MonitorRealServerEndpoint = "/monitor/real-server"
 
 type MonitorRealServerResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorRealServerResource) ListAll() (*MonitorRealServerConfigList, error) {

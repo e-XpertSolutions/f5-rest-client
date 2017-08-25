@@ -22,7 +22,7 @@ const ApplicationCustomStatEndpoint = "/tm/sys/application/custom-stat"
 
 // ApplicationCustomStatResource provides an API to manage ApplicationCustomStat configurations.
 type ApplicationCustomStatResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ApplicationCustomStat configurations.

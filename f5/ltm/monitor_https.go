@@ -41,7 +41,7 @@ type MonitorHTTPSConfig struct {
 const MonitorHTTPSEndpoint = "/monitor/https"
 
 type MonitorHTTPSResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorHTTPSResource) ListAll() (*MonitorHTTPSConfigList, error) {

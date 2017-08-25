@@ -22,7 +22,7 @@ const ManagementOVSDBEndpoint = "/tm/sys/management-ovsdb"
 
 // ManagementOVSDBResource provides an API to manage ManagementOVSDB configurations.
 type ManagementOVSDBResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ManagementOVSDB configurations.

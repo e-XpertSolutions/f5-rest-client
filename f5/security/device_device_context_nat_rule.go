@@ -22,7 +22,7 @@ const DeviceDeviceContextNATRuleEndpoint = "/device/device-context_nat-rules"
 
 // DeviceDeviceContextNATRuleResource provides an API to manage DeviceDeviceContextNATRule configurations.
 type DeviceDeviceContextNATRuleResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DeviceDeviceContextNATRule configurations.

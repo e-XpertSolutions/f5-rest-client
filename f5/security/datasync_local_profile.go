@@ -37,7 +37,7 @@ const DatasyncLocalProfileEndpoint = "/datasync/local-profile"
 
 // DatasyncLocalProfileResource provides an API to manage DatasyncLocalProfile configurations.
 type DatasyncLocalProfileResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DatasyncLocalProfile configurations.

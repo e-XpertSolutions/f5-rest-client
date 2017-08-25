@@ -25,7 +25,7 @@ const DatasyncEndpoint = "/datasync"
 
 // DatasyncResource provides an API to manage Datasync configurations.
 type DatasyncResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Datasync configurations.

@@ -25,7 +25,7 @@ const DOSEndpoint = "/dos"
 
 // DOSResource provides an API to manage DOS configurations.
 type DOSResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DOS configurations.

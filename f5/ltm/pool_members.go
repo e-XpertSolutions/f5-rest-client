@@ -48,7 +48,7 @@ const PoolMembersEndpoint = "/pool_members"
 
 // PoolMembersResource provides an API to manage pool members configuration.
 type PoolMembersResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the pool members configurations.

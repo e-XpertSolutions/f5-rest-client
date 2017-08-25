@@ -22,7 +22,7 @@ const SSHSSHPluginStatsEndpoint = "/ssh/sshplugin-stats"
 
 // SSHSSHPluginStatsResource provides an API to manage SSHSSHPluginStats configurations.
 type SSHSSHPluginStatsResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SSHSSHPluginStats configurations.

@@ -22,7 +22,7 @@ const CryptoCRLEndpoint = "/tm/sys/crypto/crl"
 
 // CryptoCRLResource provides an API to manage CryptoCRL configurations.
 type CryptoCRLResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the CryptoCRL configurations.

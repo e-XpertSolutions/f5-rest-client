@@ -22,7 +22,7 @@ const DNSEndpoint = "/dns"
 
 // DNSResource provides an API to manage DNS configurations.
 type DNSResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DNS configurations.

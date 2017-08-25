@@ -36,7 +36,7 @@ const MonitorRealServerEndpoint = "/monitor/real-server"
 
 // MonitorRealServerResource provides an API to manage MonitorRealServer configurations.
 type MonitorRealServerResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorRealServer configurations.

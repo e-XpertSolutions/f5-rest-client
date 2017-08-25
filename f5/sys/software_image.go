@@ -35,7 +35,7 @@ const SoftwareImageEndpoint = "/tm/sys/software/image"
 
 // SoftwareImageResource provides an API to manage SoftwareImage configurations.
 type SoftwareImageResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SoftwareImage configurations.

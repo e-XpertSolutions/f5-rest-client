@@ -22,7 +22,7 @@ const HealthEndpoint = "/health"
 
 // HealthResource provides an API to manage Health configurations.
 type HealthResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Health configurations.

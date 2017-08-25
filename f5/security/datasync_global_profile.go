@@ -41,7 +41,7 @@ const DatasyncGlobalProfileEndpoint = "/datasync/global-profile"
 
 // DatasyncGlobalProfileResource provides an API to manage DatasyncGlobalProfile configurations.
 type DatasyncGlobalProfileResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DatasyncGlobalProfile configurations.

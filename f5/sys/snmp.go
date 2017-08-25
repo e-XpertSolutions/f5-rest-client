@@ -22,7 +22,7 @@ const SNMPEndpoint = "/tm/sys/snmp"
 
 // SNMPResource provides an API to manage SNMP configurations.
 type SNMPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SNMP configurations.

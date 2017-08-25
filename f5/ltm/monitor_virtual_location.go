@@ -29,7 +29,7 @@ type MonitorVirtualLocationConfig struct {
 const MonitorVirtualLocationEndpoint = "/monitor/virtual-location"
 
 type MonitorVirtualLocationResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorVirtualLocationResource) ListAll() (*MonitorVirtualLocationConfigList, error) {

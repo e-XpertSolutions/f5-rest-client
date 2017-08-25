@@ -35,7 +35,7 @@ const MonitorMySQLEndpoint = "/monitor/mysql"
 
 // MonitorMySQLResource provides an API to manage MonitorMySQL configurations.
 type MonitorMySQLResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorMySQL configurations.

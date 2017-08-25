@@ -22,7 +22,7 @@ const SoftwareUpdateStatusEndpoint = "/tm/sys/software/update-status"
 
 // SoftwareUpdateStatusResource provides an API to manage SoftwareUpdateStatus configurations.
 type SoftwareUpdateStatusResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SoftwareUpdateStatus configurations.

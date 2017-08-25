@@ -31,7 +31,7 @@ type MonitorSMBConfig struct {
 const MonitorSMBEndpoint = "/monitor/smb"
 
 type MonitorSMBResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorSMBResource) ListAll() (*MonitorSMBConfigList, error) {

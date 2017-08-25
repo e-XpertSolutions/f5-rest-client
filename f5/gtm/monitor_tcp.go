@@ -35,7 +35,7 @@ const MonitorTCPEndpoint = "/monitor/tcp"
 
 // MonitorTCPResource provides an API to manage MonitorTCP configurations.
 type MonitorTCPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorTCP configurations.

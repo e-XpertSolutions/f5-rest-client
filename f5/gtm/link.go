@@ -22,7 +22,7 @@ const LinkEndpoint = "/link"
 
 // LinkResource provides an API to manage Link configurations.
 type LinkResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Link configurations.

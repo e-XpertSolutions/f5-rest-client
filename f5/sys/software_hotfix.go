@@ -34,7 +34,7 @@ const SoftwareHotfixEndpoint = "/tm/sys/software/hotfix"
 
 // SoftwareHotfixResource provides an API to manage SoftwareHotfix configurations.
 type SoftwareHotfixResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SoftwareHotfix configurations.

@@ -22,7 +22,7 @@ const DatasyncDeviceStatsEndpoint = "/datasync/device-stats"
 
 // DatasyncDeviceStatsResource provides an API to manage DatasyncDeviceStats configurations.
 type DatasyncDeviceStatsResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DatasyncDeviceStats configurations.

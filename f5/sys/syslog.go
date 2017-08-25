@@ -45,7 +45,7 @@ const SyslogEndpoint = "/syslog"
 
 // SyslogResource provides an API to manage Syslog configurations.
 type SyslogResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // Show the Syslog configuration.

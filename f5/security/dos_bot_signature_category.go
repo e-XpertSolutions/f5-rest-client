@@ -22,7 +22,7 @@ const DOSBotSignatureCategoryEndpoint = "/dos/bot-signature-category"
 
 // DOSBotSignatureCategoryResource provides an API to manage DOSBotSignatureCategory configurations.
 type DOSBotSignatureCategoryResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DOSBotSignatureCategory configurations.

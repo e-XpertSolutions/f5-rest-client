@@ -22,7 +22,7 @@ const NATSourceTranslationEndpoint = "/nat/source-translation"
 
 // NATSourceTranslationResource provides an API to manage NATSourceTranslation configurations.
 type NATSourceTranslationResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the NATSourceTranslation configurations.

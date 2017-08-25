@@ -22,7 +22,7 @@ const DaemonLogSettingsTMMEndpoint = "/tm/sys/daemon-log-settings/tmm"
 
 // DaemonLogSettingsTMMResource provides an API to manage DaemonLogSettingsTMM configurations.
 type DaemonLogSettingsTMMResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DaemonLogSettingsTMM configurations.

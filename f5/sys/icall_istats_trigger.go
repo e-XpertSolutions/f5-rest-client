@@ -22,7 +22,7 @@ const ICallIStatsTriggerEndpoint = "/tm/sys/icall/istats-trigger"
 
 // ICallIStatsTriggerResource provides an API to manage ICallIStatsTrigger configurations.
 type ICallIStatsTriggerResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ICallIStatsTrigger configurations.

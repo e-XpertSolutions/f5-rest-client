@@ -22,7 +22,7 @@ const FileDeviceCapabilitiesDBEndpoint = "/tm/sys/file/device-capabilities-db"
 
 // FileDeviceCapabilitiesDBResource provides an API to manage FileDeviceCapabilitiesDB configurations.
 type FileDeviceCapabilitiesDBResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileDeviceCapabilitiesDB configurations.

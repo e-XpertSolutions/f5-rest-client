@@ -27,7 +27,7 @@ const ManagementIPEndpoint = "/tm/sys/management-ip"
 
 // ManagementIPResource provides an API to manage ManagementIP configurations.
 type ManagementIPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ManagementIP configurations.

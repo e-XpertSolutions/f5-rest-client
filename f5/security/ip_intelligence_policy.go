@@ -31,7 +31,7 @@ const IPIntelligencePolicyEndpoint = "/ip-intelligence/policy"
 
 // IPIntelligencePolicyResource provides an API to manage IPIntelligencePolicy configurations.
 type IPIntelligencePolicyResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the IPIntelligencePolicy configurations.

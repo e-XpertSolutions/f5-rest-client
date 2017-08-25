@@ -38,7 +38,7 @@ const MonitorSNMPEndpoint = "/monitor/snmp"
 
 // MonitorSNMPResource provides an API to manage MonitorSNMP configurations.
 type MonitorSNMPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorSNMP configurations.

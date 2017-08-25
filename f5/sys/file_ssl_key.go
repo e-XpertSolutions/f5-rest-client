@@ -49,7 +49,7 @@ const FileSSLKeyEndpoint = "/file/ssl-key"
 
 // FileSSLKeyResource provides an API to manage FileSSLKey configurations.
 type FileSSLKeyResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileSSLKey configurations.

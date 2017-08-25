@@ -22,7 +22,7 @@ const ProberPoolMembersEndpoint = "/prober-pool_members"
 
 // ProberPoolMembersResource provides an API to manage ProberPoolMembers configurations.
 type ProberPoolMembersResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ProberPoolMembers configurations.

@@ -9,7 +9,7 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 const BasePath = "mgmt/tm/sys"
 
 type Sys struct {
-	c f5.Client
+	c *f5.Client
 
 	aOM                                 AOMResource
 	alert                               AlertResource
@@ -141,7 +141,7 @@ type Sys struct {
 	uRLDBURLCategory                    URLDBURLCategoryResource
 }
 
-func New(c f5.Client) Sys {
+func New(c *f5.Client) Sys {
 	return Sys{
 		c: c,
 

@@ -35,7 +35,7 @@ const MonitorFTPEndpoint = "/monitor/ftp"
 
 // MonitorFTPResource provides an API to manage MonitorFTP configurations.
 type MonitorFTPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorFTP configurations.

@@ -22,7 +22,7 @@ const PoolNAPTRMembersEndpoint = "/pool/naptr_members"
 
 // PoolNAPTRMembersResource provides an API to manage PoolNAPTRMembers configurations.
 type PoolNAPTRMembersResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the PoolNAPTRMembers configurations.

@@ -22,7 +22,7 @@ const DatacenterEndpoint = "/datacenter"
 
 // DatacenterResource provides an API to manage Datacenter configurations.
 type DatacenterResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Datacenter configurations.

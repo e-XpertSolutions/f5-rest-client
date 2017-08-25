@@ -31,7 +31,7 @@ type MonitorTCPHalfOpenConfig struct {
 const MonitorTCPHalfOpenEndpoint = "/monitor/tcp-half-open"
 
 type MonitorTCPHalfOpenResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorTCPHalfOpenResource) ListAll() (*MonitorTCPHalfOpenConfigList, error) {

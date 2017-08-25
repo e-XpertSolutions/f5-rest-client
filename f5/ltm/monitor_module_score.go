@@ -32,7 +32,7 @@ type MonitorModuleScoreConfig struct {
 const MonitorModuleScoreEndpoint = "/monitor/module-score"
 
 type MonitorModuleScoreResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorModuleScoreResource) ListAll() (*MonitorModuleScoreConfigList, error) {

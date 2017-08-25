@@ -22,7 +22,7 @@ const DaemonLogSettingsMCPDEndpoint = "/tm/sys/daemon-log-settings/mcpd"
 
 // DaemonLogSettingsMCPDResource provides an API to manage DaemonLogSettingsMCPD configurations.
 type DaemonLogSettingsMCPDResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DaemonLogSettingsMCPD configurations.

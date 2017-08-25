@@ -35,7 +35,7 @@ const MonitorIMAPEndpoint = "/monitor/imap"
 
 // MonitorIMAPResource provides an API to manage MonitorIMAP configurations.
 type MonitorIMAPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorIMAP configurations.

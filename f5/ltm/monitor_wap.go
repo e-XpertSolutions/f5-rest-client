@@ -31,7 +31,7 @@ type MonitorWAPConfig struct {
 const MonitorWAPEndpoint = "/monitor/wap"
 
 type MonitorWAPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorWAPResource) ListAll() (*MonitorWAPConfigList, error) {

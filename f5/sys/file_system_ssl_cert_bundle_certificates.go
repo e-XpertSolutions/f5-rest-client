@@ -22,7 +22,7 @@ const FileSystemSSLCertBundleCertificatesEndpoint = "/tm/sys/file/system-ssl-cer
 
 // FileSystemSSLCertBundleCertificatesResource provides an API to manage FileSystemSSLCertBundleCertificates configurations.
 type FileSystemSSLCertBundleCertificatesResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileSystemSSLCertBundleCertificates configurations.

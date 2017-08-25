@@ -25,7 +25,7 @@ const DiskEndpoint = "/tm/sys/disk"
 
 // DiskResource provides an API to manage Disk configurations.
 type DiskResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Disk configurations.

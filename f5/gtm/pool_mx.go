@@ -22,7 +22,7 @@ const PoolMXEndpoint = "/pool/mx"
 
 // PoolMXResource provides an API to manage PoolMX configurations.
 type PoolMXResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the PoolMX configurations.

@@ -22,7 +22,7 @@ const PersistEndpoint = "/persist"
 
 // PersistResource provides an API to manage Persist configurations.
 type PersistResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Persist configurations.

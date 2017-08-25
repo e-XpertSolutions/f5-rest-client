@@ -37,7 +37,7 @@ const ApplicationTemplateEndpoint = "/tm/sys/application/template"
 
 // ApplicationTemplateResource provides an API to manage ApplicationTemplate configurations.
 type ApplicationTemplateResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ApplicationTemplate configurations.

@@ -28,7 +28,7 @@ type MonitorInbandConfig struct {
 const MonitorInbandEndpoint = "/monitor/inband"
 
 type MonitorInbandResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorInbandResource) ListAll() (*MonitorInbandConfigList, error) {

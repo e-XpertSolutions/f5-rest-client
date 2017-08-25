@@ -40,7 +40,7 @@ const SelfEndpoint = "/self"
 
 // A SelfResource provides API to manage self ip configuration.
 type SelfResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the self ip configurations.

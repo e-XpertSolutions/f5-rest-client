@@ -22,7 +22,7 @@ const SSHProfileRulesEndpoint = "/ssh/profile_rules"
 
 // SSHProfileRulesResource provides an API to manage SSHProfileRules configurations.
 type SSHProfileRulesResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SSHProfileRules configurations.

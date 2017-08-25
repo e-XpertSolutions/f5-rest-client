@@ -31,7 +31,7 @@ const DBEndpoint = "/tm/sys/db"
 
 // DBResource provides an API to manage DB configurations.
 type DBResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DB configurations.

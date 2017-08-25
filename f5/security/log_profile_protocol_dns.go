@@ -22,7 +22,7 @@ const LogProfileProtocolDNSEndpoint = "/log/profile_protocol-dns"
 
 // LogProfileProtocolDNSResource provides an API to manage LogProfileProtocolDNS configurations.
 type LogProfileProtocolDNSResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LogProfileProtocolDNS configurations.

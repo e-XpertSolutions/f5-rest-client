@@ -25,7 +25,7 @@ const AntiFraudEndpoint = "/anti-fraud"
 
 // AntiFraudResource provides an API to manage AntiFraud configurations.
 type AntiFraudResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the AntiFraud configurations.

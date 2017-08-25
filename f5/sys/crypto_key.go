@@ -30,7 +30,7 @@ const CryptoKeyEndpoint = "/tm/sys/crypto/key"
 
 // CryptoKeyResource provides an API to manage CryptoKey configurations.
 type CryptoKeyResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the CryptoKey configurations.

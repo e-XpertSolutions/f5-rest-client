@@ -22,7 +22,7 @@ const FileSSLCSREndpoint = "/tm/sys/file/ssl-csr"
 
 // FileSSLCSRResource provides an API to manage FileSSLCSR configurations.
 type FileSSLCSRResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileSSLCSR configurations.

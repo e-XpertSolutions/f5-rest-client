@@ -22,7 +22,7 @@ const DatasyncUpdateFileEndpoint = "/datasync/update-file"
 
 // DatasyncUpdateFileResource provides an API to manage DatasyncUpdateFile configurations.
 type DatasyncUpdateFileResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DatasyncUpdateFile configurations.

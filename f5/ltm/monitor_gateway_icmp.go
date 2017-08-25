@@ -36,7 +36,7 @@ type MonitorGatewayICMPConfig struct {
 const MonitorGatewayICMPEndpoint = "/monitor/gateway-icmp"
 
 type MonitorGatewayICMPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorGatewayICMPResource) ListAll() (*MonitorGatewayICMPConfigList, error) {

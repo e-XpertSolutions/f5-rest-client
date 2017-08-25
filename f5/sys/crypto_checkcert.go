@@ -22,7 +22,7 @@ const CryptoCheckCertEndpoint = "/tm/sys/crypto/check-cert"
 
 // CryptoCheckCertResource provides an API to manage CryptoCheckCert configurations.
 type CryptoCheckCertResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the CryptoCheckCert configurations.

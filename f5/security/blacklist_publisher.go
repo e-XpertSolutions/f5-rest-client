@@ -22,7 +22,7 @@ const BlacklistPublisherEndpoint = "/blacklist-publisher"
 
 // BlacklistPublisherResource provides an API to manage BlacklistPublisher configurations.
 type BlacklistPublisherResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the BlacklistPublisher configurations.

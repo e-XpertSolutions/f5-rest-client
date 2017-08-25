@@ -31,7 +31,7 @@ type MonitorNNTPConfig struct {
 const MonitorNNTPEndpoint = "/monitor/nntp"
 
 type MonitorNNTPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorNNTPResource) ListAll() (*MonitorNNTPConfigList, error) {

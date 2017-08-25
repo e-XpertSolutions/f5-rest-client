@@ -22,7 +22,7 @@ const FirewallScheduleEndpoint = "/firewall/schedule"
 
 // FirewallScheduleResource provides an API to manage FirewallSchedule configurations.
 type FirewallScheduleResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallSchedule configurations.

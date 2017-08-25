@@ -34,7 +34,7 @@ const MonitorNNTPEndpoint = "/monitor/nntp"
 
 // MonitorNNTPResource provides an API to manage MonitorNNTP configurations.
 type MonitorNNTPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorNNTP configurations.

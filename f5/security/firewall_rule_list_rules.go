@@ -22,7 +22,7 @@ const FirewallRuleListRulesEndpoint = "/firewall/rule-list_rules"
 
 // FirewallRuleListRulesResource provides an API to manage FirewallRuleListRules configurations.
 type FirewallRuleListRulesResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallRuleListRules configurations.

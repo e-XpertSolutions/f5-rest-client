@@ -22,7 +22,7 @@ const CryptoPKCS12Endpoint = "/tm/sys/crypto/pkcs12"
 
 // CryptoPKCS12Resource provides an API to manage CryptoPKCS12 configurations.
 type CryptoPKCS12Resource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the CryptoPKCS12 configurations.

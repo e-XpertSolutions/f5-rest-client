@@ -22,7 +22,7 @@ const OutboundSMTPEndpoint = "/tm/sys/outbound-smtp"
 
 // OutboundSMTPResource provides an API to manage OutboundSMTP configurations.
 type OutboundSMTPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the OutboundSMTP configurations.

@@ -25,7 +25,7 @@ const SoftwareEndpoint = "/tm/sys/software"
 
 // SoftwareResource provides an API to manage Software configurations.
 type SoftwareResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Software configurations.

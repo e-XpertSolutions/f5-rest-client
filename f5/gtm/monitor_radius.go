@@ -34,7 +34,7 @@ const MonitorRadiusEndpoint = "/monitor/radius"
 
 // MonitorRadiusResource provides an API to manage MonitorRadius configurations.
 type MonitorRadiusResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorRadius configurations.

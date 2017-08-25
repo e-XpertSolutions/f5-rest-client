@@ -31,7 +31,7 @@ const ProvisionEndpoint = "/tm/sys/provision"
 
 // ProvisionResource provides an API to manage Provision configurations.
 type ProvisionResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Provision configurations.

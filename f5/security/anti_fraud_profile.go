@@ -142,7 +142,7 @@ const AntiFraudProfileEndpoint = "/anti-fraud/profile"
 
 // AntiFraudProfileResource provides an API to manage AntiFraudProfile configurations.
 type AntiFraudProfileResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the AntiFraudProfile configurations.

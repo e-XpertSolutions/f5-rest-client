@@ -48,7 +48,7 @@ const TrustDomainEndpoint = "/trust-domain"
 
 // A TrustDomainResource provides API to manage TrustDomains configuration.
 type TrustDomainResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the TrustDomain configurations.

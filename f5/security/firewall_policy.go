@@ -22,7 +22,7 @@ const FirewallPolicyEndpoint = "/firewall/policy"
 
 // FirewallPolicyResource provides an API to manage FirewallPolicy configurations.
 type FirewallPolicyResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallPolicy configurations.

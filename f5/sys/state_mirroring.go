@@ -22,7 +22,7 @@ const StateMirroringEndpoint = "/tm/sys/state-mirroring"
 
 // StateMirroringResource provides an API to manage StateMirroring configurations.
 type StateMirroringResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the StateMirroring configurations.

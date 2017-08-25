@@ -32,7 +32,7 @@ type MonitorDiameterConfig struct {
 const MonitorDiameterEndpoint = "/monitor/diameter"
 
 type MonitorDiameterResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorDiameterResource) ListAll() (*MonitorDiameterConfigList, error) {

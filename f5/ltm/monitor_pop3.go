@@ -31,7 +31,7 @@ type MonitorPOP3Config struct {
 const MonitorPOP3Endpoint = "/monitor/pop3"
 
 type MonitorPOP3Resource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorPOP3Resource) ListAll() (*MonitorPOP3ConfigList, error) {

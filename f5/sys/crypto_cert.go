@@ -35,7 +35,7 @@ const CryptoCertEndpoint = "/tm/sys/crypto/cert"
 
 // CryptoCertResource provides an API to manage CryptoCert configurations.
 type CryptoCertResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the CryptoCert configurations.

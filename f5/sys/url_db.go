@@ -25,7 +25,7 @@ const URLDBEndpoint = "/tm/sys/url-db"
 
 // URLDBResource provides an API to manage URLDB configurations.
 type URLDBResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the URLDB configurations.

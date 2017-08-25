@@ -22,7 +22,7 @@ const AlertLCDEndpoint = "/tm/sys/alert/lcd"
 
 // AlertLCDResource provides an API to manage AlertLCD configurations.
 type AlertLCDResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the AlertLCD configurations.

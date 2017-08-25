@@ -39,7 +39,7 @@ const MonitorUDPEndpoint = "/monitor/udp"
 
 // MonitorUDPResource provides an API to manage MonitorUDP configurations.
 type MonitorUDPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorUDP configurations.

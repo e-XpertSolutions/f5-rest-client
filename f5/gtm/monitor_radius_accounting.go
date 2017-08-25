@@ -34,7 +34,7 @@ const MonitorRadiusAccountingEndpoint = "/monitor/radius-accounting"
 
 // MonitorRadiusAccountingResource provides an API to manage MonitorRadiusAccounting configurations.
 type MonitorRadiusAccountingResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorRadiusAccounting configurations.

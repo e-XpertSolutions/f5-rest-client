@@ -22,7 +22,7 @@ const FirewallOnDemandRuleDeployEndpoint = "/firewall/on-demand-rule-deploy"
 
 // FirewallOnDemandRuleDeployResource provides an API to manage FirewallOnDemandRuleDeploy configurations.
 type FirewallOnDemandRuleDeployResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallOnDemandRuleDeploy configurations.

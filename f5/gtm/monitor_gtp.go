@@ -36,7 +36,7 @@ const MonitorGTPEndpoint = "/monitor/gtp"
 
 // MonitorGTPResource provides an API to manage MonitorGTP configurations.
 type MonitorGTPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorGTP configurations.

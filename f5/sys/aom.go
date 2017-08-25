@@ -22,7 +22,7 @@ const AOMEndpoint = "/tm/sys/aom"
 
 // AOMResource provides an API to manage AOM configurations.
 type AOMResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the AOM configurations.

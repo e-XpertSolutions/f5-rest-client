@@ -22,7 +22,7 @@ const FPGAInfoEndpoint = "/tm/sys/fpga/info"
 
 // FPGAInfoResource provides an API to manage FPGAInfo configurations.
 type FPGAInfoResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FPGAInfo configurations.

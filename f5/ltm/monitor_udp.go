@@ -39,7 +39,7 @@ type MonitorUDPConfig struct {
 const MonitorUDPEndpoint = "/monitor/udp"
 
 type MonitorUDPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorUDPResource) ListAll() (*MonitorUDPConfigList, error) {

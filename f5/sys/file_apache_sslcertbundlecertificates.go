@@ -22,7 +22,7 @@ const FileApacheSSLCertBundleCertificatesEndpoint = "/tm/sys/file/apache-ssl-cer
 
 // FileApacheSSLCertBundleCertificatesResource provides an API to manage FileApacheSSLCertBundleCertificates configurations.
 type FileApacheSSLCertBundleCertificatesResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileApacheSSLCertBundleCertificates configurations.

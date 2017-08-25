@@ -22,7 +22,7 @@ const FirewallFQDNEntityEndpoint = "/firewall/fqdn-entity"
 
 // FirewallFQDNEntityResource provides an API to manage FirewallFQDNEntity configurations.
 type FirewallFQDNEntityResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallFQDNEntity configurations.

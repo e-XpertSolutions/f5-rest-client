@@ -22,7 +22,7 @@ const DOSNetworkWhitelistEndpoint = "/dos/network-whitelist"
 
 // DOSNetworkWhitelistResource provides an API to manage DOSNetworkWhitelist configurations.
 type DOSNetworkWhitelistResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DOSNetworkWhitelist configurations.

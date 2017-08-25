@@ -22,7 +22,7 @@ const FirewallAddressListEndpoint = "/firewall/address-list"
 
 // FirewallAddressListResource provides an API to manage FirewallAddressList configurations.
 type FirewallAddressListResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallAddressList configurations.

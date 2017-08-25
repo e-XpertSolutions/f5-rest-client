@@ -25,7 +25,7 @@ const FirewallEndpoint = "/firewall"
 
 // FirewallResource provides an API to manage Firewall configurations.
 type FirewallResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Firewall configurations.

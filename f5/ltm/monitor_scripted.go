@@ -31,7 +31,7 @@ type MonitorScriptedConfig struct {
 const MonitorScriptedEndpoint = "/monitor/scripted"
 
 type MonitorScriptedResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorScriptedResource) ListAll() (*MonitorScriptedConfigList, error) {

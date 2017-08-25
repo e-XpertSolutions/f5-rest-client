@@ -22,7 +22,7 @@ const LTCFGClassFieldsEndpoint = "/tm/sys/ltcfg-class_fields"
 
 // LTCFGClassFieldsResource provides an API to manage LTCFGClassFields configurations.
 type LTCFGClassFieldsResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LTCFGClassFields configurations.

@@ -30,7 +30,7 @@ const FileSSLCRLEndpoint = "/file/ssl-crl"
 
 // FileSSLCRLResource provides an API to manage FileSSLCRL configurations.
 type FileSSLCRLResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileSSLCRL configurations.

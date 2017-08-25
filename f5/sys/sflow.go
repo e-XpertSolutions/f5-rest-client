@@ -25,7 +25,7 @@ const SFlowEndpoint = "/tm/sys/sflow"
 
 // SFlowResource provides an API to manage SFlow configurations.
 type SFlowResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SFlow configurations.

@@ -31,7 +31,7 @@ const RouteEndpoint = "/route"
 
 // A RouteResource provides API to manage routes configuration.
 type RouteResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the route configurations.

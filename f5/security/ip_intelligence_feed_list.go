@@ -22,7 +22,7 @@ const IPIntelligenceFeedListEndpoint = "/ip-intelligence/feed-list"
 
 // IPIntelligenceFeedListResource provides an API to manage IPIntelligenceFeedList configurations.
 type IPIntelligenceFeedListResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the IPIntelligenceFeedList configurations.

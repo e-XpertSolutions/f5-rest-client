@@ -22,7 +22,7 @@ const GlobalSettingsLoadBalancingEndpoint = "/global-settings/load-balancing"
 
 // GlobalSettingsLoadBalancingResource provides an API to manage GlobalSettingsLoadBalancing configurations.
 type GlobalSettingsLoadBalancingResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the GlobalSettingsLoadBalancing configurations.

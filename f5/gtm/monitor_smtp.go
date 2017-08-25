@@ -34,7 +34,7 @@ const MonitorSMTPEndpoint = "/monitor/smtp"
 
 // MonitorSMTPResource provides an API to manage MonitorSMTP configurations.
 type MonitorSMTPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorSMTP configurations.

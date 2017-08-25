@@ -11,7 +11,7 @@ const BasePath = "mgmt/tm/vcmp"
 
 // VCMP implements a REST client for the F5 BigIP VCMP API.
 type VCMP struct {
-	c f5.Client
+	c *f5.Client
 
 	guest               GuestResource
 	health              HealthResource
@@ -22,7 +22,7 @@ type VCMP struct {
 }
 
 // New creates a new VCMP client.
-func New(c f5.Client) VCMP {
+func New(c *f5.Client) VCMP {
 	return VCMP{
 		c: c,
 

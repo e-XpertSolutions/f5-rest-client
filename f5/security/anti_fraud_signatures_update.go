@@ -22,7 +22,7 @@ const AntiFraudSignaturesUpdateEndpoint = "/anti-fraud/signatures-update"
 
 // AntiFraudSignaturesUpdateResource provides an API to manage AntiFraudSignaturesUpdate configurations.
 type AntiFraudSignaturesUpdateResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the AntiFraudSignaturesUpdate configurations.

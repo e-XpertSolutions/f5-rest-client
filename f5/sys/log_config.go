@@ -25,7 +25,7 @@ const LogConfigEndpoint = "/tm/sys/log-config"
 
 // LogConfigResource provides an API to manage LogConfig configurations.
 type LogConfigResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LogConfig configurations.

@@ -36,7 +36,7 @@ const MonitorICMPEndpoint = "/monitor/gateway-icmp"
 
 // MonitorICMPResource provides an API to manage MonitorICMP configurations.
 type MonitorICMPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorICMP configurations.

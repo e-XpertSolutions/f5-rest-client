@@ -22,7 +22,7 @@ const GlobalSettingsMetricsExclusionsEndpoint = "/global-settings/metrics-exclus
 
 // GlobalSettingsMetricsExclusionsResource provides an API to manage GlobalSettingsMetricsExclusions configurations.
 type GlobalSettingsMetricsExclusionsResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the GlobalSettingsMetricsExclusions configurations.

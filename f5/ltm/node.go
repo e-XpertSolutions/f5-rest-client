@@ -40,7 +40,7 @@ type NodeConfig struct {
 const NodeEndpoint = "/node"
 
 type NodeResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (nr *NodeResource) ListAll() (*NodeConfigList, error) {

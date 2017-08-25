@@ -22,7 +22,7 @@ const PoolAAAAEndpoint = "/pool/aaaa"
 
 // PoolAAAAResource provides an API to manage PoolAAAA configurations.
 type PoolAAAAResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the PoolAAAA configurations.

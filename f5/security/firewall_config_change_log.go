@@ -22,7 +22,7 @@ const FirewallConfigChangeLogEndpoint = "/firewall/config-change-log"
 
 // FirewallConfigChangeLogResource provides an API to manage FirewallConfigChangeLog configurations.
 type FirewallConfigChangeLogResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallConfigChangeLog configurations.

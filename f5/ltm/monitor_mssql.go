@@ -18,7 +18,7 @@ type MonitorMSSQLConfig struct {
 const MonitorMSSQLEndpoint = "/monitor/mssql"
 
 type MonitorMSSQLResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorMSSQLResource) ListAll() (*MonitorMSSQLConfigList, error) {

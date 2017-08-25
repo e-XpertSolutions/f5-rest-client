@@ -22,7 +22,7 @@ const GlobalSettingsMetricsEndpoint = "/global-settings/metrics"
 
 // GlobalSettingsMetricsResource provides an API to manage GlobalSettingsMetrics configurations.
 type GlobalSettingsMetricsResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the GlobalSettingsMetrics configurations.

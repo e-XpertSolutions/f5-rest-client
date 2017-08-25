@@ -25,7 +25,7 @@ const MonitorEndpoint = "/monitor"
 
 // MonitorResource provides an API to manage Monitor configurations.
 type MonitorResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Monitor configurations.

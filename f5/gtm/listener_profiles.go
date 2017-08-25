@@ -22,7 +22,7 @@ const ListenerProfilesEndpoint = "/listener_profiles"
 
 // ListenerProfilesResource provides an API to manage ListenerProfiles configurations.
 type ListenerProfilesResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ListenerProfiles configurations.

@@ -37,7 +37,7 @@ const MonitorFirepassEndpoint = "/monitor/firepass"
 
 // MonitorFirepassResource provides an API to manage MonitorFirepass configurations.
 type MonitorFirepassResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorFirepass configurations.

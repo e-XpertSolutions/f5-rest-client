@@ -35,7 +35,7 @@ const MonitorLDAPEndpoint = "/monitor/ldap"
 
 // MonitorLDAPResource provides an API to manage MonitorLDAP configurations.
 type MonitorLDAPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorLDAP configurations.

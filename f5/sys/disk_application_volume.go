@@ -36,7 +36,7 @@ const DiskApplicationVolumeEndpoint = "/tm/sys/disk/application-volume"
 
 // DiskApplicationVolumeResource provides an API to manage DiskApplicationVolume configurations.
 type DiskApplicationVolumeResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DiskApplicationVolume configurations.

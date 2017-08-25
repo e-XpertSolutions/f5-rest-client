@@ -31,7 +31,7 @@ const ManagementRouteEndpoint = "/tm/sys/management-route"
 
 // ManagementRouteResource provides an API to manage ManagementRoute configurations.
 type ManagementRouteResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ManagementRoute configurations.

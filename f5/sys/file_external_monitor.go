@@ -37,7 +37,7 @@ const FileExternalMonitorEndpoint = "/tm/sys/file/external-monitor"
 
 // FileExternalMonitorResource provides an API to manage FileExternalMonitor configurations.
 type FileExternalMonitorResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileExternalMonitor configurations.

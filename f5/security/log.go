@@ -25,7 +25,7 @@ const LogEndpoint = "/log"
 
 // LogResource provides an API to manage Log configurations.
 type LogResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Log configurations.

@@ -22,7 +22,7 @@ const WideipAAAAEndpoint = "/wideip/aaaa"
 
 // WideipAAAAResource provides an API to manage WideipAAAA configurations.
 type WideipAAAAResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the WideipAAAA configurations.

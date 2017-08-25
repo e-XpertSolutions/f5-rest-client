@@ -22,7 +22,7 @@ const CryptoServerEndpoint = "/tm/sys/crypto/server"
 
 // CryptoServerResource provides an API to manage CryptoServer configurations.
 type CryptoServerResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the CryptoServer configurations.

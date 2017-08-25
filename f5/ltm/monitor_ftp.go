@@ -32,7 +32,7 @@ type MonitorFTPConfig struct {
 const MonitorFTPEndpoint = "/monitor/ftp"
 
 type MonitorFTPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorFTPResource) ListAll() (*MonitorFTPConfigList, error) {

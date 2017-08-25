@@ -9,7 +9,7 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 const BasePath = "mgmt/tm/net"
 
 type NET struct {
-	c f5.Client
+	c *f5.Client
 
 	inet        InetResource
 	route       RouteResource
@@ -20,7 +20,7 @@ type NET struct {
 }
 
 // New creates a new NET client.
-func New(c f5.Client) NET {
+func New(c *f5.Client) NET {
 	return NET{
 		c:           c,
 		inet:        InetResource{c: c},

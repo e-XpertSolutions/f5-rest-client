@@ -22,7 +22,7 @@ const LogProfileProtocolSIPEndpoint = "/log/profile_protocol-sip"
 
 // LogProfileProtocolSIPResource provides an API to manage LogProfileProtocolSIP configurations.
 type LogProfileProtocolSIPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LogProfileProtocolSIP configurations.

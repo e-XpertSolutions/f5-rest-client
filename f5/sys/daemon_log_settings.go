@@ -25,7 +25,7 @@ const DaemonLogSettingsEndpoint = "/tm/sys/daemon-log-settings"
 
 // DaemonLogSettingsResource provides an API to manage DaemonLogSettings configurations.
 type DaemonLogSettingsResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DaemonLogSettings configurations.

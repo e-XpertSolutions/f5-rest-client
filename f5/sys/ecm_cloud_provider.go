@@ -32,7 +32,7 @@ const ECMCloudProviderEndpoint = "/tm/sys/ecm/cloud-provider"
 
 // ECMCloudProviderResource provides an API to manage ECMCloudProvider configurations.
 type ECMCloudProviderResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ECMCloudProvider configurations.

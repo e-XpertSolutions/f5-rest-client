@@ -22,7 +22,7 @@ const DiskDirectoryEndpoint = "/tm/sys/disk/directory"
 
 // DiskDirectoryResource provides an API to manage DiskDirectory configurations.
 type DiskDirectoryResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DiskDirectory configurations.

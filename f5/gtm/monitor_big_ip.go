@@ -33,7 +33,7 @@ const MonitorBigIPEndpoint = "/monitor/bigip"
 
 // MonitorBigIPResource provides an API to manage MonitorBigIP configurations.
 type MonitorBigIPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorBigIP configurations.

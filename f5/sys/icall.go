@@ -25,7 +25,7 @@ const ICallEndpoint = "/tm/sys/icall"
 
 // ICallResource provides an API to manage ICall configurations.
 type ICallResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ICall configurations.

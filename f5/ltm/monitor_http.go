@@ -39,7 +39,7 @@ type MonitorHTTPConfig struct {
 const MonitorHTTPEndpoint = "/monitor/http"
 
 type MonitorHTTPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorHTTPResource) ListAll() (*MonitorHTTPConfigList, error) {

@@ -22,7 +22,7 @@ const DaemonLogSettingsCsyncdEndpoint = "/tm/sys/daemon-log-settings/csyncd"
 
 // DaemonLogSettingsCsyncdResource provides an API to manage DaemonLogSettingsCsyncd configurations.
 type DaemonLogSettingsCsyncdResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DaemonLogSettingsCsyncd configurations.

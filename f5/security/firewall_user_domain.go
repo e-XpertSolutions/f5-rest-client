@@ -22,7 +22,7 @@ const FirewallUserDomainEndpoint = "/firewall/user-domain"
 
 // FirewallUserDomainResource provides an API to manage FirewallUserDomain configurations.
 type FirewallUserDomainResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallUserDomain configurations.

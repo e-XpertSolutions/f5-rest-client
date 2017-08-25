@@ -22,7 +22,7 @@ const PoolSRVMembersEndpoint = "/pool/srv_members"
 
 // PoolSRVMembersResource provides an API to manage PoolSRVMembers configurations.
 type PoolSRVMembersResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the PoolSRVMembers configurations.

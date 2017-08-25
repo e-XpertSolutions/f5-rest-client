@@ -33,7 +33,7 @@ const LogProfileEndpoint = "/log/profile"
 
 // LogProfileResource provides an API to manage LogProfile configurations.
 type LogProfileResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LogProfile configurations.

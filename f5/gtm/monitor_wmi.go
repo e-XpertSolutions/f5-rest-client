@@ -39,7 +39,7 @@ const MonitorWMIEndpoint = "/monitor/wmi"
 
 // MonitorWMIResource provides an API to manage MonitorWMI configurations.
 type MonitorWMIResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorWMI configurations.

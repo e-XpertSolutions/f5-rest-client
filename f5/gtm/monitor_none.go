@@ -35,7 +35,7 @@ const MonitorNoneEndpoint = "/monitor/none"
 
 // MonitorNoneResource provides an API to manage MonitorNone configurations.
 type MonitorNoneResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the MonitorNone configurations.

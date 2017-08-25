@@ -25,7 +25,7 @@ const ECMEndpoint = "/tm/sys/ecm"
 
 // ECMResource provides an API to manage ECM configurations.
 type ECMResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ECM configurations.

@@ -9,7 +9,7 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 const BasePath = "mgmt/tm/cm"
 
 type CM struct {
-	c f5.Client
+	c *f5.Client
 
 	cert         CertResource
 	key          KeyResource
@@ -20,7 +20,7 @@ type CM struct {
 }
 
 // New creates a new CM client.
-func New(c f5.Client) CM {
+func New(c *f5.Client) CM {
 	return CM{
 		c:            c,
 		cert:         CertResource{c: c},

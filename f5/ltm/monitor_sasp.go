@@ -29,7 +29,7 @@ type MonitorSASPConfig struct {
 const MonitorSASPEndpoint = "/monitor/sasp"
 
 type MonitorSASPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorSASPResource) ListAll() (*MonitorSASPConfigList, error) {

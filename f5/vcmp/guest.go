@@ -40,7 +40,7 @@ const GuestEndpoint = "/guest"
 
 // GuestResource provides an API to manage Guest configurations.
 type GuestResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Guest configurations.

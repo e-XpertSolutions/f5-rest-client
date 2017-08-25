@@ -22,7 +22,7 @@ const FirewallUserListEndpoint = "/firewall/user-list"
 
 // FirewallUserListResource provides an API to manage FirewallUserList configurations.
 type FirewallUserListResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallUserList configurations.

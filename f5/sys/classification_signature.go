@@ -22,7 +22,7 @@ const ClassificationSignatureEndpoint = "/tm/sys/classification-signature"
 
 // ClassificationSignatureResource provides an API to manage ClassificationSignature configurations.
 type ClassificationSignatureResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ClassificationSignature configurations.

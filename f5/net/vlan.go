@@ -65,7 +65,7 @@ const VlanEndpoint = "/vlan"
 
 // A VlanResource provides API to manage vlan configuration.
 type VlanResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the vlan configurations.

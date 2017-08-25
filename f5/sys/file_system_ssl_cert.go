@@ -22,7 +22,7 @@ const FileSystemSSLCertEndpoint = "/tm/sys/file/system-ssl-cert"
 
 // FileSystemSSLCertResource provides an API to manage FileSystemSSLCert configurations.
 type FileSystemSSLCertResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FileSystemSSLCert configurations.

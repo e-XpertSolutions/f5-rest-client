@@ -22,7 +22,7 @@ const HTTPDEndpoint = "/tm/sys/httpd"
 
 // HTTPDResource provides an API to manage HTTPD configurations.
 type HTTPDResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the HTTPD configurations.

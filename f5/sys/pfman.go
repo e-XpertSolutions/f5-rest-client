@@ -22,7 +22,7 @@ const PFManEndpoint = "/tm/sys/pfman"
 
 // PFManResource provides an API to manage PFMan configurations.
 type PFManResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the PFMan configurations.

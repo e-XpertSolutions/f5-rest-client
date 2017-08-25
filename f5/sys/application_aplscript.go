@@ -33,7 +33,7 @@ const ApplicationAPLScriptEndpoint = "/tm/sys/application/apl-script"
 
 // ApplicationAPLScriptResource provides an API to manage ApplicationAPLScript configurations.
 type ApplicationAPLScriptResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ApplicationAPLScript configurations.

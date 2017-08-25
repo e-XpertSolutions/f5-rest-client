@@ -22,7 +22,7 @@ const PoolSRVEndpoint = "/pool/srv"
 
 // PoolSRVResource provides an API to manage PoolSRV configurations.
 type PoolSRVResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the PoolSRV configurations.

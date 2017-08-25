@@ -31,7 +31,7 @@ type MonitorSMTPConfig struct {
 const MonitorSMTPEndpoint = "/monitor/smtp"
 
 type MonitorSMTPResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorSMTPResource) ListAll() (*MonitorSMTPConfigList, error) {

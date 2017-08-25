@@ -22,7 +22,7 @@ const ECMConfigEndpoint = "/tm/sys/ecm/config"
 
 // ECMConfigResource provides an API to manage ECMConfig configurations.
 type ECMConfigResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ECMConfig configurations.

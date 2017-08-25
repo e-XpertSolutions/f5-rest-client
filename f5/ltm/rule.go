@@ -38,7 +38,7 @@ const RuleEndpoint = "/rule"
 
 // A RuleResource provides an API to manage iRule configurations.
 type RuleResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll lists all the iRule configurations.

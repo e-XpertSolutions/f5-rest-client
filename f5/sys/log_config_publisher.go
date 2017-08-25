@@ -32,7 +32,7 @@ const LogConfigPublisherEndpoint = "/tm/sys/log-config/publisher"
 
 // LogConfigPublisherResource provides an API to manage LogConfigPublisher configurations.
 type LogConfigPublisherResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LogConfigPublisher configurations.

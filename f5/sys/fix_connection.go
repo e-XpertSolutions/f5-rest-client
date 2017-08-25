@@ -22,7 +22,7 @@ const FixConnectionEndpoint = "/tm/sys/fix-connection"
 
 // FixConnectionResource provides an API to manage FixConnection configurations.
 type FixConnectionResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FixConnection configurations.

@@ -22,7 +22,7 @@ const PFManConsumerEndpoint = "/tm/sys/pfman/consumer"
 
 // PFManConsumerResource provides an API to manage PFManConsumer configurations.
 type PFManConsumerResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the PFManConsumer configurations.

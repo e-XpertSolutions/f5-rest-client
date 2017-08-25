@@ -22,7 +22,7 @@ const ClockEndpoint = "/tm/sys/clock"
 
 // ClockResource provides an API to manage Clock configurations.
 type ClockResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Clock configurations.

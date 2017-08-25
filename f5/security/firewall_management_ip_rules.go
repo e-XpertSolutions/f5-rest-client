@@ -22,7 +22,7 @@ const FirewallManagementIPRulesEndpoint = "/firewall/management-ip-rules"
 
 // FirewallManagementIPRulesResource provides an API to manage FirewallManagementIPRules configurations.
 type FirewallManagementIPRulesResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallManagementIPRules configurations.

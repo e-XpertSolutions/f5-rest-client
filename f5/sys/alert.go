@@ -22,7 +22,7 @@ const AlertEndpoint = "/tm/sys/alert"
 
 // AlertResource provides an API to manage Alert configurations.
 type AlertResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the Alert configurations.

@@ -22,7 +22,7 @@ const LogNetworkStorageFieldEndpoint = "/log/network-storage-field"
 
 // LogNetworkStorageFieldResource provides an API to manage LogNetworkStorageField configurations.
 type LogNetworkStorageFieldResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the LogNetworkStorageField configurations.

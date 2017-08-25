@@ -32,7 +32,7 @@ const DaemonHAEndpoint = "/tm/sys/daemon-ha"
 
 // DaemonHAResource provides an API to manage DaemonHA configurations.
 type DaemonHAResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DaemonHA configurations.

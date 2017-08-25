@@ -31,7 +31,7 @@ type MonitorRadiusConfig struct {
 const MonitorRadiusEndpoint = "/monitor/radius"
 
 type MonitorRadiusResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorRadiusResource) ListAll() (*MonitorRadiusConfigList, error) {

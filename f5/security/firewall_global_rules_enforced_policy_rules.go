@@ -22,7 +22,7 @@ const FirewallGlobalRulesEnforcedPolicyRulesEndpoint = "/firewall/global-rules_e
 
 // FirewallGlobalRulesEnforcedPolicyRulesResource provides an API to manage FirewallGlobalRulesEnforcedPolicyRules configurations.
 type FirewallGlobalRulesEnforcedPolicyRulesResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the FirewallGlobalRulesEnforcedPolicyRules configurations.

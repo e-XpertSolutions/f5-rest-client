@@ -22,7 +22,7 @@ const IPIntelligenceInfoEndpoint = "/ip-intelligence/info"
 
 // IPIntelligenceInfoResource provides an API to manage IPIntelligenceInfo configurations.
 type IPIntelligenceInfoResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the IPIntelligenceInfo configurations.

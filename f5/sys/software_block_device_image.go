@@ -22,7 +22,7 @@ const SoftwareBlockDeviceImageEndpoint = "/tm/sys/software/block-device-image"
 
 // SoftwareBlockDeviceImageResource provides an API to manage SoftwareBlockDeviceImage configurations.
 type SoftwareBlockDeviceImageResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the SoftwareBlockDeviceImage configurations.

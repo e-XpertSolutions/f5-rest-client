@@ -32,7 +32,7 @@ type MonitorRPCConfig struct {
 const MonitorRPCEndpoint = "/monitor/rpc"
 
 type MonitorRPCResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 func (r *MonitorRPCResource) ListAll() (*MonitorRPCConfigList, error) {

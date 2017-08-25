@@ -22,7 +22,7 @@ const ApplicationServiceEndpoint = "/tm/sys/application/service"
 
 // ApplicationServiceResource provides an API to manage ApplicationService configurations.
 type ApplicationServiceResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ApplicationService configurations.

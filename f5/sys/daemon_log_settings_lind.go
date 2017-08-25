@@ -22,7 +22,7 @@ const DaemonLogSettingsLindEndpoint = "/tm/sys/daemon-log-settings/lind"
 
 // DaemonLogSettingsLindResource provides an API to manage DaemonLogSettingsLind configurations.
 type DaemonLogSettingsLindResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the DaemonLogSettingsLind configurations.

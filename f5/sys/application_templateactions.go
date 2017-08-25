@@ -22,7 +22,7 @@ const ApplicationTemplateActionsEndpoint = "/tm/sys/application/template_actions
 
 // ApplicationTemplateActionsResource provides an API to manage ApplicationTemplateActions configurations.
 type ApplicationTemplateActionsResource struct {
-	c f5.Client
+	c *f5.Client
 }
 
 // ListAll  lists all the ApplicationTemplateActions configurations.
