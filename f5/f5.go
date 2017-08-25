@@ -134,6 +134,12 @@ func (c *Client) Begin() (*Client, error) {
 	return newClient, nil
 }
 
+// TransactionID returns the ID of the current transaction. If there is no
+// active transaction, an empty string is returned.
+func (c *Client) TransactionID() string {
+	return c.txID
+}
+
 // Commit commits the transaction.
 func (c *Client) Commit() error {
 	if c.txID == "" {
