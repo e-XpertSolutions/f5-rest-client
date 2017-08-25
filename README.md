@@ -60,7 +60,7 @@ func main() {
 - [ ] Manage DNS and global load balancing servers (/gtm)
 - [ ] Add support for analytics read-only API (/analytics)
 - [ ] Add support for results pagination
-- [ ] Add support for transaction
+- [x] Add support for transaction
 
 ## Contributing
 
