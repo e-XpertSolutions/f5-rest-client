@@ -13,6 +13,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -27,6 +28,9 @@ type Client struct {
 	c        http.Client
 	baseURL  string
 	makeAuth authFunc
+
+	// Transaction
+	txID string // transaction ID to send for every request
 }
 
 // NewBasicClient creates a new F5 client with HTTP Basic Authentication.
@@ -101,9 +105,57 @@ func (c *Client) DisableCertCheck() {
 	}
 }
 
+// Begin starts a transaction.
+func (c *Client) Begin() (*Client, error) {
+	// Send HTTP request to the API responsible for creating a new transaction.
+	resp, err := c.SendRequest("POST", "/mgmt/tm/transaction", map[string]interface{}{})
+	if err != nil {
+		return nil, errors.New("cannot create request for starting a new transaction: " + err.Error())
+	}
+	defer resp.Body.Close()
+
+	// Decode and validate transaction creation response.
+	var tx struct {
+		TransID int64  `json:"transId"`
+		State   string `json:"state"`
+	}
+	dec := json.NewDecoder(resp.Body)
+	if err := dec.Decode(&tx); err != nil {
+		return nil, errors.New("cannot read transaction creation response: " + err.Error())
+	}
+	if tx.State != "STARTED" {
+		return nil, fmt.Errorf("invalid transaction sate %q; want %q", tx.State, "STARTED")
+	}
+
+	// Create a new client from the current one, but with a transaction ID.
+	newClient := c.clone()
+	newClient.txID = strconv.FormatInt(tx.TransID, 10)
+
+	return newClient, nil
+}
+
+// Commit commits the transaction.
+func (c *Client) Commit() error {
+	if c.txID == "" {
+		return errors.New("no transaction started")
+	}
+
+	txID := c.txID
+	c.txID = ""
+
+	data := map[string]interface{}{"state": "VALIDATING"}
+	resp, err := c.SendRequest("PATCH", "/mgmt/tm/transaction/"+txID, data)
+	if err != nil {
+		return errors.New("cannot commit transaction: " + err.Error())
+	}
+	defer resp.Body.Close()
+
+	return nil
+}
+
 // MakeRequest creates a request with headers appropriately set to make
 // authenticated requests. This method must be called for every new request.
-func (c Client) MakeRequest(method, restPath string, data interface{}) (*http.Request, error) {
+func (c *Client) MakeRequest(method, restPath string, data interface{}) (*http.Request, error) {
 	var (
 		req *http.Request
 		err error
@@ -121,11 +173,14 @@ func (c Client) MakeRequest(method, restPath string, data interface{}) (*http.Re
 		return nil, fmt.Errorf("failed to create F5 authenticated request: %v", err)
 	}
 	req.Header.Add("Accept", "application/json")
+	if c.txID != "" {
+		req.Header.Add("X-F5-REST-Coordination-Id", c.txID)
+	}
 	c.makeAuth(req)
 	return req, nil
 }
 
-func (c Client) MakeUploadRequest(restPath string, r io.Reader, filesize int64) (*http.Request, error) {
+func (c *Client) MakeUploadRequest(restPath string, r io.Reader, filesize int64) (*http.Request, error) {
 	if filesize > 512*1024 {
 		return nil, fmt.Errorf("file larger than %d are not yet supported", 512*1024)
 	}
@@ -146,12 +201,12 @@ func (c Client) MakeUploadRequest(restPath string, r io.Reader, filesize int64) 
 //
 // See http package documentation for more information:
 //    https://golang.org/pkg/net/http/#Client.Do
-func (c Client) Do(req *http.Request) (*http.Response, error) {
+func (c *Client) Do(req *http.Request) (*http.Response, error) {
 	return c.c.Do(req)
 }
 
 // SendRequest is a shortcut for MakeRequest() + Do() + ReadError().
-func (c Client) SendRequest(method, restPath string, data interface{}) (*http.Response, error) {
+func (c *Client) SendRequest(method, restPath string, data interface{}) (*http.Response, error) {
 	req, err := c.MakeRequest(method, restPath, data)
 	if err != nil {
 		return nil, err
@@ -170,7 +225,7 @@ func (c Client) SendRequest(method, restPath string, data interface{}) (*http.Re
 // ReadQuery performs a GET query and unmarshal the response (from JSON) into outputData.
 //
 // outputData must be a pointer.
-func (c Client) ReadQuery(restPath string, outputData interface{}) error {
+func (c *Client) ReadQuery(restPath string, outputData interface{}) error {
 	resp, err := c.SendRequest("GET", restPath, nil)
 	if err != nil {
 		return err
@@ -184,7 +239,7 @@ func (c Client) ReadQuery(restPath string, outputData interface{}) error {
 }
 
 // ModQuery performs a modification query such as POST, PUT or DELETE.
-func (c Client) ModQuery(method, restPath string, inputData interface{}) error {
+func (c *Client) ModQuery(method, restPath string, inputData interface{}) error {
 	if method != "POST" && method != "PUT" && method != "DELETE" {
 		return errors.New("invalid method " + method)
 	}
@@ -211,6 +266,14 @@ func (c Client) ReadError(resp *http.Response) error {
 // makeURL creates an URL from the client base URL and a given REST path. What
 // this function actually does is to concatenate the base URL and the REST path
 // by handling trailing slashes.
-func (c Client) makeURL(restPath string) string {
+func (c *Client) makeURL(restPath string) string {
 	return strings.TrimSuffix(c.baseURL, "/") + "/" + strings.TrimPrefix(restPath, "/")
+}
+
+func (c *Client) clone() *Client {
+	return &Client{
+		c:        c.c,
+		baseURL:  c.baseURL,
+		makeAuth: c.makeAuth,
+	}
 }
