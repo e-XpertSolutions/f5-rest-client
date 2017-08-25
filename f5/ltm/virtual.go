@@ -43,29 +43,37 @@ type VirtualServerConfig struct {
 		IsSubcollection bool   `json:"isSubcollection,omitempty"`
 		Link            string `json:"link,omitempty"`
 	} `json:"policiesReference,omitempty"`
-	Pool              string `json:"pool,omitempty"`
+	Pool              string    `json:"pool,omitempty"`
+	Profiles          []Profile `json:"profiles,omitempty"`
 	ProfilesReference struct {
 		IsSubcollection bool   `json:"isSubcollection,omitempty"`
 		Link            string `json:"link,omitempty"`
 	} `json:"profilesReference,omitempty"`
-	RateLimit                string   `json:"rateLimit,omitempty"`
-	RateLimitDstMask         int64    `json:"rateLimitDstMask,omitempty"`
-	RateLimitMode            string   `json:"rateLimitMode,omitempty"`
-	RateLimitSrcMask         int64    `json:"rateLimitSrcMask,omitempty"`
-	Rules                    []string `json:"rules,omitempty"`
-	SelfLink                 string   `json:"selfLink,omitempty"`
-	Source                   string   `json:"source,omitempty"`
-	SourceAddressTranslation struct {
-		Type string `json:"type,omitempty"`
-	} `json:"sourceAddressTranslation,omitempty"`
-	SourcePort       string   `json:"sourcePort,omitempty"`
-	SynCookieStatus  string   `json:"synCookieStatus,omitempty"`
-	TranslateAddress string   `json:"translateAddress,omitempty"`
-	TranslatePort    string   `json:"translatePort,omitempty"`
-	Vlans            []string `json:"vlans,omitempty"`
-	VlansDisabled    bool     `json:"vlansDisabled,omitempty"`
-	VlansEnabled     bool     `json:"vlansEnabled,omitempty"`
-	VsIndex          int64    `json:"vsIndex,omitempty"`
+	RateLimit                string                   `json:"rateLimit,omitempty"`
+	RateLimitDstMask         int64                    `json:"rateLimitDstMask,omitempty"`
+	RateLimitMode            string                   `json:"rateLimitMode,omitempty"`
+	RateLimitSrcMask         int64                    `json:"rateLimitSrcMask,omitempty"`
+	Rules                    []string                 `json:"rules,omitempty"`
+	SelfLink                 string                   `json:"selfLink,omitempty"`
+	Source                   string                   `json:"source,omitempty"`
+	SourceAddressTranslation SourceAddressTranslation `json:"sourceAddressTranslation,omitempty"`
+	SourcePort               string                   `json:"sourcePort,omitempty"`
+	SynCookieStatus          string                   `json:"synCookieStatus,omitempty"`
+	TranslateAddress         string                   `json:"translateAddress,omitempty"`
+	TranslatePort            string                   `json:"translatePort,omitempty"`
+	Vlans                    []string                 `json:"vlans,omitempty"`
+	VlansDisabled            bool                     `json:"vlansDisabled,omitempty"`
+	VlansEnabled             bool                     `json:"vlansEnabled,omitempty"`
+	VsIndex                  int64                    `json:"vsIndex,omitempty"`
+}
+
+type SourceAddressTranslation struct {
+	Type string `json:"type,omitempty"`
+}
+
+type Profile struct {
+	Name    string `json:"name,omitempty"`
+	Context string `json:"context,omitempty"`
 }
 
 // VirtualEndpoint represents the REST resource for managing virtual server.
@@ -120,12 +128,7 @@ func (vr *VirtualResource) Get(id string) (*VirtualServerConfig, error) {
 
 // Create a new virtual server configuration.
 func (vr *VirtualResource) Create(item VirtualServerConfig) error {
-	resp, err := vr.doRequest("POST", "", item)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-	if err := vr.readError(resp); err != nil {
+	if err := vr.c.ModQuery("POST", BasePath+VirtualEndpoint, item); err != nil {
 		return err
 	}
 	return nil
