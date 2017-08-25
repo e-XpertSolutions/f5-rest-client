@@ -7,34 +7,34 @@ package ltm
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type MonitorDNSConfigList struct {
-	Items    []MonitorDNSConfig `json:"items"`
-	Kind     string             `json:"kind"`
-	SelfLink string             `json:"selflink"`
+	Items    []MonitorDNSConfig `json:"items,omitempty"`
+	Kind     string             `json:"kind,omitempty"`
+	SelfLink string             `json:"selflink,omitempty"`
 }
 
 type MonitorDNSConfig struct {
-	AcceptRcode              string `json:"acceptRcode"`
-	Adaptive                 string `json:"adaptive"`
-	AdaptiveDivergenceType   string `json:"adaptiveDivergenceType"`
-	AdaptiveDivergenceValue  int    `json:"adaptiveDivergenceValue"`
-	AdaptiveLimit            int    `json:"adaptiveLimit"`
-	AdaptiveSamplingTimespan int    `json:"adaptiveSamplingTimespan"`
-	AnswerContains           string `json:"answerContains"`
-	Destination              string `json:"destination"`
-	FullPath                 string `json:"fullPath"`
-	Generation               int    `json:"generation"`
-	Interval                 int    `json:"interval"`
-	Kind                     string `json:"kind"`
-	ManualResume             string `json:"manualResume"`
-	Name                     string `json:"name"`
-	Partition                string `json:"partition"`
-	Qtype                    string `json:"qtype"`
-	Reverse                  string `json:"reverse"`
-	SelfLink                 string `json:"selfLink"`
-	TimeUntilUp              int    `json:"timeUntilUp"`
-	Timeout                  int    `json:"timeout"`
-	Transparent              string `json:"transparent"`
-	UpInterval               int    `json:"upInterval"`
+	AcceptRcode              string `json:"acceptRcode,omitempty"`
+	Adaptive                 string `json:"adaptive,omitempty"`
+	AdaptiveDivergenceType   string `json:"adaptiveDivergenceType,omitempty"`
+	AdaptiveDivergenceValue  int    `json:"adaptiveDivergenceValue,omitempty"`
+	AdaptiveLimit            int    `json:"adaptiveLimit,omitempty"`
+	AdaptiveSamplingTimespan int    `json:"adaptiveSamplingTimespan,omitempty"`
+	AnswerContains           string `json:"answerContains,omitempty"`
+	Destination              string `json:"destination,omitempty"`
+	FullPath                 string `json:"fullPath,omitempty"`
+	Generation               int    `json:"generation,omitempty"`
+	Interval                 int    `json:"interval,omitempty"`
+	Kind                     string `json:"kind,omitempty"`
+	ManualResume             string `json:"manualResume,omitempty"`
+	Name                     string `json:"name,omitempty"`
+	Partition                string `json:"partition,omitempty"`
+	Qtype                    string `json:"qtype,omitempty"`
+	Reverse                  string `json:"reverse,omitempty"`
+	SelfLink                 string `json:"selfLink,omitempty"`
+	TimeUntilUp              int    `json:"timeUntilUp,omitempty"`
+	Timeout                  int    `json:"timeout,omitempty"`
+	Transparent              string `json:"transparent,omitempty"`
+	UpInterval               int    `json:"upInterval,omitempty"`
 }
 
 const MonitorDNSEndpoint = "/monitor/dns"

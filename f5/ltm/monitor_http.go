@@ -13,27 +13,28 @@ type MonitorHTTPConfigList struct {
 }
 
 type MonitorHTTPConfig struct {
-	Adaptive                 string `json:"adaptive"`
-	AdaptiveDivergenceType   string `json:"adaptiveDivergenceType"`
-	AdaptiveDivergenceValue  int    `json:"adaptiveDivergenceValue"`
-	AdaptiveLimit            int    `json:"adaptiveLimit"`
-	AdaptiveSamplingTimespan int    `json:"adaptiveSamplingTimespan"`
-	Destination              string `json:"destination"`
-	FullPath                 string `json:"fullPath"`
-	Generation               int    `json:"generation"`
-	Interval                 int    `json:"interval"`
-	IPDscp                   int    `json:"ipDscp"`
-	Kind                     string `json:"kind"`
-	ManualResume             string `json:"manualResume"`
-	Name                     string `json:"name"`
-	Partition                string `json:"partition"`
-	Reverse                  string `json:"reverse"`
-	SelfLink                 string `json:"selfLink"`
-	Send                     string `json:"send"`
-	TimeUntilUp              int    `json:"timeUntilUp"`
-	Timeout                  int    `json:"timeout"`
-	Transparent              string `json:"transparent"`
-	UpInterval               int    `json:"upInterval"`
+	Adaptive                 string `json:"adaptive,omitempty"`
+	AdaptiveDivergenceType   string `json:"adaptiveDivergenceType,omitempty"`
+	AdaptiveDivergenceValue  int    `json:"adaptiveDivergenceValue,omitempty"`
+	AdaptiveLimit            int    `json:"adaptiveLimit,omitempty"`
+	AdaptiveSamplingTimespan int    `json:"adaptiveSamplingTimespan,omitempty"`
+	Destination              string `json:"destination,omitempty"`
+	FullPath                 string `json:"fullPath,omitempty"`
+	Generation               int    `json:"generation,omitempty"`
+	Interval                 int    `json:"interval,omitempty"`
+	IPDscp                   int    `json:"ipDscp,omitempty"`
+	Kind                     string `json:"kind,omitempty"`
+	ManualResume             string `json:"manualResume,omitempty"`
+	Name                     string `json:"name,omitempty"`
+	Partition                string `json:"partition,omitempty"`
+	Reverse                  string `json:"reverse,omitempty"`
+	SelfLink                 string `json:"selfLink,omitempty"`
+	Send                     string `json:"send,omitempty"`
+	Recv                     string `json:"receive,omitempty"`
+	TimeUntilUp              int    `json:"timeUntilUp,omitempty"`
+	Timeout                  int    `json:"timeout,omitempty"`
+	Transparent              string `json:"transparent,omitempty"`
+	UpInterval               int    `json:"upInterval,omitempty"`
 }
 
 const MonitorHTTPEndpoint = "/monitor/http"
