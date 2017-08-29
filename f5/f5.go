@@ -258,8 +258,11 @@ func (c *Client) ModQuery(method, restPath string, inputData interface{}) error 
 }
 
 // ReadError checks if a HTTP response contains an error and returns it.
-func (c Client) ReadError(resp *http.Response) error {
+func (c *Client) ReadError(resp *http.Response) error {
 	if resp.StatusCode >= 400 {
+		if contentType := resp.Header.Get("Content-Type"); !strings.Contains(contentType, "application/json") {
+			return errors.New("http response error: " + resp.Status)
+		}
 		errResp, err := NewRequestError(resp.Body)
 		if err != nil {
 			return err
