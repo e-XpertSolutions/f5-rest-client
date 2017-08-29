@@ -17,7 +17,24 @@ import (
 	"strings"
 )
 
-const UploadRESTPath = "/mgmt/shared/file-transfer/uploads"
+// Paths for file upload.
+const (
+	PathUploadImage = "/mgmt/cm/autodeploy/software-image-uploads"
+	PathUploadFile  = "/mgmt/shared/file-transfer/uploads"
+
+	// For backward compatibility
+	UploadRESTPath = PathUploadFile
+)
+
+type UploadResponse struct {
+	RemainingByteCount int64          `json:"remainingByteCount"`
+	UsedChunks         map[string]int `json:"usedChunks"`
+	TotalByteCount     int64          `json:"totalByteCount"`
+	LocalFilePath      string         `json:"localFilePath"`
+	TemporaryFilePath  string         `json:"temporaryFilePath"`
+	Generation         int64          `json:"generation"`
+	LastUpdateMicros   int64          `json:"lastUpdateMicros"`
+}
 
 // An authFunc is function responsible for setting necessary headers to
 // perform authenticated requests.
@@ -184,6 +201,30 @@ func (c *Client) MakeRequest(method, restPath string, data interface{}) (*http.R
 	}
 	c.makeAuth(req)
 	return req, nil
+}
+
+func (c *Client) UploadFile(r io.Reader, filename string, filesize int64) (*UploadResponse, error) {
+	req, err := c.MakeUploadRequest(PathUploadFile+"/"+filename, r, filesize)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if err := c.ReadError(resp); err != nil {
+		return nil, err
+	}
+
+	var uploadResp UploadResponse
+	dec := json.NewDecoder(resp.Body)
+	if err := dec.Decode(&uploadResp); err != nil {
+		return nil, err
+	}
+
+	return &uploadResp, nil
 }
 
 func (c *Client) MakeUploadRequest(restPath string, r io.Reader, filesize int64) (*http.Request, error) {
