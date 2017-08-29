@@ -4,7 +4,12 @@
 
 package sys
 
-import "github.com/e-XpertSolutions/f5-rest-client/f5"
+import (
+	"errors"
+	"io"
+
+	"github.com/e-XpertSolutions/f5-rest-client/f5"
+)
 
 // CryptoCRLConfigList holds a list of CryptoCRL configuration.
 type CryptoCRLConfigList struct {
@@ -15,6 +20,9 @@ type CryptoCRLConfigList struct {
 
 // CryptoCRLConfig holds the configuration of a single CryptoCRL.
 type CryptoCRLConfig struct {
+	Name       string `json:"name,omitempty"`
+	FullPath   string `json:"fullPath,omitempty"`
+	Generation int64  `json:"generation,omitempty"`
 }
 
 // CryptoCRLEndpoint represents the REST resource for managing CryptoCRL.
@@ -43,9 +51,22 @@ func (r *CryptoCRLResource) Get(id string) (*CryptoCRLConfig, error) {
 	return &item, nil
 }
 
-// Create a new CryptoCRL configuration.
-func (r *CryptoCRLResource) Create(item CryptoCRLConfig) error {
-	if err := r.c.ModQuery("POST", BasePath+CryptoCRLEndpoint, item); err != nil {
+func (r *CryptoCRLResource) Create(name string, item CryptoCRLConfig) error {
+	return errors.New("not yet implemented")
+}
+
+// CreateFromFile upload a CRL file in PEM format and create a new CRL entry.
+func (r *CryptoCRLResource) CreateFromFile(name string, crlPEMFile io.Reader, filesize int64) error {
+	uploadResp, err := r.c.UploadFile(crlPEMFile, name+".crl", filesize)
+	if err != nil {
+		return err
+	}
+	data := map[string]string{
+		"command":         "install",
+		"name":            name,
+		"from-local-file": uploadResp.LocalFilePath,
+	}
+	if err := r.c.ModQuery("POST", BasePath+CryptoCRLEndpoint, data); err != nil {
 		return err
 	}
 	return nil
