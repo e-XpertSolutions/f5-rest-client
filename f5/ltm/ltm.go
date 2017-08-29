@@ -20,6 +20,8 @@ type LTM struct {
 	poolMembers PoolMembersResource
 	node        NodeResource
 
+	profileClientSSL ProfileClientSSLResource
+
 	monitorDiameter         MonitorDiameterResource
 	monitorDNS              MonitorDNSResource
 	monitorExternal         MonitorExternalResource
@@ -70,6 +72,8 @@ func New(c *f5.Client) LTM {
 		pool:        PoolResource{c: c},
 		poolMembers: PoolMembersResource{c: c},
 		node:        NodeResource{c: c},
+
+		profileClientSSL: ProfileClientSSLResource{c: c},
 
 		monitorDiameter:         MonitorDiameterResource{c: c},
 		monitorDNS:              MonitorDNSResource{c: c},
@@ -292,4 +296,8 @@ func (ltm LTM) MonitorWAP() *MonitorWAPResource {
 
 func (ltm LTM) MonitorWMI() *MonitorWMIResource {
 	return &ltm.monitorWMI
+}
+
+func (ltm LTM) ProfileClientSSL() *ProfileClientSSLResource {
+	return &ltm.profileClientSSL
 }
