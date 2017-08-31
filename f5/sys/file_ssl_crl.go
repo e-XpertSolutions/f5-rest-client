@@ -73,8 +73,23 @@ func (r *FileSSLCRLResource) CreateFromFile(name string, crlPEMFile io.Reader, f
 		"name":        name + ".crl",
 		"source-path": "file:" + uploadResp.LocalFilePath,
 	}
-	if err := r.c.ModQuery("PUT", BasePath+FileSSLCRLEndpoint+"/"+name+".crl", data); err != nil {
+	if err := r.c.ModQuery("POST", BasePath+FileSSLCRLEndpoint, data); err != nil {
 		return fmt.Errorf("failed to import crl file: %v", err)
+	}
+	return nil
+}
+
+func (r *FileSSLCRLResource) EditFromFile(name string, crlPEMFile io.Reader, filesize int64) error {
+	uploadResp, err := r.c.UploadFile(crlPEMFile, name+".crl", filesize)
+	if err != nil {
+		return fmt.Errorf("failed to create upload request: %v", err)
+	}
+	data := map[string]string{
+		"name":        name + ".crl",
+		"source-path": "file:" + uploadResp.LocalFilePath,
+	}
+	if err := r.c.ModQuery("PUT", BasePath+FileSSLCRLEndpoint+"/"+name+".crl", data); err != nil {
+		return fmt.Errorf("failed to update imported crl file: %v", err)
 	}
 	return nil
 }
