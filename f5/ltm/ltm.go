@@ -19,6 +19,7 @@ type LTM struct {
 	pool        PoolResource
 	poolMembers PoolMembersResource
 	node        NodeResource
+	iFile       IFileResource
 
 	profileClientSSL ProfileClientSSLResource
 
@@ -72,6 +73,7 @@ func New(c *f5.Client) LTM {
 		pool:        PoolResource{c: c},
 		poolMembers: PoolMembersResource{c: c},
 		node:        NodeResource{c: c},
+		iFile:       IFileResource{c: c},
 
 		profileClientSSL: ProfileClientSSLResource{c: c},
 
@@ -140,6 +142,11 @@ func (ltm LTM) PoolMembers() *PoolMembersResource {
 // Node returns a NodeResource configured to query /tm/ltm/node API.
 func (ltm LTM) Node() *NodeResource {
 	return &ltm.node
+}
+
+// IFile returns an IFileResource configured to query /tm/ltm/ifile API.
+func (ltm LTM) IFile() *IFileResource {
+	return &ltm.iFile
 }
 
 func (ltm LTM) MonitorDiameter() *MonitorDiameterResource {
