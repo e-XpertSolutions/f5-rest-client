@@ -6,10 +6,7 @@ package sys
 
 import (
 	"fmt"
-	"io/ioutil"
-	"log"
-	"os"
-	"path/filepath"
+	"io"
 
 	"github.com/e-XpertSolutions/f5-rest-client/f5"
 )
@@ -65,74 +62,37 @@ func (r *FileIFileResource) Get(id string) (*FileIFileConfig, error) {
 	return &item, nil
 }
 
-// Create a new FileIFile configuration.
-func (r *FileIFileResource) Create(name, path string) error {
-	info, err := os.Stat(path)
-	if err != nil {
-		return fmt.Errorf("failed to gather information about '%s': %v", path, err)
-	}
-	f, err := os.Open(path)
-	if err != nil {
-		return fmt.Errorf("failed to read file from path: %v", err)
-	}
-	defer f.Close()
-
-	req, err := r.c.MakeUploadRequest(f5.UploadRESTPath+"/"+filepath.Base(path), f, info.Size())
+// CreateFromFile uploads an iFile and create a new entry in the
+// iFiles list.
+func (r *FileIFileResource) CreateFromFile(filename string, file io.Reader, filesize int64) error {
+	uploadResp, err := r.c.UploadFile(file, filename, filesize)
 	if err != nil {
 		return fmt.Errorf("failed to create upload request: %v", err)
 	}
-	resp, err := r.c.Do(req)
-	if err != nil {
-		return fmt.Errorf("failed to upload file '%s': %v", path, err)
-	}
-	defer resp.Body.Close()
-
-	bs, _ := ioutil.ReadAll(resp.Body)
-	log.Print("DEBUG resp=", string(bs))
-
 	data := map[string]string{
-		"name":        name,
-		"source-path": "file://localhost/var/config/rest/downloads/" + filepath.Base(path),
+		"name":        filename,
+		"source-path": "file:" + uploadResp.LocalFilePath,
 	}
 	if err := r.c.ModQuery("POST", BasePath+FileIFileEndpoint, data); err != nil {
-		return fmt.Errorf("failed to create ifile configuration: %v", err)
+		return fmt.Errorf("failed to import ifile: %v", err)
 	}
-
 	return nil
 }
 
-// Edit a FileIFile configuration identified by id.
-func (r *FileIFileResource) Edit(id, path string) error {
-	info, err := os.Stat(path)
-	if err != nil {
-		return fmt.Errorf("failed to gather information about '%s': %v", path, err)
-	}
-	f, err := os.Open(path)
-	if err != nil {
-		return fmt.Errorf("failed to read file from path: %v", err)
-	}
-	defer f.Close()
-
-	req, err := r.c.MakeUploadRequest(f5.UploadRESTPath+"/"+filepath.Base(path), f, info.Size())
+// EditFromFile uploads an iFile and update an existing entry in the
+// iFiles list.
+func (r *FileIFileResource) EditFromFile(filename string, file io.Reader, filesize int64) error {
+	uploadResp, err := r.c.UploadFile(file, filename, filesize)
 	if err != nil {
 		return fmt.Errorf("failed to create upload request: %v", err)
 	}
-	resp, err := r.c.Do(req)
-	if err != nil {
-		return fmt.Errorf("failed to upload file '%s': %v", path, err)
-	}
-	defer resp.Body.Close()
-
-	bs, _ := ioutil.ReadAll(resp.Body)
-	log.Print("DEBUG resp=", string(bs))
-
 	data := map[string]string{
-		"source-path": "file://localhost/var/config/rest/downloads/" + filepath.Base(path),
+		"name":        filename,
+		"source-path": "file:" + uploadResp.LocalFilePath,
 	}
-	if err := r.c.ModQuery("PUT", BasePath+FileIFileEndpoint+"/"+id, data); err != nil {
-		return fmt.Errorf("failed to create ifile configuration: %v", err)
+	if err := r.c.ModQuery("PUT", BasePath+FileIFileEndpoint+"/"+filename, data); err != nil {
+		return fmt.Errorf("failed to update ifile: %v", err)
 	}
-
 	return nil
 }
 
