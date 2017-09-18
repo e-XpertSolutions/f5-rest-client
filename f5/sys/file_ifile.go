@@ -56,7 +56,7 @@ func (r *FileIFileResource) ListAll() (*FileIFileConfigList, error) {
 // Get a single FileIFile configuration identified by id.
 func (r *FileIFileResource) Get(id string) (*FileIFileConfig, error) {
 	var item FileIFileConfig
-	if err := r.c.ReadQuery(BasePath+FileIFileEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+FileIFileEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
