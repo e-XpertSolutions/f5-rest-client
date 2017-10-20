@@ -6,8 +6,6 @@ package sys
 
 import (
 	"fmt"
-	"io/ioutil"
-	"log"
 	"os"
 	"path/filepath"
 
@@ -82,18 +80,9 @@ func (r *FileSSLKeyResource) Create(name, path string) error {
 	}
 	defer f.Close()
 
-	req, err := r.c.MakeUploadRequest(f5.UploadRESTPath+"/"+filepath.Base(path), f, info.Size())
-	if err != nil {
+	if _, err = r.c.UploadFile(f, filepath.Base(path), info.Size()); err != nil {
 		return fmt.Errorf("failed to create upload request: %v", err)
 	}
-	resp, err := r.c.Do(req)
-	if err != nil {
-		return fmt.Errorf("failed to upload file '%s': %v", path, err)
-	}
-	defer resp.Body.Close()
-
-	bs, _ := ioutil.ReadAll(resp.Body)
-	log.Print("DEBUG resp=", string(bs))
 
 	data := map[string]string{
 		"name":        name,
@@ -118,18 +107,9 @@ func (r *FileSSLKeyResource) Edit(id, path string) error {
 	}
 	defer f.Close()
 
-	req, err := r.c.MakeUploadRequest(f5.UploadRESTPath+"/"+filepath.Base(path), f, info.Size())
-	if err != nil {
+	if _, err = r.c.UploadFile(f, filepath.Base(path), info.Size()); err != nil {
 		return fmt.Errorf("failed to create upload request: %v", err)
 	}
-	resp, err := r.c.Do(req)
-	if err != nil {
-		return fmt.Errorf("failed to upload file '%s': %v", path, err)
-	}
-	defer resp.Body.Close()
-
-	bs, _ := ioutil.ReadAll(resp.Body)
-	log.Print("DEBUG resp=", string(bs))
 
 	data := map[string]string{
 		"source-path": "file://localhost/var/config/rest/downloads/" + filepath.Base(path),

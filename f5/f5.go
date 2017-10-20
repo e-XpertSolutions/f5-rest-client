@@ -204,39 +204,51 @@ func (c *Client) MakeRequest(method, restPath string, data interface{}) (*http.R
 }
 
 func (c *Client) UploadFile(r io.Reader, filename string, filesize int64) (*UploadResponse, error) {
-	req, err := c.MakeUploadRequest(PathUploadFile+"/"+filename, r, filesize)
-	if err != nil {
-		return nil, err
-	}
-	resp, err := c.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if err := c.ReadError(resp); err != nil {
-		return nil, err
-	}
-
 	var uploadResp UploadResponse
-	dec := json.NewDecoder(resp.Body)
-	if err := dec.Decode(&uploadResp); err != nil {
-		return nil, err
-	}
+	for bytesSent := int64(0); bytesSent < filesize; {
+		var chunk int64
+		if remainingBytes := filesize - bytesSent; remainingBytes >= 512*1024 {
+			chunk = 512 * 1024
+		} else {
+			chunk = remainingBytes
+		}
 
+		req, err := c.MakeUploadRequest(PathUploadFile+"/"+filename, io.LimitReader(r, chunk), bytesSent, chunk, filesize)
+		if err != nil {
+			return nil, err
+		}
+		resp, err := c.Do(req)
+		if err != nil {
+			return nil, err
+		}
+		if err := c.ReadError(resp); err != nil {
+			resp.Body.Close()
+			return nil, err
+		}
+
+		if filesize-bytesSent <= 512*1024 {
+			dec := json.NewDecoder(resp.Body)
+			if err := dec.Decode(&uploadResp); err != nil {
+				resp.Body.Close()
+				return nil, err
+			}
+		}
+
+		bytesSent += chunk
+	}
 	return &uploadResp, nil
 }
 
-func (c *Client) MakeUploadRequest(restPath string, r io.Reader, filesize int64) (*http.Request, error) {
-	if filesize > 512*1024 {
-		return nil, fmt.Errorf("file larger than %d are not yet supported", 512*1024)
+func (c *Client) MakeUploadRequest(restPath string, r io.Reader, off, chunk, filesize int64) (*http.Request, error) {
+	if chunk > 512*1024 {
+		return nil, fmt.Errorf("chunk size greater than %d is not supported", 512*1024)
 	}
 	req, err := http.NewRequest("POST", c.makeURL(restPath), r)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create F5 authenticated request: %v", err)
 	}
 	req.Header.Add("Accept", "application/json")
-	req.Header.Set("Content-Range", fmt.Sprintf("%d-%d/%d", 0, filesize-1, filesize))
+	req.Header.Set("Content-Range", fmt.Sprintf("%d-%d/%d", off, off+chunk-1, filesize))
 	req.Header.Set("Content-Type", "application/octet-stream")
 	c.makeAuth(req)
 	return req, nil
