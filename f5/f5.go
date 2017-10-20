@@ -237,6 +237,7 @@ func (c *Client) MakeUploadRequest(restPath string, r io.Reader, filesize int64)
 	}
 	req.Header.Add("Accept", "application/json")
 	req.Header.Set("Content-Range", fmt.Sprintf("%d-%d/%d", 0, filesize-1, filesize))
+	req.Header.Set("Content-Type", "application/octet-stream")
 	c.makeAuth(req)
 	return req, nil
 }
