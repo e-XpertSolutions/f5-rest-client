@@ -4,7 +4,11 @@
 
 package apm
 
-import "github.com/e-XpertSolutions/f5-rest-client/f5"
+import (
+	"encoding/json"
+
+	"github.com/e-XpertSolutions/f5-rest-client/f5"
+)
 
 // OAuthClientAppConfigList holds a list of OAuthClientApp configuration.
 type OAuthClientAppConfigList struct {
@@ -74,11 +78,18 @@ func (r *OAuthClientAppResource) Get(id string) (*OAuthClientAppConfig, error) {
 }
 
 // Create a new OAuthClientApp configuration.
-func (r *OAuthClientAppResource) Create(item OAuthClientAppConfig) error {
-	if err := r.c.ModQuery("POST", BasePath+OAuthClientAppEndpoint, item); err != nil {
-		return err
+func (r *OAuthClientAppResource) Create(item OAuthClientAppConfig) (*OAuthClientAppConfig, error) {
+	resp, err := r.c.MakeRequest("POST", BasePath+OAuthClientAppEndpoint, item)
+	if err != nil {
+		return nil, err
 	}
-	return nil
+	defer resp.Body.Close()
+	var respItem OAuthClientAppConfig
+	dec := json.NewDecoder(resp.Body)
+	if err := dec.Decode(&respItem); err != nil {
+		return nil, err
+	}
+	return &respItem, nil
 }
 
 // Edit a OAuthClientApp configuration identified by id.
