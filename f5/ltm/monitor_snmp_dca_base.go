@@ -7,23 +7,23 @@ package ltm
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type MonitorSNMPDCABaseConfigList struct {
-	Items    []MonitorSNMPDCABaseConfig `json:"items"`
-	Kind     string                     `json:"kind"`
-	SelfLink string                     `json:"selflink"`
+	Items    []MonitorSNMPDCABaseConfig `json:"items,omitempty"`
+	Kind     string                     `json:"kind,omitempty"`
+	SelfLink string                     `json:"selflink,omitempty"`
 }
 
 type MonitorSNMPDCABaseConfig struct {
-	Community   string `json:"community"`
-	FullPath    string `json:"fullPath"`
-	Generation  int    `json:"generation"`
-	Interval    int    `json:"interval"`
-	Kind        string `json:"kind"`
-	Name        string `json:"name"`
-	Partition   string `json:"partition"`
-	SelfLink    string `json:"selfLink"`
-	TimeUntilUp int    `json:"timeUntilUp"`
-	Timeout     int    `json:"timeout"`
-	Version     string `json:"version"`
+	Community   string `json:"community,omitempty"`
+	FullPath    string `json:"fullPath,omitempty"`
+	Generation  int    `json:"generation,omitempty"`
+	Interval    int    `json:"interval,omitempty"`
+	Kind        string `json:"kind,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Partition   string `json:"partition,omitempty"`
+	SelfLink    string `json:"selfLink,omitempty"`
+	TimeUntilUp int    `json:"timeUntilUp,omitempty"`
+	Timeout     int    `json:"timeout,omitempty"`
+	Version     string `json:"version,omitempty"`
 }
 
 const MonitorSNMPDCABaseEndpoint = "/monitor/snmp-dca-base"

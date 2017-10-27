@@ -7,25 +7,25 @@ package ltm
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type MonitorSMTPConfigList struct {
-	Items    []MonitorSMTPConfig `json:"items"`
-	Kind     string              `json:"kind"`
-	SelfLink string              `json:"selflink"`
+	Items    []MonitorSMTPConfig `json:"items,omitempty"`
+	Kind     string              `json:"kind,omitempty"`
+	SelfLink string              `json:"selflink,omitempty"`
 }
 
 type MonitorSMTPConfig struct {
-	Debug        string `json:"debug,omitempty"`
-	Destination  string `json:"destination,omitempty"`
-	FullPath     string `json:"fullPath,omitempty"`
-	Generation   int    `json:"generation,omitempty"`
-	Interval     int    `json:"interval,omitempty"`
-	Kind         string `json:"kind,omitempty"`
-	ManualResume string `json:"manualResume,omitempty"`
-	Name         string `json:"name,omitempty"`
-	Partition    string `json:"partition,omitempty"`
-	SelfLink     string `json:"selfLink,omitempty"`
-	TimeUntilUp  int    `json:"timeUntilUp,omitempty"`
-	Timeout      int    `json:"timeout,omitempty"`
-	UpInterval   int    `json:"upInterval,omitempty"`
+	Debug        string `json:"debug,omitempty,omitempty"`
+	Destination  string `json:"destination,omitempty,omitempty"`
+	FullPath     string `json:"fullPath,omitempty,omitempty"`
+	Generation   int    `json:"generation,omitempty,omitempty"`
+	Interval     int    `json:"interval,omitempty,omitempty"`
+	Kind         string `json:"kind,omitempty,omitempty"`
+	ManualResume string `json:"manualResume,omitempty,omitempty"`
+	Name         string `json:"name,omitempty,omitempty"`
+	Partition    string `json:"partition,omitempty,omitempty"`
+	SelfLink     string `json:"selfLink,omitempty,omitempty"`
+	TimeUntilUp  int    `json:"timeUntilUp,omitempty,omitempty"`
+	Timeout      int    `json:"timeout,omitempty,omitempty"`
+	UpInterval   int    `json:"upInterval,omitempty,omitempty"`
 }
 
 const MonitorSMTPEndpoint = "/monitor/smtp"

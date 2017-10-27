@@ -7,30 +7,30 @@ package ltm
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type MonitorSNMPDCAConfigList struct {
-	Items    []MonitorSNMPDCAConfig `json:"items"`
-	Kind     string                 `json:"kind"`
-	SelfLink string                 `json:"selflink"`
+	Items    []MonitorSNMPDCAConfig `json:"items,omitempty"`
+	Kind     string                 `json:"kind,omitempty"`
+	SelfLink string                 `json:"selflink,omitempty"`
 }
 
 type MonitorSNMPDCAConfig struct {
-	AgentType         string `json:"agentType"`
-	Community         string `json:"community"`
-	CPUCoefficient    string `json:"cpuCoefficient"`
-	CPUThreshold      string `json:"cpuThreshold"`
-	DiskCoefficient   string `json:"diskCoefficient"`
-	DiskThreshold     string `json:"diskThreshold"`
-	FullPath          string `json:"fullPath"`
-	Generation        int    `json:"generation"`
-	Interval          int    `json:"interval"`
-	Kind              string `json:"kind"`
-	MemoryCoefficient string `json:"memoryCoefficient"`
-	MemoryThreshold   string `json:"memoryThreshold"`
-	Name              string `json:"name"`
-	Partition         string `json:"partition"`
-	SelfLink          string `json:"selfLink"`
-	TimeUntilUp       int    `json:"timeUntilUp"`
-	Timeout           int    `json:"timeout"`
-	Version           string `json:"version"`
+	AgentType         string `json:"agentType,omitempty"`
+	Community         string `json:"community,omitempty"`
+	CPUCoefficient    string `json:"cpuCoefficient,omitempty"`
+	CPUThreshold      string `json:"cpuThreshold,omitempty"`
+	DiskCoefficient   string `json:"diskCoefficient,omitempty"`
+	DiskThreshold     string `json:"diskThreshold,omitempty"`
+	FullPath          string `json:"fullPath,omitempty"`
+	Generation        int    `json:"generation,omitempty"`
+	Interval          int    `json:"interval,omitempty"`
+	Kind              string `json:"kind,omitempty"`
+	MemoryCoefficient string `json:"memoryCoefficient,omitempty"`
+	MemoryThreshold   string `json:"memoryThreshold,omitempty"`
+	Name              string `json:"name,omitempty"`
+	Partition         string `json:"partition,omitempty"`
+	SelfLink          string `json:"selfLink,omitempty"`
+	TimeUntilUp       int    `json:"timeUntilUp,omitempty"`
+	Timeout           int    `json:"timeout,omitempty"`
+	Version           string `json:"version,omitempty"`
 }
 
 const MonitorSNMPDCAEndpoint = "/monitor/snmp-dca"

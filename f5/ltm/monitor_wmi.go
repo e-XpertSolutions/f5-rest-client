@@ -7,28 +7,28 @@ package ltm
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type MonitorWMIConfigList struct {
-	Items    []MonitorWMIConfig `json:"items"`
-	Kind     string             `json:"kind"`
-	SelfLink string             `json:"selflink"`
+	Items    []MonitorWMIConfig `json:"items,omitempty"`
+	Kind     string             `json:"kind,omitempty"`
+	SelfLink string             `json:"selflink,omitempty"`
 }
 
 type MonitorWMIConfig struct {
-	Agent       string `json:"agent"`
-	Destination string `json:"destination"`
-	FullPath    string `json:"fullPath"`
-	Generation  int    `json:"generation"`
-	Interval    int    `json:"interval"`
-	Kind        string `json:"kind"`
-	Method      string `json:"method"`
-	Metrics     string `json:"metrics"`
-	Name        string `json:"name"`
-	Partition   string `json:"partition"`
-	Post        string `json:"post"`
-	SelfLink    string `json:"selfLink"`
-	TimeUntilUp int    `json:"timeUntilUp"`
-	Timeout     int    `json:"timeout"`
-	TmCommand   string `json:"tmCommand"`
-	URL         string `json:"url"`
+	Agent       string `json:"agent,omitempty"`
+	Destination string `json:"destination,omitempty"`
+	FullPath    string `json:"fullPath,omitempty"`
+	Generation  int    `json:"generation,omitempty"`
+	Interval    int    `json:"interval,omitempty"`
+	Kind        string `json:"kind,omitempty"`
+	Method      string `json:"method,omitempty"`
+	Metrics     string `json:"metrics,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Partition   string `json:"partition,omitempty"`
+	Post        string `json:"post,omitempty"`
+	SelfLink    string `json:"selfLink,omitempty"`
+	TimeUntilUp int    `json:"timeUntilUp,omitempty"`
+	Timeout     int    `json:"timeout,omitempty"`
+	TmCommand   string `json:"tmCommand,omitempty"`
+	URL         string `json:"url,omitempty"`
 }
 
 const MonitorWMIEndpoint = "/monitor/wmi"

@@ -8,23 +8,23 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // DiskLogicalDiskConfigList holds a list of DiskLogicalDisk configuration.
 type DiskLogicalDiskConfigList struct {
-	Items    []DiskLogicalDiskConfig `json:"items"`
-	Kind     string                  `json:"kind"`
-	SelfLink string                  `json:"selflink"`
+	Items    []DiskLogicalDiskConfig `json:"items,omitempty"`
+	Kind     string                  `json:"kind,omitempty"`
+	SelfLink string                  `json:"selflink,omitempty"`
 }
 
 // DiskLogicalDiskConfig holds the configuration of a single DiskLogicalDisk.
 type DiskLogicalDiskConfig struct {
-	FullPath   string `json:"fullPath"`
-	Generation int    `json:"generation"`
-	Kind       string `json:"kind"`
-	Mode       string `json:"mode"`
-	Name       string `json:"name"`
-	SelfLink   string `json:"selfLink"`
-	Size       int    `json:"size"`
-	VgFree     int    `json:"vgFree"`
-	VgInUse    int    `json:"vgInUse"`
-	VgReserved int    `json:"vgReserved"`
+	FullPath   string `json:"fullPath,omitempty"`
+	Generation int    `json:"generation,omitempty"`
+	Kind       string `json:"kind,omitempty"`
+	Mode       string `json:"mode,omitempty"`
+	Name       string `json:"name,omitempty"`
+	SelfLink   string `json:"selfLink,omitempty"`
+	Size       int    `json:"size,omitempty"`
+	VgFree     int    `json:"vgFree,omitempty"`
+	VgInUse    int    `json:"vgInUse,omitempty"`
+	VgReserved int    `json:"vgReserved,omitempty"`
 }
 
 // DiskLogicalDiskEndpoint represents the REST resource for managing DiskLogicalDisk.

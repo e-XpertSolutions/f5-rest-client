@@ -7,22 +7,22 @@ package ltm
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type MonitorInbandConfigList struct {
-	Items    []MonitorInbandConfig `json:"items"`
-	Kind     string                `json:"kind"`
-	SelfLink string                `json:"selflink"`
+	Items    []MonitorInbandConfig `json:"items,omitempty"`
+	Kind     string                `json:"kind,omitempty"`
+	SelfLink string                `json:"selflink,omitempty"`
 }
 
 type MonitorInbandConfig struct {
-	FailureInterval int    `json:"failureInterval"`
-	Failures        int    `json:"failures"`
-	FullPath        string `json:"fullPath"`
-	Generation      int    `json:"generation"`
-	Kind            string `json:"kind"`
-	Name            string `json:"name"`
-	Partition       string `json:"partition"`
-	ResponseTime    int    `json:"responseTime"`
-	RetryTime       int    `json:"retryTime"`
-	SelfLink        string `json:"selfLink"`
+	FailureInterval int    `json:"failureInterval,omitempty"`
+	Failures        int    `json:"failures,omitempty"`
+	FullPath        string `json:"fullPath,omitempty"`
+	Generation      int    `json:"generation,omitempty"`
+	Kind            string `json:"kind,omitempty"`
+	Name            string `json:"name,omitempty"`
+	Partition       string `json:"partition,omitempty"`
+	ResponseTime    int    `json:"responseTime,omitempty"`
+	RetryTime       int    `json:"retryTime,omitempty"`
+	SelfLink        string `json:"selfLink,omitempty"`
 }
 
 const MonitorInbandEndpoint = "/monitor/inband"

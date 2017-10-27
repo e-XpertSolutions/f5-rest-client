@@ -7,28 +7,28 @@ package ltm
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type MonitorSIPConfigList struct {
-	Items    []MonitorSIPConfig `json:"items"`
-	Kind     string             `json:"kind"`
-	SelfLink string             `json:"selflink"`
+	Items    []MonitorSIPConfig `json:"items,omitempty"`
+	Kind     string             `json:"kind,omitempty"`
+	SelfLink string             `json:"selflink,omitempty"`
 }
 
 type MonitorSIPConfig struct {
-	Cipherlist    string `json:"cipherlist"`
-	Compatibility string `json:"compatibility"`
-	Debug         string `json:"debug"`
-	Destination   string `json:"destination"`
-	FullPath      string `json:"fullPath"`
-	Generation    int    `json:"generation"`
-	Interval      int    `json:"interval"`
-	Kind          string `json:"kind"`
-	ManualResume  string `json:"manualResume"`
-	Mode          string `json:"mode"`
-	Name          string `json:"name"`
-	Partition     string `json:"partition"`
-	SelfLink      string `json:"selfLink"`
-	TimeUntilUp   int    `json:"timeUntilUp"`
-	Timeout       int    `json:"timeout"`
-	UpInterval    int    `json:"upInterval"`
+	Cipherlist    string `json:"cipherlist,omitempty"`
+	Compatibility string `json:"compatibility,omitempty"`
+	Debug         string `json:"debug,omitempty"`
+	Destination   string `json:"destination,omitempty"`
+	FullPath      string `json:"fullPath,omitempty"`
+	Generation    int    `json:"generation,omitempty"`
+	Interval      int    `json:"interval,omitempty"`
+	Kind          string `json:"kind,omitempty"`
+	ManualResume  string `json:"manualResume,omitempty"`
+	Mode          string `json:"mode,omitempty"`
+	Name          string `json:"name,omitempty"`
+	Partition     string `json:"partition,omitempty"`
+	SelfLink      string `json:"selfLink,omitempty"`
+	TimeUntilUp   int    `json:"timeUntilUp,omitempty"`
+	Timeout       int    `json:"timeout,omitempty"`
+	UpInterval    int    `json:"upInterval,omitempty"`
 }
 
 const MonitorSIPEndpoint = "/monitor/sip"

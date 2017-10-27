@@ -14,32 +14,32 @@ import (
 
 // FileSSLKeyConfigList holds a list of FileSSLKey configuration.
 type FileSSLKeyConfigList struct {
-	Items    []FileSSLKeyConfig `json:"items"`
-	Kind     string             `json:"kind"`
-	SelfLink string             `json:"selflink"`
+	Items    []FileSSLKeyConfig `json:"items,omitempty"`
+	Kind     string             `json:"kind,omitempty"`
+	SelfLink string             `json:"selflink,omitempty"`
 }
 
 // FileSSLKeyConfig holds the configuration of a single FileSSLKey.
 type FileSSLKeyConfig struct {
-	Checksum       string `json:"checksum"`
-	CreateTime     string `json:"createTime"`
-	CreatedBy      string `json:"createdBy"`
-	CurveName      string `json:"curveName"`
-	FullPath       string `json:"fullPath"`
-	Generation     int    `json:"generation"`
-	KeySize        int    `json:"keySize"`
-	KeyType        string `json:"keyType"`
-	Kind           string `json:"kind"`
-	LastUpdateTime string `json:"lastUpdateTime"`
-	Mode           int    `json:"mode"`
-	Name           string `json:"name"`
-	Partition      string `json:"partition"`
-	Revision       int    `json:"revision"`
-	SecurityType   string `json:"securityType"`
-	SelfLink       string `json:"selfLink"`
-	Size           int    `json:"size"`
-	SystemPath     string `json:"systemPath"`
-	UpdatedBy      string `json:"updatedBy"`
+	Checksum       string `json:"checksum,omitempty"`
+	CreateTime     string `json:"createTime,omitempty"`
+	CreatedBy      string `json:"createdBy,omitempty"`
+	CurveName      string `json:"curveName,omitempty"`
+	FullPath       string `json:"fullPath,omitempty"`
+	Generation     int    `json:"generation,omitempty"`
+	KeySize        int    `json:"keySize,omitempty"`
+	KeyType        string `json:"keyType,omitempty"`
+	Kind           string `json:"kind,omitempty"`
+	LastUpdateTime string `json:"lastUpdateTime,omitempty"`
+	Mode           int    `json:"mode,omitempty"`
+	Name           string `json:"name,omitempty"`
+	Partition      string `json:"partition,omitempty"`
+	Revision       int    `json:"revision,omitempty"`
+	SecurityType   string `json:"securityType,omitempty"`
+	SelfLink       string `json:"selfLink,omitempty"`
+	Size           int    `json:"size,omitempty"`
+	SystemPath     string `json:"systemPath,omitempty"`
+	UpdatedBy      string `json:"updatedBy,omitempty"`
 }
 
 // FileSSLKeyEndpoint represents the REST resource for managing FileSSLKey.

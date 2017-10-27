@@ -7,23 +7,23 @@ package ltm
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type MonitorSASPConfigList struct {
-	Items    []MonitorSASPConfig `json:"items"`
-	Kind     string              `json:"kind"`
-	SelfLink string              `json:"selflink"`
+	Items    []MonitorSASPConfig `json:"items,omitempty"`
+	Kind     string              `json:"kind,omitempty"`
+	SelfLink string              `json:"selflink,omitempty"`
 }
 
 type MonitorSASPConfig struct {
-	FullPath    string `json:"fullPath"`
-	Generation  int    `json:"generation"`
-	Interval    string `json:"interval"`
-	Kind        string `json:"kind"`
-	Mode        string `json:"mode"`
-	Name        string `json:"name"`
-	Partition   string `json:"partition"`
-	Protocol    string `json:"protocol"`
-	SelfLink    string `json:"selfLink"`
-	Service     string `json:"service"`
-	TimeUntilUp int    `json:"timeUntilUp"`
+	FullPath    string `json:"fullPath,omitempty"`
+	Generation  int    `json:"generation,omitempty"`
+	Interval    string `json:"interval,omitempty"`
+	Kind        string `json:"kind,omitempty"`
+	Mode        string `json:"mode,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Partition   string `json:"partition,omitempty"`
+	Protocol    string `json:"protocol,omitempty"`
+	SelfLink    string `json:"selfLink,omitempty"`
+	Service     string `json:"service,omitempty"`
+	TimeUntilUp int    `json:"timeUntilUp,omitempty"`
 }
 
 const MonitorSASPEndpoint = "/monitor/sasp"

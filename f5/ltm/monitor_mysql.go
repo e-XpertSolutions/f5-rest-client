@@ -7,26 +7,26 @@ package ltm
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type MonitorMySQLConfigList struct {
-	Items    []MonitorMySQLConfig `json:"items"`
-	Kind     string               `json:"kind"`
-	SelfLink string               `json:"selflink"`
+	Items    []MonitorMySQLConfig `json:"items,omitempty"`
+	Kind     string               `json:"kind,omitempty"`
+	SelfLink string               `json:"selflink,omitempty"`
 }
 
 type MonitorMySQLConfig struct {
-	Count        string `json:"count"`
-	Debug        string `json:"debug"`
-	Destination  string `json:"destination"`
-	FullPath     string `json:"fullPath"`
-	Generation   int    `json:"generation"`
-	Interval     int    `json:"interval"`
-	Kind         string `json:"kind"`
-	ManualResume string `json:"manualResume"`
-	Name         string `json:"name"`
-	Partition    string `json:"partition"`
-	SelfLink     string `json:"selfLink"`
-	TimeUntilUp  int    `json:"timeUntilUp"`
-	Timeout      int    `json:"timeout"`
-	UpInterval   int    `json:"upInterval"`
+	Count        string `json:"count,omitempty"`
+	Debug        string `json:"debug,omitempty"`
+	Destination  string `json:"destination,omitempty"`
+	FullPath     string `json:"fullPath,omitempty"`
+	Generation   int    `json:"generation,omitempty"`
+	Interval     int    `json:"interval,omitempty"`
+	Kind         string `json:"kind,omitempty"`
+	ManualResume string `json:"manualResume,omitempty"`
+	Name         string `json:"name,omitempty"`
+	Partition    string `json:"partition,omitempty"`
+	SelfLink     string `json:"selfLink,omitempty"`
+	TimeUntilUp  int    `json:"timeUntilUp,omitempty"`
+	Timeout      int    `json:"timeout,omitempty"`
+	UpInterval   int    `json:"upInterval,omitempty"`
 }
 
 const MonitorMySQLEndpoint = "/monitor/mysql"

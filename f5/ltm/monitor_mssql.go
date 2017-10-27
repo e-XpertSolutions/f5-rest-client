@@ -7,9 +7,9 @@ package ltm
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type MonitorMSSQLConfigList struct {
-	Items    []MonitorMSSQLConfig `json:"items"`
-	Kind     string               `json:"kind"`
-	SelfLink string               `json:"selflink"`
+	Items    []MonitorMSSQLConfig `json:"items,omitempty"`
+	Kind     string               `json:"kind,omitempty"`
+	SelfLink string               `json:"selflink,omitempty"`
 }
 
 type MonitorMSSQLConfig struct {

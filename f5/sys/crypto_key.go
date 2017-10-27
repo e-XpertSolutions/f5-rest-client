@@ -8,21 +8,21 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // CryptoKeyConfigList holds a list of CryptoKey configuration.
 type CryptoKeyConfigList struct {
-	Items    []CryptoKeyConfig `json:"items"`
-	Kind     string            `json:"kind"`
-	SelfLink string            `json:"selflink"`
+	Items    []CryptoKeyConfig `json:"items,omitempty"`
+	Kind     string            `json:"kind,omitempty"`
+	SelfLink string            `json:"selflink,omitempty"`
 }
 
 // CryptoKeyConfig holds the configuration of a single CryptoKey.
 type CryptoKeyConfig struct {
-	FullPath     string `json:"fullPath"`
-	Generation   int    `json:"generation"`
-	KeySize      string `json:"keySize"`
-	KeyType      string `json:"keyType"`
-	Kind         string `json:"kind"`
-	Name         string `json:"name"`
-	SecurityType string `json:"securityType"`
-	SelfLink     string `json:"selfLink"`
+	FullPath     string `json:"fullPath,omitempty"`
+	Generation   int    `json:"generation,omitempty"`
+	KeySize      string `json:"keySize,omitempty"`
+	KeyType      string `json:"keyType,omitempty"`
+	Kind         string `json:"kind,omitempty"`
+	Name         string `json:"name,omitempty"`
+	SecurityType string `json:"securityType,omitempty"`
+	SelfLink     string `json:"selfLink,omitempty"`
 }
 
 // CryptoKeyEndpoint represents the REST resource for managing CryptoKey.

@@ -7,26 +7,26 @@ package ltm
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type MonitorModuleScoreConfigList struct {
-	Items    []MonitorModuleScoreConfig `json:"items"`
-	Kind     string                     `json:"kind"`
-	SelfLink string                     `json:"selflink"`
+	Items    []MonitorModuleScoreConfig `json:"items,omitempty"`
+	Kind     string                     `json:"kind,omitempty"`
+	SelfLink string                     `json:"selflink,omitempty"`
 }
 
 type MonitorModuleScoreConfig struct {
-	Debug         string `json:"debug"`
-	FullPath      string `json:"fullPath"`
-	Generation    int    `json:"generation"`
-	Interval      int    `json:"interval"`
-	Kind          string `json:"kind"`
-	Name          string `json:"name"`
-	Partition     string `json:"partition"`
-	SelfLink      string `json:"selfLink"`
-	SnmpCommunity string `json:"snmpCommunity"`
-	SnmpPort      int    `json:"snmpPort"`
-	SnmpVersion   string `json:"snmpVersion"`
-	TimeUntilUp   int    `json:"timeUntilUp"`
-	Timeout       int    `json:"timeout"`
-	UpInterval    int    `json:"upInterval"`
+	Debug         string `json:"debug,omitempty"`
+	FullPath      string `json:"fullPath,omitempty"`
+	Generation    int    `json:"generation,omitempty"`
+	Interval      int    `json:"interval,omitempty"`
+	Kind          string `json:"kind,omitempty"`
+	Name          string `json:"name,omitempty"`
+	Partition     string `json:"partition,omitempty"`
+	SelfLink      string `json:"selfLink,omitempty"`
+	SnmpCommunity string `json:"snmpCommunity,omitempty"`
+	SnmpPort      int    `json:"snmpPort,omitempty"`
+	SnmpVersion   string `json:"snmpVersion,omitempty"`
+	TimeUntilUp   int    `json:"timeUntilUp,omitempty"`
+	Timeout       int    `json:"timeout,omitempty"`
+	UpInterval    int    `json:"upInterval,omitempty"`
 }
 
 const MonitorModuleScoreEndpoint = "/monitor/module-score"

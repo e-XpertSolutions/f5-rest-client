@@ -8,26 +8,26 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // CryptoCertConfigList holds a list of CryptoCert configuration.
 type CryptoCertConfigList struct {
-	Items    []CryptoCertConfig `json:"items"`
-	Kind     string             `json:"kind"`
-	SelfLink string             `json:"selflink"`
+	Items    []CryptoCertConfig `json:"items,omitempty"`
+	Kind     string             `json:"kind,omitempty"`
+	SelfLink string             `json:"selflink,omitempty"`
 }
 
 // CryptoCertConfig holds the configuration of a single CryptoCert.
 type CryptoCertConfig struct {
 	APIRawValues struct {
-		CertificateKeySize string `json:"certificateKeySize"`
-		Expiration         string `json:"expiration"`
-		PublicKeyType      string `json:"publicKeyType"`
-	} `json:"apiRawValues"`
-	Country      string `json:"country"`
-	FullPath     string `json:"fullPath"`
-	Generation   int    `json:"generation"`
-	Kind         string `json:"kind"`
-	Name         string `json:"name"`
-	Organization string `json:"organization"`
-	Ou           string `json:"ou"`
-	SelfLink     string `json:"selfLink"`
+		CertificateKeySize string `json:"certificateKeySize,omitempty"`
+		Expiration         string `json:"expiration,omitempty"`
+		PublicKeyType      string `json:"publicKeyType,omitempty"`
+	} `json:"apiRawValues,omitempty"`
+	Country      string `json:"country,omitempty"`
+	FullPath     string `json:"fullPath,omitempty"`
+	Generation   int    `json:"generation,omitempty"`
+	Kind         string `json:"kind,omitempty"`
+	Name         string `json:"name,omitempty"`
+	Organization string `json:"organization,omitempty"`
+	Ou           string `json:"ou,omitempty"`
+	SelfLink     string `json:"selfLink,omitempty"`
 }
 
 // CryptoCertEndpoint represents the REST resource for managing CryptoCert.

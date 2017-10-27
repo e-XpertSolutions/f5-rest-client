@@ -7,9 +7,9 @@ package ltm
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type MonitorSNMPDataConfigList struct {
-	Items    []MonitorSNMPDataConfig `json:"items"`
-	Kind     string                  `json:"kind"`
-	SelfLink string                  `json:"selflink"`
+	Items    []MonitorSNMPDataConfig `json:"items,omitempty"`
+	Kind     string                  `json:"kind,omitempty"`
+	SelfLink string                  `json:"selflink,omitempty"`
 }
 
 type MonitorSNMPDataConfig struct {

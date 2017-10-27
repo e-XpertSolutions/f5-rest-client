@@ -8,27 +8,27 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // DiskApplicationVolumeConfigList holds a list of DiskApplicationVolume configuration.
 type DiskApplicationVolumeConfigList struct {
-	Items    []DiskApplicationVolumeConfig `json:"items"`
-	Kind     string                        `json:"kind"`
-	SelfLink string                        `json:"selflink"`
+	Items    []DiskApplicationVolumeConfig `json:"items,omitempty"`
+	Kind     string                        `json:"kind,omitempty"`
+	SelfLink string                        `json:"selflink,omitempty"`
 }
 
 // DiskApplicationVolumeConfig holds the configuration of a single DiskApplicationVolume.
 type DiskApplicationVolumeConfig struct {
-	FullPath             string `json:"fullPath"`
-	Generation           int    `json:"generation"`
-	Kind                 string `json:"kind"`
-	LogicalDisk          string `json:"logicalDisk"`
+	FullPath             string `json:"fullPath,omitempty"`
+	Generation           int    `json:"generation,omitempty"`
+	Kind                 string `json:"kind,omitempty"`
+	LogicalDisk          string `json:"logicalDisk,omitempty"`
 	LogicalDiskReference struct {
-		Link string `json:"link"`
-	} `json:"logicalDiskReference"`
-	Name                         string `json:"name"`
-	Owner                        string `json:"owner"`
-	Preservability               string `json:"preservability"`
-	Resizeable                   string `json:"resizeable"`
-	SelfLink                     string `json:"selfLink"`
-	Size                         int    `json:"size"`
-	VolumeSetVisibilityRestraint string `json:"volumeSetVisibilityRestraint"`
+		Link string `json:"link,omitempty"`
+	} `json:"logicalDiskReference,omitempty"`
+	Name                         string `json:"name,omitempty"`
+	Owner                        string `json:"owner,omitempty"`
+	Preservability               string `json:"preservability,omitempty"`
+	Resizeable                   string `json:"resizeable,omitempty"`
+	SelfLink                     string `json:"selfLink,omitempty"`
+	Size                         int    `json:"size,omitempty"`
+	VolumeSetVisibilityRestraint string `json:"volumeSetVisibilityRestraint,omitempty"`
 }
 
 // DiskApplicationVolumeEndpoint represents the REST resource for managing DiskApplicationVolume.

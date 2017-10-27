@@ -8,31 +8,31 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // GuestConfigList holds a list of Guest configuration.
 type GuestConfigList struct {
-	Items    []GuestConfig `json:"items"`
-	Kind     string        `json:"kind"`
-	SelfLink string        `json:"selflink"`
+	Items    []GuestConfig `json:"items,omitempty"`
+	Kind     string        `json:"kind,omitempty"`
+	SelfLink string        `json:"selflink,omitempty"`
 }
 
 // GuestConfig holds the configuration of a single Guest.
 type GuestConfig struct {
-	AllowedSlots      int    `json:"allowedSlots"`
-	AppService        string `json:"appService"`
-	AssignedSlots     int    `json:"assignedSlots"`
-	CoresPerSlot      int    `json:"coresPerSlot"`
-	Hostname          string `json:"hostname"`
-	InitialHotfix     string `json:"initialHotfix"`
-	InitialImage      string `json:"initialImage"`
-	ManagementGW      string `json:"managementGw"`
-	ManagementIP      string `json:"managementIp"`
-	ManagementNetwork string `json:"managementNetwork"`
-	MinSlots          int    `json:"minSlots"`
-	PreferredSLots    int    `json:"preferredSlots"`
-	Slots             int    `json:"slots"`
-	SSLMode           string `json:"sslMode"`
-	State             string `json:"state"`
-	SymUnitKey        string `json:"symUnitKey"`
-	TrafficProfile    string `json:"trafficProfile"`
-	VirtualDisk       string `json:"virtualDisk"`
+	AllowedSlots      int    `json:"allowedSlots,omitempty"`
+	AppService        string `json:"appService,omitempty"`
+	AssignedSlots     int    `json:"assignedSlots,omitempty"`
+	CoresPerSlot      int    `json:"coresPerSlot,omitempty"`
+	Hostname          string `json:"hostname,omitempty"`
+	InitialHotfix     string `json:"initialHotfix,omitempty"`
+	InitialImage      string `json:"initialImage,omitempty"`
+	ManagementGW      string `json:"managementGw,omitempty"`
+	ManagementIP      string `json:"managementIp,omitempty"`
+	ManagementNetwork string `json:"managementNetwork,omitempty"`
+	MinSlots          int    `json:"minSlots,omitempty"`
+	PreferredSLots    int    `json:"preferredSlots,omitempty"`
+	Slots             int    `json:"slots,omitempty"`
+	SSLMode           string `json:"sslMode,omitempty"`
+	State             string `json:"state,omitempty"`
+	SymUnitKey        string `json:"symUnitKey,omitempty"`
+	TrafficProfile    string `json:"trafficProfile,omitempty"`
+	VirtualDisk       string `json:"virtualDisk,omitempty"`
 }
 
 // GuestEndpoint represents the REST resource for managing Guest.

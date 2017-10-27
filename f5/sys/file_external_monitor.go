@@ -8,28 +8,28 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // FileExternalMonitorConfigList holds a list of FileExternalMonitor configuration.
 type FileExternalMonitorConfigList struct {
-	Items    []FileExternalMonitorConfig `json:"items"`
-	Kind     string                      `json:"kind"`
-	SelfLink string                      `json:"selflink"`
+	Items    []FileExternalMonitorConfig `json:"items,omitempty"`
+	Kind     string                      `json:"kind,omitempty"`
+	SelfLink string                      `json:"selflink,omitempty"`
 }
 
 // FileExternalMonitorConfig holds the configuration of a single FileExternalMonitor.
 type FileExternalMonitorConfig struct {
-	Checksum       string `json:"checksum"`
-	CreateTime     string `json:"createTime"`
-	CreatedBy      string `json:"createdBy"`
-	FullPath       string `json:"fullPath"`
-	Generation     int    `json:"generation"`
-	Kind           string `json:"kind"`
-	LastUpdateTime string `json:"lastUpdateTime"`
-	Mode           int    `json:"mode"`
-	Name           string `json:"name"`
-	Partition      string `json:"partition"`
-	Revision       int    `json:"revision"`
-	SelfLink       string `json:"selfLink"`
-	Size           int    `json:"size"`
-	SystemPath     string `json:"systemPath"`
-	UpdatedBy      string `json:"updatedBy"`
+	Checksum       string `json:"checksum,omitempty"`
+	CreateTime     string `json:"createTime,omitempty"`
+	CreatedBy      string `json:"createdBy,omitempty"`
+	FullPath       string `json:"fullPath,omitempty"`
+	Generation     int    `json:"generation,omitempty"`
+	Kind           string `json:"kind,omitempty"`
+	LastUpdateTime string `json:"lastUpdateTime,omitempty"`
+	Mode           int    `json:"mode,omitempty"`
+	Name           string `json:"name,omitempty"`
+	Partition      string `json:"partition,omitempty"`
+	Revision       int    `json:"revision,omitempty"`
+	SelfLink       string `json:"selfLink,omitempty"`
+	Size           int    `json:"size,omitempty"`
+	SystemPath     string `json:"systemPath,omitempty"`
+	UpdatedBy      string `json:"updatedBy,omitempty"`
 }
 
 // FileExternalMonitorEndpoint represents the REST resource for managing FileExternalMonitor.

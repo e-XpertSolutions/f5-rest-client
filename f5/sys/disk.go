@@ -8,16 +8,16 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // DiskConfigList holds a list of Disk configuration.
 type DiskConfigList struct {
-	Items    []DiskConfig `json:"items"`
-	Kind     string       `json:"kind"`
-	SelfLink string       `json:"selflink"`
+	Items    []DiskConfig `json:"items,omitempty"`
+	Kind     string       `json:"kind,omitempty"`
+	SelfLink string       `json:"selflink,omitempty"`
 }
 
 // DiskConfig holds the configuration of a single Disk.
 type DiskConfig struct {
 	Reference struct {
-		Link string `json:"link"`
-	} `json:"reference"`
+		Link string `json:"link,omitempty"`
+	} `json:"reference,omitempty"`
 }
 
 // DiskEndpoint represents the REST resource for managing Disk.

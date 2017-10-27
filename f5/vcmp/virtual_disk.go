@@ -8,14 +8,14 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // VirtualDiskConfigList holds a list of VirtualDisk configuration.
 type VirtualDiskConfigList struct {
-	Items    []VirtualDiskConfig `json:"items"`
-	Kind     string              `json:"kind"`
-	SelfLink string              `json:"selflink"`
+	Items    []VirtualDiskConfig `json:"items,omitempty"`
+	Kind     string              `json:"kind,omitempty"`
+	SelfLink string              `json:"selflink,omitempty"`
 }
 
 // VirtualDiskConfig holds the configuration of a single VirtualDisk.
 type VirtualDiskConfig struct {
-	OperatingSystem string `json:"operatingSystem"`
+	OperatingSystem string `json:"operatingSystem,omitempty"`
 }
 
 // VirtualDiskEndpoint represents the REST resource for managing VirtualDisk.

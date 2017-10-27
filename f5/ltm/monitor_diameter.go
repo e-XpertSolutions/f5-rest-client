@@ -7,26 +7,26 @@ package ltm
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type MonitorDiameterConfigList struct {
-	Items    []MonitorDiameterConfig `json:"items"`
-	Kind     string                  `json:"kind"`
-	SelfLink string                  `json:"selflink"`
+	Items    []MonitorDiameterConfig `json:"items,omitempty"`
+	Kind     string                  `json:"kind,omitempty"`
+	SelfLink string                  `json:"selflink,omitempty"`
 }
 
 type MonitorDiameterConfig struct {
-	FullPath     string `json:"fullPath"`
-	Generation   int    `json:"generation"`
-	Interval     int    `json:"interval"`
-	Kind         string `json:"kind"`
-	ManualResume string `json:"manualResume"`
-	Name         string `json:"name"`
-	OriginRealm  string `json:"originRealm"`
-	Partition    string `json:"partition"`
-	ProductName  string `json:"productName"`
-	SelfLink     string `json:"selfLink"`
-	TimeUntilUp  int    `json:"timeUntilUp"`
-	Timeout      int    `json:"timeout"`
-	UpInterval   int    `json:"upInterval"`
-	VendorID     string `json:"vendorId"`
+	FullPath     string `json:"fullPath,omitempty"`
+	Generation   int    `json:"generation,omitempty"`
+	Interval     int    `json:"interval,omitempty"`
+	Kind         string `json:"kind,omitempty"`
+	ManualResume string `json:"manualResume,omitempty"`
+	Name         string `json:"name,omitempty"`
+	OriginRealm  string `json:"originRealm,omitempty"`
+	Partition    string `json:"partition,omitempty"`
+	ProductName  string `json:"productName,omitempty"`
+	SelfLink     string `json:"selfLink,omitempty"`
+	TimeUntilUp  int    `json:"timeUntilUp,omitempty"`
+	Timeout      int    `json:"timeout,omitempty"`
+	UpInterval   int    `json:"upInterval,omitempty"`
+	VendorID     string `json:"vendorId,omitempty"`
 }
 
 const MonitorDiameterEndpoint = "/monitor/diameter"

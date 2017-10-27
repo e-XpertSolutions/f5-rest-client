@@ -8,15 +8,15 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // VirtualDiskTemplateConfigList holds a list of VirtualDiskTemplate configuration.
 type VirtualDiskTemplateConfigList struct {
-	Items    []VirtualDiskTemplateConfig `json:"items"`
-	Kind     string                      `json:"kind"`
-	SelfLink string                      `json:"selflink"`
+	Items    []VirtualDiskTemplateConfig `json:"items,omitempty"`
+	Kind     string                      `json:"kind,omitempty"`
+	SelfLink string                      `json:"selflink,omitempty"`
 }
 
 // VirtualDiskTemplateConfig holds the configuration of a single VirtualDiskTemplate.
 type VirtualDiskTemplateConfig struct {
-	ISOVersion      string `json:"isoVersion"`
-	OperatingSystem string `json:"operatingSystem"`
+	ISOVersion      string `json:"isoVersion,omitempty"`
+	OperatingSystem string `json:"operatingSystem,omitempty"`
 }
 
 // VirtualDiskTemplateEndpoint represents the REST resource for managing VirtualDiskTemplate.

@@ -15,42 +15,42 @@ import (
 
 // FileSSLCertConfigList holds a list of FileSSLCert configuration.
 type FileSSLCertConfigList struct {
-	Items    []FileSSLCertConfig `json:"items"`
-	Kind     string              `json:"kind"`
-	SelfLink string              `json:"selflink"`
+	Items    []FileSSLCertConfig `json:"items,omitempty"`
+	Kind     string              `json:"kind,omitempty"`
+	SelfLink string              `json:"selflink,omitempty"`
 }
 
 // FileSSLCertConfig holds the configuration of a single FileSSLCert.
 type FileSSLCertConfig struct {
 	BundleCertificatesReference struct {
-		IsSubcollection bool   `json:"isSubcollection"`
-		Link            string `json:"link"`
-	} `json:"bundleCertificatesReference"`
-	CertificateKeyCurveName string `json:"certificateKeyCurveName"`
-	CertificateKeySize      int    `json:"certificateKeySize"`
-	Checksum                string `json:"checksum"`
-	CreateTime              string `json:"createTime"`
-	CreatedBy               string `json:"createdBy"`
-	ExpirationDate          int64  `json:"expirationDate"`
-	ExpirationString        string `json:"expirationString"`
-	FullPath                string `json:"fullPath"`
-	Generation              int    `json:"generation"`
-	IsBundle                string `json:"isBundle"`
-	Issuer                  string `json:"issuer"`
-	KeyType                 string `json:"keyType"`
-	Kind                    string `json:"kind"`
-	LastUpdateTime          string `json:"lastUpdateTime"`
-	Mode                    int    `json:"mode"`
-	Name                    string `json:"name"`
-	Partition               string `json:"partition"`
-	Revision                int    `json:"revision"`
-	SelfLink                string `json:"selfLink"`
-	SerialNumber            string `json:"serialNumber"`
-	Size                    int    `json:"size"`
-	Subject                 string `json:"subject"`
-	SystemPath              string `json:"systemPath"`
-	UpdatedBy               string `json:"updatedBy"`
-	Version                 int    `json:"version"`
+		IsSubcollection bool   `json:"isSubcollection,omitempty"`
+		Link            string `json:"link,omitempty"`
+	} `json:"bundleCertificatesReference,omitempty"`
+	CertificateKeyCurveName string `json:"certificateKeyCurveName,omitempty"`
+	CertificateKeySize      int    `json:"certificateKeySize,omitempty"`
+	Checksum                string `json:"checksum,omitempty"`
+	CreateTime              string `json:"createTime,omitempty"`
+	CreatedBy               string `json:"createdBy,omitempty"`
+	ExpirationDate          int64  `json:"expirationDate,omitempty"`
+	ExpirationString        string `json:"expirationString,omitempty"`
+	FullPath                string `json:"fullPath,omitempty"`
+	Generation              int    `json:"generation,omitempty"`
+	IsBundle                string `json:"isBundle,omitempty"`
+	Issuer                  string `json:"issuer,omitempty"`
+	KeyType                 string `json:"keyType,omitempty"`
+	Kind                    string `json:"kind,omitempty"`
+	LastUpdateTime          string `json:"lastUpdateTime,omitempty"`
+	Mode                    int    `json:"mode,omitempty"`
+	Name                    string `json:"name,omitempty"`
+	Partition               string `json:"partition,omitempty"`
+	Revision                int    `json:"revision,omitempty"`
+	SelfLink                string `json:"selfLink,omitempty"`
+	SerialNumber            string `json:"serialNumber,omitempty"`
+	Size                    int    `json:"size,omitempty"`
+	Subject                 string `json:"subject,omitempty"`
+	SystemPath              string `json:"systemPath,omitempty"`
+	UpdatedBy               string `json:"updatedBy,omitempty"`
+	Version                 int    `json:"version,omitempty"`
 }
 
 // FileSSLCertEndpoint represents the REST resource for managing FileSSLCert.

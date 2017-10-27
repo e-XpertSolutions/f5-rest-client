@@ -8,15 +8,15 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // TrafficProfileConfigList holds a list of TrafficProfile configuration.
 type TrafficProfileConfigList struct {
-	Items    []TrafficProfileConfig `json:"items"`
-	Kind     string                 `json:"kind"`
-	SelfLink string                 `json:"selflink"`
+	Items    []TrafficProfileConfig `json:"items,omitempty"`
+	Kind     string                 `json:"kind,omitempty"`
+	SelfLink string                 `json:"selflink,omitempty"`
 }
 
 // TrafficProfileConfig holds the configuration of a single TrafficProfile.
 type TrafficProfileConfig struct {
-	AppService   string `json:"appService"`
-	ColorPolicer string `json:"colorPolicer"`
+	AppService   string `json:"appService,omitempty"`
+	ColorPolicer string `json:"colorPolicer,omitempty"`
 }
 
 // TrafficProfileEndpoint represents the REST resource for managing TrafficProfile.
