@@ -13,6 +13,8 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -38,13 +40,16 @@ type UploadResponse struct {
 
 // An authFunc is function responsible for setting necessary headers to
 // perform authenticated requests.
-type authFunc func(req *http.Request)
+type authFunc func(req *http.Request) error
 
 // A Client manages communication with the F5 API.
 type Client struct {
 	c        http.Client
 	baseURL  string
 	makeAuth authFunc
+	t        *http.Transport
+
+	token string
 
 	// Transaction
 	txID string // transaction ID to send for every request
@@ -54,11 +59,14 @@ type Client struct {
 //
 // baseURL is the base URL of the F5 API server.
 func NewBasicClient(baseURL, user, password string) (*Client, error) {
+	t := &http.Transport{}
 	return &Client{
-		c:       http.Client{},
+		c:       http.Client{Transport: t},
 		baseURL: baseURL,
-		makeAuth: authFunc(func(req *http.Request) {
+		t:       t,
+		makeAuth: authFunc(func(req *http.Request) error {
 			req.SetBasicAuth(user, password)
+			return nil
 		}),
 	}, nil
 }
@@ -66,49 +74,50 @@ func NewBasicClient(baseURL, user, password string) (*Client, error) {
 // NewTokenClient creates a new F5 client with token based authentication.
 //
 // baseURL is the base URL of the F5 API server.
-func NewTokenClient(baseURL, user, password, loginProvName string, sslCheck bool) (*Client, error) {
-	c := Client{c: http.Client{}, baseURL: baseURL}
-
-	// Negociate token with a pair of username/password.
-	data, err := json.Marshal(map[string]string{"username": user, "password": password, "loginProviderName": loginProvName})
-	if err != nil {
-		return nil, fmt.Errorf("failed to create token client (cannot marshal user credentials): %v", err)
-	}
-
-	req, err := http.NewRequest("POST", c.makeURL("/mgmt/shared/authn/login"), bytes.NewBuffer(data))
-	if err != nil {
-		return nil, fmt.Errorf("failed to create token client, (cannot create login request): %v", err)
-	}
-	req.Header.Add("Content-Type", "application/json")
-	req.SetBasicAuth(user, password)
-
-	client := http.Client{
-		Transport: &http.Transport{
-			TLSClientConfig: &tls.Config{InsecureSkipVerify: sslCheck},
-		},
-	}
-	resp, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("failed to create token client (token negociation failed): %v", err)
-	}
-	if resp.StatusCode >= 400 {
-		return nil, fmt.Errorf("failed to create token client (token negociation failed): http status %s", resp.Status)
-	}
-	defer resp.Body.Close()
-
-	tok := struct {
-		Token struct {
-			Token string `json:"token"`
-		} `json:"token"`
-	}{}
-	dec := json.NewDecoder(resp.Body)
-	if err := dec.Decode(&tok); err != nil {
-		return nil, fmt.Errorf("failed to create token client (cannot decode token): %v", err)
-	}
+func NewTokenClient(baseURL, user, password, loginProvName string) (*Client, error) {
+	t := &http.Transport{}
+	c := Client{c: http.Client{Transport: t}, baseURL: baseURL, t: t}
 
 	// Create auth function for token based authentication.
-	c.makeAuth = authFunc(func(req *http.Request) {
-		req.Header.Add("X-F5-Auth-Token", tok.Token.Token)
+	c.makeAuth = authFunc(func(req *http.Request) error {
+		if c.token == "" {
+			// Negociate token with a pair of username/password.
+			data, err := json.Marshal(map[string]string{"username": user, "password": password, "loginProviderName": loginProvName})
+			if err != nil {
+				return fmt.Errorf("failed to create token client (cannot marshal user credentials): %v", err)
+			}
+
+			tokReq, err := http.NewRequest("POST", c.makeURL("/mgmt/shared/authn/login"), bytes.NewBuffer(data))
+			if err != nil {
+				return fmt.Errorf("failed to create token client, (cannot create login request): %v", err)
+			}
+
+			tokReq.Header.Add("Content-Type", "application/json")
+			tokReq.SetBasicAuth(user, password)
+
+			resp, err := c.c.Do(tokReq)
+			if err != nil {
+				return fmt.Errorf("failed to create token client (token negociation failed): %v", err)
+			}
+			if resp.StatusCode >= 400 {
+				return fmt.Errorf("failed to create token client (token negociation failed): http status %s", resp.Status)
+			}
+			defer resp.Body.Close()
+
+			tok := struct {
+				Token struct {
+					Token string `json:"token"`
+				} `json:"token"`
+			}{}
+			dec := json.NewDecoder(resp.Body)
+			if err := dec.Decode(&tok); err != nil {
+				return fmt.Errorf("failed to create token client (cannot decode token): %v", err)
+			}
+
+			c.token = tok.Token.Token
+		}
+		req.Header.Add("X-F5-Auth-Token", c.token)
+		return nil
 	})
 
 	return &c, nil
@@ -117,9 +126,30 @@ func NewTokenClient(baseURL, user, password, loginProvName string, sslCheck bool
 // DisableCertCheck disables certificate verification, meaning that insecure
 // certificate will not cause any error.
 func (c *Client) DisableCertCheck() {
-	c.c.Transport = &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	c.t.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+}
+
+// UseProxy configures a proxy to use for outbound connections
+func (c *Client) UseProxy(proxy string) error {
+	proxyURL, err := url.Parse(proxy)
+	if err != nil {
+		return err
 	}
+	c.t.Proxy = http.ProxyURL(proxyURL)
+	return nil
+}
+
+// UseSystemProxy configures the client to use the system proxy
+func (c *Client) UseSystemProxy() error {
+	proxy := os.Getenv("HTTP_PROXY")
+	if proxy != "" {
+		proxyURL, err := url.Parse(proxy)
+		if err != nil {
+			return err
+		}
+		c.t.Proxy = http.ProxyURL(proxyURL)
+	}
+	return nil
 }
 
 // Begin starts a transaction.
@@ -199,7 +229,9 @@ func (c *Client) MakeRequest(method, restPath string, data interface{}) (*http.R
 	if c.txID != "" {
 		req.Header.Add("X-F5-REST-Coordination-Id", c.txID)
 	}
-	c.makeAuth(req)
+	if err := c.makeAuth(req); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -250,7 +282,9 @@ func (c *Client) MakeUploadRequest(restPath string, r io.Reader, off, chunk, fil
 	req.Header.Add("Accept", "application/json")
 	req.Header.Set("Content-Range", fmt.Sprintf("%d-%d/%d", off, off+chunk-1, filesize))
 	req.Header.Set("Content-Type", "application/octet-stream")
-	c.makeAuth(req)
+	if err := c.makeAuth(req); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
 
