@@ -103,3 +103,11 @@ func (nr *NodeResource) Delete(id string) error {
 	}
 	return nil
 }
+
+func (nr *NodeResource) ShowStats(id string) (*NodeStats, error) {
+	var item NodeStats
+	if err := nr.c.ReadQuery(BasePath+NodeEndpoint+"/"+id+"/stats", &item); err != nil {
+		return nil, err
+	}
+	return &item, nil
+}
