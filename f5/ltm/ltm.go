@@ -14,14 +14,15 @@ const BasePath = "mgmt/tm/ltm"
 type LTM struct {
 	c *f5.Client
 
-	virtual     VirtualResource
-	rule        RuleResource
-	pool        PoolResource
-	poolStats   PoolStatsResource
-	poolMembers PoolMembersResource
-	node        NodeResource
-	nodeStats   NodeStatsResource
-	iFile       IFileResource
+	virtual           VirtualResource
+	rule              RuleResource
+	pool              PoolResource
+	poolStats         PoolStatsResource
+	poolMembers       PoolMembersResource
+	node              NodeResource
+	nodeStats         NodeStatsResource
+	iFile             IFileResource
+	dataGroupInternal DataGroupInternalResource
 
 	profileClientSSL ProfileClientSSLResource
 
@@ -69,15 +70,16 @@ type LTM struct {
 // New creates a new LTM client.
 func New(c *f5.Client) LTM {
 	return LTM{
-		c:           c,
-		virtual:     VirtualResource{c: c},
-		rule:        RuleResource{c: c},
-		pool:        PoolResource{c: c},
-		poolStats:   PoolStatsResource{c: c},
-		poolMembers: PoolMembersResource{c: c},
-		node:        NodeResource{c: c},
-		nodeStats:   NodeStatsResource{c: c},
-		iFile:       IFileResource{c: c},
+		c:                 c,
+		virtual:           VirtualResource{c: c},
+		rule:              RuleResource{c: c},
+		pool:              PoolResource{c: c},
+		poolStats:         PoolStatsResource{c: c},
+		poolMembers:       PoolMembersResource{c: c},
+		node:              NodeResource{c: c},
+		nodeStats:         NodeStatsResource{c: c},
+		iFile:             IFileResource{c: c},
+		dataGroupInternal: DataGroupInternalResource{c: c},
 
 		profileClientSSL: ProfileClientSSLResource{c: c},
 
@@ -159,6 +161,11 @@ func (ltm LTM) NodeStats() *NodeStatsResource {
 // IFile returns an IFileResource configured to query /tm/ltm/ifile API.
 func (ltm LTM) IFile() *IFileResource {
 	return &ltm.iFile
+}
+
+// DataGroupInternal returns a DataGroupInternalResource configured to query /tm/ltm/data-group/internal API.
+func (ltm LTM) DataGroupInternal() *DataGroupInternalResource {
+	return &ltm.dataGroupInternal
 }
 
 func (ltm LTM) MonitorDiameter() *MonitorDiameterResource {
