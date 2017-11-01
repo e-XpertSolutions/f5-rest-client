@@ -70,3 +70,11 @@ func (pr *InetResource) Get(id string) (*Interface, error) {
 	}
 	return &item, nil
 }
+
+func (pr *InetResource) ShowStats(id string) (*InterfaceStats, error) {
+	var item InterfaceStats
+	if err := pr.c.ReadQuery(BasePath+InterfaceEndpoint+"/"+id+"/stats", &item); err != nil {
+		return nil, err
+	}
+	return &item, nil
+}

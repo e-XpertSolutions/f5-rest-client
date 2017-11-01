@@ -12,6 +12,7 @@ type NET struct {
 	c *f5.Client
 
 	inet        InetResource
+	inetStats   InetStatsResource
 	route       RouteResource
 	vlan        VlanResource
 	self        SelfResource
@@ -24,6 +25,7 @@ func New(c *f5.Client) NET {
 	return NET{
 		c:           c,
 		inet:        InetResource{c: c},
+		inetStats:   InetStatsResource{c: c},
 		route:       RouteResource{c: c},
 		vlan:        VlanResource{c: c},
 		self:        SelfResource{c: c},
@@ -35,6 +37,10 @@ func New(c *f5.Client) NET {
 // Inet returns a InetResource configured to query tm/net/interface API.
 func (net NET) Inet() *InetResource {
 	return &net.inet
+}
+
+func (net NET) InetStats() *InetStatsResource {
+	return &net.inetStats
 }
 
 // Route returns a RouteResource configured to query tm/net/route API.
