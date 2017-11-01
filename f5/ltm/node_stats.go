@@ -7,69 +7,69 @@ package ltm
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type NodeStatsList struct {
-	Entries  map[string]NodeStatsEntries `json:"entries"`
-	Kind     string                      `json:"kind"`
-	SelfLink string                      `json:"selflink"`
+	Entries  map[string]NodeStatsEntries `json:"entries,omitempty"`
+	Kind     string                      `json:"kind,omitempty"`
+	SelfLink string                      `json:"selflink,omitempty"`
 }
 
 type NodeStatsEntries struct {
-	NestedNodeStats NodeStats `json:"nestedStats"`
+	NestedNodeStats NodeStats `json:"nestedStats,omitempty"`
 }
 
 type NodeStats struct {
 	Entries struct {
 		Addr struct {
-			Description string `json:"description"`
-		} `json:"addr"`
+			Description string `json:"description,omitempty"`
+		} `json:"addr,omitempty"`
 		CurSessions struct {
-			Value int `json:"value"`
-		} `json:"curSessions"`
+			Value int `json:"value,omitempty"`
+		} `json:"curSessions,omitempty"`
 		MonitorRule struct {
-			Description string `json:"description"`
-		} `json:"monitorRule"`
+			Description string `json:"description,omitempty"`
+		} `json:"monitorRule,omitempty"`
 		MonitorStatus struct {
-			Description string `json:"description"`
-		} `json:"monitorStatus"`
+			Description string `json:"description,omitempty"`
+		} `json:"monitorStatus,omitempty"`
 		ServersideBitsIn struct {
-			Value int `json:"value"`
-		} `json:"serverside.bitsIn"`
+			Value int `json:"value,omitempty"`
+		} `json:"serverside.bitsIn,omitempty"`
 		ServersideBitsOut struct {
-			Value int `json:"value"`
-		} `json:"serverside.bitsOut"`
+			Value int `json:"value,omitempty"`
+		} `json:"serverside.bitsOut,omitempty"`
 		ServersideCurConns struct {
-			Value int `json:"value"`
-		} `json:"serverside.curConns"`
+			Value int `json:"value,omitempty"`
+		} `json:"serverside.curConns,omitempty"`
 		ServersideMaxConns struct {
-			Value int `json:"value"`
-		} `json:"serverside.maxConns"`
+			Value int `json:"value,omitempty"`
+		} `json:"serverside.maxConns,omitempty"`
 		ServersidePktsIn struct {
-			Value int `json:"value"`
-		} `json:"serverside.pktsIn"`
+			Value int `json:"value,omitempty"`
+		} `json:"serverside.pktsIn,omitempty"`
 		ServersidePktsOut struct {
-			Value int `json:"value"`
-		} `json:"serverside.pktsOut"`
+			Value int `json:"value,omitempty"`
+		} `json:"serverside.pktsOut,omitempty"`
 		ServersideTotConns struct {
-			Value int `json:"value"`
-		} `json:"serverside.totConns"`
+			Value int `json:"value,omitempty"`
+		} `json:"serverside.totConns,omitempty"`
 		SessionStatus struct {
-			Description string `json:"description"`
-		} `json:"sessionStatus"`
+			Description string `json:"description,omitempty"`
+		} `json:"sessionStatus,omitempty"`
 		StatusAvailabilityState struct {
-			Description string `json:"description"`
-		} `json:"status.availabilityState"`
+			Description string `json:"description,omitempty"`
+		} `json:"status.availabilityState,omitempty"`
 		StatusEnabledState struct {
-			Description string `json:"description"`
-		} `json:"status.enabledState"`
+			Description string `json:"description,omitempty"`
+		} `json:"status.enabledState,omitempty"`
 		StatusStatusReason struct {
-			Description string `json:"description"`
-		} `json:"status.statusReason"`
+			Description string `json:"description,omitempty"`
+		} `json:"status.statusReason,omitempty"`
 		TmName struct {
-			Description string `json:"description"`
-		} `json:"tmName"`
+			Description string `json:"description,omitempty"`
+		} `json:"tmName,omitempty"`
 		TotRequests struct {
-			Value int `json:"value"`
-		} `json:"totRequests"`
-	} `json:"entries"`
+			Value int `json:"value,omitempty"`
+		} `json:"totRequests,omitempty"`
+	} `json:"entries,omitempty"`
 }
 
 // NodeStatsEndpoint represents the REST resource for managing NodeStats.
