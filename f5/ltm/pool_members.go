@@ -44,7 +44,7 @@ type PoolMembersConfig struct {
 }
 
 // PoolMembersEndpoint represents the REST resource for managing pool members.
-const PoolMembersEndpoint = "/pool_members"
+const PoolMembersEndpoint = "/members"
 
 // PoolMembersResource provides an API to manage pool members configuration.
 type PoolMembersResource struct {
