@@ -104,3 +104,11 @@ func (pr *PoolResource) GetMembers(id string) (*PoolMembersConfigList, error) {
 	}
 	return &poolMembersConfig, nil
 }
+
+func (nr *PoolResource) ShowStats(id string) (*PoolStats, error) {
+	var item PoolStats
+	if err := nr.c.ReadQuery(BasePath+PoolEndpoint+"/"+id+"/stats", &item); err != nil {
+		return nil, err
+	}
+	return &item, nil
+}
