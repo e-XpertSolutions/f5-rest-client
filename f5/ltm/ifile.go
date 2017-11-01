@@ -11,8 +11,10 @@ type IFileConfigList struct {
 type IFileConfig struct {
 	AppService  string `json:"appService,omitempty"`
 	Description string `json:"description,omitempty"`
+	Name        string `json:"name,omitempty"`
 	FileName    string `json:"fileName,omitempty"`
 	TMPartition string `json:"tmPartition,omitempty"`
+	Partition   string `json:"partition,omitempty"`
 }
 
 const IFileEndpoint = "/ifile"
