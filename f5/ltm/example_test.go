@@ -28,7 +28,7 @@ func Example() {
 	}
 	log.Print(vsConfigList)
 
-	node1 := ltm.NodeConfig{
+	node1 := ltm.Node{
 		Address: "1.1.1.1",
 		Name:    "my-node-1",
 	}

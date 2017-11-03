@@ -23,7 +23,7 @@ func ExampleClient_Begin() {
 	ltmClient := ltm.New(tx)
 
 	// Node 1
-	nodeConfig := ltm.NodeConfig{
+	nodeConfig := ltm.Node{
 		Name:    "test-node-1",
 		Address: "1.1.1.1",
 	}
@@ -32,7 +32,7 @@ func ExampleClient_Begin() {
 	}
 
 	// Node 2
-	nodeConfig = ltm.NodeConfig{
+	nodeConfig = ltm.Node{
 		Name:    "test-node-2",
 		Address: "2.2.2.2",
 	}
@@ -77,7 +77,7 @@ func Example_transaction() {
 	// Create a Pool
 	log.Print("Create a pool")
 
-	poolConfig := ltm.PoolConfig{
+	poolConfig := ltm.Pool{
 		Name:    "pool_" + tx.TransactionID(),
 		Monitor: "/Common/http_monitor_" + tx.TransactionID(),
 		Members: []string{"10.1.10.10:80", "10.1.10.11:80"},
@@ -90,7 +90,7 @@ func Example_transaction() {
 	// Create a Virtual Server
 	log.Print("Create a Virtual Server")
 
-	vsConfig := ltm.VirtualServerConfig{
+	vsConfig := ltm.VirtualServer{
 		Name:        "vs_http_" + tx.TransactionID(),
 		Destination: "10.1.20.130:80",
 		IPProtocol:  "tcp",
