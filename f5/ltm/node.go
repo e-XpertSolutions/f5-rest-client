@@ -74,7 +74,7 @@ func (nr *NodeResource) Edit(id string, item Node) error {
 }
 
 func (nr *NodeResource) Enable(id string) error {
-	item := Node{Session: "unchecked", State: "user-enabled"}
+	item := Node{Session: "user-enabled", State: "user-up"}
 	if err := nr.c.ModQuery("PUT", BasePath+NodeEndpoint+"/"+id, item); err != nil {
 		return err
 	}
@@ -82,7 +82,7 @@ func (nr *NodeResource) Enable(id string) error {
 }
 
 func (nr *NodeResource) Disable(id string) error {
-	item := Node{Session: "unchecked", State: "user-disabled"}
+	item := Node{Session: "user-disabled", State: "user-up"}
 	if err := nr.c.ModQuery("PUT", BasePath+NodeEndpoint+"/"+id, item); err != nil {
 		return err
 	}
@@ -90,7 +90,7 @@ func (nr *NodeResource) Disable(id string) error {
 }
 
 func (nr *NodeResource) ForceOffline(id string) error {
-	item := Node{Session: "user-down", State: "user-disabled"}
+	item := Node{Session: "user-disabled", State: "user-down"}
 	if err := nr.c.ModQuery("PUT", BasePath+NodeEndpoint+"/"+id, item); err != nil {
 		return err
 	}
