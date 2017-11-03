@@ -11,15 +11,15 @@ import (
 	"github.com/e-XpertSolutions/f5-rest-client/f5"
 )
 
-// VirtualServerConfigList holds a list of virtual server configuration.
-type VirtualServerConfigList struct {
-	Items    []VirtualServerConfig `json:"items,omitempty"`
-	Kind     string                `json:"kind,omitempty"`
-	SelfLink string                `json:"selfLink,omitempty"`
+// VirtualServerList holds a list of virtual server uration.
+type VirtualServerList struct {
+	Items    []VirtualServer `json:"items,omitempty"`
+	Kind     string          `json:"kind,omitempty" pretty:",expanded"`
+	SelfLink string          `json:"selfLink,omitempty" pretty:",expanded"`
 }
 
-// VirtualServerConfig holds the configuration of a single virtual server.
-type VirtualServerConfig struct {
+// VirtualServer holds the uration of a single virtual server.
+type VirtualServer struct {
 	AddressStatus     string `json:"addressStatus,omitempty"`
 	AutoLasthop       string `json:"autoLasthop,omitempty"`
 	CmpEnabled        string `json:"cmpEnabled,omitempty"`
@@ -28,33 +28,33 @@ type VirtualServerConfig struct {
 	Destination       string `json:"destination,omitempty"`
 	Disabled          bool   `json:"disabled,omitempty"`
 	Enabled           bool   `json:"enabled,omitempty"`
-	FullPath          string `json:"fullPath,omitempty"`
-	Generation        int64  `json:"generation,omitempty"`
-	GtmScore          int64  `json:"gtmScore,omitempty"`
+	FullPath          string `json:"fullPath,omitempty" pretty:",expanded"`
+	Generation        int64  `json:"generation,omitempty" pretty:",expanded"`
+	GtmScore          int64  `json:"gtmScore,omitempty" pretty:",expanded"`
 	IPProtocol        string `json:"ipProtocol,omitempty"`
-	Kind              string `json:"kind,omitempty"`
+	Kind              string `json:"kind,omitempty" pretty:",expanded"`
 	Mask              string `json:"mask,omitempty"`
 	Mirror            string `json:"mirror,omitempty"`
-	MobileAppTunnel   string `json:"mobileAppTunnel,omitempty"`
+	MobileAppTunnel   string `json:"mobileAppTunnel,omitempty" pretty:",expanded"`
 	Name              string `json:"name,omitempty"`
-	Nat64             string `json:"nat64,omitempty"`
+	Nat64             string `json:"nat64,omitempty" pretty:",expanded"`
 	Partition         string `json:"partition,omitempty"`
 	PoliciesReference struct {
 		IsSubcollection bool   `json:"isSubcollection,omitempty"`
 		Link            string `json:"link,omitempty"`
 	} `json:"policiesReference,omitempty"`
-	Pool              string    `json:"pool,omitempty"`
-	Profiles          []Profile `json:"profiles,omitempty"`
+	Pool              string `json:"pool,omitempty"`
 	ProfilesReference struct {
-		IsSubcollection bool   `json:"isSubcollection,omitempty"`
-		Link            string `json:"link,omitempty"`
+		IsSubcollection bool      `json:"isSubcollection,omitempty"`
+		Link            string    `json:"link,omitempty"`
+		Profiles        []Profile `json:"items,omitempty"`
 	} `json:"profilesReference,omitempty"`
-	RateLimit                string                   `json:"rateLimit,omitempty"`
-	RateLimitDstMask         int64                    `json:"rateLimitDstMask,omitempty"`
-	RateLimitMode            string                   `json:"rateLimitMode,omitempty"`
-	RateLimitSrcMask         int64                    `json:"rateLimitSrcMask,omitempty"`
+	RateLimit                string                   `json:"rateLimit,omitempty" pretty:",expanded"`
+	RateLimitDstMask         int64                    `json:"rateLimitDstMask,omitempty" pretty:",expanded"`
+	RateLimitMode            string                   `json:"rateLimitMode,omitempty" pretty:",expanded"`
+	RateLimitSrcMask         int64                    `json:"rateLimitSrcMask,omitempty" pretty:",expanded"`
 	Rules                    []string                 `json:"rules,omitempty"`
-	SelfLink                 string                   `json:"selfLink,omitempty"`
+	SelfLink                 string                   `json:"selfLink,omitempty" pretty:",expanded"`
 	Source                   string                   `json:"source,omitempty"`
 	SourceAddressTranslation SourceAddressTranslation `json:"sourceAddressTranslation,omitempty"`
 	SourcePort               string                   `json:"sourcePort,omitempty"`
@@ -64,7 +64,7 @@ type VirtualServerConfig struct {
 	Vlans                    []string                 `json:"vlans,omitempty"`
 	VlansDisabled            bool                     `json:"vlansDisabled,omitempty"`
 	VlansEnabled             bool                     `json:"vlansEnabled,omitempty"`
-	VsIndex                  int64                    `json:"vsIndex,omitempty"`
+	VsIndex                  int64                    `json:"vsIndex,omitempty" pretty:",expanded"`
 }
 
 type SourceAddressTranslation struct {
@@ -85,13 +85,13 @@ const VirtualEndpoint = "/virtual"
 type VirtualResponse struct {
 }
 
-// VirtualResource provides an API to manage virtual server configurations.
+// VirtualResource provides an API to manage virtual server urations.
 type VirtualResource struct {
 	c *f5.Client
 }
 
-// ListAll lists all the virtual server configurations.
-func (vr *VirtualResource) ListAll() (*VirtualServerConfigList, error) {
+// ListAll lists all the virtual server urations.
+func (vr *VirtualResource) ListAll() (*VirtualServerList, error) {
 	resp, err := vr.doRequest("GET", "", nil)
 	if err != nil {
 		return nil, err
@@ -100,7 +100,7 @@ func (vr *VirtualResource) ListAll() (*VirtualServerConfigList, error) {
 	if err := vr.readError(resp); err != nil {
 		return nil, err
 	}
-	var vsc VirtualServerConfigList
+	var vsc VirtualServerList
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&vsc); err != nil {
 		return nil, err
@@ -108,8 +108,8 @@ func (vr *VirtualResource) ListAll() (*VirtualServerConfigList, error) {
 	return &vsc, nil
 }
 
-// Get a single virtual server configuration identified by id.
-func (vr *VirtualResource) Get(id string) (*VirtualServerConfig, error) {
+// Get a single virtual server uration identified by id.
+func (vr *VirtualResource) Get(id string) (*VirtualServer, error) {
 	resp, err := vr.doRequest("GET", id, nil)
 	if err != nil {
 		return nil, err
@@ -118,7 +118,7 @@ func (vr *VirtualResource) Get(id string) (*VirtualServerConfig, error) {
 	if err := vr.readError(resp); err != nil {
 		return nil, err
 	}
-	var vsci VirtualServerConfig
+	var vsci VirtualServer
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&vsci); err != nil {
 		return nil, err
@@ -126,16 +126,16 @@ func (vr *VirtualResource) Get(id string) (*VirtualServerConfig, error) {
 	return &vsci, nil
 }
 
-// Create a new virtual server configuration.
-func (vr *VirtualResource) Create(item VirtualServerConfig) error {
+// Create a new virtual server uration.
+func (vr *VirtualResource) Create(item VirtualServer) error {
 	if err := vr.c.ModQuery("POST", BasePath+VirtualEndpoint, item); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Edit a virtual server configuration identified by id.
-func (vr *VirtualResource) Edit(id string, item VirtualServerConfig) error {
+// Edit a virtual server uration identified by id.
+func (vr *VirtualResource) Edit(id string, item VirtualServer) error {
 	resp, err := vr.doRequest("PUT", id, item)
 	if err != nil {
 		return err
@@ -149,7 +149,7 @@ func (vr *VirtualResource) Edit(id string, item VirtualServerConfig) error {
 
 // Enabling a virtual server item identified by id.
 func (vr *VirtualResource) Enable(id string) error {
-	item := VirtualServerConfig{Enabled: true}
+	item := VirtualServer{Enabled: true}
 	resp, err := vr.doRequest("PATCH", id, item)
 	if err != nil {
 		return err
@@ -163,7 +163,7 @@ func (vr *VirtualResource) Enable(id string) error {
 
 // Disabling a virtual server item identified by id.
 func (vr *VirtualResource) Disable(id string) error {
-	item := VirtualServerConfig{Disabled: true}
+	item := VirtualServer{Disabled: true}
 	resp, err := vr.doRequest("PATCH", id, item)
 	if err != nil {
 		return err
@@ -175,7 +175,7 @@ func (vr *VirtualResource) Disable(id string) error {
 	return nil
 }
 
-// Delete a single server configuration identified by id.
+// Delete a single server uration identified by id.
 func (vr *VirtualResource) Delete(id string) error {
 	resp, err := vr.doRequest("DELETE", id, nil)
 	if err != nil {
@@ -188,7 +188,7 @@ func (vr *VirtualResource) Delete(id string) error {
 	return nil
 }
 
-// Rules gets the iRules configuration for a virtual server identified by id.
+// Rules gets the iRules uration for a virtual server identified by id.
 func (vr *VirtualResource) Rules(id string) ([]Rule, error) {
 	resp, err := vr.doRequest("GET", id+"/rule", nil)
 	if err != nil {

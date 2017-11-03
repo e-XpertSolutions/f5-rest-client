@@ -2,13 +2,13 @@ package ltm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-type ProfileClientSSLConfigList struct {
-	Items    []ProfileClientSSLConfig `json:"items,omitempty"`
-	Kind     string                   `json:"kind,omitempty"`
-	SelfLink string                   `json:"selflink,omitempty"`
+type ProfileClientSSLList struct {
+	Items    []ProfileClientSSL `json:"items,omitempty"`
+	Kind     string             `json:"kind,omitempty" pretty:",expanded"`
+	SelfLink string             `json:"selflink,omitempty" pretty:",expanded"`
 }
 
-type ProfileClientSSLConfig struct {
+type ProfileClientSSL struct {
 	AlertTimeout             string   `json:"alertTimeout,omitempty"`
 	AllowDynamicRecordSizing string   `json:"allowDynamicRecordSizing,omitempty"`
 	AllowExpiredCRL          string   `json:"allowExpiredCrl,omitempty"`
@@ -111,30 +111,30 @@ type ProfileClientSSLResource struct {
 	c *f5.Client
 }
 
-func (r *ProfileClientSSLResource) ListAll() (*ProfileClientSSLConfigList, error) {
-	var list ProfileClientSSLConfigList
+func (r *ProfileClientSSLResource) ListAll() (*ProfileClientSSLList, error) {
+	var list ProfileClientSSLList
 	if err := r.c.ReadQuery(BasePath+ProfileClientSSLEndpoint, &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
 }
 
-func (r *ProfileClientSSLResource) Get(id string) (*ProfileClientSSLConfig, error) {
-	var item ProfileClientSSLConfig
+func (r *ProfileClientSSLResource) Get(id string) (*ProfileClientSSL, error) {
+	var item ProfileClientSSL
 	if err := r.c.ReadQuery(BasePath+ProfileClientSSLEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
 }
 
-func (r *ProfileClientSSLResource) Create(item ProfileClientSSLConfig) error {
+func (r *ProfileClientSSLResource) Create(item ProfileClientSSL) error {
 	if err := r.c.ModQuery("POST", BasePath+ProfileClientSSLEndpoint, item); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (r *ProfileClientSSLResource) Edit(id string, item ProfileClientSSLConfig) error {
+func (r *ProfileClientSSLResource) Edit(id string, item ProfileClientSSL) error {
 	if err := r.c.ModQuery("PUT", BasePath+ProfileClientSSLEndpoint+"/"+id, item); err != nil {
 		return err
 	}

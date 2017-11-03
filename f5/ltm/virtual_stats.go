@@ -8,8 +8,8 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type VirtualStatsList struct {
 	Entries  map[string]VirtualStatsEntries `json:"entries,omitempty"`
-	Kind     string                         `json:"kind,omitempty"`
-	SelfLink string                         `json:"selflink,omitempty"`
+	Kind     string                         `json:"kind,omitempty" pretty:",expanded"`
+	SelfLink string                         `json:"selflink,omitempty" pretty:",expanded"`
 }
 
 type VirtualStatsEntries struct {

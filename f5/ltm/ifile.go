@@ -2,13 +2,13 @@ package ltm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-type IFileConfigList struct {
-	Items    []IFileConfig `json:"items"`
-	Kind     string        `json:"kind"`
-	SelfLink string        `json:"selflink"`
+type IFileList struct {
+	Items    []IFile `json:"items"`
+	Kind     string  `json:"kind"`
+	SelfLink string  `json:"selflink"`
 }
 
-type IFileConfig struct {
+type IFile struct {
 	AppService  string `json:"appService,omitempty"`
 	Description string `json:"description,omitempty"`
 	Name        string `json:"name,omitempty"`
@@ -23,16 +23,16 @@ type IFileResource struct {
 	c *f5.Client
 }
 
-func (r *IFileResource) ListAll() (*IFileConfigList, error) {
-	var list IFileConfigList
+func (r *IFileResource) ListAll() (*IFileList, error) {
+	var list IFileList
 	if err := r.c.ReadQuery(BasePath+IFileEndpoint, &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
 }
 
-func (r *IFileResource) Get(id string) (*IFileConfig, error) {
-	var item IFileConfig
+func (r *IFileResource) Get(id string) (*IFile, error) {
+	var item IFile
 	if err := r.c.ReadQuery(BasePath+IFileEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}

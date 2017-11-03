@@ -14,8 +14,8 @@ import (
 // A RuleList holds a list of iRule configurations.
 type RuleList struct {
 	Items    []Rule `json:"items,omitempty"`
-	Kind     string `json:"kind,omitempty"`
-	SelfLink string `json:"selfLink,omitempty"`
+	Kind     string `json:"kind,omitempty" pretty:",expanded"`
+	SelfLink string `json:"selfLink,omitempty" pretty:",expanded"`
 }
 
 // A Rule holds an iRule configuration.
@@ -32,6 +32,12 @@ type Rule struct {
 	Plugin              string `json:"plugin,omitempty"`
 	PublicCert          string `json:"publicCert,omitempty"`
 	SigningKey          string `json:"signingKey,omitempty"`
+
+	Name         string `json:"name,omitempty"`
+	Partition    string `json:"partition,omitempty"`
+	FullPath     string `json:"fullPath,omitempty"`
+	SelfLink     string `json:"selfLink,omitempty"`
+	ApiAnonymous string `json:"apiAnonymous,omitempty"`
 }
 
 // RuleEndpoint represents the REST resource for managing iRule configurations.

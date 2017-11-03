@@ -8,8 +8,8 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 type NodeStatsList struct {
 	Entries  map[string]NodeStatsEntries `json:"entries,omitempty"`
-	Kind     string                      `json:"kind,omitempty"`
-	SelfLink string                      `json:"selflink,omitempty"`
+	Kind     string                      `json:"kind,omitempty" pretty:",expanded"`
+	SelfLink string                      `json:"selflink,omitempty" pretty:",expanded"`
 }
 
 type NodeStatsEntries struct {
@@ -65,7 +65,7 @@ type NodeStats struct {
 		} `json:"status.statusReason,omitempty"`
 		TmName struct {
 			Description string `json:"description,omitempty"`
-		} `json:"tmName,omitempty"`
+		} `json:"tmName,omitempty" pretty:",expanded"`
 		TotRequests struct {
 			Value int `json:"value"`
 		} `json:"totRequests,omitempty"`
