@@ -15,17 +15,18 @@ type PoolList struct {
 
 // A Pool hold the uration for a pool.
 type Pool struct {
-	AllowNat              string `json:"allowNat,omitempty" pretty:",expanded"`
-	AllowSnat             string `json:"allowSnat,omitempty" pretty:",expanded"`
-	FullPath              string `json:"fullPath,omitempty" pretty:",expanded"`
-	Generation            int64  `json:"generation,omitempty" pretty:",expanded"`
-	IgnorePersistedWeight string `json:"ignorePersistedWeight,omitempty" pretty:",expanded"`
-	IPTosToClient         string `json:"ipTosToClient,omitempty" pretty:",expanded"`
-	IPTosToServer         string `json:"ipTosToServer,omitempty" pretty:",expanded"`
-	Kind                  string `json:"kind,omitempty" pretty:",expanded"`
-	LinkQosToClient       string `json:"linkQosToClient,omitempty" pretty:",expanded"`
-	LinkQosToServer       string `json:"linkQosToServer,omitempty" pretty:",expanded"`
-	LoadBalancingMode     string `json:"loadBalancingMode,omitempty"`
+	AllowNat              string   `json:"allowNat,omitempty" pretty:",expanded"`
+	AllowSnat             string   `json:"allowSnat,omitempty" pretty:",expanded"`
+	FullPath              string   `json:"fullPath,omitempty" pretty:",expanded"`
+	Generation            int64    `json:"generation,omitempty" pretty:",expanded"`
+	IgnorePersistedWeight string   `json:"ignorePersistedWeight,omitempty" pretty:",expanded"`
+	IPTosToClient         string   `json:"ipTosToClient,omitempty" pretty:",expanded"`
+	IPTosToServer         string   `json:"ipTosToServer,omitempty" pretty:",expanded"`
+	Kind                  string   `json:"kind,omitempty" pretty:",expanded"`
+	LinkQosToClient       string   `json:"linkQosToClient,omitempty" pretty:",expanded"`
+	LinkQosToServer       string   `json:"linkQosToServer,omitempty" pretty:",expanded"`
+	LoadBalancingMode     string   `json:"loadBalancingMode,omitempty"`
+	Members               []string `json:"items,omitempty"`
 	MembersReference      struct {
 		IsSubcollection bool          `json:"isSubcollection,omitempty"`
 		Link            string        `json:"link,omitempty"`
