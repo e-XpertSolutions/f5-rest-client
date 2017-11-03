@@ -19,22 +19,22 @@ type InterfaceStatsEntries struct {
 type InterfaceStats struct {
 	Entries struct {
 		CountersBitsIn struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"counters.bitsIn,omitempty"`
 		CountersBitsOut struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"counters.bitsOut,omitempty"`
 		CountersDropsAll struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"counters.dropsAll,omitempty"`
 		CountersErrorsAll struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"counters.errorsAll,omitempty"`
 		CountersPktsIn struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"counters.pktsIn,omitempty"`
 		CountersPktsOut struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"counters.pktsOut,omitempty"`
 		MediaActive struct {
 			Description string `json:"description,omitempty"`
