@@ -22,7 +22,7 @@ type NodeStats struct {
 			Description string `json:"description,omitempty"`
 		} `json:"addr,omitempty"`
 		CurSessions struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"curSessions,omitempty"`
 		MonitorRule struct {
 			Description string `json:"description,omitempty"`
@@ -31,25 +31,25 @@ type NodeStats struct {
 			Description string `json:"description,omitempty"`
 		} `json:"monitorStatus,omitempty"`
 		ServersideBitsIn struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"serverside.bitsIn,omitempty"`
 		ServersideBitsOut struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"serverside.bitsOut,omitempty"`
 		ServersideCurConns struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"serverside.curConns,omitempty"`
 		ServersideMaxConns struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"serverside.maxConns,omitempty"`
 		ServersidePktsIn struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"serverside.pktsIn,omitempty"`
 		ServersidePktsOut struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"serverside.pktsOut,omitempty"`
 		ServersideTotConns struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"serverside.totConns,omitempty"`
 		SessionStatus struct {
 			Description string `json:"description,omitempty"`
@@ -67,7 +67,7 @@ type NodeStats struct {
 			Description string `json:"description,omitempty"`
 		} `json:"tmName,omitempty"`
 		TotRequests struct {
-			Value int `json:"value,omitempty"`
+			Value int `json:"value"`
 		} `json:"totRequests,omitempty"`
 	} `json:"entries,omitempty"`
 }

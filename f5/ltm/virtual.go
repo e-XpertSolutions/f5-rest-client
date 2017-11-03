@@ -261,8 +261,8 @@ func (vr *VirtualResource) readError(resp *http.Response) error {
 	return nil
 }
 
-func (vr *VirtualResource) ShowStats(id string) (*VirtualStats, error) {
-	var item VirtualStats
+func (vr *VirtualResource) ShowStats(id string) (*VirtualStatsList, error) {
+	var item VirtualStatsList
 	if err := vr.c.ReadQuery(BasePath+VirtualEndpoint+"/"+id+"/stats", &item); err != nil {
 		return nil, err
 	}

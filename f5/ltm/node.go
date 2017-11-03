@@ -104,8 +104,8 @@ func (nr *NodeResource) Delete(id string) error {
 	return nil
 }
 
-func (nr *NodeResource) ShowStats(id string) (*NodeStats, error) {
-	var item NodeStats
+func (nr *NodeResource) ShowStats(id string) (*NodeStatsList, error) {
+	var item NodeStatsList
 	if err := nr.c.ReadQuery(BasePath+NodeEndpoint+"/"+id+"/stats", &item); err != nil {
 		return nil, err
 	}

@@ -106,8 +106,8 @@ func (pr *PoolResource) GetMembers(id string) (*PoolMembersConfigList, error) {
 	return &poolMembersConfig, nil
 }
 
-func (pr *PoolResource) ShowStats(id string) (*PoolStats, error) {
-	var item PoolStats
+func (pr *PoolResource) ShowStats(id string) (*PoolStatsList, error) {
+	var item PoolStatsList
 	if err := pr.c.ReadQuery(BasePath+PoolEndpoint+"/"+id+"/stats", &item); err != nil {
 		return nil, err
 	}
