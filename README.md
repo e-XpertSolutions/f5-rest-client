@@ -57,7 +57,7 @@ func main() {
 - [ ] Manage firewall, WAF and DOS profiles (/security)
 - [ ] Manage virtualization features (/vcmp)
 - [ ] Manage access policies (/apm)
-- [ ] Manage DNS and global load balancing servers (/gtm)
+- [x] Manage DNS and global load balancing servers (/gtm)
 - [ ] Add support for analytics read-only API (/analytics)
 - [ ] Add support for results pagination
 - [x] Add support for transaction
