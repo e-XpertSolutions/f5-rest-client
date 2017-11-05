@@ -6,15 +6,27 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// DatacenterConfigList holds a list of Datacenter configuration.
-type DatacenterConfigList struct {
-	Items    []DatacenterConfig `json:"items"`
-	Kind     string             `json:"kind"`
-	SelfLink string             `json:"selflink"`
+// DatacenterList holds a list of Datacenter configuration.
+type DatacenterList struct {
+	Items    []Datacenter `json:"items,omitempty"`
+	Kind     string       `json:"kind,omitempty"`
+	SelfLink string       `json:"selflink,omitempty"`
 }
 
-// DatacenterConfig holds the configuration of a single Datacenter.
-type DatacenterConfig struct {
+// Datacenter holds the configuration of a single Datacenter.
+type Datacenter struct {
+	Contact          string `json:"contact,omitempty"`
+	Description      string `json:"description,omitempty"`
+	Enabled          bool   `json:"enabled,omitempty"`
+	FullPath         string `json:"fullPath,omitempty"`
+	Generation       int    `json:"generation,omitempty"`
+	Kind             string `json:"kind,omitempty"`
+	Location         string `json:"location,omitempty"`
+	Name             string `json:"name,omitempty"`
+	Partition        string `json:"partition,omitempty"`
+	ProberFallback   string `json:"proberFallback,omitempty"`
+	ProberPreference string `json:"proberPreference,omitempty"`
+	SelfLink         string `json:"selfLink,omitempty"`
 }
 
 // DatacenterEndpoint represents the REST resource for managing Datacenter.
@@ -26,8 +38,8 @@ type DatacenterResource struct {
 }
 
 // ListAll  lists all the Datacenter configurations.
-func (r *DatacenterResource) ListAll() (*DatacenterConfigList, error) {
-	var list DatacenterConfigList
+func (r *DatacenterResource) ListAll() (*DatacenterList, error) {
+	var list DatacenterList
 	if err := r.c.ReadQuery(BasePath+DatacenterEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -35,8 +47,8 @@ func (r *DatacenterResource) ListAll() (*DatacenterConfigList, error) {
 }
 
 // Get a single Datacenter configuration identified by id.
-func (r *DatacenterResource) Get(id string) (*DatacenterConfig, error) {
-	var item DatacenterConfig
+func (r *DatacenterResource) Get(id string) (*Datacenter, error) {
+	var item Datacenter
 	if err := r.c.ReadQuery(BasePath+DatacenterEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -44,7 +56,7 @@ func (r *DatacenterResource) Get(id string) (*DatacenterConfig, error) {
 }
 
 // Create a new Datacenter configuration.
-func (r *DatacenterResource) Create(item DatacenterConfig) error {
+func (r *DatacenterResource) Create(item Datacenter) error {
 	if err := r.c.ModQuery("POST", BasePath+DatacenterEndpoint, item); err != nil {
 		return err
 	}
@@ -52,7 +64,7 @@ func (r *DatacenterResource) Create(item DatacenterConfig) error {
 }
 
 // Edit a Datacenter configuration identified by id.
-func (r *DatacenterResource) Edit(id string, item DatacenterConfig) error {
+func (r *DatacenterResource) Edit(id string, item Datacenter) error {
 	if err := r.c.ModQuery("PUT", BasePath+DatacenterEndpoint+"/"+id, item); err != nil {
 		return err
 	}

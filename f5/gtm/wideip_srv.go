@@ -6,17 +6,6 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// WideipSrvConfigList holds a list of WideipSrv configuration.
-type WideipSrvConfigList struct {
-	Items    []WideipSrvConfig `json:"items"`
-	Kind     string            `json:"kind"`
-	SelfLink string            `json:"selflink"`
-}
-
-// WideipSrvConfig holds the configuration of a single WideipSrv.
-type WideipSrvConfig struct {
-}
-
 // WideipSrvEndpoint represents the REST resource for managing WideipSrv.
 const WideipSrvEndpoint = "/wideip/srv"
 
@@ -26,8 +15,8 @@ type WideipSrvResource struct {
 }
 
 // ListAll  lists all the WideipSrv configurations.
-func (r *WideipSrvResource) ListAll() (*WideipSrvConfigList, error) {
-	var list WideipSrvConfigList
+func (r *WideipSrvResource) ListAll() (*WideipList, error) {
+	var list WideipList
 	if err := r.c.ReadQuery(BasePath+WideipSrvEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -35,8 +24,8 @@ func (r *WideipSrvResource) ListAll() (*WideipSrvConfigList, error) {
 }
 
 // Get a single WideipSrv configuration identified by id.
-func (r *WideipSrvResource) Get(id string) (*WideipSrvConfig, error) {
-	var item WideipSrvConfig
+func (r *WideipSrvResource) Get(id string) (*Wideip, error) {
+	var item Wideip
 	if err := r.c.ReadQuery(BasePath+WideipSrvEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -44,7 +33,7 @@ func (r *WideipSrvResource) Get(id string) (*WideipSrvConfig, error) {
 }
 
 // Create a new WideipSrv configuration.
-func (r *WideipSrvResource) Create(item WideipSrvConfig) error {
+func (r *WideipSrvResource) Create(item Wideip) error {
 	if err := r.c.ModQuery("POST", BasePath+WideipSrvEndpoint, item); err != nil {
 		return err
 	}
@@ -52,7 +41,7 @@ func (r *WideipSrvResource) Create(item WideipSrvConfig) error {
 }
 
 // Edit a WideipSrv configuration identified by id.
-func (r *WideipSrvResource) Edit(id string, item WideipSrvConfig) error {
+func (r *WideipSrvResource) Edit(id string, item Wideip) error {
 	if err := r.c.ModQuery("PUT", BasePath+WideipSrvEndpoint+"/"+id, item); err != nil {
 		return err
 	}

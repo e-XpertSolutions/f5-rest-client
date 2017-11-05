@@ -6,70 +6,70 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorBigIPLinkConfigList holds a list of MonitorBigIPLink configuration.
-type MonitorBigIPLinkConfigList struct {
-	Items    []MonitorBigIPLinkConfig `json:"items"`
-	Kind     string                   `json:"kind"`
-	SelfLink string                   `json:"selflink"`
+// MonitorBigIPLinkList holds a list of MonitorBigIPLink uration.
+type MonitorBigIPLinkList struct {
+	Items    []MonitorBigIPLink `json:"items,omitempty"`
+	Kind     string             `json:"kind,omitempty"`
+	SelfLink string             `json:"selflink,omitempty"`
 }
 
-// MonitorBigIPLinkConfig holds the configuration of a single MonitorBigIPLink.
-type MonitorBigIPLinkConfig struct {
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
+// MonitorBigIPLink holds the uration of a single MonitorBigIPLink.
+type MonitorBigIPLink struct {
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
 }
 
 // MonitorBigIPLinkEndpoint represents the REST resource for managing MonitorBigIPLink.
 const MonitorBigIPLinkEndpoint = "/monitor/bigip-link"
 
-// MonitorBigIPLinkResource provides an API to manage MonitorBigIPLink configurations.
+// MonitorBigIPLinkResource provides an API to manage MonitorBigIPLink urations.
 type MonitorBigIPLinkResource struct {
 	c *f5.Client
 }
 
-// ListAll  lists all the MonitorBigIPLink configurations.
-func (r *MonitorBigIPLinkResource) ListAll() (*MonitorBigIPLinkConfigList, error) {
-	var list MonitorBigIPLinkConfigList
+// ListAll  lists all the MonitorBigIPLink urations.
+func (r *MonitorBigIPLinkResource) ListAll() (*MonitorBigIPLinkList, error) {
+	var list MonitorBigIPLinkList
 	if err := r.c.ReadQuery(BasePath+MonitorBigIPLinkEndpoint, &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
 }
 
-// Get a single MonitorBigIPLink configuration identified by id.
-func (r *MonitorBigIPLinkResource) Get(id string) (*MonitorBigIPLinkConfig, error) {
-	var item MonitorBigIPLinkConfig
+// Get a single MonitorBigIPLink uration identified by id.
+func (r *MonitorBigIPLinkResource) Get(id string) (*MonitorBigIPLink, error) {
+	var item MonitorBigIPLink
 	if err := r.c.ReadQuery(BasePath+MonitorBigIPLinkEndpoint, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
 }
 
-// Create a new MonitorBigIPLink configuration.
-func (r *MonitorBigIPLinkResource) Create(item MonitorBigIPLinkConfig) error {
+// Create a new MonitorBigIPLink uration.
+func (r *MonitorBigIPLinkResource) Create(item MonitorBigIPLink) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorBigIPLinkEndpoint, item); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Edit a MonitorBigIPLink configuration identified by id.
-func (r *MonitorBigIPLinkResource) Edit(id string, item MonitorBigIPLinkConfig) error {
+// Edit a MonitorBigIPLink uration identified by id.
+func (r *MonitorBigIPLinkResource) Edit(id string, item MonitorBigIPLink) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorBigIPLinkEndpoint+"/"+id, item); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Delete a single MonitorBigIPLink configuration identified by id.
+// Delete a single MonitorBigIPLink uration identified by id.
 func (r *MonitorBigIPLinkResource) Delete(id string) error {
 	if err := r.c.ModQuery("DELETE", BasePath+MonitorBigIPLinkEndpoint+"/"+id, nil); err != nil {
 		return err

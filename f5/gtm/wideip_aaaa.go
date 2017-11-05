@@ -6,17 +6,6 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// WideipAAAAConfigList holds a list of WideipAAAA configuration.
-type WideipAAAAConfigList struct {
-	Items    []WideipAAAAConfig `json:"items"`
-	Kind     string             `json:"kind"`
-	SelfLink string             `json:"selflink"`
-}
-
-// WideipAAAAConfig holds the configuration of a single WideipAAAA.
-type WideipAAAAConfig struct {
-}
-
 // WideipAAAAEndpoint represents the REST resource for managing WideipAAAA.
 const WideipAAAAEndpoint = "/wideip/aaaa"
 
@@ -26,8 +15,8 @@ type WideipAAAAResource struct {
 }
 
 // ListAll  lists all the WideipAAAA configurations.
-func (r *WideipAAAAResource) ListAll() (*WideipAAAAConfigList, error) {
-	var list WideipAAAAConfigList
+func (r *WideipAAAAResource) ListAll() (*WideipList, error) {
+	var list WideipList
 	if err := r.c.ReadQuery(BasePath+WideipAAAAEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -35,8 +24,8 @@ func (r *WideipAAAAResource) ListAll() (*WideipAAAAConfigList, error) {
 }
 
 // Get a single WideipAAAA configuration identified by id.
-func (r *WideipAAAAResource) Get(id string) (*WideipAAAAConfig, error) {
-	var item WideipAAAAConfig
+func (r *WideipAAAAResource) Get(id string) (*Wideip, error) {
+	var item Wideip
 	if err := r.c.ReadQuery(BasePath+WideipAAAAEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -44,7 +33,7 @@ func (r *WideipAAAAResource) Get(id string) (*WideipAAAAConfig, error) {
 }
 
 // Create a new WideipAAAA configuration.
-func (r *WideipAAAAResource) Create(item WideipAAAAConfig) error {
+func (r *WideipAAAAResource) Create(item Wideip) error {
 	if err := r.c.ModQuery("POST", BasePath+WideipAAAAEndpoint, item); err != nil {
 		return err
 	}
@@ -52,7 +41,7 @@ func (r *WideipAAAAResource) Create(item WideipAAAAConfig) error {
 }
 
 // Edit a WideipAAAA configuration identified by id.
-func (r *WideipAAAAResource) Edit(id string, item WideipAAAAConfig) error {
+func (r *WideipAAAAResource) Edit(id string, item Wideip) error {
 	if err := r.c.ModQuery("PUT", BasePath+WideipAAAAEndpoint+"/"+id, item); err != nil {
 		return err
 	}

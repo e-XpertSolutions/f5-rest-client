@@ -6,15 +6,41 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// WideipAConfigList holds a list of WideipA configuration.
-type WideipAConfigList struct {
-	Items    []WideipAConfig `json:"items"`
-	Kind     string          `json:"kind"`
-	SelfLink string          `json:"selflink"`
+// WideipList holds a list of WideipA configuration.
+type WideipList struct {
+	Items    []Wideip `json:"items,omitempty"`
+	Kind     string   `json:"kind,omitempty"`
+	SelfLink string   `json:"selflink,omitempty"`
 }
 
-// WideipAConfig holds the configuration of a single WideipA.
-type WideipAConfig struct {
+// Wideip holds the configuration of a single WideipA.
+type Wideip struct {
+	Enabled              bool   `json:"enabled,omitempty"`
+	FailureRcode         string `json:"failureRcode,omitempty"`
+	FailureRcodeResponse string `json:"failureRcodeResponse,omitempty"`
+	FailureRcodeTTL      int    `json:"failureRcodeTtl,omitempty"`
+	FullPath             string `json:"fullPath,omitempty"`
+	Generation           int    `json:"generation,omitempty"`
+	Kind                 string `json:"kind,omitempty"`
+	LastResortPool       string `json:"lastResortPool,omitempty"`
+	MinimalResponse      string `json:"minimalResponse,omitempty"`
+	Name                 string `json:"name,omitempty"`
+	Partition            string `json:"partition,omitempty"`
+	PersistCidrIpv4      int    `json:"persistCidrIpv4,omitempty"`
+	PersistCidrIpv6      int    `json:"persistCidrIpv6,omitempty"`
+	Persistence          string `json:"persistence,omitempty"`
+	PoolLbMode           string `json:"poolLbMode,omitempty"`
+	Pools                []struct {
+		Name          string `json:"name,omitempty"`
+		NameReference struct {
+			Link string `json:"link,omitempty"`
+		} `json:"nameReference,omitempty"`
+		Order     int    `json:"order,omitempty"`
+		Partition string `json:"partition,omitempty"`
+		Ratio     int    `json:"ratio,omitempty"`
+	} `json:"pools,omitempty"`
+	SelfLink       string `json:"selfLink,omitempty"`
+	TTLPersistence int    `json:"ttlPersistence,omitempty"`
 }
 
 // WideipAEndpoint represents the REST resource for managing WideipA.
@@ -26,8 +52,8 @@ type WideipAResource struct {
 }
 
 // ListAll  lists all the WideipA configurations.
-func (r *WideipAResource) ListAll() (*WideipAConfigList, error) {
-	var list WideipAConfigList
+func (r *WideipAResource) ListAll() (*WideipList, error) {
+	var list WideipList
 	if err := r.c.ReadQuery(BasePath+WideipAEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -35,8 +61,8 @@ func (r *WideipAResource) ListAll() (*WideipAConfigList, error) {
 }
 
 // Get a single WideipA configuration identified by id.
-func (r *WideipAResource) Get(id string) (*WideipAConfig, error) {
-	var item WideipAConfig
+func (r *WideipAResource) Get(id string) (*Wideip, error) {
+	var item Wideip
 	if err := r.c.ReadQuery(BasePath+WideipAEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -44,7 +70,7 @@ func (r *WideipAResource) Get(id string) (*WideipAConfig, error) {
 }
 
 // Create a new WideipA configuration.
-func (r *WideipAResource) Create(item WideipAConfig) error {
+func (r *WideipAResource) Create(item Wideip) error {
 	if err := r.c.ModQuery("POST", BasePath+WideipAEndpoint, item); err != nil {
 		return err
 	}
@@ -52,7 +78,7 @@ func (r *WideipAResource) Create(item WideipAConfig) error {
 }
 
 // Edit a WideipA configuration identified by id.
-func (r *WideipAResource) Edit(id string, item WideipAConfig) error {
+func (r *WideipAResource) Edit(id string, item Wideip) error {
 	if err := r.c.ModQuery("PUT", BasePath+WideipAEndpoint+"/"+id, item); err != nil {
 		return err
 	}

@@ -6,17 +6,6 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// WideipNaptrConfigList holds a list of WideipNaptr configuration.
-type WideipNaptrConfigList struct {
-	Items    []WideipNaptrConfig `json:"items"`
-	Kind     string              `json:"kind"`
-	SelfLink string              `json:"selflink"`
-}
-
-// WideipNaptrConfig holds the configuration of a single WideipNaptr.
-type WideipNaptrConfig struct {
-}
-
 // WideipNaptrEndpoint represents the REST resource for managing WideipNaptr.
 const WideipNaptrEndpoint = "/wideip/naptr"
 
@@ -26,8 +15,8 @@ type WideipNaptrResource struct {
 }
 
 // ListAll  lists all the WideipNaptr configurations.
-func (r *WideipNaptrResource) ListAll() (*WideipNaptrConfigList, error) {
-	var list WideipNaptrConfigList
+func (r *WideipNaptrResource) ListAll() (*WideipList, error) {
+	var list WideipList
 	if err := r.c.ReadQuery(BasePath+WideipNaptrEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -35,8 +24,8 @@ func (r *WideipNaptrResource) ListAll() (*WideipNaptrConfigList, error) {
 }
 
 // Get a single WideipNaptr configuration identified by id.
-func (r *WideipNaptrResource) Get(id string) (*WideipNaptrConfig, error) {
-	var item WideipNaptrConfig
+func (r *WideipNaptrResource) Get(id string) (*Wideip, error) {
+	var item Wideip
 	if err := r.c.ReadQuery(BasePath+WideipNaptrEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -44,7 +33,7 @@ func (r *WideipNaptrResource) Get(id string) (*WideipNaptrConfig, error) {
 }
 
 // Create a new WideipNaptr configuration.
-func (r *WideipNaptrResource) Create(item WideipNaptrConfig) error {
+func (r *WideipNaptrResource) Create(item Wideip) error {
 	if err := r.c.ModQuery("POST", BasePath+WideipNaptrEndpoint, item); err != nil {
 		return err
 	}
@@ -52,7 +41,7 @@ func (r *WideipNaptrResource) Create(item WideipNaptrConfig) error {
 }
 
 // Edit a WideipNaptr configuration identified by id.
-func (r *WideipNaptrResource) Edit(id string, item WideipNaptrConfig) error {
+func (r *WideipNaptrResource) Edit(id string, item Wideip) error {
 	if err := r.c.ModQuery("PUT", BasePath+WideipNaptrEndpoint+"/"+id, item); err != nil {
 		return err
 	}

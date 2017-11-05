@@ -6,15 +6,24 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// RegionConfigList holds a list of Region configuration.
-type RegionConfigList struct {
-	Items    []RegionConfig `json:"items"`
-	Kind     string         `json:"kind"`
-	SelfLink string         `json:"selflink"`
+// RegionList holds a list of Region configuration.
+type RegionList struct {
+	Items    []Region `json:"items,omitempty"`
+	Kind     string   `json:"kind,omitempty"`
+	SelfLink string   `json:"selflink,omitempty"`
 }
 
-// RegionConfig holds the configuration of a single Region.
-type RegionConfig struct {
+// Region holds the configuration of a single Region.
+type Region struct {
+	FullPath      string `json:"fullPath,omitempty"`
+	Generation    int    `json:"generation,omitempty"`
+	Kind          string `json:"kind,omitempty"`
+	Name          string `json:"name,omitempty"`
+	Partition     string `json:"partition,omitempty"`
+	RegionMembers []struct {
+		Name string `json:"name,omitempty"`
+	} `json:"regionMembers,omitempty"`
+	SelfLink string `json:"selfLink,omitempty"`
 }
 
 // RegionEndpoint represents the REST resource for managing Region.
@@ -26,8 +35,8 @@ type RegionResource struct {
 }
 
 // ListAll  lists all the Region configurations.
-func (r *RegionResource) ListAll() (*RegionConfigList, error) {
-	var list RegionConfigList
+func (r *RegionResource) ListAll() (*RegionList, error) {
+	var list RegionList
 	if err := r.c.ReadQuery(BasePath+RegionEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -35,8 +44,8 @@ func (r *RegionResource) ListAll() (*RegionConfigList, error) {
 }
 
 // Get a single Region configuration identified by id.
-func (r *RegionResource) Get(id string) (*RegionConfig, error) {
-	var item RegionConfig
+func (r *RegionResource) Get(id string) (*Region, error) {
+	var item Region
 	if err := r.c.ReadQuery(BasePath+RegionEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -44,7 +53,7 @@ func (r *RegionResource) Get(id string) (*RegionConfig, error) {
 }
 
 // Create a new Region configuration.
-func (r *RegionResource) Create(item RegionConfig) error {
+func (r *RegionResource) Create(item Region) error {
 	if err := r.c.ModQuery("POST", BasePath+RegionEndpoint, item); err != nil {
 		return err
 	}
@@ -52,7 +61,7 @@ func (r *RegionResource) Create(item RegionConfig) error {
 }
 
 // Edit a Region configuration identified by id.
-func (r *RegionResource) Edit(id string, item RegionConfig) error {
+func (r *RegionResource) Edit(id string, item Region) error {
 	if err := r.c.ModQuery("PUT", BasePath+RegionEndpoint+"/"+id, item); err != nil {
 		return err
 	}

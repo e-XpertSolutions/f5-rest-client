@@ -6,15 +6,31 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// GlobalSettingsGeneralConfigList holds a list of GlobalSettingsGeneral configuration.
-type GlobalSettingsGeneralConfigList struct {
-	Items    []GlobalSettingsGeneralConfig `json:"items"`
-	Kind     string                        `json:"kind"`
-	SelfLink string                        `json:"selflink"`
-}
-
-// GlobalSettingsGeneralConfig holds the configuration of a single GlobalSettingsGeneral.
-type GlobalSettingsGeneralConfig struct {
+// GlobalSettingsGeneral holds the configuration of a single GlobalSettingsGeneral.
+type GlobalSettingsGeneral struct {
+	AutoDiscovery                     string `json:"autoDiscovery,omitempty"`
+	AutoDiscoveryInterval             int    `json:"autoDiscoveryInterval,omitempty"`
+	AutomaticConfigurationSaveTimeout int    `json:"automaticConfigurationSaveTimeout,omitempty"`
+	CacheLdnsServers                  string `json:"cacheLdnsServers,omitempty"`
+	DomainNameCheck                   string `json:"domainNameCheck,omitempty"`
+	DrainPersistentRequests           string `json:"drainPersistentRequests,omitempty"`
+	ForwardStatus                     string `json:"forwardStatus,omitempty"`
+	GtmSetsRecursion                  string `json:"gtmSetsRecursion,omitempty"`
+	HeartbeatInterval                 int    `json:"heartbeatInterval,omitempty"`
+	Kind                              string `json:"kind,omitempty"`
+	MonitorDisabledObjects            string `json:"monitorDisabledObjects,omitempty"`
+	NethsmTimeout                     int    `json:"nethsmTimeout,omitempty"`
+	SelfLink                          string `json:"selfLink,omitempty"`
+	SendWildcardRrs                   string `json:"sendWildcardRrs,omitempty"`
+	StaticPersistCidrIpv4             int    `json:"staticPersistCidrIpv4,omitempty"`
+	StaticPersistCidrIpv6             int    `json:"staticPersistCidrIpv6,omitempty"`
+	Synchronization                   string `json:"synchronization,omitempty"`
+	SynchronizationGroupName          string `json:"synchronizationGroupName,omitempty"`
+	SynchronizationTimeTolerance      int    `json:"synchronizationTimeTolerance,omitempty"`
+	SynchronizationTimeout            int    `json:"synchronizationTimeout,omitempty"`
+	SynchronizeZoneFiles              string `json:"synchronizeZoneFiles,omitempty"`
+	SynchronizeZoneFilesTimeout       int    `json:"synchronizeZoneFilesTimeout,omitempty"`
+	VirtualsDependOnServerState       string `json:"virtualsDependOnServerState,omitempty"`
 }
 
 // GlobalSettingsGeneralEndpoint represents the REST resource for managing GlobalSettingsGeneral.
@@ -25,43 +41,18 @@ type GlobalSettingsGeneralResource struct {
 	c *f5.Client
 }
 
-// ListAll  lists all the GlobalSettingsGeneral configurations.
-func (r *GlobalSettingsGeneralResource) ListAll() (*GlobalSettingsGeneralConfigList, error) {
-	var list GlobalSettingsGeneralConfigList
+// List  lists all the GlobalSettingsGeneral configurations.
+func (r *GlobalSettingsGeneralResource) List() (*GlobalSettingsGeneral, error) {
+	var list GlobalSettingsGeneral
 	if err := r.c.ReadQuery(BasePath+GlobalSettingsGeneralEndpoint, &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
 }
 
-// Get a single GlobalSettingsGeneral configuration identified by id.
-func (r *GlobalSettingsGeneralResource) Get(id string) (*GlobalSettingsGeneralConfig, error) {
-	var item GlobalSettingsGeneralConfig
-	if err := r.c.ReadQuery(BasePath+GlobalSettingsGeneralEndpoint, &item); err != nil {
-		return nil, err
-	}
-	return &item, nil
-}
-
-// Create a new GlobalSettingsGeneral configuration.
-func (r *GlobalSettingsGeneralResource) Create(item GlobalSettingsGeneralConfig) error {
+// Modify a GlobalSettingsGeneral configuration.
+func (r *GlobalSettingsGeneralResource) Modify(item GlobalSettingsGeneral) error {
 	if err := r.c.ModQuery("POST", BasePath+GlobalSettingsGeneralEndpoint, item); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Edit a GlobalSettingsGeneral configuration identified by id.
-func (r *GlobalSettingsGeneralResource) Edit(id string, item GlobalSettingsGeneralConfig) error {
-	if err := r.c.ModQuery("PUT", BasePath+GlobalSettingsGeneralEndpoint+"/"+id, item); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Delete a single GlobalSettingsGeneral configuration identified by id.
-func (r *GlobalSettingsGeneralResource) Delete(id string) error {
-	if err := r.c.ModQuery("DELETE", BasePath+GlobalSettingsGeneralEndpoint+"/"+id, nil); err != nil {
 		return err
 	}
 	return nil

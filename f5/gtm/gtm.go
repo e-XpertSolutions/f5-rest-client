@@ -11,77 +11,65 @@ const BasePath = "mgmt/tm/gtm"
 type GTM struct {
 	c *f5.Client
 
-	datacenter                      DatacenterResource
-	distributedApp                  DistributedAppResource
-	globalSettings                  GlobalSettingsResource
-	globalSettingsGeneral           GlobalSettingsGeneralResource
-	globalSettingsLoadBalancing     GlobalSettingsLoadBalancingResource
-	globalSettingsMetrics           GlobalSettingsMetricsResource
-	globalSettingsMetricsExclusions GlobalSettingsMetricsExclusionsResource
-	link                            LinkResource
-	listener                        ListenerResource
-	listenerProfiles                ListenerProfilesResource
-	monitor                         MonitorResource
-	monitorBigIP                    MonitorBigIPResource
-	monitorBigIPLink                MonitorBigIPLinkResource
-	monitorExternal                 MonitorExternalResource
-	monitorFTP                      MonitorFTPResource
-	monitorFirepass                 MonitorFirepassResource
-	monitorGTP                      MonitorGTPResource
-	monitorHTTP                     MonitorHTTPResource
-	monitorHTTPS                    MonitorHTTPSResource
-	monitorICMP                     MonitorICMPResource
-	monitorIMAP                     MonitorIMAPResource
-	monitorLDAP                     MonitorLDAPResource
-	monitorMSSQL                    MonitorMSSQLResource
-	monitorMySQL                    MonitorMySQLResource
-	monitorNNTP                     MonitorNNTPResource
-	monitorNone                     MonitorNoneResource
-	monitorOracle                   MonitorOracleResource
-	monitorPOP3                     MonitorPOP3Resource
-	monitorPostgreSQL               MonitorPostgreSQLResource
-	monitorRadius                   MonitorRadiusResource
-	monitorRadiusAccounting         MonitorRadiusAccountingResource
-	monitorRealServer               MonitorRealServerResource
-	monitorSIP                      MonitorSIPResource
-	monitorSMTP                     MonitorSMTPResource
-	monitorSNMP                     MonitorSNMPResource
-	monitorSNMPLink                 MonitorSNMPLinkResource
-	monitorSOAP                     MonitorSOAPResource
-	monitorTCP                      MonitorTCPResource
-	monitorTCPHalf                  MonitorTCPHalfResource
-	monitorUDP                      MonitorUDPResource
-	monitorWAP                      MonitorWAPResource
-	monitorWMI                      MonitorWMIResource
-	monitorscripted                 MonitorscriptedResource
-	persist                         PersistResource
-	pool                            PoolResource
-	poolA                           PoolAResource
-	poolAAAA                        PoolAAAAResource
-	poolAAAAMembers                 PoolAAAAMembersResource
-	poolAMembers                    PoolAMembersResource
-	poolCNAME                       PoolCNAMEResource
-	poolCNAMEMembers                PoolCNAMEMembersResource
-	poolMX                          PoolMXResource
-	poolMXMembers                   PoolMXMembersResource
-	poolNAPTR                       PoolNAPTRResource
-	poolNAPTRMembers                PoolNAPTRMembersResource
-	poolSRV                         PoolSRVResource
-	poolSRVMembers                  PoolSRVMembersResource
-	proberPool                      ProberPoolResource
-	proberPoolMembers               ProberPoolMembersResource
-	region                          RegionResource
-	rule                            RuleResource
-	server                          ServerResource
-	serverVirtualServers            ServerVirtualServersResource
-	topology                        TopologyResource
-	wideIP                          WideIPResource
-	wideipA                         WideipAResource
-	wideipAAAA                      WideipAAAAResource
-	wideipCname                     WideipCnameResource
-	wideipMx                        WideipMxResource
-	wideipNaptr                     WideipNaptrResource
-	wideipSrv                       WideipSrvResource
+	syncStatus                  SyncStatusResource
+	datacenter                  DatacenterResource
+	distributedApp              DistributedAppResource
+	globalSettingsGeneral       GlobalSettingsGeneralResource
+	globalSettingsLoadBalancing GlobalSettingsLoadBalancingResource
+	globalSettingsMetrics       GlobalSettingsMetricsResource
+	link                        LinkResource
+	listener                    ListenerResource
+	listenerProfiles            ListenerProfilesResource
+	monitorBigIP                MonitorBigIPResource
+	monitorBigIPLink            MonitorBigIPLinkResource
+	monitorExternal             MonitorExternalResource
+	monitorFTP                  MonitorFTPResource
+	monitorFirepass             MonitorFirepassResource
+	monitorGTP                  MonitorGTPResource
+	monitorHTTP                 MonitorHTTPResource
+	monitorHTTPS                MonitorHTTPSResource
+	monitorICMP                 MonitorICMPResource
+	monitorIMAP                 MonitorIMAPResource
+	monitorLDAP                 MonitorLDAPResource
+	monitorMSSQL                MonitorMSSQLResource
+	monitorMySQL                MonitorMySQLResource
+	monitorNNTP                 MonitorNNTPResource
+	monitorNone                 MonitorNoneResource
+	monitorOracle               MonitorOracleResource
+	monitorPOP3                 MonitorPOP3Resource
+	monitorPostgreSQL           MonitorPostgreSQLResource
+	monitorRadius               MonitorRadiusResource
+	monitorRadiusAccounting     MonitorRadiusAccountingResource
+	monitorRealServer           MonitorRealServerResource
+	monitorSIP                  MonitorSIPResource
+	monitorSMTP                 MonitorSMTPResource
+	monitorSNMP                 MonitorSNMPResource
+	monitorSNMPLink             MonitorSNMPLinkResource
+	monitorSOAP                 MonitorSOAPResource
+	monitorTCP                  MonitorTCPResource
+	monitorTCPHalf              MonitorTCPHalfResource
+	monitorUDP                  MonitorUDPResource
+	monitorWAP                  MonitorWAPResource
+	monitorWMI                  MonitorWMIResource
+	monitorscripted             MonitorscriptedResource
+	persist                     PersistResource
+	poolA                       PoolAResource
+	poolAAAA                    PoolAAAAResource
+	poolCNAME                   PoolCNAMEResource
+	poolMX                      PoolMXResource
+	poolNAPTR                   PoolNAPTRResource
+	poolSRV                     PoolSRVResource
+	proberPool                  ProberPoolResource
+	region                      RegionResource
+	rule                        RuleResource
+	server                      ServerResource
+	topology                    TopologyResource
+	wideipA                     WideipAResource
+	wideipAAAA                  WideipAAAAResource
+	wideipCname                 WideipCnameResource
+	wideipMx                    WideipMxResource
+	wideipNaptr                 WideipNaptrResource
+	wideipSrv                   WideipSrvResource
 }
 
 // New creates a new GTM client.
@@ -89,17 +77,15 @@ func New(c *f5.Client) GTM {
 	return GTM{
 		c: c,
 
-		datacenter:                      DatacenterResource{c: c},
-		distributedApp:                  DistributedAppResource{c: c},
-		globalSettings:                  GlobalSettingsResource{c: c},
-		globalSettingsGeneral:           GlobalSettingsGeneralResource{c: c},
-		globalSettingsLoadBalancing:     GlobalSettingsLoadBalancingResource{c: c},
-		globalSettingsMetrics:           GlobalSettingsMetricsResource{c: c},
-		globalSettingsMetricsExclusions: GlobalSettingsMetricsExclusionsResource{c: c},
+		syncStatus:                  SyncStatusResource{c: c},
+		datacenter:                  DatacenterResource{c: c},
+		distributedApp:              DistributedAppResource{c: c},
+		globalSettingsGeneral:       GlobalSettingsGeneralResource{c: c},
+		globalSettingsLoadBalancing: GlobalSettingsLoadBalancingResource{c: c},
+		globalSettingsMetrics:       GlobalSettingsMetricsResource{c: c},
 		link:                    LinkResource{c: c},
 		listener:                ListenerResource{c: c},
 		listenerProfiles:        ListenerProfilesResource{c: c},
-		monitor:                 MonitorResource{c: c},
 		monitorBigIP:            MonitorBigIPResource{c: c},
 		monitorBigIPLink:        MonitorBigIPLinkResource{c: c},
 		monitorExternal:         MonitorExternalResource{c: c},
@@ -133,27 +119,17 @@ func New(c *f5.Client) GTM {
 		monitorWMI:              MonitorWMIResource{c: c},
 		monitorscripted:         MonitorscriptedResource{c: c},
 		persist:                 PersistResource{c: c},
-		pool:                    PoolResource{c: c},
 		poolA:                   PoolAResource{c: c},
 		poolAAAA:                PoolAAAAResource{c: c},
-		poolAAAAMembers:         PoolAAAAMembersResource{c: c},
-		poolAMembers:            PoolAMembersResource{c: c},
 		poolCNAME:               PoolCNAMEResource{c: c},
-		poolCNAMEMembers:        PoolCNAMEMembersResource{c: c},
 		poolMX:                  PoolMXResource{c: c},
-		poolMXMembers:           PoolMXMembersResource{c: c},
 		poolNAPTR:               PoolNAPTRResource{c: c},
-		poolNAPTRMembers:        PoolNAPTRMembersResource{c: c},
 		poolSRV:                 PoolSRVResource{c: c},
-		poolSRVMembers:          PoolSRVMembersResource{c: c},
 		proberPool:              ProberPoolResource{c: c},
-		proberPoolMembers:       ProberPoolMembersResource{c: c},
 		region:                  RegionResource{c: c},
 		rule:                    RuleResource{c: c},
 		server:                  ServerResource{c: c},
-		serverVirtualServers:    ServerVirtualServersResource{c: c},
 		topology:                TopologyResource{c: c},
-		wideIP:                  WideIPResource{c: c},
 		wideipA:                 WideipAResource{c: c},
 		wideipAAAA:              WideipAAAAResource{c: c},
 		wideipCname:             WideipCnameResource{c: c},
@@ -164,6 +140,11 @@ func New(c *f5.Client) GTM {
 }
 
 // Datacenter returns a configured DatacenterResource.
+func (gtm GTM) SyncStatus() *SyncStatusResource {
+	return &gtm.syncStatus
+}
+
+// Datacenter returns a configured DatacenterResource.
 func (gtm GTM) Datacenter() *DatacenterResource {
 	return &gtm.datacenter
 }
@@ -171,11 +152,6 @@ func (gtm GTM) Datacenter() *DatacenterResource {
 // DistributedApp returns a configured DistributedAppResource.
 func (gtm GTM) DistributedApp() *DistributedAppResource {
 	return &gtm.distributedApp
-}
-
-// GlobalSettings returns a configured GlobalSettingsResource.
-func (gtm GTM) GlobalSettings() *GlobalSettingsResource {
-	return &gtm.globalSettings
 }
 
 // GlobalSettingsGeneral returns a configured GlobalSettingsGeneralResource.
@@ -193,11 +169,6 @@ func (gtm GTM) GlobalSettingsMetrics() *GlobalSettingsMetricsResource {
 	return &gtm.globalSettingsMetrics
 }
 
-// GlobalSettingsMetricsExclusions returns a configured GlobalSettingsMetricsExclusionsResource.
-func (gtm GTM) GlobalSettingsMetricsExclusions() *GlobalSettingsMetricsExclusionsResource {
-	return &gtm.globalSettingsMetricsExclusions
-}
-
 // Link returns a configured LinkResource.
 func (gtm GTM) Link() *LinkResource {
 	return &gtm.link
@@ -211,11 +182,6 @@ func (gtm GTM) Listener() *ListenerResource {
 // ListenerProfiles returns a configured ListenerProfilesResource.
 func (gtm GTM) ListenerProfiles() *ListenerProfilesResource {
 	return &gtm.listenerProfiles
-}
-
-// Monitor returns a configured MonitorResource.
-func (gtm GTM) Monitor() *MonitorResource {
-	return &gtm.monitor
 }
 
 // MonitorBigIP returns a configured MonitorBigIPResource.
@@ -383,11 +349,6 @@ func (gtm GTM) Persist() *PersistResource {
 	return &gtm.persist
 }
 
-// Pool returns a configured PoolResource.
-func (gtm GTM) Pool() *PoolResource {
-	return &gtm.pool
-}
-
 // PoolA returns a configured PoolAResource.
 func (gtm GTM) PoolA() *PoolAResource {
 	return &gtm.poolA
@@ -398,24 +359,9 @@ func (gtm GTM) PoolAAAA() *PoolAAAAResource {
 	return &gtm.poolAAAA
 }
 
-// PoolAAAAMembers returns a configured PoolAAAAMembersResource.
-func (gtm GTM) PoolAAAAMembers() *PoolAAAAMembersResource {
-	return &gtm.poolAAAAMembers
-}
-
-// PoolAMembers returns a configured PoolAMembersResource.
-func (gtm GTM) PoolAMembers() *PoolAMembersResource {
-	return &gtm.poolAMembers
-}
-
 // PoolCNAME returns a configured PoolCNAMEResource.
 func (gtm GTM) PoolCNAME() *PoolCNAMEResource {
 	return &gtm.poolCNAME
-}
-
-// PoolCNAMEMembers returns a configured PoolCNAMEMembersResource.
-func (gtm GTM) PoolCNAMEMembers() *PoolCNAMEMembersResource {
-	return &gtm.poolCNAMEMembers
 }
 
 // PoolMX returns a configured PoolMXResource.
@@ -423,19 +369,9 @@ func (gtm GTM) PoolMX() *PoolMXResource {
 	return &gtm.poolMX
 }
 
-// PoolMXMembers returns a configured PoolMXMembersResource.
-func (gtm GTM) PoolMXMembers() *PoolMXMembersResource {
-	return &gtm.poolMXMembers
-}
-
 // PoolNAPTR returns a configured PoolNAPTRResource.
 func (gtm GTM) PoolNAPTR() *PoolNAPTRResource {
 	return &gtm.poolNAPTR
-}
-
-// PoolNAPTRMembers returns a configured PoolNAPTRMembersResource.
-func (gtm GTM) PoolNAPTRMembers() *PoolNAPTRMembersResource {
-	return &gtm.poolNAPTRMembers
 }
 
 // PoolSRV returns a configured PoolSRVResource.
@@ -443,19 +379,9 @@ func (gtm GTM) PoolSRV() *PoolSRVResource {
 	return &gtm.poolSRV
 }
 
-// PoolSRVMembers returns a configured PoolSRVMembersResource.
-func (gtm GTM) PoolSRVMembers() *PoolSRVMembersResource {
-	return &gtm.poolSRVMembers
-}
-
 // ProberPool returns a configured ProberPoolResource.
 func (gtm GTM) ProberPool() *ProberPoolResource {
 	return &gtm.proberPool
-}
-
-// ProberPoolMembers returns a configured ProberPoolMembersResource.
-func (gtm GTM) ProberPoolMembers() *ProberPoolMembersResource {
-	return &gtm.proberPoolMembers
 }
 
 // Region returns a configured RegionResource.
@@ -473,19 +399,9 @@ func (gtm GTM) Server() *ServerResource {
 	return &gtm.server
 }
 
-// ServerVirtualServers returns a configured ServerVirtualServersResource.
-func (gtm GTM) ServerVirtualServers() *ServerVirtualServersResource {
-	return &gtm.serverVirtualServers
-}
-
 // Topology returns a configured TopologyResource.
 func (gtm GTM) Topology() *TopologyResource {
 	return &gtm.topology
-}
-
-// WideIP returns a configured WideIPResource.
-func (gtm GTM) WideIP() *WideIPResource {
-	return &gtm.wideIP
 }
 
 // WideipA returns a configured WideipAResource.

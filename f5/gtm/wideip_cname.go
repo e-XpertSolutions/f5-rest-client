@@ -6,17 +6,6 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// WideipCnameConfigList holds a list of WideipCname configuration.
-type WideipCnameConfigList struct {
-	Items    []WideipCnameConfig `json:"items"`
-	Kind     string              `json:"kind"`
-	SelfLink string              `json:"selflink"`
-}
-
-// WideipCnameConfig holds the configuration of a single WideipCname.
-type WideipCnameConfig struct {
-}
-
 // WideipCnameEndpoint represents the REST resource for managing WideipCname.
 const WideipCnameEndpoint = "/wideip/cname"
 
@@ -26,8 +15,8 @@ type WideipCnameResource struct {
 }
 
 // ListAll  lists all the WideipCname configurations.
-func (r *WideipCnameResource) ListAll() (*WideipCnameConfigList, error) {
-	var list WideipCnameConfigList
+func (r *WideipCnameResource) ListAll() (*WideipList, error) {
+	var list WideipList
 	if err := r.c.ReadQuery(BasePath+WideipCnameEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -35,8 +24,8 @@ func (r *WideipCnameResource) ListAll() (*WideipCnameConfigList, error) {
 }
 
 // Get a single WideipCname configuration identified by id.
-func (r *WideipCnameResource) Get(id string) (*WideipCnameConfig, error) {
-	var item WideipCnameConfig
+func (r *WideipCnameResource) Get(id string) (*Wideip, error) {
+	var item Wideip
 	if err := r.c.ReadQuery(BasePath+WideipCnameEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -44,7 +33,7 @@ func (r *WideipCnameResource) Get(id string) (*WideipCnameConfig, error) {
 }
 
 // Create a new WideipCname configuration.
-func (r *WideipCnameResource) Create(item WideipCnameConfig) error {
+func (r *WideipCnameResource) Create(item Wideip) error {
 	if err := r.c.ModQuery("POST", BasePath+WideipCnameEndpoint, item); err != nil {
 		return err
 	}
@@ -52,7 +41,7 @@ func (r *WideipCnameResource) Create(item WideipCnameConfig) error {
 }
 
 // Edit a WideipCname configuration identified by id.
-func (r *WideipCnameResource) Edit(id string, item WideipCnameConfig) error {
+func (r *WideipCnameResource) Edit(id string, item Wideip) error {
 	if err := r.c.ModQuery("PUT", BasePath+WideipCnameEndpoint+"/"+id, item); err != nil {
 		return err
 	}

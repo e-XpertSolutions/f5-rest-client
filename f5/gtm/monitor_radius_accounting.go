@@ -6,27 +6,27 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorRadiusAccountingConfigList holds a list of MonitorRadiusAccounting configuration.
-type MonitorRadiusAccountingConfigList struct {
-	Items    []MonitorRadiusAccountingConfig `json:"items"`
-	Kind     string                          `json:"kind"`
-	SelfLink string                          `json:"selflink"`
+// MonitorRadiusAccountingList holds a list of MonitorRadiusAccounting configuration.
+type MonitorRadiusAccountingList struct {
+	Items    []MonitorRadiusAccounting `json:"items,omitempty"`
+	Kind     string                    `json:"kind,omitempty"`
+	SelfLink string                    `json:"selflink,omitempty"`
 }
 
-// MonitorRadiusAccountingConfig holds the configuration of a single MonitorRadiusAccounting.
-type MonitorRadiusAccountingConfig struct {
-	Debug              string `json:"debug"`
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
+// MonitorRadiusAccounting holds the configuration of a single MonitorRadiusAccounting.
+type MonitorRadiusAccounting struct {
+	Debug              string `json:"debug,omitempty"`
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
 }
 
 // MonitorRadiusAccountingEndpoint represents the REST resource for managing MonitorRadiusAccounting.
@@ -38,8 +38,8 @@ type MonitorRadiusAccountingResource struct {
 }
 
 // ListAll  lists all the MonitorRadiusAccounting configurations.
-func (r *MonitorRadiusAccountingResource) ListAll() (*MonitorRadiusAccountingConfigList, error) {
-	var list MonitorRadiusAccountingConfigList
+func (r *MonitorRadiusAccountingResource) ListAll() (*MonitorRadiusAccountingList, error) {
+	var list MonitorRadiusAccountingList
 	if err := r.c.ReadQuery(BasePath+MonitorRadiusAccountingEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -47,8 +47,8 @@ func (r *MonitorRadiusAccountingResource) ListAll() (*MonitorRadiusAccountingCon
 }
 
 // Get a single MonitorRadiusAccounting configuration identified by id.
-func (r *MonitorRadiusAccountingResource) Get(id string) (*MonitorRadiusAccountingConfig, error) {
-	var item MonitorRadiusAccountingConfig
+func (r *MonitorRadiusAccountingResource) Get(id string) (*MonitorRadiusAccounting, error) {
+	var item MonitorRadiusAccounting
 	if err := r.c.ReadQuery(BasePath+MonitorRadiusAccountingEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (r *MonitorRadiusAccountingResource) Get(id string) (*MonitorRadiusAccounti
 }
 
 // Create a new MonitorRadiusAccounting configuration.
-func (r *MonitorRadiusAccountingResource) Create(item MonitorRadiusAccountingConfig) error {
+func (r *MonitorRadiusAccountingResource) Create(item MonitorRadiusAccounting) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorRadiusAccountingEndpoint, item); err != nil {
 		return err
 	}
@@ -64,7 +64,7 @@ func (r *MonitorRadiusAccountingResource) Create(item MonitorRadiusAccountingCon
 }
 
 // Edit a MonitorRadiusAccounting configuration identified by id.
-func (r *MonitorRadiusAccountingResource) Edit(id string, item MonitorRadiusAccountingConfig) error {
+func (r *MonitorRadiusAccountingResource) Edit(id string, item MonitorRadiusAccounting) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorRadiusAccountingEndpoint+"/"+id, item); err != nil {
 		return err
 	}

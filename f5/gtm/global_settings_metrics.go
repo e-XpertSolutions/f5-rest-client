@@ -6,15 +6,23 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// GlobalSettingsMetricsConfigList holds a list of GlobalSettingsMetrics configuration.
-type GlobalSettingsMetricsConfigList struct {
-	Items    []GlobalSettingsMetricsConfig `json:"items"`
-	Kind     string                        `json:"kind"`
-	SelfLink string                        `json:"selflink"`
-}
-
-// GlobalSettingsMetricsConfig holds the configuration of a single GlobalSettingsMetrics.
-type GlobalSettingsMetricsConfig struct {
+// GlobalSettingsMetrics holds the configuration of a single GlobalSettingsMetrics.
+type GlobalSettingsMetrics struct {
+	DefaultProbeLimit             int      `json:"defaultProbeLimit,omitempty"`
+	HopsPacketLength              int      `json:"hopsPacketLength,omitempty"`
+	HopsSampleCount               int      `json:"hopsSampleCount,omitempty"`
+	HopsTimeout                   int      `json:"hopsTimeout,omitempty"`
+	HopsTTL                       int      `json:"hopsTtl,omitempty"`
+	InactiveLdnsTTL               int      `json:"inactiveLdnsTtl,omitempty"`
+	InactivePathsTTL              int      `json:"inactivePathsTtl,omitempty"`
+	Kind                          string   `json:"kind,omitempty"`
+	LdnsUpdateInterval            int      `json:"ldnsUpdateInterval,omitempty"`
+	MaxSynchronousMonitorRequests int      `json:"maxSynchronousMonitorRequests,omitempty"`
+	MetricsCaching                int      `json:"metricsCaching,omitempty"`
+	MetricsCollectionProtocols    []string `json:"metricsCollectionProtocols,omitempty"`
+	PathTTL                       int      `json:"pathTtl,omitempty"`
+	PathsRetry                    int      `json:"pathsRetry,omitempty"`
+	SelfLink                      string   `json:"selfLink,omitempty"`
 }
 
 // GlobalSettingsMetricsEndpoint represents the REST resource for managing GlobalSettingsMetrics.
@@ -25,43 +33,18 @@ type GlobalSettingsMetricsResource struct {
 	c *f5.Client
 }
 
-// ListAll  lists all the GlobalSettingsMetrics configurations.
-func (r *GlobalSettingsMetricsResource) ListAll() (*GlobalSettingsMetricsConfigList, error) {
-	var list GlobalSettingsMetricsConfigList
+// List  lists all the GlobalSettingsMetrics configurations.
+func (r *GlobalSettingsMetricsResource) List() (*GlobalSettingsMetrics, error) {
+	var list GlobalSettingsMetrics
 	if err := r.c.ReadQuery(BasePath+GlobalSettingsMetricsEndpoint, &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
 }
 
-// Get a single GlobalSettingsMetrics configuration identified by id.
-func (r *GlobalSettingsMetricsResource) Get(id string) (*GlobalSettingsMetricsConfig, error) {
-	var item GlobalSettingsMetricsConfig
-	if err := r.c.ReadQuery(BasePath+GlobalSettingsMetricsEndpoint, &item); err != nil {
-		return nil, err
-	}
-	return &item, nil
-}
-
-// Create a new GlobalSettingsMetrics configuration.
-func (r *GlobalSettingsMetricsResource) Create(item GlobalSettingsMetricsConfig) error {
+// Modify a new GlobalSettingsMetrics configuration.
+func (r *GlobalSettingsMetricsResource) Modify(item GlobalSettingsMetrics) error {
 	if err := r.c.ModQuery("POST", BasePath+GlobalSettingsMetricsEndpoint, item); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Edit a GlobalSettingsMetrics configuration identified by id.
-func (r *GlobalSettingsMetricsResource) Edit(id string, item GlobalSettingsMetricsConfig) error {
-	if err := r.c.ModQuery("PUT", BasePath+GlobalSettingsMetricsEndpoint+"/"+id, item); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Delete a single GlobalSettingsMetrics configuration identified by id.
-func (r *GlobalSettingsMetricsResource) Delete(id string) error {
-	if err := r.c.ModQuery("DELETE", BasePath+GlobalSettingsMetricsEndpoint+"/"+id, nil); err != nil {
 		return err
 	}
 	return nil

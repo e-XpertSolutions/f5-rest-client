@@ -6,29 +6,29 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorRealServerConfigList holds a list of MonitorRealServer configuration.
-type MonitorRealServerConfigList struct {
-	Items    []MonitorRealServerConfig `json:"items"`
-	Kind     string                    `json:"kind"`
-	SelfLink string                    `json:"selflink"`
+// MonitorRealServerList holds a list of MonitorRealServer configuration.
+type MonitorRealServerList struct {
+	Items    []MonitorRealServer `json:"items,omitempty"`
+	Kind     string              `json:"kind,omitempty"`
+	SelfLink string              `json:"selflink,omitempty"`
 }
 
-// MonitorRealServerConfig holds the configuration of a single MonitorRealServer.
-type MonitorRealServerConfig struct {
-	Agent              string `json:"agent"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Method             string `json:"method"`
-	Metrics            string `json:"metrics"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
-	TmCommand          string `json:"tmCommand"`
+// MonitorRealServer holds the configuration of a single MonitorRealServer.
+type MonitorRealServer struct {
+	Agent              string `json:"agent,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Method             string `json:"method,omitempty"`
+	Metrics            string `json:"metrics,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
+	TmCommand          string `json:"tmCommand,omitempty"`
 }
 
 // MonitorRealServerEndpoint represents the REST resource for managing MonitorRealServer.
@@ -40,8 +40,8 @@ type MonitorRealServerResource struct {
 }
 
 // ListAll  lists all the MonitorRealServer configurations.
-func (r *MonitorRealServerResource) ListAll() (*MonitorRealServerConfigList, error) {
-	var list MonitorRealServerConfigList
+func (r *MonitorRealServerResource) ListAll() (*MonitorRealServerList, error) {
+	var list MonitorRealServerList
 	if err := r.c.ReadQuery(BasePath+MonitorRealServerEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -49,8 +49,8 @@ func (r *MonitorRealServerResource) ListAll() (*MonitorRealServerConfigList, err
 }
 
 // Get a single MonitorRealServer configuration identified by id.
-func (r *MonitorRealServerResource) Get(id string) (*MonitorRealServerConfig, error) {
-	var item MonitorRealServerConfig
+func (r *MonitorRealServerResource) Get(id string) (*MonitorRealServer, error) {
+	var item MonitorRealServer
 	if err := r.c.ReadQuery(BasePath+MonitorRealServerEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ func (r *MonitorRealServerResource) Get(id string) (*MonitorRealServerConfig, er
 }
 
 // Create a new MonitorRealServer configuration.
-func (r *MonitorRealServerResource) Create(item MonitorRealServerConfig) error {
+func (r *MonitorRealServerResource) Create(item MonitorRealServer) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorRealServerEndpoint, item); err != nil {
 		return err
 	}
@@ -66,7 +66,7 @@ func (r *MonitorRealServerResource) Create(item MonitorRealServerConfig) error {
 }
 
 // Edit a MonitorRealServer configuration identified by id.
-func (r *MonitorRealServerResource) Edit(id string, item MonitorRealServerConfig) error {
+func (r *MonitorRealServerResource) Edit(id string, item MonitorRealServer) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorRealServerEndpoint+"/"+id, item); err != nil {
 		return err
 	}

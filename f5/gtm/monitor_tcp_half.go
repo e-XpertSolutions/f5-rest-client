@@ -6,29 +6,29 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorTCPHalfConfigList holds a list of MonitorTCPHalf configuration.
-type MonitorTCPHalfConfigList struct {
-	Items    []MonitorTCPHalfConfig `json:"items"`
-	Kind     string                 `json:"kind"`
-	SelfLink string                 `json:"selflink"`
+// MonitorTCPHalfList holds a list of MonitorTCPHalf configuration.
+type MonitorTCPHalfList struct {
+	Items    []MonitorTCPHalf `json:"items,omitempty"`
+	Kind     string           `json:"kind,omitempty"`
+	SelfLink string           `json:"selflink,omitempty"`
 }
 
-// MonitorTCPHalfConfig holds the configuration of a single MonitorTCPHalf.
-type MonitorTCPHalfConfig struct {
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	ProbeAttempts      int    `json:"probeAttempts"`
-	ProbeInterval      int    `json:"probeInterval"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
-	Transparent        string `json:"transparent"`
+// MonitorTCPHalf holds the configuration of a single MonitorTCPHalf.
+type MonitorTCPHalf struct {
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	ProbeAttempts      int    `json:"probeAttempts,omitempty"`
+	ProbeInterval      int    `json:"probeInterval,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
+	Transparent        string `json:"transparent,omitempty"`
 }
 
 // MonitorTCPHalfEndpoint represents the REST resource for managing MonitorTCPHalf.
@@ -40,8 +40,8 @@ type MonitorTCPHalfResource struct {
 }
 
 // ListAll  lists all the MonitorTCPHalf configurations.
-func (r *MonitorTCPHalfResource) ListAll() (*MonitorTCPHalfConfigList, error) {
-	var list MonitorTCPHalfConfigList
+func (r *MonitorTCPHalfResource) ListAll() (*MonitorTCPHalfList, error) {
+	var list MonitorTCPHalfList
 	if err := r.c.ReadQuery(BasePath+MonitorTCPHalfEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -49,8 +49,8 @@ func (r *MonitorTCPHalfResource) ListAll() (*MonitorTCPHalfConfigList, error) {
 }
 
 // Get a single MonitorTCPHalf configuration identified by id.
-func (r *MonitorTCPHalfResource) Get(id string) (*MonitorTCPHalfConfig, error) {
-	var item MonitorTCPHalfConfig
+func (r *MonitorTCPHalfResource) Get(id string) (*MonitorTCPHalf, error) {
+	var item MonitorTCPHalf
 	if err := r.c.ReadQuery(BasePath+MonitorTCPHalfEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ func (r *MonitorTCPHalfResource) Get(id string) (*MonitorTCPHalfConfig, error) {
 }
 
 // Create a new MonitorTCPHalf configuration.
-func (r *MonitorTCPHalfResource) Create(item MonitorTCPHalfConfig) error {
+func (r *MonitorTCPHalfResource) Create(item MonitorTCPHalf) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorTCPHalfEndpoint, item); err != nil {
 		return err
 	}
@@ -66,7 +66,7 @@ func (r *MonitorTCPHalfResource) Create(item MonitorTCPHalfConfig) error {
 }
 
 // Edit a MonitorTCPHalf configuration identified by id.
-func (r *MonitorTCPHalfResource) Edit(id string, item MonitorTCPHalfConfig) error {
+func (r *MonitorTCPHalfResource) Edit(id string, item MonitorTCPHalf) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorTCPHalfEndpoint+"/"+id, item); err != nil {
 		return err
 	}

@@ -6,15 +6,42 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// LinkConfigList holds a list of Link configuration.
-type LinkConfigList struct {
-	Items    []LinkConfig `json:"items"`
-	Kind     string       `json:"kind"`
-	SelfLink string       `json:"selflink"`
+// LinkList holds a list of Link configuration.
+type LinkList struct {
+	Items    []Link `json:"items,omitempty"`
+	Kind     string `json:"kind,omitempty"`
+	SelfLink string `json:"selflink,omitempty"`
 }
 
-// LinkConfig holds the configuration of a single Link.
-type LinkConfig struct {
+// Link holds the configuration of a single Link.
+type Link struct {
+	Datacenter          string `json:"datacenter,omitempty"`
+	DatacenterReference struct {
+		Link string `json:"link,omitempty"`
+	} `json:"datacenterReference,omitempty"`
+	DuplexBilling             string `json:"duplexBilling,omitempty"`
+	Enabled                   bool   `json:"enabled,omitempty"`
+	FullPath                  string `json:"fullPath,omitempty"`
+	Generation                int    `json:"generation,omitempty"`
+	Kind                      string `json:"kind,omitempty"`
+	LimitMaxInboundBps        int    `json:"limitMaxInboundBps,omitempty"`
+	LimitMaxInboundBpsStatus  string `json:"limitMaxInboundBpsStatus,omitempty"`
+	LimitMaxOutboundBps       int    `json:"limitMaxOutboundBps,omitempty"`
+	LimitMaxOutboundBpsStatus string `json:"limitMaxOutboundBpsStatus,omitempty"`
+	LimitMaxTotalBps          int    `json:"limitMaxTotalBps,omitempty"`
+	LimitMaxTotalBpsStatus    string `json:"limitMaxTotalBpsStatus,omitempty"`
+	LinkRatio                 int    `json:"linkRatio,omitempty"`
+	Monitor                   string `json:"monitor,omitempty"`
+	Name                      string `json:"name,omitempty"`
+	Partition                 string `json:"partition,omitempty"`
+	PrepaidSegment            int    `json:"prepaidSegment,omitempty"`
+	RouterAddresses           []struct {
+		Name        string `json:"name,omitempty"`
+		Translation string `json:"translation,omitempty"`
+	} `json:"routerAddresses,omitempty"`
+	SelfLink      string `json:"selfLink,omitempty"`
+	UplinkAddress string `json:"uplinkAddress,omitempty"`
+	Weighting     string `json:"weighting,omitempty"`
 }
 
 // LinkEndpoint represents the REST resource for managing Link.
@@ -26,8 +53,8 @@ type LinkResource struct {
 }
 
 // ListAll  lists all the Link configurations.
-func (r *LinkResource) ListAll() (*LinkConfigList, error) {
-	var list LinkConfigList
+func (r *LinkResource) ListAll() (*LinkList, error) {
+	var list LinkList
 	if err := r.c.ReadQuery(BasePath+LinkEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -35,8 +62,8 @@ func (r *LinkResource) ListAll() (*LinkConfigList, error) {
 }
 
 // Get a single Link configuration identified by id.
-func (r *LinkResource) Get(id string) (*LinkConfig, error) {
-	var item LinkConfig
+func (r *LinkResource) Get(id string) (*Link, error) {
+	var item Link
 	if err := r.c.ReadQuery(BasePath+LinkEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -44,7 +71,7 @@ func (r *LinkResource) Get(id string) (*LinkConfig, error) {
 }
 
 // Create a new Link configuration.
-func (r *LinkResource) Create(item LinkConfig) error {
+func (r *LinkResource) Create(item Link) error {
 	if err := r.c.ModQuery("POST", BasePath+LinkEndpoint, item); err != nil {
 		return err
 	}
@@ -52,7 +79,7 @@ func (r *LinkResource) Create(item LinkConfig) error {
 }
 
 // Edit a Link configuration identified by id.
-func (r *LinkResource) Edit(id string, item LinkConfig) error {
+func (r *LinkResource) Edit(id string, item Link) error {
 	if err := r.c.ModQuery("PUT", BasePath+LinkEndpoint+"/"+id, item); err != nil {
 		return err
 	}

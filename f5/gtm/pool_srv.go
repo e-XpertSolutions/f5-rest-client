@@ -6,17 +6,6 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// PoolSRVConfigList holds a list of PoolSRV configuration.
-type PoolSRVConfigList struct {
-	Items    []PoolSRVConfig `json:"items"`
-	Kind     string          `json:"kind"`
-	SelfLink string          `json:"selflink"`
-}
-
-// PoolSRVConfig holds the configuration of a single PoolSRV.
-type PoolSRVConfig struct {
-}
-
 // PoolSRVEndpoint represents the REST resource for managing PoolSRV.
 const PoolSRVEndpoint = "/pool/srv"
 
@@ -26,8 +15,8 @@ type PoolSRVResource struct {
 }
 
 // ListAll  lists all the PoolSRV configurations.
-func (r *PoolSRVResource) ListAll() (*PoolSRVConfigList, error) {
-	var list PoolSRVConfigList
+func (r *PoolSRVResource) ListAll() (*PoolList, error) {
+	var list PoolList
 	if err := r.c.ReadQuery(BasePath+PoolSRVEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -35,16 +24,25 @@ func (r *PoolSRVResource) ListAll() (*PoolSRVConfigList, error) {
 }
 
 // Get a single PoolSRV configuration identified by id.
-func (r *PoolSRVResource) Get(id string) (*PoolSRVConfig, error) {
-	var item PoolSRVConfig
+func (r *PoolSRVResource) Get(id string) (*Pool, error) {
+	var item Pool
 	if err := r.c.ReadQuery(BasePath+PoolSRVEndpoint, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
 }
 
+// GetSRVMembers  lists all the PoolMembers configurations.
+func (r *PoolAResource) GetSRVMembers(id string) (*PoolMembersList, error) {
+	var list PoolMembersList
+	if err := r.c.ReadQuery(BasePath+PoolSRVEndpoint+"/"+id+"/members", &list); err != nil {
+		return nil, err
+	}
+	return &list, nil
+}
+
 // Create a new PoolSRV configuration.
-func (r *PoolSRVResource) Create(item PoolSRVConfig) error {
+func (r *PoolSRVResource) Create(item Pool) error {
 	if err := r.c.ModQuery("POST", BasePath+PoolSRVEndpoint, item); err != nil {
 		return err
 	}
@@ -52,7 +50,7 @@ func (r *PoolSRVResource) Create(item PoolSRVConfig) error {
 }
 
 // Edit a PoolSRV configuration identified by id.
-func (r *PoolSRVResource) Edit(id string, item PoolSRVConfig) error {
+func (r *PoolSRVResource) Edit(id string, item Pool) error {
 	if err := r.c.ModQuery("PUT", BasePath+PoolSRVEndpoint+"/"+id, item); err != nil {
 		return err
 	}

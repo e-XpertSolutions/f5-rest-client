@@ -6,75 +6,75 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorFirepassConfigList holds a list of MonitorFirepass configuration.
-type MonitorFirepassConfigList struct {
-	Items    []MonitorFirepassConfig `json:"items"`
-	Kind     string                  `json:"kind"`
-	SelfLink string                  `json:"selflink"`
+// MonitorFirepassList holds a list of MonitorFirepass uration.
+type MonitorFirepassList struct {
+	Items    []MonitorFirepass `json:"items,omitempty"`
+	Kind     string            `json:"kind,omitempty"`
+	SelfLink string            `json:"selflink,omitempty"`
 }
 
-// MonitorFirepassConfig holds the configuration of a single MonitorFirepass.
-type MonitorFirepassConfig struct {
-	Cipherlist         string `json:"cipherlist"`
-	ConcurrencyLimit   int    `json:"concurrencyLimit"`
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	MaxLoadAverage     int    `json:"maxLoadAverage"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
-	Username           string `json:"username"`
+// MonitorFirepass holds the uration of a single MonitorFirepass.
+type MonitorFirepass struct {
+	Cipherlist         string `json:"cipherlist,omitempty"`
+	ConcurrencyLimit   int    `json:"concurrencyLimit,omitempty"`
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	MaxLoadAverage     int    `json:"maxLoadAverage,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
+	Username           string `json:"username,omitempty"`
 }
 
 // MonitorFirepassEndpoint represents the REST resource for managing MonitorFirepass.
 const MonitorFirepassEndpoint = "/monitor/firepass"
 
-// MonitorFirepassResource provides an API to manage MonitorFirepass configurations.
+// MonitorFirepassResource provides an API to manage MonitorFirepass urations.
 type MonitorFirepassResource struct {
 	c *f5.Client
 }
 
-// ListAll  lists all the MonitorFirepass configurations.
-func (r *MonitorFirepassResource) ListAll() (*MonitorFirepassConfigList, error) {
-	var list MonitorFirepassConfigList
+// ListAll  lists all the MonitorFirepass urations.
+func (r *MonitorFirepassResource) ListAll() (*MonitorFirepassList, error) {
+	var list MonitorFirepassList
 	if err := r.c.ReadQuery(BasePath+MonitorFirepassEndpoint, &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
 }
 
-// Get a single MonitorFirepass configuration identified by id.
-func (r *MonitorFirepassResource) Get(id string) (*MonitorFirepassConfig, error) {
-	var item MonitorFirepassConfig
+// Get a single MonitorFirepass uration identified by id.
+func (r *MonitorFirepassResource) Get(id string) (*MonitorFirepass, error) {
+	var item MonitorFirepass
 	if err := r.c.ReadQuery(BasePath+MonitorFirepassEndpoint, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
 }
 
-// Create a new MonitorFirepass configuration.
-func (r *MonitorFirepassResource) Create(item MonitorFirepassConfig) error {
+// Create a new MonitorFirepass uration.
+func (r *MonitorFirepassResource) Create(item MonitorFirepass) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorFirepassEndpoint, item); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Edit a MonitorFirepass configuration identified by id.
-func (r *MonitorFirepassResource) Edit(id string, item MonitorFirepassConfig) error {
+// Edit a MonitorFirepass uration identified by id.
+func (r *MonitorFirepassResource) Edit(id string, item MonitorFirepass) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorFirepassEndpoint+"/"+id, item); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Delete a single MonitorFirepass configuration identified by id.
+// Delete a single MonitorFirepass uration identified by id.
 func (r *MonitorFirepassResource) Delete(id string) error {
 	if err := r.c.ModQuery("DELETE", BasePath+MonitorFirepassEndpoint+"/"+id, nil); err != nil {
 		return err

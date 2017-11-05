@@ -6,71 +6,71 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorExternalConfigList holds a list of MonitorExternal configuration.
-type MonitorExternalConfigList struct {
-	Items    []MonitorExternalConfig `json:"items"`
-	Kind     string                  `json:"kind"`
-	SelfLink string                  `json:"selflink"`
+// MonitorExternalList holds a list of MonitorExternal uration.
+type MonitorExternalList struct {
+	Items    []MonitorExternal `json:"items,omitempty"`
+	Kind     string            `json:"kind,omitempty"`
+	SelfLink string            `json:"selflink,omitempty"`
 }
 
-// MonitorExternalConfig holds the configuration of a single MonitorExternal.
-type MonitorExternalConfig struct {
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
+// MonitorExternal holds the uration of a single MonitorExternal.
+type MonitorExternal struct {
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
 }
 
 // MonitorExternalEndpoint represents the REST resource for managing MonitorExternal.
 const MonitorExternalEndpoint = "/monitor/external"
 
-// MonitorExternalResource provides an API to manage MonitorExternal configurations.
+// MonitorExternalResource provides an API to manage MonitorExternal urations.
 type MonitorExternalResource struct {
 	c *f5.Client
 }
 
-// ListAll  lists all the MonitorExternal configurations.
-func (r *MonitorExternalResource) ListAll() (*MonitorExternalConfigList, error) {
-	var list MonitorExternalConfigList
+// ListAll  lists all the MonitorExternal urations.
+func (r *MonitorExternalResource) ListAll() (*MonitorExternalList, error) {
+	var list MonitorExternalList
 	if err := r.c.ReadQuery(BasePath+MonitorExternalEndpoint, &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
 }
 
-// Get a single MonitorExternal configuration identified by id.
-func (r *MonitorExternalResource) Get(id string) (*MonitorExternalConfig, error) {
-	var item MonitorExternalConfig
+// Get a single MonitorExternal uration identified by id.
+func (r *MonitorExternalResource) Get(id string) (*MonitorExternal, error) {
+	var item MonitorExternal
 	if err := r.c.ReadQuery(BasePath+MonitorExternalEndpoint, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
 }
 
-// Create a new MonitorExternal configuration.
-func (r *MonitorExternalResource) Create(item MonitorExternalConfig) error {
+// Create a new MonitorExternal uration.
+func (r *MonitorExternalResource) Create(item MonitorExternal) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorExternalEndpoint, item); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Edit a MonitorExternal configuration identified by id.
-func (r *MonitorExternalResource) Edit(id string, item MonitorExternalConfig) error {
+// Edit a MonitorExternal uration identified by id.
+func (r *MonitorExternalResource) Edit(id string, item MonitorExternal) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorExternalEndpoint+"/"+id, item); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Delete a single MonitorExternal configuration identified by id.
+// Delete a single MonitorExternal uration identified by id.
 func (r *MonitorExternalResource) Delete(id string) error {
 	if err := r.c.ModQuery("DELETE", BasePath+MonitorExternalEndpoint+"/"+id, nil); err != nil {
 		return err

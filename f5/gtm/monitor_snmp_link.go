@@ -8,29 +8,29 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // MonitorSNMPLinkConfigList holds a list of MonitorSNMPLink configuration.
 type MonitorSNMPLinkConfigList struct {
-	Items    []MonitorSNMPLinkConfig `json:"items"`
-	Kind     string                  `json:"kind"`
-	SelfLink string                  `json:"selflink"`
+	Items    []MonitorSNMPLinkConfig `json:"items,omitempty"`
+	Kind     string                  `json:"kind,omitempty"`
+	SelfLink string                  `json:"selflink,omitempty"`
 }
 
 // MonitorSNMPLinkConfig holds the configuration of a single MonitorSNMPLink.
 type MonitorSNMPLinkConfig struct {
-	Community          string `json:"community"`
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	Port               int    `json:"port"`
-	ProbeAttempts      int    `json:"probeAttempts"`
-	ProbeInterval      int    `json:"probeInterval"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
-	Version            string `json:"version"`
+	Community          string `json:"community,omitempty"`
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	Port               int    `json:"port,omitempty"`
+	ProbeAttempts      int    `json:"probeAttempts,omitempty"`
+	ProbeInterval      int    `json:"probeInterval,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
+	Version            string `json:"version,omitempty"`
 }
 
 // MonitorSNMPLinkEndpoint represents the REST resource for managing MonitorSNMPLink.

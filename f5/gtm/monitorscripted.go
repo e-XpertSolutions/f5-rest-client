@@ -6,72 +6,72 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorscriptedConfigList holds a list of Monitorscripted configuration.
-type MonitorscriptedConfigList struct {
-	Items    []MonitorscriptedConfig `json:"items"`
-	Kind     string                  `json:"kind"`
-	SelfLink string                  `json:"selflink"`
+// MonitorscriptedList holds a list of Monitorscripted uration.
+type MonitorscriptedList struct {
+	Items    []Monitorscripted `json:"items,omitempty"`
+	Kind     string            `json:"kind,omitempty"`
+	SelfLink string            `json:"selflink,omitempty"`
 }
 
-// MonitorscriptedConfig holds the configuration of a single Monitorscripted.
-type MonitorscriptedConfig struct {
-	Debug              string `json:"debug"`
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
+// Monitorscripted holds the uration of a single Monitorscripted.
+type Monitorscripted struct {
+	Debug              string `json:"debug,omitempty"`
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
 }
 
 // MonitorscriptedEndpoint represents the REST resource for managing Monitorscripted.
 const MonitorscriptedEndpoint = "/monitor/scripted"
 
-// MonitorscriptedResource provides an API to manage Monitorscripted configurations.
+// MonitorscriptedResource provides an API to manage Monitorscripted urations.
 type MonitorscriptedResource struct {
 	c *f5.Client
 }
 
-// ListAll  lists all the Monitorscripted configurations.
-func (r *MonitorscriptedResource) ListAll() (*MonitorscriptedConfigList, error) {
-	var list MonitorscriptedConfigList
+// ListAll  lists all the Monitorscripted urations.
+func (r *MonitorscriptedResource) ListAll() (*MonitorscriptedList, error) {
+	var list MonitorscriptedList
 	if err := r.c.ReadQuery(BasePath+MonitorscriptedEndpoint, &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
 }
 
-// Get a single Monitorscripted configuration identified by id.
-func (r *MonitorscriptedResource) Get(id string) (*MonitorscriptedConfig, error) {
-	var item MonitorscriptedConfig
+// Get a single Monitorscripted uration identified by id.
+func (r *MonitorscriptedResource) Get(id string) (*Monitorscripted, error) {
+	var item Monitorscripted
 	if err := r.c.ReadQuery(BasePath+MonitorscriptedEndpoint, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
 }
 
-// Create a new Monitorscripted configuration.
-func (r *MonitorscriptedResource) Create(item MonitorscriptedConfig) error {
+// Create a new Monitorscripted uration.
+func (r *MonitorscriptedResource) Create(item Monitorscripted) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorscriptedEndpoint, item); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Edit a Monitorscripted configuration identified by id.
-func (r *MonitorscriptedResource) Edit(id string, item MonitorscriptedConfig) error {
+// Edit a Monitorscripted uration identified by id.
+func (r *MonitorscriptedResource) Edit(id string, item Monitorscripted) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorscriptedEndpoint+"/"+id, item); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Delete a single Monitorscripted configuration identified by id.
+// Delete a single Monitorscripted uration identified by id.
 func (r *MonitorscriptedResource) Delete(id string) error {
 	if err := r.c.ModQuery("DELETE", BasePath+MonitorscriptedEndpoint+"/"+id, nil); err != nil {
 		return err

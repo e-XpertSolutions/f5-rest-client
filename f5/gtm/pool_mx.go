@@ -6,17 +6,6 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// PoolMXConfigList holds a list of PoolMX configuration.
-type PoolMXConfigList struct {
-	Items    []PoolMXConfig `json:"items"`
-	Kind     string         `json:"kind"`
-	SelfLink string         `json:"selflink"`
-}
-
-// PoolMXConfig holds the configuration of a single PoolMX.
-type PoolMXConfig struct {
-}
-
 // PoolMXEndpoint represents the REST resource for managing PoolMX.
 const PoolMXEndpoint = "/pool/mx"
 
@@ -26,8 +15,8 @@ type PoolMXResource struct {
 }
 
 // ListAll  lists all the PoolMX configurations.
-func (r *PoolMXResource) ListAll() (*PoolMXConfigList, error) {
-	var list PoolMXConfigList
+func (r *PoolMXResource) ListAll() (*PoolList, error) {
+	var list PoolList
 	if err := r.c.ReadQuery(BasePath+PoolMXEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -35,16 +24,25 @@ func (r *PoolMXResource) ListAll() (*PoolMXConfigList, error) {
 }
 
 // Get a single PoolMX configuration identified by id.
-func (r *PoolMXResource) Get(id string) (*PoolMXConfig, error) {
-	var item PoolMXConfig
+func (r *PoolMXResource) Get(id string) (*Pool, error) {
+	var item Pool
 	if err := r.c.ReadQuery(BasePath+PoolMXEndpoint, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
 }
 
+// GetMXMembers  lists all the PoolMembers configurations.
+func (r *PoolAResource) GetMXMembers(id string) (*PoolMembersList, error) {
+	var list PoolMembersList
+	if err := r.c.ReadQuery(BasePath+PoolMXEndpoint+"/"+id+"/members", &list); err != nil {
+		return nil, err
+	}
+	return &list, nil
+}
+
 // Create a new PoolMX configuration.
-func (r *PoolMXResource) Create(item PoolMXConfig) error {
+func (r *PoolMXResource) Create(item Pool) error {
 	if err := r.c.ModQuery("POST", BasePath+PoolMXEndpoint, item); err != nil {
 		return err
 	}
@@ -52,7 +50,7 @@ func (r *PoolMXResource) Create(item PoolMXConfig) error {
 }
 
 // Edit a PoolMX configuration identified by id.
-func (r *PoolMXResource) Edit(id string, item PoolMXConfig) error {
+func (r *PoolMXResource) Edit(id string, item Pool) error {
 	if err := r.c.ModQuery("PUT", BasePath+PoolMXEndpoint+"/"+id, item); err != nil {
 		return err
 	}

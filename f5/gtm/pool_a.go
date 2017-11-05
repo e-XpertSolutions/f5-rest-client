@@ -6,60 +6,132 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// PoolAConfigList holds a list of PoolA configuration.
-type PoolAConfigList struct {
-	Items    []PoolAConfig `json:"items"`
-	Kind     string        `json:"kind"`
-	SelfLink string        `json:"selflink"`
+// PoolList holds a list of Pool configuration.
+type PoolList struct {
+	Items    []Pool `json:"items,omitempty"`
+	Kind     string `json:"kind,omitempty"`
+	SelfLink string `json:"selflink,omitempty"`
 }
 
-// PoolAConfig holds the configuration of a single PoolA.
-type PoolAConfig struct {
+// Pool holds the configuration of a single Pool.
+type Pool struct {
+	AlternateMode             string `json:"alternateMode,omitempty"`
+	DynamicRatio              string `json:"dynamicRatio,omitempty"`
+	Enabled                   bool   `json:"enabled,omitempty"`
+	FallbackIP                string `json:"fallbackIp,omitempty"`
+	FallbackMode              string `json:"fallbackMode,omitempty"`
+	FullPath                  string `json:"fullPath,omitempty"`
+	Generation                int    `json:"generation,omitempty"`
+	Kind                      string `json:"kind,omitempty"`
+	LimitMaxBps               int    `json:"limitMaxBps,omitempty"`
+	LimitMaxBpsStatus         string `json:"limitMaxBpsStatus,omitempty"`
+	LimitMaxConnections       int    `json:"limitMaxConnections,omitempty"`
+	LimitMaxConnectionsStatus string `json:"limitMaxConnectionsStatus,omitempty"`
+	LimitMaxPps               int    `json:"limitMaxPps,omitempty"`
+	LimitMaxPpsStatus         string `json:"limitMaxPpsStatus,omitempty"`
+	LoadBalancingMode         string `json:"loadBalancingMode,omitempty"`
+	ManualResume              string `json:"manualResume,omitempty"`
+	MaxAnswersReturned        int    `json:"maxAnswersReturned,omitempty"`
+	MembersReference          struct {
+		Members         []PoolMembers `json:"items,omitempty"`
+		IsSubcollection bool          `json:"isSubcollection,omitempty"`
+		Link            string        `json:"link,omitempty"`
+	} `json:"membersReference,omitempty"`
+	Monitor                  string `json:"monitor,omitempty"`
+	Name                     string `json:"name,omitempty"`
+	Partition                string `json:"partition,omitempty"`
+	QosHitRatio              int    `json:"qosHitRatio,omitempty"`
+	QosHops                  int    `json:"qosHops,omitempty"`
+	QosKilobytesSecond       int    `json:"qosKilobytesSecond,omitempty"`
+	QosLcs                   int    `json:"qosLcs,omitempty"`
+	QosPacketRate            int    `json:"qosPacketRate,omitempty"`
+	QosRtt                   int    `json:"qosRtt,omitempty"`
+	QosTopology              int    `json:"qosTopology,omitempty"`
+	QosVsCapacity            int    `json:"qosVsCapacity,omitempty"`
+	QosVsScore               int    `json:"qosVsScore,omitempty"`
+	SelfLink                 string `json:"selfLink,omitempty"`
+	TTL                      int    `json:"ttl,omitempty"`
+	VerifyMemberAvailability string `json:"verifyMemberAvailability,omitempty"`
 }
 
-// PoolAEndpoint represents the REST resource for managing PoolA.
+type PoolMembersList struct {
+	Items    []PoolMembers `json:"items,omitempty"`
+	Kind     string        `json:"kind,omitempty"`
+	SelfLink string        `json:"selflink,omitempty"`
+}
+
+// PoolMembers holds the configuration of a single PoolMembers.
+type PoolMembers struct {
+	Enabled                   bool   `json:"enabled,omitempty"`
+	FullPath                  string `json:"fullPath,omitempty"`
+	Generation                int    `json:"generation,omitempty"`
+	Kind                      string `json:"kind,omitempty"`
+	LimitMaxBps               int    `json:"limitMaxBps,omitempty"`
+	LimitMaxBpsStatus         string `json:"limitMaxBpsStatus,omitempty"`
+	LimitMaxConnections       int    `json:"limitMaxConnections,omitempty"`
+	LimitMaxConnectionsStatus string `json:"limitMaxConnectionsStatus,omitempty"`
+	LimitMaxPps               int    `json:"limitMaxPps,omitempty"`
+	LimitMaxPpsStatus         string `json:"limitMaxPpsStatus,omitempty"`
+	MemberOrder               int    `json:"memberOrder,omitempty"`
+	Monitor                   string `json:"monitor,omitempty"`
+	Name                      string `json:"name,omitempty"`
+	Partition                 string `json:"partition,omitempty"`
+	Ratio                     int    `json:"ratio,omitempty"`
+	SelfLink                  string `json:"selfLink,omitempty"`
+}
+
+// PoolEndpoint represents the REST resource for managing Pool.
 const PoolAEndpoint = "/pool/a"
 
-// PoolAResource provides an API to manage PoolA configurations.
+// PoolAResource provides an API to manage Pool configurations.
 type PoolAResource struct {
 	c *f5.Client
 }
 
 // ListAll  lists all the PoolA configurations.
-func (r *PoolAResource) ListAll() (*PoolAConfigList, error) {
-	var list PoolAConfigList
+func (r *PoolAResource) ListAll() (*PoolList, error) {
+	var list PoolList
 	if err := r.c.ReadQuery(BasePath+PoolAEndpoint, &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
 }
 
-// Get a single PoolA configuration identified by id.
-func (r *PoolAResource) Get(id string) (*PoolAConfig, error) {
-	var item PoolAConfig
-	if err := r.c.ReadQuery(BasePath+PoolAEndpoint, &item); err != nil {
+// GetAMembers  lists all the PoolMembers configurations.
+func (r *PoolAResource) GetAMembers(id string) (*PoolMembersList, error) {
+	var list PoolMembersList
+	if err := r.c.ReadQuery(BasePath+PoolAEndpoint+"/"+id+"/members", &list); err != nil {
+		return nil, err
+	}
+	return &list, nil
+}
+
+// Get a single Pool configuration identified by id.
+func (r *PoolAResource) Get(id string) (*Pool, error) {
+	var item Pool
+	if err := r.c.ReadQuery(BasePath+PoolAEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
 }
 
-// Create a new PoolA configuration.
-func (r *PoolAResource) Create(item PoolAConfig) error {
+// Create a new Pool configuration.
+func (r *PoolAResource) Create(item Pool) error {
 	if err := r.c.ModQuery("POST", BasePath+PoolAEndpoint, item); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Edit a PoolA configuration identified by id.
-func (r *PoolAResource) Edit(id string, item PoolAConfig) error {
+// Edit a Pool configuration identified by id.
+func (r *PoolAResource) Edit(id string, item Pool) error {
 	if err := r.c.ModQuery("PUT", BasePath+PoolAEndpoint+"/"+id, item); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Delete a single PoolA configuration identified by id.
+// Delete a single Pool configuration identified by id.
 func (r *PoolAResource) Delete(id string) error {
 	if err := r.c.ModQuery("DELETE", BasePath+PoolAEndpoint+"/"+id, nil); err != nil {
 		return err

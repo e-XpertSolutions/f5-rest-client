@@ -6,17 +6,6 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// PoolAAAAConfigList holds a list of PoolAAAA configuration.
-type PoolAAAAConfigList struct {
-	Items    []PoolAAAAConfig `json:"items"`
-	Kind     string           `json:"kind"`
-	SelfLink string           `json:"selflink"`
-}
-
-// PoolAAAAConfig holds the configuration of a single PoolAAAA.
-type PoolAAAAConfig struct {
-}
-
 // PoolAAAAEndpoint represents the REST resource for managing PoolAAAA.
 const PoolAAAAEndpoint = "/pool/aaaa"
 
@@ -26,8 +15,8 @@ type PoolAAAAResource struct {
 }
 
 // ListAll  lists all the PoolAAAA configurations.
-func (r *PoolAAAAResource) ListAll() (*PoolAAAAConfigList, error) {
-	var list PoolAAAAConfigList
+func (r *PoolAAAAResource) ListAll() (*PoolList, error) {
+	var list PoolList
 	if err := r.c.ReadQuery(BasePath+PoolAAAAEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -35,16 +24,25 @@ func (r *PoolAAAAResource) ListAll() (*PoolAAAAConfigList, error) {
 }
 
 // Get a single PoolAAAA configuration identified by id.
-func (r *PoolAAAAResource) Get(id string) (*PoolAAAAConfig, error) {
-	var item PoolAAAAConfig
+func (r *PoolAAAAResource) Get(id string) (*Pool, error) {
+	var item Pool
 	if err := r.c.ReadQuery(BasePath+PoolAAAAEndpoint, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
 }
 
+// GetAAAAMembers  lists all the PoolMembers configurations.
+func (r *PoolAResource) GetAAAAMembers(id string) (*PoolMembersList, error) {
+	var list PoolMembersList
+	if err := r.c.ReadQuery(BasePath+PoolAAAAEndpoint+"/"+id+"/members", &list); err != nil {
+		return nil, err
+	}
+	return &list, nil
+}
+
 // Create a new PoolAAAA configuration.
-func (r *PoolAAAAResource) Create(item PoolAAAAConfig) error {
+func (r *PoolAAAAResource) Create(item Pool) error {
 	if err := r.c.ModQuery("POST", BasePath+PoolAAAAEndpoint, item); err != nil {
 		return err
 	}
@@ -52,7 +50,7 @@ func (r *PoolAAAAResource) Create(item PoolAAAAConfig) error {
 }
 
 // Edit a PoolAAAA configuration identified by id.
-func (r *PoolAAAAResource) Edit(id string, item PoolAAAAConfig) error {
+func (r *PoolAAAAResource) Edit(id string, item Pool) error {
 	if err := r.c.ModQuery("PUT", BasePath+PoolAAAAEndpoint+"/"+id, item); err != nil {
 		return err
 	}

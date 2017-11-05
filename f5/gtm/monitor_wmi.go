@@ -6,32 +6,32 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorWMIConfigList holds a list of MonitorWMI configuration.
-type MonitorWMIConfigList struct {
-	Items    []MonitorWMIConfig `json:"items"`
-	Kind     string             `json:"kind"`
-	SelfLink string             `json:"selflink"`
+// MonitorWMIList holds a list of MonitorWMI configuration.
+type MonitorWMIList struct {
+	Items    []MonitorWMI `json:"items,omitempty"`
+	Kind     string       `json:"kind,omitempty"`
+	SelfLink string       `json:"selflink,omitempty"`
 }
 
-// MonitorWMIConfig holds the configuration of a single MonitorWMI.
-type MonitorWMIConfig struct {
-	Agent              string `json:"agent"`
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Method             string `json:"method"`
-	Metrics            string `json:"metrics"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	Post               string `json:"post"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
-	TmCommand          string `json:"tmCommand"`
-	URL                string `json:"url"`
+// MonitorWMI holds the configuration of a single MonitorWMI.
+type MonitorWMI struct {
+	Agent              string `json:"agent,omitempty"`
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Method             string `json:"method,omitempty"`
+	Metrics            string `json:"metrics,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	Post               string `json:"post,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
+	TmCommand          string `json:"tmCommand,omitempty"`
+	URL                string `json:"url,omitempty"`
 }
 
 // MonitorWMIEndpoint represents the REST resource for managing MonitorWMI.
@@ -43,8 +43,8 @@ type MonitorWMIResource struct {
 }
 
 // ListAll  lists all the MonitorWMI configurations.
-func (r *MonitorWMIResource) ListAll() (*MonitorWMIConfigList, error) {
-	var list MonitorWMIConfigList
+func (r *MonitorWMIResource) ListAll() (*MonitorWMIList, error) {
+	var list MonitorWMIList
 	if err := r.c.ReadQuery(BasePath+MonitorWMIEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -52,8 +52,8 @@ func (r *MonitorWMIResource) ListAll() (*MonitorWMIConfigList, error) {
 }
 
 // Get a single MonitorWMI configuration identified by id.
-func (r *MonitorWMIResource) Get(id string) (*MonitorWMIConfig, error) {
-	var item MonitorWMIConfig
+func (r *MonitorWMIResource) Get(id string) (*MonitorWMI, error) {
+	var item MonitorWMI
 	if err := r.c.ReadQuery(BasePath+MonitorWMIEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ func (r *MonitorWMIResource) Get(id string) (*MonitorWMIConfig, error) {
 }
 
 // Create a new MonitorWMI configuration.
-func (r *MonitorWMIResource) Create(item MonitorWMIConfig) error {
+func (r *MonitorWMIResource) Create(item MonitorWMI) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorWMIEndpoint, item); err != nil {
 		return err
 	}
@@ -69,7 +69,7 @@ func (r *MonitorWMIResource) Create(item MonitorWMIConfig) error {
 }
 
 // Edit a MonitorWMI configuration identified by id.
-func (r *MonitorWMIResource) Edit(id string, item MonitorWMIConfig) error {
+func (r *MonitorWMIResource) Edit(id string, item MonitorWMI) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorWMIEndpoint+"/"+id, item); err != nil {
 		return err
 	}

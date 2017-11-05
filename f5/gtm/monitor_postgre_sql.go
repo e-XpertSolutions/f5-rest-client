@@ -6,28 +6,28 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorPostgreSQLConfigList holds a list of MonitorPostgreSQL configuration.
-type MonitorPostgreSQLConfigList struct {
-	Items    []MonitorPostgreSQLConfig `json:"items"`
-	Kind     string                    `json:"kind"`
-	SelfLink string                    `json:"selflink"`
+// MonitorPostgreSQLList holds a list of MonitorPostgreSQL configuration.
+type MonitorPostgreSQLList struct {
+	Items    []MonitorPostgreSQL `json:"items,omitempty"`
+	Kind     string              `json:"kind,omitempty"`
+	SelfLink string              `json:"selflink,omitempty"`
 }
 
-// MonitorPostgreSQLConfig holds the configuration of a single MonitorPostgreSQL.
-type MonitorPostgreSQLConfig struct {
-	Count              string `json:"count"`
-	Debug              string `json:"debug"`
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
+// MonitorPostgreSQL holds the configuration of a single MonitorPostgreSQL.
+type MonitorPostgreSQL struct {
+	Count              string `json:"count,omitempty"`
+	Debug              string `json:"debug,omitempty"`
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
 }
 
 // MonitorPostgreSQLEndpoint represents the REST resource for managing MonitorPostgreSQL.
@@ -39,8 +39,8 @@ type MonitorPostgreSQLResource struct {
 }
 
 // ListAll  lists all the MonitorPostgreSQL configurations.
-func (r *MonitorPostgreSQLResource) ListAll() (*MonitorPostgreSQLConfigList, error) {
-	var list MonitorPostgreSQLConfigList
+func (r *MonitorPostgreSQLResource) ListAll() (*MonitorPostgreSQLList, error) {
+	var list MonitorPostgreSQLList
 	if err := r.c.ReadQuery(BasePath+MonitorPostgreSQLEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -48,8 +48,8 @@ func (r *MonitorPostgreSQLResource) ListAll() (*MonitorPostgreSQLConfigList, err
 }
 
 // Get a single MonitorPostgreSQL configuration identified by id.
-func (r *MonitorPostgreSQLResource) Get(id string) (*MonitorPostgreSQLConfig, error) {
-	var item MonitorPostgreSQLConfig
+func (r *MonitorPostgreSQLResource) Get(id string) (*MonitorPostgreSQL, error) {
+	var item MonitorPostgreSQL
 	if err := r.c.ReadQuery(BasePath+MonitorPostgreSQLEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ func (r *MonitorPostgreSQLResource) Get(id string) (*MonitorPostgreSQLConfig, er
 }
 
 // Create a new MonitorPostgreSQL configuration.
-func (r *MonitorPostgreSQLResource) Create(item MonitorPostgreSQLConfig) error {
+func (r *MonitorPostgreSQLResource) Create(item MonitorPostgreSQL) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorPostgreSQLEndpoint, item); err != nil {
 		return err
 	}
@@ -65,7 +65,7 @@ func (r *MonitorPostgreSQLResource) Create(item MonitorPostgreSQLConfig) error {
 }
 
 // Edit a MonitorPostgreSQL configuration identified by id.
-func (r *MonitorPostgreSQLResource) Edit(id string, item MonitorPostgreSQLConfig) error {
+func (r *MonitorPostgreSQLResource) Edit(id string, item MonitorPostgreSQL) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorPostgreSQLEndpoint+"/"+id, item); err != nil {
 		return err
 	}

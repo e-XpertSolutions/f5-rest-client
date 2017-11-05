@@ -6,74 +6,74 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorICMPConfigList holds a list of MonitorICMP configuration.
-type MonitorICMPConfigList struct {
-	Items    []MonitorICMPConfig `json:"items"`
-	Kind     string              `json:"kind"`
-	SelfLink string              `json:"selflink"`
+// MonitorICMPList holds a list of MonitorICMP uration.
+type MonitorICMPList struct {
+	Items    []MonitorICMP `json:"items,omitempty"`
+	Kind     string        `json:"kind,omitempty"`
+	SelfLink string        `json:"selflink,omitempty"`
 }
 
-// MonitorICMPConfig holds the configuration of a single MonitorICMP.
-type MonitorICMPConfig struct {
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	ProbeAttempts      int    `json:"probeAttempts"`
-	ProbeInterval      int    `json:"probeInterval"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
-	Transparent        string `json:"transparent"`
+// MonitorICMP holds the uration of a single MonitorICMP.
+type MonitorICMP struct {
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	ProbeAttempts      int    `json:"probeAttempts,omitempty"`
+	ProbeInterval      int    `json:"probeInterval,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
+	Transparent        string `json:"transparent,omitempty"`
 }
 
 // MonitorICMPEndpoint represents the REST resource for managing MonitorICMP.
 const MonitorICMPEndpoint = "/monitor/gateway-icmp"
 
-// MonitorICMPResource provides an API to manage MonitorICMP configurations.
+// MonitorICMPResource provides an API to manage MonitorICMP urations.
 type MonitorICMPResource struct {
 	c *f5.Client
 }
 
-// ListAll  lists all the MonitorICMP configurations.
-func (r *MonitorICMPResource) ListAll() (*MonitorICMPConfigList, error) {
-	var list MonitorICMPConfigList
+// ListAll  lists all the MonitorICMP urations.
+func (r *MonitorICMPResource) ListAll() (*MonitorICMPList, error) {
+	var list MonitorICMPList
 	if err := r.c.ReadQuery(BasePath+MonitorICMPEndpoint, &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
 }
 
-// Get a single MonitorICMP configuration identified by id.
-func (r *MonitorICMPResource) Get(id string) (*MonitorICMPConfig, error) {
-	var item MonitorICMPConfig
+// Get a single MonitorICMP uration identified by id.
+func (r *MonitorICMPResource) Get(id string) (*MonitorICMP, error) {
+	var item MonitorICMP
 	if err := r.c.ReadQuery(BasePath+MonitorICMPEndpoint, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
 }
 
-// Create a new MonitorICMP configuration.
-func (r *MonitorICMPResource) Create(item MonitorICMPConfig) error {
+// Create a new MonitorICMP uration.
+func (r *MonitorICMPResource) Create(item MonitorICMP) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorICMPEndpoint, item); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Edit a MonitorICMP configuration identified by id.
-func (r *MonitorICMPResource) Edit(id string, item MonitorICMPConfig) error {
+// Edit a MonitorICMP uration identified by id.
+func (r *MonitorICMPResource) Edit(id string, item MonitorICMP) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorICMPEndpoint+"/"+id, item); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Delete a single MonitorICMP configuration identified by id.
+// Delete a single MonitorICMP uration identified by id.
 func (r *MonitorICMPResource) Delete(id string) error {
 	if err := r.c.ModQuery("DELETE", BasePath+MonitorICMPEndpoint+"/"+id, nil); err != nil {
 		return err

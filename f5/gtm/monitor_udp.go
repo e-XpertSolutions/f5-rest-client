@@ -6,32 +6,32 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorUDPConfigList holds a list of MonitorUDP configuration.
-type MonitorUDPConfigList struct {
-	Items    []MonitorUDPConfig `json:"items"`
-	Kind     string             `json:"kind"`
-	SelfLink string             `json:"selflink"`
+// MonitorUDPList holds a list of MonitorUDP configuration.
+type MonitorUDPList struct {
+	Items    []MonitorUDP `json:"items,omitempty"`
+	Kind     string       `json:"kind,omitempty"`
+	SelfLink string       `json:"selflink,omitempty"`
 }
 
-// MonitorUDPConfig holds the configuration of a single MonitorUDP.
-type MonitorUDPConfig struct {
-	Debug              string `json:"debug"`
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	ProbeAttempts      int    `json:"probeAttempts"`
-	ProbeInterval      int    `json:"probeInterval"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	Reverse            string `json:"reverse"`
-	SelfLink           string `json:"selfLink"`
-	Send               string `json:"send"`
-	Timeout            int    `json:"timeout"`
-	Transparent        string `json:"transparent"`
+// MonitorUDP holds the configuration of a single MonitorUDP.
+type MonitorUDP struct {
+	Debug              string `json:"debug,omitempty"`
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	ProbeAttempts      int    `json:"probeAttempts,omitempty"`
+	ProbeInterval      int    `json:"probeInterval,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	Reverse            string `json:"reverse,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Send               string `json:"send,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
+	Transparent        string `json:"transparent,omitempty"`
 }
 
 // MonitorUDPEndpoint represents the REST resource for managing MonitorUDP.
@@ -43,8 +43,8 @@ type MonitorUDPResource struct {
 }
 
 // ListAll  lists all the MonitorUDP configurations.
-func (r *MonitorUDPResource) ListAll() (*MonitorUDPConfigList, error) {
-	var list MonitorUDPConfigList
+func (r *MonitorUDPResource) ListAll() (*MonitorUDPList, error) {
+	var list MonitorUDPList
 	if err := r.c.ReadQuery(BasePath+MonitorUDPEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -52,8 +52,8 @@ func (r *MonitorUDPResource) ListAll() (*MonitorUDPConfigList, error) {
 }
 
 // Get a single MonitorUDP configuration identified by id.
-func (r *MonitorUDPResource) Get(id string) (*MonitorUDPConfig, error) {
-	var item MonitorUDPConfig
+func (r *MonitorUDPResource) Get(id string) (*MonitorUDP, error) {
+	var item MonitorUDP
 	if err := r.c.ReadQuery(BasePath+MonitorUDPEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ func (r *MonitorUDPResource) Get(id string) (*MonitorUDPConfig, error) {
 }
 
 // Create a new MonitorUDP configuration.
-func (r *MonitorUDPResource) Create(item MonitorUDPConfig) error {
+func (r *MonitorUDPResource) Create(item MonitorUDP) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorUDPEndpoint, item); err != nil {
 		return err
 	}
@@ -69,7 +69,7 @@ func (r *MonitorUDPResource) Create(item MonitorUDPConfig) error {
 }
 
 // Edit a MonitorUDP configuration identified by id.
-func (r *MonitorUDPResource) Edit(id string, item MonitorUDPConfig) error {
+func (r *MonitorUDPResource) Edit(id string, item MonitorUDP) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorUDPEndpoint+"/"+id, item); err != nil {
 		return err
 	}

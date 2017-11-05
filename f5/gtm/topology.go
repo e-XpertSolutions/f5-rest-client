@@ -6,15 +6,22 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// TopologyConfigList holds a list of Topology configuration.
-type TopologyConfigList struct {
-	Items    []TopologyConfig `json:"items"`
-	Kind     string           `json:"kind"`
-	SelfLink string           `json:"selflink"`
+// TopologyList holds a list of Topology configuration.
+type TopologyList struct {
+	Items    []Topology `json:"items,omitempty"`
+	Kind     string     `json:"kind,omitempty"`
+	SelfLink string     `json:"selflink,omitempty"`
 }
 
-// TopologyConfig holds the configuration of a single Topology.
-type TopologyConfig struct {
+// Topology holds the configuration of a single Topology.
+type Topology struct {
+	FullPath   string `json:"fullPath,omitempty"`
+	Generation int    `json:"generation,omitempty"`
+	Kind       string `json:"kind,omitempty"`
+	Name       string `json:"name,omitempty"`
+	Order      int    `json:"order,omitempty"`
+	Score      int    `json:"score,omitempty"`
+	SelfLink   string `json:"selfLink,omitempty"`
 }
 
 // TopologyEndpoint represents the REST resource for managing Topology.
@@ -26,8 +33,8 @@ type TopologyResource struct {
 }
 
 // ListAll  lists all the Topology configurations.
-func (r *TopologyResource) ListAll() (*TopologyConfigList, error) {
-	var list TopologyConfigList
+func (r *TopologyResource) ListAll() (*TopologyList, error) {
+	var list TopologyList
 	if err := r.c.ReadQuery(BasePath+TopologyEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -35,8 +42,8 @@ func (r *TopologyResource) ListAll() (*TopologyConfigList, error) {
 }
 
 // Get a single Topology configuration identified by id.
-func (r *TopologyResource) Get(id string) (*TopologyConfig, error) {
-	var item TopologyConfig
+func (r *TopologyResource) Get(id string) (*Topology, error) {
+	var item Topology
 	if err := r.c.ReadQuery(BasePath+TopologyEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -44,7 +51,7 @@ func (r *TopologyResource) Get(id string) (*TopologyConfig, error) {
 }
 
 // Create a new Topology configuration.
-func (r *TopologyResource) Create(item TopologyConfig) error {
+func (r *TopologyResource) Create(item Topology) error {
 	if err := r.c.ModQuery("POST", BasePath+TopologyEndpoint, item); err != nil {
 		return err
 	}
@@ -52,7 +59,7 @@ func (r *TopologyResource) Create(item TopologyConfig) error {
 }
 
 // Edit a Topology configuration identified by id.
-func (r *TopologyResource) Edit(id string, item TopologyConfig) error {
+func (r *TopologyResource) Edit(id string, item Topology) error {
 	if err := r.c.ModQuery("PUT", BasePath+TopologyEndpoint+"/"+id, item); err != nil {
 		return err
 	}

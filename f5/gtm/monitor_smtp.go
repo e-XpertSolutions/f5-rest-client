@@ -6,27 +6,27 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorSMTPConfigList holds a list of MonitorSMTP configuration.
-type MonitorSMTPConfigList struct {
-	Items    []MonitorSMTPConfig `json:"items"`
-	Kind     string              `json:"kind"`
-	SelfLink string              `json:"selflink"`
+// MonitorSMTPList holds a list of MonitorSMTP configuration.
+type MonitorSMTPList struct {
+	Items    []MonitorSMTP `json:"items,omitempty"`
+	Kind     string        `json:"kind,omitempty"`
+	SelfLink string        `json:"selflink,omitempty"`
 }
 
-// MonitorSMTPConfig holds the configuration of a single MonitorSMTP.
-type MonitorSMTPConfig struct {
-	Debug              string `json:"debug"`
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
+// MonitorSMTP holds the configuration of a single MonitorSMTP.
+type MonitorSMTP struct {
+	Debug              string `json:"debug,omitempty"`
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
 }
 
 // MonitorSMTPEndpoint represents the REST resource for managing MonitorSMTP.
@@ -38,8 +38,8 @@ type MonitorSMTPResource struct {
 }
 
 // ListAll  lists all the MonitorSMTP configurations.
-func (r *MonitorSMTPResource) ListAll() (*MonitorSMTPConfigList, error) {
-	var list MonitorSMTPConfigList
+func (r *MonitorSMTPResource) ListAll() (*MonitorSMTPList, error) {
+	var list MonitorSMTPList
 	if err := r.c.ReadQuery(BasePath+MonitorSMTPEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -47,8 +47,8 @@ func (r *MonitorSMTPResource) ListAll() (*MonitorSMTPConfigList, error) {
 }
 
 // Get a single MonitorSMTP configuration identified by id.
-func (r *MonitorSMTPResource) Get(id string) (*MonitorSMTPConfig, error) {
-	var item MonitorSMTPConfig
+func (r *MonitorSMTPResource) Get(id string) (*MonitorSMTP, error) {
+	var item MonitorSMTP
 	if err := r.c.ReadQuery(BasePath+MonitorSMTPEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (r *MonitorSMTPResource) Get(id string) (*MonitorSMTPConfig, error) {
 }
 
 // Create a new MonitorSMTP configuration.
-func (r *MonitorSMTPResource) Create(item MonitorSMTPConfig) error {
+func (r *MonitorSMTPResource) Create(item MonitorSMTP) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorSMTPEndpoint, item); err != nil {
 		return err
 	}
@@ -64,7 +64,7 @@ func (r *MonitorSMTPResource) Create(item MonitorSMTPConfig) error {
 }
 
 // Edit a MonitorSMTP configuration identified by id.
-func (r *MonitorSMTPResource) Edit(id string, item MonitorSMTPConfig) error {
+func (r *MonitorSMTPResource) Edit(id string, item MonitorSMTP) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorSMTPEndpoint+"/"+id, item); err != nil {
 		return err
 	}

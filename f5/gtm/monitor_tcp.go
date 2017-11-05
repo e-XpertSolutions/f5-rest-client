@@ -6,28 +6,28 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorTCPConfigList holds a list of MonitorTCP configuration.
-type MonitorTCPConfigList struct {
-	Items    []MonitorTCPConfig `json:"items"`
-	Kind     string             `json:"kind"`
-	SelfLink string             `json:"selflink"`
+// MonitorTCPList holds a list of MonitorTCP configuration.
+type MonitorTCPList struct {
+	Items    []MonitorTCP `json:"items,omitempty"`
+	Kind     string       `json:"kind,omitempty"`
+	SelfLink string       `json:"selflink,omitempty"`
 }
 
-// MonitorTCPConfig holds the configuration of a single MonitorTCP.
-type MonitorTCPConfig struct {
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	Reverse            string `json:"reverse"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
-	Transparent        string `json:"transparent"`
+// MonitorTCP holds the configuration of a single MonitorTCP.
+type MonitorTCP struct {
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	Reverse            string `json:"reverse,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
+	Transparent        string `json:"transparent,omitempty"`
 }
 
 // MonitorTCPEndpoint represents the REST resource for managing MonitorTCP.
@@ -39,8 +39,8 @@ type MonitorTCPResource struct {
 }
 
 // ListAll  lists all the MonitorTCP configurations.
-func (r *MonitorTCPResource) ListAll() (*MonitorTCPConfigList, error) {
-	var list MonitorTCPConfigList
+func (r *MonitorTCPResource) ListAll() (*MonitorTCPList, error) {
+	var list MonitorTCPList
 	if err := r.c.ReadQuery(BasePath+MonitorTCPEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -48,8 +48,8 @@ func (r *MonitorTCPResource) ListAll() (*MonitorTCPConfigList, error) {
 }
 
 // Get a single MonitorTCP configuration identified by id.
-func (r *MonitorTCPResource) Get(id string) (*MonitorTCPConfig, error) {
-	var item MonitorTCPConfig
+func (r *MonitorTCPResource) Get(id string) (*MonitorTCP, error) {
+	var item MonitorTCP
 	if err := r.c.ReadQuery(BasePath+MonitorTCPEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ func (r *MonitorTCPResource) Get(id string) (*MonitorTCPConfig, error) {
 }
 
 // Create a new MonitorTCP configuration.
-func (r *MonitorTCPResource) Create(item MonitorTCPConfig) error {
+func (r *MonitorTCPResource) Create(item MonitorTCP) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorTCPEndpoint, item); err != nil {
 		return err
 	}
@@ -65,7 +65,7 @@ func (r *MonitorTCPResource) Create(item MonitorTCPConfig) error {
 }
 
 // Edit a MonitorTCP configuration identified by id.
-func (r *MonitorTCPResource) Edit(id string, item MonitorTCPConfig) error {
+func (r *MonitorTCPResource) Edit(id string, item MonitorTCP) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorTCPEndpoint+"/"+id, item); err != nil {
 		return err
 	}

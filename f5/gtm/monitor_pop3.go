@@ -6,27 +6,27 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorPOP3ConfigList holds a list of MonitorPOP3 configuration.
-type MonitorPOP3ConfigList struct {
-	Items    []MonitorPOP3Config `json:"items"`
-	Kind     string              `json:"kind"`
-	SelfLink string              `json:"selflink"`
+// MonitorPOP3List holds a list of MonitorPOP3 configuration.
+type MonitorPOP3List struct {
+	Items    []MonitorPOP3 `json:"items,omitempty"`
+	Kind     string        `json:"kind,omitempty"`
+	SelfLink string        `json:"selflink,omitempty"`
 }
 
-// MonitorPOP3Config holds the configuration of a single MonitorPOP3.
-type MonitorPOP3Config struct {
-	Debug              string `json:"debug"`
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
+// MonitorPOP3 holds the configuration of a single MonitorPOP3.
+type MonitorPOP3 struct {
+	Debug              string `json:"debug,omitempty"`
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
 }
 
 // MonitorPOP3Endpoint represents the REST resource for managing MonitorPOP3.
@@ -38,8 +38,8 @@ type MonitorPOP3Resource struct {
 }
 
 // ListAll  lists all the MonitorPOP3 configurations.
-func (r *MonitorPOP3Resource) ListAll() (*MonitorPOP3ConfigList, error) {
-	var list MonitorPOP3ConfigList
+func (r *MonitorPOP3Resource) ListAll() (*MonitorPOP3List, error) {
+	var list MonitorPOP3List
 	if err := r.c.ReadQuery(BasePath+MonitorPOP3Endpoint, &list); err != nil {
 		return nil, err
 	}
@@ -47,8 +47,8 @@ func (r *MonitorPOP3Resource) ListAll() (*MonitorPOP3ConfigList, error) {
 }
 
 // Get a single MonitorPOP3 configuration identified by id.
-func (r *MonitorPOP3Resource) Get(id string) (*MonitorPOP3Config, error) {
-	var item MonitorPOP3Config
+func (r *MonitorPOP3Resource) Get(id string) (*MonitorPOP3, error) {
+	var item MonitorPOP3
 	if err := r.c.ReadQuery(BasePath+MonitorPOP3Endpoint, &item); err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (r *MonitorPOP3Resource) Get(id string) (*MonitorPOP3Config, error) {
 }
 
 // Create a new MonitorPOP3 configuration.
-func (r *MonitorPOP3Resource) Create(item MonitorPOP3Config) error {
+func (r *MonitorPOP3Resource) Create(item MonitorPOP3) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorPOP3Endpoint, item); err != nil {
 		return err
 	}
@@ -64,7 +64,7 @@ func (r *MonitorPOP3Resource) Create(item MonitorPOP3Config) error {
 }
 
 // Edit a MonitorPOP3 configuration identified by id.
-func (r *MonitorPOP3Resource) Edit(id string, item MonitorPOP3Config) error {
+func (r *MonitorPOP3Resource) Edit(id string, item MonitorPOP3) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorPOP3Endpoint+"/"+id, item); err != nil {
 		return err
 	}

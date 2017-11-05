@@ -6,17 +6,6 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// PoolNAPTRConfigList holds a list of PoolNAPTR configuration.
-type PoolNAPTRConfigList struct {
-	Items    []PoolNAPTRConfig `json:"items"`
-	Kind     string            `json:"kind"`
-	SelfLink string            `json:"selflink"`
-}
-
-// PoolNAPTRConfig holds the configuration of a single PoolNAPTR.
-type PoolNAPTRConfig struct {
-}
-
 // PoolNAPTREndpoint represents the REST resource for managing PoolNAPTR.
 const PoolNAPTREndpoint = "/pool/naptr"
 
@@ -26,8 +15,8 @@ type PoolNAPTRResource struct {
 }
 
 // ListAll  lists all the PoolNAPTR configurations.
-func (r *PoolNAPTRResource) ListAll() (*PoolNAPTRConfigList, error) {
-	var list PoolNAPTRConfigList
+func (r *PoolNAPTRResource) ListAll() (*PoolList, error) {
+	var list PoolList
 	if err := r.c.ReadQuery(BasePath+PoolNAPTREndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -35,16 +24,25 @@ func (r *PoolNAPTRResource) ListAll() (*PoolNAPTRConfigList, error) {
 }
 
 // Get a single PoolNAPTR configuration identified by id.
-func (r *PoolNAPTRResource) Get(id string) (*PoolNAPTRConfig, error) {
-	var item PoolNAPTRConfig
+func (r *PoolNAPTRResource) Get(id string) (*Pool, error) {
+	var item Pool
 	if err := r.c.ReadQuery(BasePath+PoolNAPTREndpoint, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
 }
 
+// GetNAPTRMembers  lists all the PoolMembers configurations.
+func (r *PoolAResource) GetNAPTRMembers(id string) (*PoolMembersList, error) {
+	var list PoolMembersList
+	if err := r.c.ReadQuery(BasePath+PoolNAPTREndpoint+"/"+id+"/members", &list); err != nil {
+		return nil, err
+	}
+	return &list, nil
+}
+
 // Create a new PoolNAPTR configuration.
-func (r *PoolNAPTRResource) Create(item PoolNAPTRConfig) error {
+func (r *PoolNAPTRResource) Create(item Pool) error {
 	if err := r.c.ModQuery("POST", BasePath+PoolNAPTREndpoint, item); err != nil {
 		return err
 	}
@@ -52,7 +50,7 @@ func (r *PoolNAPTRResource) Create(item PoolNAPTRConfig) error {
 }
 
 // Edit a PoolNAPTR configuration identified by id.
-func (r *PoolNAPTRResource) Edit(id string, item PoolNAPTRConfig) error {
+func (r *PoolNAPTRResource) Edit(id string, item Pool) error {
 	if err := r.c.ModQuery("PUT", BasePath+PoolNAPTREndpoint+"/"+id, item); err != nil {
 		return err
 	}

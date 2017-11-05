@@ -8,25 +8,25 @@ import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
 // MonitorRadiusConfigList holds a list of MonitorRadius configuration.
 type MonitorRadiusConfigList struct {
-	Items    []MonitorRadiusConfig `json:"items"`
-	Kind     string                `json:"kind"`
-	SelfLink string                `json:"selflink"`
+	Items    []MonitorRadiusConfig `json:"items,omitempty"`
+	Kind     string                `json:"kind,omitempty"`
+	SelfLink string                `json:"selflink,omitempty"`
 }
 
 // MonitorRadiusConfig holds the configuration of a single MonitorRadius.
 type MonitorRadiusConfig struct {
-	Debug              string `json:"debug"`
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
+	Debug              string `json:"debug,omitempty"`
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
 }
 
 // MonitorRadiusEndpoint represents the REST resource for managing MonitorRadius.

@@ -6,29 +6,29 @@ package gtm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// MonitorSIPConfigList holds a list of MonitorSIP configuration.
-type MonitorSIPConfigList struct {
-	Items    []MonitorSIPConfig `json:"items"`
-	Kind     string             `json:"kind"`
-	SelfLink string             `json:"selflink"`
+// MonitorSIPList holds a list of MonitorSIP configuration.
+type MonitorSIPList struct {
+	Items    []MonitorSIP `json:"items,omitempty"`
+	Kind     string       `json:"kind,omitempty"`
+	SelfLink string       `json:"selflink,omitempty"`
 }
 
-// MonitorSIPConfig holds the configuration of a single MonitorSIP.
-type MonitorSIPConfig struct {
-	Compatibility      string `json:"compatibility"`
-	Debug              string `json:"debug"`
-	Destination        string `json:"destination"`
-	FullPath           string `json:"fullPath"`
-	Generation         int    `json:"generation"`
-	IgnoreDownResponse string `json:"ignoreDownResponse"`
-	Interval           int    `json:"interval"`
-	Kind               string `json:"kind"`
-	Mode               string `json:"mode"`
-	Name               string `json:"name"`
-	Partition          string `json:"partition"`
-	ProbeTimeout       int    `json:"probeTimeout"`
-	SelfLink           string `json:"selfLink"`
-	Timeout            int    `json:"timeout"`
+// MonitorSIP holds the configuration of a single MonitorSIP.
+type MonitorSIP struct {
+	Compatibility      string `json:"compatibility,omitempty"`
+	Debug              string `json:"debug,omitempty"`
+	Destination        string `json:"destination,omitempty"`
+	FullPath           string `json:"fullPath,omitempty"`
+	Generation         int    `json:"generation,omitempty"`
+	IgnoreDownResponse string `json:"ignoreDownResponse,omitempty"`
+	Interval           int    `json:"interval,omitempty"`
+	Kind               string `json:"kind,omitempty"`
+	Mode               string `json:"mode,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Partition          string `json:"partition,omitempty"`
+	ProbeTimeout       int    `json:"probeTimeout,omitempty"`
+	SelfLink           string `json:"selfLink,omitempty"`
+	Timeout            int    `json:"timeout,omitempty"`
 }
 
 // MonitorSIPEndpoint represents the REST resource for managing MonitorSIP.
@@ -40,8 +40,8 @@ type MonitorSIPResource struct {
 }
 
 // ListAll  lists all the MonitorSIP configurations.
-func (r *MonitorSIPResource) ListAll() (*MonitorSIPConfigList, error) {
-	var list MonitorSIPConfigList
+func (r *MonitorSIPResource) ListAll() (*MonitorSIPList, error) {
+	var list MonitorSIPList
 	if err := r.c.ReadQuery(BasePath+MonitorSIPEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -49,8 +49,8 @@ func (r *MonitorSIPResource) ListAll() (*MonitorSIPConfigList, error) {
 }
 
 // Get a single MonitorSIP configuration identified by id.
-func (r *MonitorSIPResource) Get(id string) (*MonitorSIPConfig, error) {
-	var item MonitorSIPConfig
+func (r *MonitorSIPResource) Get(id string) (*MonitorSIP, error) {
+	var item MonitorSIP
 	if err := r.c.ReadQuery(BasePath+MonitorSIPEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ func (r *MonitorSIPResource) Get(id string) (*MonitorSIPConfig, error) {
 }
 
 // Create a new MonitorSIP configuration.
-func (r *MonitorSIPResource) Create(item MonitorSIPConfig) error {
+func (r *MonitorSIPResource) Create(item MonitorSIP) error {
 	if err := r.c.ModQuery("POST", BasePath+MonitorSIPEndpoint, item); err != nil {
 		return err
 	}
@@ -66,7 +66,7 @@ func (r *MonitorSIPResource) Create(item MonitorSIPConfig) error {
 }
 
 // Edit a MonitorSIP configuration identified by id.
-func (r *MonitorSIPResource) Edit(id string, item MonitorSIPConfig) error {
+func (r *MonitorSIPResource) Edit(id string, item MonitorSIP) error {
 	if err := r.c.ModQuery("PUT", BasePath+MonitorSIPEndpoint+"/"+id, item); err != nil {
 		return err
 	}
