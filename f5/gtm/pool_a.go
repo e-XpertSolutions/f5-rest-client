@@ -80,6 +80,54 @@ type PoolMembers struct {
 	SelfLink                  string `json:"selfLink,omitempty"`
 }
 
+type PoolStatsList struct {
+	Entries  map[string]PoolStatsEntries `json:"entries,omitempty"`
+	Kind     string                      `json:"kind,omitempty" pretty:",expanded"`
+	SelfLink string                      `json:"selflink,omitempty" pretty:",expanded"`
+}
+
+type PoolStatsEntries struct {
+	NestedPoolStats PoolStats `json:"nestedStats,omitempty"`
+}
+
+type PoolStats struct {
+	Entries struct {
+		Alternate struct {
+			Value int `json:"value"`
+		} `json:"alternate"`
+		Dropped struct {
+			Value int `json:"value"`
+		} `json:"dropped"`
+		Fallback struct {
+			Value int `json:"value"`
+		} `json:"fallback"`
+		PoolType struct {
+			Description string `json:"description"`
+		} `json:"poolType"`
+		Preferred struct {
+			Value int `json:"value"`
+		} `json:"preferred"`
+		ReturnFromDNS struct {
+			Value int `json:"value"`
+		} `json:"returnFromDns"`
+		ReturnToDNS struct {
+			Value int `json:"value"`
+		} `json:"returnToDns"`
+		Status_availabilityState struct {
+			Description string `json:"description"`
+		} `json:"status.availabilityState"`
+		Status_enabledState struct {
+			Description string `json:"description"`
+		} `json:"status.enabledState"`
+		Status_statusReason struct {
+			Description string `json:"description"`
+		} `json:"status.statusReason"`
+		TmName struct {
+			Description string `json:"description"`
+		} `json:"tmName"`
+	} `json:"entries"`
+}
+
 // PoolEndpoint represents the REST resource for managing Pool.
 const PoolAEndpoint = "/pool/a"
 
@@ -137,4 +185,20 @@ func (r *PoolAResource) Delete(id string) error {
 		return err
 	}
 	return nil
+}
+
+func (pr *PoolAResource) ShowAStats(id string) (*PoolStatsList, error) {
+	var item PoolStatsList
+	if err := pr.c.ReadQuery(BasePath+PoolAEndpoint+"/"+id+"/stats", &item); err != nil {
+		return nil, err
+	}
+	return &item, nil
+}
+
+func (pr *PoolAResource) ShowAllAStats() (*PoolStatsList, error) {
+	var item PoolStatsList
+	if err := pr.c.ReadQuery(BasePath+PoolAEndpoint+"/stats", &item); err != nil {
+		return nil, err
+	}
+	return &item, nil
 }

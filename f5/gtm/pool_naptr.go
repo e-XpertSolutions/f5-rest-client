@@ -64,3 +64,19 @@ func (r *PoolNAPTRResource) Delete(id string) error {
 	}
 	return nil
 }
+
+func (pr *PoolNAPTRResource) ShowNAPTRStats(id string) (*PoolStatsList, error) {
+	var item PoolStatsList
+	if err := pr.c.ReadQuery(BasePath+PoolNAPTREndpoint+"/"+id+"/stats", &item); err != nil {
+		return nil, err
+	}
+	return &item, nil
+}
+
+func (pr *PoolNAPTRResource) ShowAllNAPTRStats() (*PoolStatsList, error) {
+	var item PoolStatsList
+	if err := pr.c.ReadQuery(BasePath+PoolNAPTREndpoint+"/stats", &item); err != nil {
+		return nil, err
+	}
+	return &item, nil
+}

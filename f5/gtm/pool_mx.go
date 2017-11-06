@@ -64,3 +64,19 @@ func (r *PoolMXResource) Delete(id string) error {
 	}
 	return nil
 }
+
+func (pr *PoolMXResource) ShowMXStats(id string) (*PoolStatsList, error) {
+	var item PoolStatsList
+	if err := pr.c.ReadQuery(BasePath+PoolMXEndpoint+"/"+id+"/stats", &item); err != nil {
+		return nil, err
+	}
+	return &item, nil
+}
+
+func (pr *PoolMXResource) ShowAllMXStats() (*PoolStatsList, error) {
+	var item PoolStatsList
+	if err := pr.c.ReadQuery(BasePath+PoolMXEndpoint+"/stats", &item); err != nil {
+		return nil, err
+	}
+	return &item, nil
+}

@@ -64,3 +64,19 @@ func (r *PoolCNAMEResource) Delete(id string) error {
 	}
 	return nil
 }
+
+func (pr *PoolCNAMEResource) ShowCNAMEStats(id string) (*PoolStatsList, error) {
+	var item PoolStatsList
+	if err := pr.c.ReadQuery(BasePath+PoolCNAMEEndpoint+"/"+id+"/stats", &item); err != nil {
+		return nil, err
+	}
+	return &item, nil
+}
+
+func (pr *PoolCNAMEResource) ShowAllCNAMEStats() (*PoolStatsList, error) {
+	var item PoolStatsList
+	if err := pr.c.ReadQuery(BasePath+PoolCNAMEEndpoint+"/stats", &item); err != nil {
+		return nil, err
+	}
+	return &item, nil
+}

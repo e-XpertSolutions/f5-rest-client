@@ -64,3 +64,19 @@ func (r *PoolSRVResource) Delete(id string) error {
 	}
 	return nil
 }
+
+func (pr *PoolSRVResource) ShowSRVStats(id string) (*PoolStatsList, error) {
+	var item PoolStatsList
+	if err := pr.c.ReadQuery(BasePath+PoolSRVEndpoint+"/"+id+"/stats", &item); err != nil {
+		return nil, err
+	}
+	return &item, nil
+}
+
+func (pr *PoolSRVResource) ShowAllSRVStats() (*PoolStatsList, error) {
+	var item PoolStatsList
+	if err := pr.c.ReadQuery(BasePath+PoolSRVEndpoint+"/stats", &item); err != nil {
+		return nil, err
+	}
+	return &item, nil
+}
