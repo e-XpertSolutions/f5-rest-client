@@ -15,6 +15,7 @@ type GuestConfigList struct {
 
 // GuestConfig holds the configuration of a single Guest.
 type GuestConfig struct {
+	Name              string `json:"name,omitempty"`
 	AllowedSlots      int    `json:"allowedSlots,omitempty"`
 	AppService        string `json:"appService,omitempty"`
 	AssignedSlots     int    `json:"assignedSlots,omitempty"`
