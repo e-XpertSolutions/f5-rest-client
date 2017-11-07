@@ -15,25 +15,29 @@ type GuestList struct {
 
 // Guest holds the configuration of a single Guest.
 type Guest struct {
-	Name              string `json:"name,omitempty"`
-	AllowedSlots      int    `json:"allowedSlots,omitempty"`
-	AppService        string `json:"appService,omitempty"`
-	AssignedSlots     int    `json:"assignedSlots,omitempty"`
-	CoresPerSlot      int    `json:"coresPerSlot,omitempty"`
-	Hostname          string `json:"hostname,omitempty"`
-	InitialHotfix     string `json:"initialHotfix,omitempty"`
-	InitialImage      string `json:"initialImage,omitempty"`
-	ManagementGW      string `json:"managementGw,omitempty"`
-	ManagementIP      string `json:"managementIp,omitempty"`
-	ManagementNetwork string `json:"managementNetwork,omitempty"`
-	MinSlots          int    `json:"minSlots,omitempty"`
-	PreferredSLots    int    `json:"preferredSlots,omitempty"`
-	Slots             int    `json:"slots,omitempty"`
-	SSLMode           string `json:"sslMode,omitempty"`
-	State             string `json:"state,omitempty"`
-	SymUnitKey        string `json:"symUnitKey,omitempty"`
-	TrafficProfile    string `json:"trafficProfile,omitempty"`
-	VirtualDisk       string `json:"virtualDisk,omitempty"`
+	Name              string   `json:"name,omitempty"`
+	AllowedSlots      int      `json:"allowedSlots,omitempty"`
+	AppService        string   `json:"appService,omitempty"`
+	AssignedSlots     int      `json:"assignedSlots,omitempty"`
+	CoresPerSlot      int      `json:"coresPerSlot,omitempty"`
+	Hostname          string   `json:"hostname,omitempty"`
+	InitialHotfix     string   `json:"initialHotfix,omitempty"`
+	InitialImage      string   `json:"initialImage,omitempty"`
+	ManagementGW      string   `json:"managementGw,omitempty"`
+	ManagementIP      string   `json:"managementIp,omitempty"`
+	ManagementNetwork string   `json:"managementNetwork,omitempty"`
+	MinSlots          int      `json:"minSlots,omitempty"`
+	PreferredSLots    int      `json:"preferredSlots,omitempty"`
+	Slots             int      `json:"slots,omitempty"`
+	SSLMode           string   `json:"sslMode,omitempty"`
+	State             string   `json:"state,omitempty"`
+	SymUnitKey        string   `json:"symUnitKey,omitempty"`
+	TrafficProfile    string   `json:"trafficProfile,omitempty"`
+	VirtualDisk       string   `json:"virtualDisk,omitempty"`
+	VLAN              []string `json:"vlans,omitempty"`
+	VLANRef []struct {
+		Link string `json:"link,omitempty"`
+	} `json:"vlansReference,omitempty"`
 }
 
 // GuestEndpoint represents the REST resource for managing Guest.
