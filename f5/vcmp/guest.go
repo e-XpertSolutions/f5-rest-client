@@ -6,15 +6,15 @@ package vcmp
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
-// GuestConfigList holds a list of Guest configuration.
-type GuestConfigList struct {
-	Items    []GuestConfig `json:"items,omitempty"`
-	Kind     string        `json:"kind,omitempty"`
-	SelfLink string        `json:"selflink,omitempty"`
+// GuestList holds a list of Guests.
+type GuestList struct {
+	Items    []Guest `json:"items,omitempty"`
+	Kind     string  `json:"kind,omitempty"`
+	SelfLink string  `json:"selflink,omitempty"`
 }
 
-// GuestConfig holds the configuration of a single Guest.
-type GuestConfig struct {
+// Guest holds the configuration of a single Guest.
+type Guest struct {
 	Name              string `json:"name,omitempty"`
 	AllowedSlots      int    `json:"allowedSlots,omitempty"`
 	AppService        string `json:"appService,omitempty"`
@@ -45,8 +45,8 @@ type GuestResource struct {
 }
 
 // ListAll  lists all the Guest configurations.
-func (r *GuestResource) ListAll() (*GuestConfigList, error) {
-	var list GuestConfigList
+func (r *GuestResource) ListAll() (*GuestList, error) {
+	var list GuestList
 	if err := r.c.ReadQuery(BasePath+GuestEndpoint, &list); err != nil {
 		return nil, err
 	}
@@ -54,8 +54,8 @@ func (r *GuestResource) ListAll() (*GuestConfigList, error) {
 }
 
 // Get a single Guest configuration identified by id.
-func (r *GuestResource) Get(id string) (*GuestConfig, error) {
-	var item GuestConfig
+func (r *GuestResource) Get(id string) (*Guest, error) {
+	var item Guest
 	if err := r.c.ReadQuery(BasePath+GuestEndpoint, &item); err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ func (r *GuestResource) Get(id string) (*GuestConfig, error) {
 }
 
 // Create a new Guest configuration.
-func (r *GuestResource) Create(item GuestConfig) error {
+func (r *GuestResource) Create(item Guest) error {
 	if err := r.c.ModQuery("POST", BasePath+GuestEndpoint, item); err != nil {
 		return err
 	}
@@ -71,7 +71,7 @@ func (r *GuestResource) Create(item GuestConfig) error {
 }
 
 // Edit a Guest configuration identified by id.
-func (r *GuestResource) Edit(id string, item GuestConfig) error {
+func (r *GuestResource) Edit(id string, item Guest) error {
 	if err := r.c.ModQuery("PUT", BasePath+GuestEndpoint+"/"+id, item); err != nil {
 		return err
 	}
