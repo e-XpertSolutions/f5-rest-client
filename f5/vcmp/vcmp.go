@@ -16,7 +16,6 @@ type VCMP struct {
 	guest               GuestResource
 	health              HealthResource
 	trafficProfile      TrafficProfileResource
-	vCMP                VCMPResource
 	virtualDisk         VirtualDiskResource
 	virtualDiskTemplate VirtualDiskTemplateResource
 }
@@ -29,7 +28,6 @@ func New(c *f5.Client) VCMP {
 		guest:               GuestResource{c: c},
 		health:              HealthResource{c: c},
 		trafficProfile:      TrafficProfileResource{c: c},
-		vCMP:                VCMPResource{c: c},
 		virtualDisk:         VirtualDiskResource{c: c},
 		virtualDiskTemplate: VirtualDiskTemplateResource{c: c},
 	}
@@ -48,11 +46,6 @@ func (vcmp VCMP) Health() *HealthResource {
 // TrafficProfile returns a configured TrafficProfileResource.
 func (vcmp VCMP) TrafficProfile() *TrafficProfileResource {
 	return &vcmp.trafficProfile
-}
-
-// VCMP returns a configured VCMPResource.
-func (vcmp VCMP) VCMP() *VCMPResource {
-	return &vcmp.vCMP
 }
 
 // VirtualDisk returns a configured VirtualDiskResource.
