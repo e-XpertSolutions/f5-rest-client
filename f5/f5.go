@@ -28,6 +28,9 @@ const (
 	UploadRESTPath = PathUploadFile
 )
 
+// ErrNoToken is the error returned when the Client does not have a token.
+var ErrNoToken = errors.New("no token")
+
 type UploadResponse struct {
 	RemainingByteCount int64          `json:"remainingByteCount"`
 	UsedChunks         map[string]int `json:"usedChunks"`
@@ -127,6 +130,35 @@ func NewTokenClient(baseURL, user, password, loginProvName string) (*Client, err
 // certificate will not cause any error.
 func (c *Client) DisableCertCheck() {
 	c.t.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+}
+
+// RevokeToken revokes the current token. If the Client has not been initialized
+// with NewTokenClient, ErrNoToken is returned.
+func (c *Client) RevokeToken() error {
+	if c.token == "" {
+		return ErrNoToken
+	}
+
+	resp, err := c.SendRequest("DELETE", "/mgmt/shared/authz/tokens/"+c.token, nil)
+	if err != nil {
+		return errors.New("token revocation request failed: " + err.Error())
+	}
+	defer resp.Body.Close()
+
+	var respData struct {
+		Token string `json:"token"`
+	}
+	dec := json.NewDecoder(resp.Body)
+	if err := dec.Decode(&respData); err != nil {
+		return errors.New("cannot decode token revocation response: " + err.Error())
+	}
+	if respData.Token != c.token {
+		return errors.New("invalid token revocation response")
+	}
+
+	c.token = ""
+
+	return nil
 }
 
 // UseProxy configures a proxy to use for outbound connections
