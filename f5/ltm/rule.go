@@ -68,7 +68,7 @@ func (rr *RuleResource) ListAll() (*RuleList, error) {
 
 // Get a single iRule configuration identified by id.
 func (rr *RuleResource) Get(id string) (*Rule, error) {
-	resp, err := rr.doRequest("GET", "", nil)
+	resp, err := rr.doRequest("GET", id, nil)
 	if err != nil {
 		return nil, err
 	}
