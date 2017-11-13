@@ -107,6 +107,13 @@ func (pr *PoolResource) GetMembers(id string) (*PoolMembersList, error) {
 	return &poolMembers, nil
 }
 
+func (pr *PoolResource) AddMember(id string, poolMember PoolMembers) error {
+	if err := pr.c.ModQuery("POST", BasePath+PoolEndpoint+"/"+id+"/members", poolMember); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (pr *PoolResource) ShowStats(id string) (*PoolStatsList, error) {
 	var item PoolStatsList
 	if err := pr.c.ReadQuery(BasePath+PoolEndpoint+"/"+id+"/stats", &item); err != nil {
