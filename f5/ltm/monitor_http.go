@@ -13,6 +13,7 @@ type MonitorHTTPConfigList struct {
 }
 
 type MonitorHTTPConfig struct {
+	Name                     string `json:"name,omitempty"`
 	Adaptive                 string `json:"adaptive,omitempty"`
 	AdaptiveDivergenceType   string `json:"adaptiveDivergenceType,omitempty"`
 	AdaptiveDivergenceValue  int    `json:"adaptiveDivergenceValue,omitempty"`
@@ -25,7 +26,6 @@ type MonitorHTTPConfig struct {
 	IPDscp                   int    `json:"ipDscp,omitempty"`
 	Kind                     string `json:"kind,omitempty"`
 	ManualResume             string `json:"manualResume,omitempty"`
-	Name                     string `json:"name,omitempty"`
 	Partition                string `json:"partition,omitempty"`
 	Reverse                  string `json:"reverse,omitempty"`
 	SelfLink                 string `json:"selfLink,omitempty"`
