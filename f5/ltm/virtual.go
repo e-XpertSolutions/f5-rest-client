@@ -29,6 +29,7 @@ type VirtualServer struct {
 	Disabled          bool   `json:"disabled,omitempty"`
 	Enabled           bool   `json:"enabled,omitempty"`
 	FullPath          string `json:"fullPath,omitempty" pretty:",expanded"`
+	FwEnforcedPolicy  string `json:"fwEnforcedPolicy,omitempty"`
 	Generation        int64  `json:"generation,omitempty" pretty:",expanded"`
 	GtmScore          int64  `json:"gtmScore,omitempty" pretty:",expanded"`
 	IPProtocol        string `json:"ipProtocol,omitempty"`
@@ -44,6 +45,7 @@ type VirtualServer struct {
 		Link            string `json:"link,omitempty"`
 	} `json:"policiesReference,omitempty"`
 	Pool              string `json:"pool,omitempty"`
+	Profiles    	  []Profile `json:"profiles,omitempty"`
 	ProfilesReference struct {
 		IsSubcollection bool      `json:"isSubcollection,omitempty"`
 		Link            string    `json:"link,omitempty"`
