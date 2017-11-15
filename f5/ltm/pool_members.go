@@ -20,6 +20,7 @@ type PoolMembersList struct {
 
 // A PoolMembers holds the uration for the members of a pool.
 type PoolMembers struct {
+	Name            string `json:"name,omitempty"`
 	Address         string `json:"address,omitempty"`
 	ConnectionLimit int64  `json:"connectionLimit,omitempty"`
 	DynamicRatio    int64  `json:"dynamicRatio,omitempty"`
@@ -33,7 +34,6 @@ type PoolMembers struct {
 	Kind           string `json:"kind,omitempty"`
 	Logging        string `json:"logging,omitempty"`
 	Monitor        string `json:"monitor,omitempty"`
-	Name           string `json:"name,omitempty"`
 	Partition      string `json:"partition,omitempty"`
 	PriorityGroup  int64  `json:"priorityGroup,omitempty"`
 	RateLimit      string `json:"rateLimit,omitempty"`
