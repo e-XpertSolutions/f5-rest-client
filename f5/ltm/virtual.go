@@ -11,6 +11,12 @@ import (
 	"github.com/e-XpertSolutions/f5-rest-client/f5"
 )
 
+type Persistence struct {
+	Name      string `json:"name,omitempty"`
+	Partition string `json:"partition,omitempty"`
+	TMDefault string `json:"tmDefault,omitempty"`
+}
+
 // VirtualServerList holds a list of virtual server uration.
 type VirtualServerList struct {
 	Items    []VirtualServer `json:"items,omitempty"`
@@ -20,27 +26,29 @@ type VirtualServerList struct {
 
 // VirtualServer holds the uration of a single virtual server.
 type VirtualServer struct {
-	AddressStatus     string `json:"addressStatus,omitempty"`
-	AutoLasthop       string `json:"autoLasthop,omitempty"`
-	CmpEnabled        string `json:"cmpEnabled,omitempty"`
-	ConnectionLimit   int64  `json:"connectionLimit,omitempty"`
-	Description       string `json:"description,omitempty"`
-	Destination       string `json:"destination,omitempty"`
-	Disabled          bool   `json:"disabled,omitempty"`
-	Enabled           bool   `json:"enabled,omitempty"`
-	FullPath          string `json:"fullPath,omitempty" pretty:",expanded"`
+	AddressStatus       string        `json:"addressStatus,omitempty"`
+	AutoLasthop         string        `json:"autoLasthop,omitempty"`
+	CmpEnabled          string        `json:"cmpEnabled,omitempty"`
+	ConnectionLimit     int64         `json:"connectionLimit,omitempty"`
+	Description         string        `json:"description,omitempty"`
+	Destination         string        `json:"destination,omitempty"`
+	Disabled            bool          `json:"disabled,omitempty"`
+	Enabled             bool          `json:"enabled,omitempty"`
+	FallbackPersistence string        `json:"fallbackPersistence,omitempty"`
+	FullPath            string        `json:"fullPath,omitempty" pretty:",expanded"`
 	FwEnforcedPolicy  string `json:"fwEnforcedPolicy,omitempty"`
-	Generation        int64  `json:"generation,omitempty" pretty:",expanded"`
-	GtmScore          int64  `json:"gtmScore,omitempty" pretty:",expanded"`
-	IPProtocol        string `json:"ipProtocol,omitempty"`
-	Kind              string `json:"kind,omitempty" pretty:",expanded"`
-	Mask              string `json:"mask,omitempty"`
-	Mirror            string `json:"mirror,omitempty"`
-	MobileAppTunnel   string `json:"mobileAppTunnel,omitempty" pretty:",expanded"`
-	Name              string `json:"name,omitempty"`
-	Nat64             string `json:"nat64,omitempty" pretty:",expanded"`
-	Partition         string `json:"partition,omitempty"`
-	PoliciesReference struct {
+	Generation          int64         `json:"generation,omitempty" pretty:",expanded"`
+	GtmScore            int64         `json:"gtmScore,omitempty" pretty:",expanded"`
+	IPProtocol          string        `json:"ipProtocol,omitempty"`
+	Kind                string        `json:"kind,omitempty" pretty:",expanded"`
+	Mask                string        `json:"mask,omitempty"`
+	Mirror              string        `json:"mirror,omitempty"`
+	MobileAppTunnel     string        `json:"mobileAppTunnel,omitempty" pretty:",expanded"`
+	Name                string        `json:"name,omitempty"`
+	Nat64               string        `json:"nat64,omitempty" pretty:",expanded"`
+	Partition           string        `json:"partition,omitempty"`
+	Persistences        []Persistence `json:"persist,omitempty"`
+	PoliciesReference   struct {
 		IsSubcollection bool   `json:"isSubcollection,omitempty"`
 		Link            string `json:"link,omitempty"`
 	} `json:"policiesReference,omitempty"`
