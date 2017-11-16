@@ -44,8 +44,8 @@ type VirtualServer struct {
 		IsSubcollection bool   `json:"isSubcollection,omitempty"`
 		Link            string `json:"link,omitempty"`
 	} `json:"policiesReference,omitempty"`
-	Pool              string `json:"pool,omitempty"`
-	Profiles    	  []Profile `json:"profiles,omitempty"`
+	Pool              string   `json:"pool,omitempty"`
+	Profiles          []string `json:"profiles,omitempty"` // only used to link existing profiles a creation or update
 	ProfilesReference struct {
 		IsSubcollection bool      `json:"isSubcollection,omitempty"`
 		Link            string    `json:"link,omitempty"`
