@@ -36,6 +36,7 @@ type VirtualServer struct {
 	Enabled             bool          `json:"enabled,omitempty"`
 	FallbackPersistence string        `json:"fallbackPersistence,omitempty"`
 	FullPath            string        `json:"fullPath,omitempty" pretty:",expanded"`
+	FwEnforcedPolicy    string        `json:"fwEnforcedPolicy,omitempty"`
 	Generation          int64         `json:"generation,omitempty" pretty:",expanded"`
 	GtmScore            int64         `json:"gtmScore,omitempty" pretty:",expanded"`
 	IPProtocol          string        `json:"ipProtocol,omitempty"`
