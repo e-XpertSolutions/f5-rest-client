@@ -251,6 +251,21 @@ func (c *Client) TransactionState() (*Transaction, error) {
 	return &tx, nil
 }
 
+// Rollback aborts the current transaction. If there is no active transaction,
+// ErrNoTransaction is returned.
+func (c *Client) Rollback() error {
+	if c.txID == "" {
+		return nil
+	}
+	txID := c.txID
+	c.txID = ""
+	if err := c.ModQuery("DELETE", "/mgmt/tm/transaction/"+txID, nil); err != nil {
+		c.txID = txID
+		return errors.New("cannot rollback current transaction: " + err.Error())
+	}
+	return nil
+}
+
 // Commit commits the transaction.
 func (c *Client) Commit() error {
 	if c.txID == "" {
