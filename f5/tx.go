@@ -7,10 +7,15 @@ import (
 	"strconv"
 )
 
+// PathTransaction is the path to transaction API endpoint.
+const PathTransaction = "/mgmt/tm/transaction"
+
 // ErrNoTransaction is the error returned when a function related to
 // transaction management is called when there is no active transaction.
 var ErrNoTransaction = errors.New("no active transaction")
 
+// A Transaction holds the state of a remote transaction identified by its
+// transaction ID.
 type Transaction struct {
 	TransID          int64  `json:"transId"`
 	ValidateOnly     bool   `json:"validateOnly"`
@@ -33,10 +38,7 @@ func (c *Client) Begin() (*Client, error) {
 	defer resp.Body.Close()
 
 	// Decode and validate transaction creation response.
-	var tx struct {
-		TransID int64  `json:"transId"`
-		State   string `json:"state"`
-	}
+	var tx Transaction
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&tx); err != nil {
 		return nil, errors.New("cannot read transaction creation response: " + err.Error())
