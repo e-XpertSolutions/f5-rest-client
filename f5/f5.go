@@ -28,8 +28,15 @@ const (
 	UploadRESTPath = PathUploadFile
 )
 
-// ErrNoToken is the error returned when the Client does not have a token.
-var ErrNoToken = errors.New("no token")
+// Errors.
+var (
+	// ErrNoToken is the error returned when the Client does not have a token.
+	ErrNoToken = errors.New("no token")
+
+	// ErrNoTransaction is the error returned when a function related to
+	// transaction management is called when there is no active transaction.
+	ErrNoTransaction = errors.New("no active transaction")
+)
 
 type UploadResponse struct {
 	RemainingByteCount int64          `json:"remainingByteCount"`
@@ -39,6 +46,18 @@ type UploadResponse struct {
 	TemporaryFilePath  string         `json:"temporaryFilePath"`
 	Generation         int64          `json:"generation"`
 	LastUpdateMicros   int64          `json:"lastUpdateMicros"`
+}
+
+type Transaction struct {
+	TransID          int64  `json:"transId"`
+	ValidateOnly     bool   `json:"validateOnly"`
+	ExecutionTimeout int64  `json:"executionTimeout"`
+	SelfLink         string `json:"selfLink"`
+	State            string `json:"state"`
+	TimeoutSeconds   int64  `json:"timeoutSeconds"`
+	AsyncExecution   bool   `json:"asynExecution"`
+	FailureReason    string `json:"failureReason"`
+	Kind             string `json:"kind"`
 }
 
 // An authFunc is function responsible for setting necessary headers to
@@ -217,6 +236,19 @@ func (c *Client) Begin() (*Client, error) {
 // active transaction, an empty string is returned.
 func (c *Client) TransactionID() string {
 	return c.txID
+}
+
+// TransactionState returns the state of the current transaction. If there is no
+// active transaction, ErrNoTransaction is returned.
+func (c *Client) TransactionState() (*Transaction, error) {
+	if c.txID == "" {
+		return nil, ErrNoTransaction
+	}
+	var tx Transaction
+	if err := c.ReadQuery("/mgmt/tm/transaction/"+c.txID, &tx); err != nil {
+		return nil, errors.New("cannot get current transaction state: " + err.Error())
+	}
+	return &tx, nil
 }
 
 // Commit commits the transaction.
