@@ -30,7 +30,7 @@ type MonitorHTTPConfig struct {
 	Reverse                  string `json:"reverse,omitempty"`
 	SelfLink                 string `json:"selfLink,omitempty"`
 	Send                     string `json:"send,omitempty"`
-	Recv                     string `json:"receive,omitempty"`
+	Recv                     string `json:"recv,omitempty"`
 	TimeUntilUp              int    `json:"timeUntilUp,omitempty"`
 	Timeout                  int    `json:"timeout,omitempty"`
 	Transparent              string `json:"transparent,omitempty"`
