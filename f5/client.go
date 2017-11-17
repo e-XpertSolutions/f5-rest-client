@@ -10,34 +10,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
 	"net/http"
 	"net/url"
 	"os"
 	"strings"
 )
 
-// Paths for file upload.
-const (
-	PathUploadImage = "/mgmt/cm/autodeploy/software-image-uploads"
-	PathUploadFile  = "/mgmt/shared/file-transfer/uploads"
-
-	// For backward compatibility
-	UploadRESTPath = PathUploadFile
-)
-
 // ErrNoToken is the error returned when the Client does not have a token.
 var ErrNoToken = errors.New("no token")
-
-type UploadResponse struct {
-	RemainingByteCount int64          `json:"remainingByteCount"`
-	UsedChunks         map[string]int `json:"usedChunks"`
-	TotalByteCount     int64          `json:"totalByteCount"`
-	LocalFilePath      string         `json:"localFilePath"`
-	TemporaryFilePath  string         `json:"temporaryFilePath"`
-	Generation         int64          `json:"generation"`
-	LastUpdateMicros   int64          `json:"lastUpdateMicros"`
-}
 
 // An authFunc is function responsible for setting necessary headers to
 // perform authenticated requests.
@@ -205,59 +185,6 @@ func (c *Client) MakeRequest(method, restPath string, data interface{}) (*http.R
 	if c.txID != "" {
 		req.Header.Add("X-F5-REST-Coordination-Id", c.txID)
 	}
-	if err := c.makeAuth(req); err != nil {
-		return nil, err
-	}
-	return req, nil
-}
-
-func (c *Client) UploadFile(r io.Reader, filename string, filesize int64) (*UploadResponse, error) {
-	var uploadResp UploadResponse
-	for bytesSent := int64(0); bytesSent < filesize; {
-		var chunk int64
-		if remainingBytes := filesize - bytesSent; remainingBytes >= 512*1024 {
-			chunk = 512 * 1024
-		} else {
-			chunk = remainingBytes
-		}
-
-		req, err := c.MakeUploadRequest(PathUploadFile+"/"+filename, io.LimitReader(r, chunk), bytesSent, chunk, filesize)
-		if err != nil {
-			return nil, err
-		}
-		resp, err := c.Do(req)
-		if err != nil {
-			return nil, err
-		}
-		if err := c.ReadError(resp); err != nil {
-			resp.Body.Close()
-			return nil, err
-		}
-
-		if filesize-bytesSent <= 512*1024 {
-			dec := json.NewDecoder(resp.Body)
-			if err := dec.Decode(&uploadResp); err != nil {
-				resp.Body.Close()
-				return nil, err
-			}
-		}
-
-		bytesSent += chunk
-	}
-	return &uploadResp, nil
-}
-
-func (c *Client) MakeUploadRequest(restPath string, r io.Reader, off, chunk, filesize int64) (*http.Request, error) {
-	if chunk > 512*1024 {
-		return nil, fmt.Errorf("chunk size greater than %d is not supported", 512*1024)
-	}
-	req, err := http.NewRequest("POST", c.makeURL(restPath), r)
-	if err != nil {
-		return nil, fmt.Errorf("failed to create F5 authenticated request: %v", err)
-	}
-	req.Header.Add("Accept", "application/json")
-	req.Header.Set("Content-Range", fmt.Sprintf("%d-%d/%d", off, off+chunk-1, filesize))
-	req.Header.Set("Content-Type", "application/octet-stream")
 	if err := c.makeAuth(req); err != nil {
 		return nil, err
 	}
