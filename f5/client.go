@@ -52,7 +52,7 @@ func NewBasicClient(baseURL, user, password string) (*Client, error) {
 	}, nil
 }
 
-//TokenClientConnection creates a new client with the given token.
+// TokenClientConnection creates a new client with the given token.
 func TokenClientConnection(baseURL, token string) (*Client, error) {
 	t := &http.Transport{}
 	c := &Client{c: http.Client{Transport: t}, baseURL: baseURL, t: t}
