@@ -52,6 +52,59 @@ func NewBasicClient(baseURL, user, password string) (*Client, error) {
 	}, nil
 }
 
+//TokenClientConnection creates a new client with the given token.
+func TokenClientConnection(baseURL, token string) (*Client, error) {
+	t := &http.Transport{}
+	c := &Client{c: http.Client{Transport: t}, baseURL: baseURL, t: t}
+	c.token = token
+	c.makeAuth = authFunc(func(req *http.Request) error {
+		req.Header.Add("X-F5-Auth-Token", c.token)
+		return nil
+	})
+
+	return c, nil
+}
+
+// CreateToken creates a new token with the given baseURL, user, password and loginProvName.
+func CreateToken(baseURL, user, password, loginProvName string) (string, error) {
+	t := &http.Transport{}
+	c := &Client{c: http.Client{Transport: t}, baseURL: baseURL, t: t}
+	c.t.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+	// Negociate token with a pair of username/password.
+	data, err := json.Marshal(map[string]string{"username": user, "password": password, "loginProviderName": loginProvName})
+	if err != nil {
+		return "", fmt.Errorf("failed to create token client (cannot marshal user credentials): %v", err)
+	}
+
+	tokReq, err := http.NewRequest("POST", c.makeURL("/mgmt/shared/authn/login"), bytes.NewBuffer(data))
+	if err != nil {
+		return "", fmt.Errorf("failed to create token client, (cannot create login request): %v", err)
+	}
+
+	tokReq.Header.Add("Content-Type", "application/json")
+	tokReq.SetBasicAuth(user, password)
+
+	resp, err := c.c.Do(tokReq)
+	if err != nil {
+		return "", fmt.Errorf("failed to create token client (token negociation failed): %v", err)
+	}
+	if resp.StatusCode >= 400 {
+		return "", fmt.Errorf("failed to create token client (token negociation failed): http status %s", resp.Status)
+	}
+	defer resp.Body.Close()
+
+	tok := struct {
+		Token struct {
+			Token string `json:"token"`
+		} `json:"token"`
+	}{}
+	dec := json.NewDecoder(resp.Body)
+	if err := dec.Decode(&tok); err != nil {
+		return "", fmt.Errorf("failed to create token client (cannot decode token): %v", err)
+	}
+	return tok.Token.Token, nil
+}
+
 // NewTokenClient creates a new F5 client with token based authentication.
 //
 // baseURL is the base URL of the F5 API server.
