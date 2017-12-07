@@ -15,6 +15,7 @@ type TrafficProfileConfigList struct {
 
 // TrafficProfileConfig holds the configuration of a single TrafficProfile.
 type TrafficProfileConfig struct {
+	Name         string `json:"name,omitempty"`
 	AppService   string `json:"appService,omitempty"`
 	ColorPolicer string `json:"colorPolicer,omitempty"`
 }
