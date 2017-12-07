@@ -15,6 +15,11 @@ type VirtualDiskConfigList struct {
 
 // VirtualDiskConfig holds the configuration of a single VirtualDisk.
 type VirtualDiskConfig struct {
+	Name            string `json:"name,omitempty"`
+	Kind            string `json:"kind,omitempty"`
+	FullPath        string `json:"fullPath,omitempty"`
+	Generation      int    `json:"generation,omitempty"`
+	SelfLink        string `json:"selfLink,omitempty"`
 	OperatingSystem string `json:"operatingSystem,omitempty"`
 }
 
