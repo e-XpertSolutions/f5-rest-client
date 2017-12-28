@@ -16,9 +16,9 @@ type GuestList struct {
 // Guest holds the configuration of a single Guest.
 type Guest struct {
 	Name              string   `json:"name,omitempty"`
-	AllowedSlots      int      `json:"allowedSlots,omitempty"`
+	AllowedSlots      []int    `json:"allowedSlots,omitempty"`
+	AssignedSlots     []int    `json:"assignedSlots,omitempty"`
 	AppService        string   `json:"appService,omitempty"`
-	AssignedSlots     int      `json:"assignedSlots,omitempty"`
 	CoresPerSlot      int      `json:"coresPerSlot,omitempty"`
 	Hostname          string   `json:"hostname,omitempty"`
 	InitialHotfix     string   `json:"initialHotfix,omitempty"`
@@ -35,7 +35,7 @@ type Guest struct {
 	TrafficProfile    string   `json:"trafficProfile,omitempty"`
 	VirtualDisk       string   `json:"virtualDisk,omitempty"`
 	VLAN              []string `json:"vlans,omitempty"`
-	VLANRef []struct {
+	VLANRef           []struct {
 		Link string `json:"link,omitempty"`
 	} `json:"vlansReference,omitempty"`
 }
