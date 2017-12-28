@@ -260,7 +260,7 @@ func (c *Client) ReadQuery(restPath string, outputData interface{}) error {
 
 // ModQuery performs a modification query such as POST, PUT or DELETE.
 func (c *Client) ModQuery(method, restPath string, inputData interface{}) error {
-	if method != "POST" && method != "PUT" && method != "DELETE" {
+	if method != "POST" && method != "PUT" && method != "DELETE" && method != "PATCH" {
 		return errors.New("invalid method " + method)
 	}
 	resp, err := c.SendRequest(method, restPath, inputData)
