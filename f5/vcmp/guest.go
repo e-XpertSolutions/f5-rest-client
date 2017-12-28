@@ -4,7 +4,11 @@
 
 package vcmp
 
-import "github.com/e-XpertSolutions/f5-rest-client/f5"
+import (
+	"fmt"
+
+	"github.com/e-XpertSolutions/f5-rest-client/f5"
+)
 
 // GuestList holds a list of Guests.
 type GuestList struct {
@@ -85,6 +89,20 @@ func (r *GuestResource) Edit(id string, item Guest) error {
 // Delete a single Guest configuration identified by id.
 func (r *GuestResource) Delete(id string) error {
 	if err := r.c.ModQuery("DELETE", BasePath+GuestEndpoint+"/"+id, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+// ChangeState changes the state of a Guest.
+func (r *GuestResource) ChangeState(id, state string) error {
+	if state != "deployed" && state != "provisioned" && state != "configured" {
+		return fmt.Errorf("invalid state value %q", state)
+	}
+	data := map[string]interface{}{
+		"state": state,
+	}
+	if err := r.c.ModQuery("PATCH", BasePath+GuestEndpoint+"/"+id, data); err != nil {
 		return err
 	}
 	return nil
