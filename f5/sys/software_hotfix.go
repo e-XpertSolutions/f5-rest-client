@@ -4,7 +4,9 @@
 
 package sys
 
-import "github.com/e-XpertSolutions/f5-rest-client/f5"
+import (
+	"github.com/e-XpertSolutions/f5-rest-client/f5"
+)
 
 // SoftwareHotfixConfigList holds a list of SoftwareHotfix configuration.
 type SoftwareHotfixConfigList struct {
