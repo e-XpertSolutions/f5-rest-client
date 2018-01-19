@@ -40,6 +40,31 @@ type BackupResponse struct {
 	Status string `json:"status"`
 }
 
+// IsDone reports whether the status indicates that the action is terminated,
+// even if it is an error or that the task has been canceled.
+func (resp BackupResponse) IsDone() bool {
+	switch resp.Status {
+	case "STARTED", "CANCEL_REQUESTED":
+		return false
+	}
+	return true
+}
+
+// IsFailure reports whether the status is FAILED.
+func (resp BackupResponse) IsFailure() bool {
+	return resp.Status == "FAILED"
+}
+
+// IsCanceled reports whether the status is CANCELED.
+func (resp BackupResponse) IsCanceled() bool {
+	return resp.Status == "CANCELED"
+}
+
+// IsSuccess reports whether the status is FINISHED.
+func (resp BackupResponse) IsSuccess() bool {
+	return resp.Status == "FINISHED"
+}
+
 // Backup creates a backup remotely saved into a file named according to the
 // provided filename.
 func (c *Client) Backup(filename string) (*BackupResponse, error) {
