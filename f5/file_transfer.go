@@ -2,9 +2,12 @@ package f5
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
+	"strconv"
+	"strings"
 )
 
 // Paths for file upload.
@@ -25,18 +28,92 @@ const (
 
 // DownloadUCS downloads an UCS file and writes its content to w.
 func (c *Client) DownloadUCS(w io.Writer, filename string) (n int64, err error) {
-	resp, err := c.SendRequest("GET", PathDownloadUCS+"/"+filename, nil)
+	if n, err = c.download(w, PathDownloadUCS+"/"+filename); err != nil {
+		return 0, fmt.Errorf("cannot download ucs file: %v", err)
+	}
+	return
+}
+
+func (c *Client) download(w io.Writer, restPath string) (n int64, err error) {
+	resp, err := c.SendRequest("GET", restPath, nil)
 	if err != nil {
-		return 0, fmt.Errorf("error while requesting ucs file download: %v", err)
+		return 0, err
 	}
 	defer resp.Body.Close()
 
 	if err := c.ReadError(resp); err != nil {
-		return 0, fmt.Errorf("ucs download api returned an error: %v", err)
+		return 0, err
 	}
 
 	if n, err = io.Copy(w, resp.Body); err != nil {
-		return 0, fmt.Errorf("cannot download ucs file: %v", err)
+		return 0, err
+	}
+
+	if resp.StatusCode == http.StatusPartialContent {
+		contentRange := resp.Header.Get("Content-Range")
+
+		parts := strings.Split(contentRange, "/")
+		if len(parts) != 2 {
+			return 0, errors.New("malformed Content-Range header")
+		}
+		filesize, err := strconv.ParseInt(parts[1], 10, 64)
+		if err != nil {
+			return 0, errors.New("malformed Content-Range header")
+		}
+
+		rangeParts := strings.Split(parts[0], "-")
+		if len(rangeParts) != 2 {
+			return 0, errors.New("malformed Content-Range header")
+		}
+		offset, err := strconv.ParseInt(rangeParts[1], 10, 64)
+		if err != nil {
+			return 0, errors.New("malformed Content-Range header")
+		}
+
+		np, err := c.downloadByChunks(w, restPath, filesize, offset+1, offset)
+		if err != nil {
+			return 0, err
+		}
+		n += np
+	}
+
+	return
+}
+
+func (c *Client) downloadByChunks(w io.Writer, restPath string, filesize, offset, chunkSize int64) (n int64, err error) {
+	req, err := c.MakeRequest("GET", restPath, nil)
+	if err != nil {
+		return 0, err
+	}
+
+	// Bound limit to filesize
+	limit := offset + chunkSize - 1
+	if limit >= filesize {
+		limit = filesize - 1
+	}
+
+	req.Header.Set("Content-Range", fmt.Sprintf("%d-%d/%d", offset, limit, filesize))
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return 0, err
+	}
+	defer resp.Body.Close()
+
+	if err := c.ReadError(resp); err != nil {
+		return 0, err
+	}
+
+	if n, err = io.Copy(w, resp.Body); err != nil {
+		return 0, err
+	}
+
+	if limit < filesize-1 {
+		nn, err := c.downloadByChunks(w, restPath, filesize, offset+chunkSize, chunkSize)
+		if err != nil {
+			return 0, err
+		}
+		n += nn
 	}
 
 	return
