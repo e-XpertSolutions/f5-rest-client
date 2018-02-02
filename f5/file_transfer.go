@@ -26,58 +26,71 @@ const (
 	PathDownloadUCS = "/mgmt/shared/file-transfer/ucs-downloads"
 )
 
+// MaxChunkSize is the maximum chunk size allowed by the iControl REST
+const MaxChunkSize = 1048576
+
 // DownloadUCS downloads an UCS file and writes its content to w.
 func (c *Client) DownloadUCS(w io.Writer, filename string) (n int64, err error) {
-	if n, err = c.download(w, PathDownloadUCS+"/"+filename); err != nil {
+	// BigIP 12.x.x only support download requests with a Content-Range header,
+	// thus, it is required to know the size of the file to download beforehand.
+	//
+	// BigIP 13.x.x automatically download the first chunk and provide the
+	// Content-Range header with all information in the response, which is far
+	// more convenient. Unfortunately, we need to support BigIP 12 and as a
+	// result, we need to first retrieve the UCS file size information.
+	resp, err := c.SendRequest("GET", "/mgmt/tm/sys/ucs", nil)
+	if err != nil {
+		return 0, fmt.Errorf("cannot retrieve info for ucs file: %v", err)
+	}
+	defer resp.Body.Close()
+	if err := c.ReadError(resp); err != nil {
+		return 0, fmt.Errorf("cannot retrieve info for ucs file: %v", err)
+	}
+
+	// As far as I know, there is no direct way to fetch UCS file info for a
+	// specific file and therefore we need to list all UCS files and search
+	// for the one we want in the list.
+	var ucsInfo struct {
+		Items []struct {
+			APIRawValues struct {
+				Filename string `json:"filename"`
+				FileSize string `json:"file_size"`
+			} `json:"apiRawValues"`
+		} `json:"items"`
+	}
+	dec := json.NewDecoder(resp.Body)
+	if err := dec.Decode(&ucsInfo); err != nil {
+		return 0, fmt.Errorf("cannot decode ucs file info: %v", err)
+	}
+
+	// File size is a raw string and we need to parse it in order to extract the
+	// size as an integer.
+	var rawFileSize string
+	for _, item := range ucsInfo.Items {
+		if strings.HasSuffix(item.APIRawValues.Filename, filename) {
+			rawFileSize = strings.TrimSuffix(item.APIRawValues.FileSize, " (in bytes)")
+			break
+		}
+	}
+	if rawFileSize == "" {
+		return 0, errors.New("ucs file does not exist")
+	}
+	fileSize, err := strconv.ParseInt(rawFileSize, 10, 64)
+	if err != nil {
+		return 0, fmt.Errorf("malformed file size in ucs file info: %v", err)
+	}
+
+	if n, err = c.download(w, PathDownloadUCS+"/"+filename, fileSize, MaxChunkSize); err != nil {
 		return 0, fmt.Errorf("cannot download ucs file: %v", err)
 	}
 	return
 }
 
-func (c *Client) download(w io.Writer, restPath string) (n int64, err error) {
-	resp, err := c.SendRequest("GET", restPath, nil)
-	if err != nil {
-		return 0, err
+func (c *Client) download(w io.Writer, restPath string, filesize, chunkSize int64) (n int64, err error) {
+	if filesize < chunkSize {
+		chunkSize = filesize
 	}
-	defer resp.Body.Close()
-
-	if err := c.ReadError(resp); err != nil {
-		return 0, err
-	}
-
-	if n, err = io.Copy(w, resp.Body); err != nil {
-		return 0, err
-	}
-
-	if resp.StatusCode == http.StatusPartialContent {
-		contentRange := resp.Header.Get("Content-Range")
-
-		parts := strings.Split(contentRange, "/")
-		if len(parts) != 2 {
-			return 0, errors.New("malformed Content-Range header")
-		}
-		filesize, err := strconv.ParseInt(parts[1], 10, 64)
-		if err != nil {
-			return 0, errors.New("malformed Content-Range header")
-		}
-
-		rangeParts := strings.Split(parts[0], "-")
-		if len(rangeParts) != 2 {
-			return 0, errors.New("malformed Content-Range header")
-		}
-		offset, err := strconv.ParseInt(rangeParts[1], 10, 64)
-		if err != nil {
-			return 0, errors.New("malformed Content-Range header")
-		}
-
-		np, err := c.downloadByChunks(w, restPath, filesize, offset+1, offset)
-		if err != nil {
-			return 0, err
-		}
-		n += np
-	}
-
-	return
+	return c.downloadByChunks(w, restPath, filesize, 0, chunkSize)
 }
 
 func (c *Client) downloadByChunks(w io.Writer, restPath string, filesize, offset, chunkSize int64) (n int64, err error) {
@@ -93,6 +106,7 @@ func (c *Client) downloadByChunks(w io.Writer, restPath string, filesize, offset
 	}
 
 	req.Header.Set("Content-Range", fmt.Sprintf("%d-%d/%d", offset, limit, filesize))
+	fmt.Println("Content-Range: ", fmt.Sprintf("%d-%d/%d", offset, limit, filesize))
 
 	resp, err := c.Do(req)
 	if err != nil {
