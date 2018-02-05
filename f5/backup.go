@@ -86,6 +86,12 @@ func (c *Client) RestoreBackup(filename string) (*BackupResponse, error) {
 	return c.backupRequest("RESTORE", filename)
 }
 
+// RestoreBackupWithNoLicense works exactly as RestoreBackup but do no check the
+// license.
+func (c *Client) RestoreBackupWithNoLicense(filename string) (*BackupResponse, error) {
+	return c.backupRequest("RESTORE_WITH_NO_LICENSE", filename)
+}
+
 func (c *Client) backupRequest(action, filename string) (*BackupResponse, error) {
 	data := map[string]interface{}{
 		"file":   filename,
