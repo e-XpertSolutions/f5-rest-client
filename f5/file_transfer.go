@@ -106,7 +106,6 @@ func (c *Client) downloadByChunks(w io.Writer, restPath string, filesize, offset
 	}
 
 	req.Header.Set("Content-Range", fmt.Sprintf("%d-%d/%d", offset, limit, filesize))
-	fmt.Println("Content-Range: ", fmt.Sprintf("%d-%d/%d", offset, limit, filesize))
 
 	resp, err := c.Do(req)
 	if err != nil {
