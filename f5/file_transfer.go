@@ -218,6 +218,8 @@ func (c *Client) upload(r io.Reader, restPath, filename string, filesize int64) 
 			}
 		}
 
+		resp.Body.Close()
+
 		bytesSent += chunk
 	}
 	return &uploadResp, nil
