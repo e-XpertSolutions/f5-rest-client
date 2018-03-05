@@ -279,7 +279,7 @@ func (c *Client) ReadError(resp *http.Response) error {
 		}
 		errResp, err := NewRequestError(resp.Body)
 		if err != nil {
-			return err
+			return errors.New("cannot read error message from response body: " + err.Error())
 		}
 		return errResp
 	}
