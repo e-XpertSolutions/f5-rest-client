@@ -4,20 +4,49 @@
 
 package sys
 
-import "github.com/e-XpertSolutions/f5-rest-client/f5"
+import (
+	"time"
 
-// LicenseConfigList holds a list of License configuration.
-type LicenseConfigList struct {
-	Items    []LicenseConfig `json:"items"`
-	Kind     string          `json:"kind"`
-	SelfLink string          `json:"selflink"`
+	"github.com/e-XpertSolutions/f5-rest-client/f5"
+)
+
+// License holds the configuration of a single License.
+type License struct {
+	Kind     string `json:"kind"`
+	SelfLink string `json:"selfLink"`
+	Entries  map[string]struct {
+		NestedStats struct {
+			Entries map[string]struct {
+				Description string `json:"description"`
+			}
+		} `json:"nestedStats"`
+	} `json:"entries"`
 }
 
-// LicenseConfig holds the configuration of a single License.
-type LicenseConfig struct {
-	Entries  map[string]interface{} `json:"entries"`
-	Kind     string                 `json:"kind"`
-	SelfLink string                 `json:"selfLink"`
+func (l License) ServiceCheckDate() time.Time {
+	for _, entry := range l.Entries {
+		innerEntry, ok := entry.NestedStats.Entries["serviceCheckDate"]
+		if !ok {
+			continue
+		}
+		t, err := time.Parse("2006/01/02", innerEntry.Description)
+		if err != nil {
+			break
+		}
+		return t
+	}
+	return time.Time{}
+}
+
+func (l License) RegistrationKey() string {
+	for _, entry := range l.Entries {
+		innerEntry, ok := entry.NestedStats.Entries["registrationKey"]
+		if !ok {
+			continue
+		}
+		return innerEntry.Description
+	}
+	return ""
 }
 
 // LicenseEndpoint represents the REST resource for managing License.
@@ -29,10 +58,22 @@ type LicenseResource struct {
 }
 
 // Get list the License configurations.
-func (r *LicenseResource) Get() (*LicenseConfigList, error) {
-	var list LicenseConfigList
-	if err := r.c.ReadQuery(BasePath+LicenseEndpoint, &list); err != nil {
+func (r *LicenseResource) Get() (*License, error) {
+	var l License
+	if err := r.c.ReadQuery(BasePath+LicenseEndpoint, &l); err != nil {
 		return nil, err
 	}
-	return &list, nil
+	return &l, nil
+}
+
+// Activate license.
+func (r *LicenseResource) Activate(registrationKey string) error {
+	data := struct {
+		Command         string `json:"command"`
+		RegistrationKey string `json:"registrationKey"`
+	}{
+		Command:         "install",
+		RegistrationKey: registrationKey,
+	}
+	return r.c.ModQuery("POST", BasePath+LicenseEndpoint, &data)
 }
