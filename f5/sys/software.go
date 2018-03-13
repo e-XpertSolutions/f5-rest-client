@@ -4,7 +4,11 @@
 
 package sys
 
-import "github.com/e-XpertSolutions/f5-rest-client/f5"
+import (
+	"fmt"
+
+	"github.com/e-XpertSolutions/f5-rest-client/f5"
+)
 
 // SoftwareConfigList holds a list of Software configuration.
 type SoftwareConfigList struct {
@@ -28,44 +32,19 @@ type SoftwareResource struct {
 	c *f5.Client
 }
 
-// ListAll  lists all the Software configurations.
-func (r *SoftwareResource) ListAll() (*SoftwareConfigList, error) {
-	var list SoftwareConfigList
-	if err := r.c.ReadQuery(BasePath+SoftwareEndpoint, &list); err != nil {
-		return nil, err
+// Install installs a software image on a specified volume.
+func (r *SoftwareResource) Install(imageName, volumeName string) error {
+	data := struct {
+		Command string `json:"command"`
+		Name    string `json:"name"`
+		Volume  string `json:"volume"`
+	}{
+		Command: "install",
+		Name:    imageName,
+		Volume:  volumeName,
 	}
-	return &list, nil
-}
-
-// Get a single Software configuration identified by id.
-func (r *SoftwareResource) Get(id string) (*SoftwareConfig, error) {
-	var item SoftwareConfig
-	if err := r.c.ReadQuery(BasePath+SoftwareEndpoint, &item); err != nil {
-		return nil, err
-	}
-	return &item, nil
-}
-
-// Create a new Software configuration.
-func (r *SoftwareResource) Create(item SoftwareConfig) error {
-	if err := r.c.ModQuery("POST", BasePath+SoftwareEndpoint, item); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Edit a Software configuration identified by id.
-func (r *SoftwareResource) Edit(id string, item SoftwareConfig) error {
-	if err := r.c.ModQuery("PUT", BasePath+SoftwareEndpoint+"/"+id, item); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Delete a single Software configuration identified by id.
-func (r *SoftwareResource) Delete(id string) error {
-	if err := r.c.ModQuery("DELETE", BasePath+SoftwareEndpoint+"/"+id, nil); err != nil {
-		return err
+	if err := r.c.ModQuery("POST", BasePath+SoftwareEndpoint, &data); err != nil {
+		return fmt.Errorf("install software image command failed: %v", err)
 	}
 	return nil
 }
