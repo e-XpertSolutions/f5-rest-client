@@ -14,10 +14,14 @@ import (
 	"net/url"
 	"os"
 	"strings"
+	"time"
 )
 
 // ErrNoToken is the error returned when the Client does not have a token.
 var ErrNoToken = errors.New("no token")
+
+// DefaultTimeout defines the default timeout for HTTP clients.
+var DefaultTimeout = 5 * time.Second
 
 // An authFunc is function responsible for setting necessary headers to
 // perform authenticated requests.
@@ -42,7 +46,7 @@ type Client struct {
 func NewBasicClient(baseURL, user, password string) (*Client, error) {
 	t := &http.Transport{}
 	return &Client{
-		c:       http.Client{Transport: t},
+		c:       http.Client{Transport: t, Timeout: DefaultTimeout},
 		baseURL: baseURL,
 		t:       t,
 		makeAuth: authFunc(func(req *http.Request) error {
@@ -55,7 +59,7 @@ func NewBasicClient(baseURL, user, password string) (*Client, error) {
 // TokenClientConnection creates a new client with the given token.
 func TokenClientConnection(baseURL, token string) (*Client, error) {
 	t := &http.Transport{}
-	c := &Client{c: http.Client{Transport: t}, baseURL: baseURL, t: t}
+	c := &Client{c: http.Client{Transport: t, Timeout: DefaultTimeout}, baseURL: baseURL, t: t}
 	c.token = token
 	c.makeAuth = authFunc(func(req *http.Request) error {
 		req.Header.Add("X-F5-Auth-Token", c.token)
@@ -68,7 +72,7 @@ func TokenClientConnection(baseURL, token string) (*Client, error) {
 // CreateToken creates a new token with the given baseURL, user, password and loginProvName.
 func CreateToken(baseURL, user, password, loginProvName string) (string, error) {
 	t := &http.Transport{}
-	c := &Client{c: http.Client{Transport: t}, baseURL: baseURL, t: t}
+	c := &Client{c: http.Client{Transport: t, Timeout: DefaultTimeout}, baseURL: baseURL, t: t}
 	c.t.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	// Negociate token with a pair of username/password.
 	data, err := json.Marshal(map[string]string{"username": user, "password": password, "loginProviderName": loginProvName})
@@ -110,7 +114,7 @@ func CreateToken(baseURL, user, password, loginProvName string) (string, error) 
 // baseURL is the base URL of the F5 API server.
 func NewTokenClient(baseURL, user, password, loginProvName string) (*Client, error) {
 	t := &http.Transport{}
-	c := Client{c: http.Client{Transport: t}, baseURL: baseURL, t: t}
+	c := Client{c: http.Client{Transport: t, Timeout: DefaultTimeout}, baseURL: baseURL, t: t}
 
 	// Create auth function for token based authentication.
 	c.makeAuth = authFunc(func(req *http.Request) (err error) {
