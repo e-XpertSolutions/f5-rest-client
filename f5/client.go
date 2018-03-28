@@ -133,6 +133,19 @@ func (c *Client) DisableCertCheck() {
 	c.t.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 }
 
+// CheckAuth verifies that the credentials provided at the client initialization
+// are correct.
+func (c *Client) CheckAuth() error {
+	req, err := http.NewRequest("GET", "http://dummy", nil)
+	if err != nil {
+		return fmt.Errorf("cannot create dummy request to check authentication: %v", err)
+	}
+	if err := c.makeAuth(req); err != nil {
+		return fmt.Errorf("authentication verification failed: %v", err)
+	}
+	return nil
+}
+
 // RevokeToken revokes the current token. If the Client has not been initialized
 // with NewTokenClient, ErrNoToken is returned.
 func (c *Client) RevokeToken() error {
