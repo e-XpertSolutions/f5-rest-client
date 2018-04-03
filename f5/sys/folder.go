@@ -31,6 +31,11 @@ type FolderConfig struct {
 	} `json:"trafficGroupReference"`
 }
 
+type NewFolderConfig struct {
+	Name      string `json:"name"`
+	Partition string `json:"partition"`
+}
+
 // FolderEndpoint represents the REST resource for managing Folder.
 const FolderEndpoint = "/folder"
 
@@ -51,14 +56,14 @@ func (r *FolderResource) ListAll() (*FolderConfigList, error) {
 // Get a single Folder configuration identified by id.
 func (r *FolderResource) Get(id string) (*FolderConfig, error) {
 	var item FolderConfig
-	if err := r.c.ReadQuery(BasePath+FolderEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+FolderEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
 }
 
 // Create a new Folder configuration.
-func (r *FolderResource) Create(item FolderConfig) error {
+func (r *FolderResource) Create(item NewFolderConfig) error {
 	if err := r.c.ModQuery("POST", BasePath+FolderEndpoint, item); err != nil {
 		return err
 	}
