@@ -26,6 +26,7 @@ type Sys struct {
 	cluster                             ClusterResource
 	connection                          ConnectionResource
 	console                             ConsoleResource
+	cpuStats                            CPUStatsResource
 	crypto                              CryptoResource
 	cryptoCRL                           CryptoCRLResource
 	cryptoCSR                           CryptoCSRResource
@@ -160,6 +161,7 @@ func New(c *f5.Client) Sys {
 		cluster:                   ClusterResource{c: c},
 		connection:                ConnectionResource{c: c},
 		console:                   ConsoleResource{c: c},
+		cpuStats:                  CPUStatsResource{c: c},
 		crypto:                    CryptoResource{c: c},
 		cryptoCRL:                 CryptoCRLResource{c: c},
 		cryptoCSR:                 CryptoCSRResource{c: c},
@@ -349,6 +351,11 @@ func (sys Sys) Connection() *ConnectionResource {
 // console returns a configured ConsoleResource.
 func (sys Sys) Console() *ConsoleResource {
 	return &sys.console
+}
+
+// console returns a configured ConsoleResource.
+func (sys Sys) CPUStats() *CPUStatsResource {
+	return &sys.cpuStats
 }
 
 // crypto returns a configured CryptoResource.
