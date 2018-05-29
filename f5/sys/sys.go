@@ -103,6 +103,7 @@ type Sys struct {
 	managementIP                        ManagementIPResource
 	managementOVSDB                     ManagementOVSDBResource
 	managementRoute                     ManagementRouteResource
+	memoryStats                         MemoryStatsResource
 	nTP                                 NTPResource
 	nTPRestrict                         NTPRestrictResource
 	outboundSMTP                        OutboundSMTPResource
@@ -238,6 +239,7 @@ func New(c *f5.Client) Sys {
 		managementIP:                        ManagementIPResource{c: c},
 		managementOVSDB:                     ManagementOVSDBResource{c: c},
 		managementRoute:                     ManagementRouteResource{c: c},
+		memoryStats:                         MemoryStatsResource{c: c},
 		nTP:                                 NTPResource{c: c},
 		nTPRestrict:                         NTPRestrictResource{c: c},
 		outboundSMTP:                        OutboundSMTPResource{c: c},
@@ -736,6 +738,10 @@ func (sys Sys) ManagementOVSDB() *ManagementOVSDBResource {
 // managementRoute returns a configured ManagementRouteResource.
 func (sys Sys) ManagementRoute() *ManagementRouteResource {
 	return &sys.managementRoute
+}
+
+func (sys Sys) MemoryStats() *MemoryStatsResource {
+	return &sys.memoryStats
 }
 
 // nTP returns a configured NTPResource.

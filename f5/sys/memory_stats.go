@@ -21,14 +21,20 @@ type MemoryInnerStatsList struct {
 }
 
 type MemoryStatsEntries struct {
-	NestedMemoryStats MemoryStats `json:"nestedStats,omitempty"`
+	NestedStats MemoryStats `json:"nestedStats,omitempty"`
 }
 
 type MemoryStats struct {
 	Entries struct {
+		Allocated struct {
+			Value int `json:"value"`
+		} `json:"allocated,omitempty"`
 		HostId struct {
 			Value string `json:"description"`
 		} `json:"hostId,omitempty"`
+		MaxAllocated struct{
+			Value int `json:"value"`
+		} `json maxAllocated,omitempty"`
 		MemoryFree struct {
 			Value int `json:"value"`
 		} `json:"memoryFree,omitempty"`
@@ -47,6 +53,9 @@ type MemoryStats struct {
 		OtherMemoryUsed struct {
 			Value int `json:"value"`
 		} `json:"otherMemoryUsed,omitempty"`
+		Size struct {
+			Value int `json:"value"`
+		} `json:"size,omitempty"`
 		SwapFree struct {
 			Value int `json:"value"`
 		} `json:"swapFree,omitempty"`
@@ -56,6 +65,9 @@ type MemoryStats struct {
 		SwapUsed struct {
 			Value int `json:"value"`
 		} `json:"swapUsed,omitempty"`
+		TmmId struct {
+			Value string `json:"description"`
+		} `json:"tmmId,omitempty"`
 		TmmMemoryFree struct {
 			Value int `json:"value"`
 		} `json:"tmmMemoryFree,omitempty"`
@@ -65,6 +77,9 @@ type MemoryStats struct {
 		TmmMemoryUsed struct {
 			Value int `json:"value"`
 		} `json:"tmmMemoryUsed,omitempty"`
+		TmName struct {
+			Value string `json:"description"`
+		} `json:"tmName,omitempty"`
 	} `json:"entries,omitempty"`
 }
 
