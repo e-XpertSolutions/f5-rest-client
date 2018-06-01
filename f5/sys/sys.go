@@ -26,6 +26,7 @@ type Sys struct {
 	cluster                             ClusterResource
 	connection                          ConnectionResource
 	console                             ConsoleResource
+	cpuStats                            CPUStatsResource
 	crypto                              CryptoResource
 	cryptoCRL                           CryptoCRLResource
 	cryptoCSR                           CryptoCSRResource
@@ -102,6 +103,7 @@ type Sys struct {
 	managementIP                        ManagementIPResource
 	managementOVSDB                     ManagementOVSDBResource
 	managementRoute                     ManagementRouteResource
+	memoryStats                         MemoryStatsResource
 	nTP                                 NTPResource
 	nTPRestrict                         NTPRestrictResource
 	outboundSMTP                        OutboundSMTPResource
@@ -160,6 +162,7 @@ func New(c *f5.Client) Sys {
 		cluster:                   ClusterResource{c: c},
 		connection:                ConnectionResource{c: c},
 		console:                   ConsoleResource{c: c},
+		cpuStats:                  CPUStatsResource{c: c},
 		crypto:                    CryptoResource{c: c},
 		cryptoCRL:                 CryptoCRLResource{c: c},
 		cryptoCSR:                 CryptoCSRResource{c: c},
@@ -236,6 +239,7 @@ func New(c *f5.Client) Sys {
 		managementIP:                        ManagementIPResource{c: c},
 		managementOVSDB:                     ManagementOVSDBResource{c: c},
 		managementRoute:                     ManagementRouteResource{c: c},
+		memoryStats:                         MemoryStatsResource{c: c},
 		nTP:                                 NTPResource{c: c},
 		nTPRestrict:                         NTPRestrictResource{c: c},
 		outboundSMTP:                        OutboundSMTPResource{c: c},
@@ -349,6 +353,11 @@ func (sys Sys) Connection() *ConnectionResource {
 // console returns a configured ConsoleResource.
 func (sys Sys) Console() *ConsoleResource {
 	return &sys.console
+}
+
+// console returns a configured ConsoleResource.
+func (sys Sys) CPUStats() *CPUStatsResource {
+	return &sys.cpuStats
 }
 
 // crypto returns a configured CryptoResource.
@@ -729,6 +738,10 @@ func (sys Sys) ManagementOVSDB() *ManagementOVSDBResource {
 // managementRoute returns a configured ManagementRouteResource.
 func (sys Sys) ManagementRoute() *ManagementRouteResource {
 	return &sys.managementRoute
+}
+
+func (sys Sys) MemoryStats() *MemoryStatsResource {
+	return &sys.memoryStats
 }
 
 // nTP returns a configured NTPResource.
