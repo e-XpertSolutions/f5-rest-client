@@ -34,7 +34,8 @@ type Client struct {
 	makeAuth authFunc
 	t        *http.Transport
 
-	token string
+	token          string
+	tokenExpiresAt time.Time
 
 	// Transaction
 	txID string // transaction ID to send for every request
@@ -70,19 +71,19 @@ func TokenClientConnection(baseURL, token string) (*Client, error) {
 }
 
 // CreateToken creates a new token with the given baseURL, user, password and loginProvName.
-func CreateToken(baseURL, user, password, loginProvName string) (string, error) {
+func CreateToken(baseURL, user, password, loginProvName string) (string, time.Time, error) {
 	t := &http.Transport{}
 	c := &Client{c: http.Client{Transport: t, Timeout: DefaultTimeout}, baseURL: baseURL, t: t}
 	c.t.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	// Negociate token with a pair of username/password.
 	data, err := json.Marshal(map[string]string{"username": user, "password": password, "loginProviderName": loginProvName})
 	if err != nil {
-		return "", fmt.Errorf("failed to create token client (cannot marshal user credentials): %v", err)
+		return "", time.Time{}, fmt.Errorf("failed to create token client (cannot marshal user credentials): %v", err)
 	}
 
 	tokReq, err := http.NewRequest("POST", c.makeURL("/mgmt/shared/authn/login"), bytes.NewBuffer(data))
 	if err != nil {
-		return "", fmt.Errorf("failed to create token client, (cannot create login request): %v", err)
+		return "", time.Time{}, fmt.Errorf("failed to create token client, (cannot create login request): %v", err)
 	}
 
 	tokReq.Header.Add("Content-Type", "application/json")
@@ -90,10 +91,10 @@ func CreateToken(baseURL, user, password, loginProvName string) (string, error) 
 
 	resp, err := c.c.Do(tokReq)
 	if err != nil {
-		return "", fmt.Errorf("failed to create token client (token negociation failed): %v", err)
+		return "", time.Time{}, fmt.Errorf("failed to create token client (token negociation failed): %v", err)
 	}
 	if resp.StatusCode >= 400 {
-		return "", fmt.Errorf("failed to create token client (token negociation failed): http status %s", resp.Status)
+		return "", time.Time{}, fmt.Errorf("failed to create token client (token negociation failed): http status %s", resp.Status)
 	}
 	defer resp.Body.Close()
 
@@ -101,12 +102,18 @@ func CreateToken(baseURL, user, password, loginProvName string) (string, error) 
 		Token struct {
 			Token string `json:"token"`
 		} `json:"token"`
+		StartTime time.Time `json:"startTime"`
+		Timeout   int       `json:"timeout"`
 	}{}
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&tok); err != nil {
-		return "", fmt.Errorf("failed to create token client (cannot decode token): %v", err)
+		return "", time.Time{}, fmt.Errorf("failed to create token client (cannot decode token): %v", err)
 	}
-	return tok.Token.Token, nil
+
+	// Compate time at which the token will expire (minus a minute).
+	expireAt := tok.StartTime.Add(time.Duration(tok.Timeout - 60))
+
+	return tok.Token.Token, expireAt, nil
 }
 
 // NewTokenClient creates a new F5 client with token based authentication.
@@ -118,8 +125,8 @@ func NewTokenClient(baseURL, user, password, loginProvName string) (*Client, err
 
 	// Create auth function for token based authentication.
 	c.makeAuth = authFunc(func(req *http.Request) (err error) {
-		if c.token == "" {
-			c.token, err = CreateToken(baseURL, user, password, loginProvName)
+		if c.token == "" || time.Now().After(c.tokenExpiresAt) {
+			c.token, c.tokenExpiresAt, err = CreateToken(baseURL, user, password, loginProvName)
 			if err != nil {
 				return
 			}
