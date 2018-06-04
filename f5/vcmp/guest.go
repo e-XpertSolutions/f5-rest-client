@@ -31,7 +31,7 @@ type Guest struct {
 	ManagementIP      string   `json:"managementIp,omitempty"`
 	ManagementNetwork string   `json:"managementNetwork,omitempty"`
 	MinSlots          int      `json:"minSlots,omitempty"`
-	PreferredSLots    int      `json:"preferredSlots,omitempty"`
+	PreferredSlots    []int    `json:"preferredSlots,omitempty"`
 	Slots             int      `json:"slots,omitempty"`
 	SSLMode           string   `json:"sslMode,omitempty"`
 	State             string   `json:"state,omitempty"`
