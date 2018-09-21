@@ -23,6 +23,28 @@ var ErrNoToken = errors.New("no token")
 // DefaultTimeout defines the default timeout for HTTP clients.
 var DefaultTimeout = 5 * time.Second
 
+// F5TimeLayout defines the layout to use for decoding dates returned by the
+// F5 iControl REST API.
+const F5TimeLayout = "2006-01-02T15:04:05.999999999-0700"
+
+// F5Date wraps time.Time in order to override the time layout used during
+// JSON decoding.
+type F5Date struct {
+	time.Time
+}
+
+// UnmarshalJSON overrides time.Time JSON decoding to support F5 time parsing
+// layout.
+func (d *F5Date) UnmarshalJSON(b []byte) error {
+	rawdate := strings.Trim(string(b), `"`)
+	t, err := time.Parse(F5TimeLayout, rawdate)
+	if err != nil {
+		return err
+	}
+	d.Time = t
+	return nil
+}
+
 // An authFunc is function responsible for setting necessary headers to
 // perform authenticated requests.
 type authFunc func(req *http.Request) error
@@ -100,10 +122,10 @@ func CreateToken(baseURL, user, password, loginProvName string) (string, time.Ti
 
 	tok := struct {
 		Token struct {
-			Token string `json:"token"`
+			Token     string `json:"token"`
+			StartTime F5Date `json:"startTime"`
+			Timeout   int    `json:"timeout"`
 		} `json:"token"`
-		StartTime time.Time `json:"startTime"`
-		Timeout   int       `json:"timeout"`
 	}{}
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&tok); err != nil {
@@ -111,7 +133,7 @@ func CreateToken(baseURL, user, password, loginProvName string) (string, time.Ti
 	}
 
 	// Compate time at which the token will expire (minus a minute).
-	expireAt := tok.StartTime.Add(time.Duration(tok.Timeout - 60))
+	expireAt := tok.Token.StartTime.Add(time.Duration(tok.Token.Timeout - 60))
 
 	return tok.Token.Token, expireAt, nil
 }
@@ -131,7 +153,7 @@ func NewTokenClient(baseURL, user, password, loginProvName string) (*Client, err
 				return
 			}
 		}
-		req.Header.Add("X-F5-Auth-Token", c.token)
+		req.Header.Set("X-F5-Auth-Token", c.token)
 		return
 	})
 
@@ -242,7 +264,17 @@ func (c *Client) MakeRequest(method, restPath string, data interface{}) (*http.R
 // See http package documentation for more information:
 //    https://golang.org/pkg/net/http/#Client.Do
 func (c *Client) Do(req *http.Request) (*http.Response, error) {
-	return c.c.Do(req)
+	var attempt int
+retry:
+	resp, err := c.c.Do(req)
+	if resp.StatusCode == 401 && attempt <= 5 {
+		if err := c.makeAuth(req); err != nil {
+			return nil, fmt.Errorf("cannot re-authenticate after 401: %v", err)
+		}
+		attempt++
+		goto retry
+	}
+	return resp, err
 }
 
 // SendRequest is a shortcut for MakeRequest() + Do() + ReadError().
