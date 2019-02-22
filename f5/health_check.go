@@ -1,8 +1,8 @@
 package f5
 
 import (
-	"errors"
 	"fmt"
+	"strings"
 )
 
 // Cluster Management REST paths.
@@ -12,34 +12,50 @@ const (
 
 // IsActive returns true whether the BigIP is active and the iControl REST are
 // accessible. In case of error, false is returned.
-func (c *Client) IsActive() bool {
+func (c *Client) IsActive(host string) bool {
 	var respData struct {
-		Items []struct {
-			FailoverState string `json:"failoverState"`
-		} `json:"items"`
+		FailoverState string `json:"failoverState"`
 	}
-	if err := c.ReadQuery(PathDeviceInfo, &respData); err != nil {
+	if err := c.ReadQuery(PathDeviceInfo+"/"+host, &respData); err != nil {
 		return false
 	}
-	if respData.Items == nil || len(respData.Items) == 0 {
-		return false
-	}
-	return respData.Items[0].FailoverState == "active"
+	return respData.FailoverState == "active"
 }
 
 // FailoverState returns the status of the BigIP (active, standby,
 // forced-offline, ...).
-func (c *Client) FailoverState() (string, error) {
+func (c *Client) FailoverState(host, ip string) (string, error) {
 	var respData struct {
 		Items []struct {
 			FailoverState string `json:"failoverState"`
+			Name          string `json:"name"`
+			Hostname      string `json:"hostname"`
+			IP            string `json:"managementIp"`
 		} `json:"items"`
 	}
 	if err := c.ReadQuery(PathDeviceInfo, &respData); err != nil {
-		return "", fmt.Errorf("cannot retrieve failover state: %v", err)
+		return "unreachable", fmt.Errorf("cannot retrieve failover state: %v", err)
 	}
-	if respData.Items == nil || len(respData.Items) == 0 {
-		return "", errors.New("no failover state found")
+	for _, item := range respData.Items {
+		if strings.HasPrefix(item.Name, host) || strings.HasPrefix(item.Hostname, host) {
+			if item.FailoverState == "" {
+				return "invalid", nil
+			}
+			return item.FailoverState, nil
+		}
 	}
-	return respData.Items[0].FailoverState, nil
+	if ip != "" {
+		if pos := strings.Index(ip, "/"); pos != -1 {
+			ip = ip[:pos]
+		}
+		for _, item := range respData.Items {
+			if strings.HasPrefix(item.IP, ip) {
+				if item.FailoverState == "" {
+					return "invalid", nil
+				}
+				return item.FailoverState, nil
+			}
+		}
+	}
+	return "invalid hostname", fmt.Errorf("hostname %q and management ip %q mismatch the ones retrieved", host, ip)
 }

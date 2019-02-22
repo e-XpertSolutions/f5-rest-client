@@ -133,7 +133,7 @@ func CreateToken(baseURL, user, password, loginProvName string) (string, time.Ti
 	}
 
 	// Compate time at which the token will expire (minus a minute).
-	expireAt := tok.Token.StartTime.Add(time.Duration(tok.Token.Timeout - 60))
+	expireAt := tok.Token.StartTime.Add(time.Duration(tok.Token.Timeout-60) * time.Second)
 
 	return tok.Token.Token, expireAt, nil
 }
@@ -264,15 +264,14 @@ func (c *Client) MakeRequest(method, restPath string, data interface{}) (*http.R
 // See http package documentation for more information:
 //    https://golang.org/pkg/net/http/#Client.Do
 func (c *Client) Do(req *http.Request) (*http.Response, error) {
-	var attempt int
-retry:
 	resp, err := c.c.Do(req)
-	if resp.StatusCode == 401 && attempt <= 5 {
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode == 401 {
 		if err := c.makeAuth(req); err != nil {
 			return nil, fmt.Errorf("cannot re-authenticate after 401: %v", err)
 		}
-		attempt++
-		goto retry
 	}
 	return resp, err
 }

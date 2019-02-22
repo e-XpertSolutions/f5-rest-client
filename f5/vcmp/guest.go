@@ -64,7 +64,7 @@ func (r *GuestResource) ListAll() (*GuestList, error) {
 // Get a single Guest configuration identified by id.
 func (r *GuestResource) Get(id string) (*Guest, error) {
 	var item Guest
-	if err := r.c.ReadQuery(BasePath+GuestEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+GuestEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
