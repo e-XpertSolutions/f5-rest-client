@@ -6,6 +6,7 @@ package sys
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"time"
@@ -177,6 +178,37 @@ func (r *FileSSLCertResource) Edit(id, path string) error {
 		return fmt.Errorf("failed to create FileSSLCert configuration: %v", err)
 	}
 
+	return nil
+}
+
+// CreateFromFile uploads a CRL file in PEM and create or update its value.
+func (r *FileSSLCertResource) CreateFromFile(name string, certPEMFile io.Reader, filesize int64) error {
+	uploadResp, err := r.c.UploadFile(certPEMFile, name+".crl", filesize)
+	if err != nil {
+		return fmt.Errorf("failed to create upload request: %v", err)
+	}
+	data := map[string]string{
+		"name":        name + ".crl",
+		"source-path": "file:" + uploadResp.LocalFilePath,
+	}
+	if err := r.c.ModQuery("POST", BasePath+FileSSLCRLEndpoint, data); err != nil {
+		return fmt.Errorf("failed to import crl file: %v", err)
+	}
+	return nil
+}
+
+func (r *FileSSLCertResource) EditFromFile(name string, certPEMFile io.Reader, filesize int64) error {
+	uploadResp, err := r.c.UploadFile(certPEMFile, name+".crl", filesize)
+	if err != nil {
+		return fmt.Errorf("failed to create upload request: %v", err)
+	}
+	data := map[string]string{
+		"name":        name + ".crl",
+		"source-path": "file:" + uploadResp.LocalFilePath,
+	}
+	if err := r.c.ModQuery("PUT", BasePath+FileSSLCRLEndpoint+"/"+name+".crl", data); err != nil {
+		return fmt.Errorf("failed to update imported crl file: %v", err)
+	}
 	return nil
 }
 
