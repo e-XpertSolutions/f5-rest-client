@@ -122,7 +122,7 @@ func (r *FileSSLCertResource) ListExpiring(sec int64) (*FileSSLCertConfigList, e
 // Get a single FileSSLCert configuration identified by id.
 func (r *FileSSLCertResource) Get(id string) (*FileSSLCertConfig, error) {
 	var item FileSSLCertConfig
-	if err := r.c.ReadQuery(BasePath+FileSSLCertEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+FileSSLCertEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
