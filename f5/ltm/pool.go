@@ -45,7 +45,7 @@ type Pool struct {
 	SelfLink               string `json:"selfLink,omitempty" pretty:",expanded"`
 	ServiceDownAction      string `json:"serviceDownAction,omitempty"`
 	SlowRampTime           int64  `json:"slowRampTime,omitempty" pretty:",expanded"`
-	Partition              int64  `json:"partition,omitempty"`
+	Partition              string `json:"partition,omitempty"`
 }
 
 // PoolEndpoint represents the REST resource for managing a pool.
