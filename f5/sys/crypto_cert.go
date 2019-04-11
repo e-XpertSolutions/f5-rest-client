@@ -21,6 +21,8 @@ type CryptoCertConfig struct {
 		PublicKeyType      string `json:"publicKeyType,omitempty"`
 	} `json:"apiRawValues,omitempty"`
 	Country      string `json:"country,omitempty"`
+	CommonName   string `json:"commonName,omitempty"`
+	Fingerprint  string `json:"fingerprint,omitempty"`
 	FullPath     string `json:"fullPath,omitempty"`
 	Generation   int    `json:"generation,omitempty"`
 	Kind         string `json:"kind,omitempty"`
