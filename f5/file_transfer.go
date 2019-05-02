@@ -23,7 +23,8 @@ const (
 
 // Paths for file download.
 const (
-	PathDownloadUCS = "/mgmt/shared/file-transfer/ucs-downloads"
+	PathDownloadUCS   = "/mgmt/shared/file-transfer/ucs-downloads"
+	PathDownloadImage = "/mgmt/cm/autodeploy/software-image-downloads"
 )
 
 // MaxChunkSize is the maximum chunk size allowed by the iControl REST
@@ -82,6 +83,32 @@ func (c *Client) DownloadUCS(w io.Writer, filename string) (n int64, err error) 
 
 	if n, err = c.download(w, PathDownloadUCS+"/"+filename, fileSize, MaxChunkSize); err != nil {
 		return 0, fmt.Errorf("cannot download ucs file: %v", err)
+	}
+	return
+}
+
+// DownloadImage downloads BIG-IP images from the API and writes it to w.
+//
+// Download can take some time due to the size of the image files.
+func (c *Client) DownloadImage(w io.Writer, filename string) (n int64, err error) {
+	// This is necessary to get the filesize first using bash command in order
+	// to support BIG-IP 12.x.x.
+	out, err := c.Exec("wc -c /shared/images/" + filename)
+	if err != nil {
+		return 0, fmt.Errorf("cannot get file size: %v", err)
+	}
+	fileSizeStr := strings.TrimSpace(out.CommandResult)
+	pos := strings.Index(fileSizeStr, " ")
+	if pos != -1 {
+		fileSizeStr = fileSizeStr[:pos]
+	}
+	fileSize, err := strconv.ParseInt(fileSizeStr, 10, 64)
+	if err != nil {
+		return 0, fmt.Errorf("cannot read file size: %v", err)
+	}
+
+	if n, err = c.download(w, PathDownloadImage+"/"+filename, fileSize, MaxChunkSize); err != nil {
+		return 0, fmt.Errorf("cannot download image file: %v", err)
 	}
 	return
 }
