@@ -15,6 +15,7 @@ type NodeList struct {
 type Node struct {
 	Address         string `json:"address,omitempty"`
 	ConnectionLimit int    `json:"connectionLimit,omitempty"`
+	Description     string `json:"description,omitempty"`
 	DynamicRatio    int    `json:"dynamicRatio,omitempty"`
 	Ephemeral       string `json:"ephemeral,omitempty"`
 	Fqdn            struct {
