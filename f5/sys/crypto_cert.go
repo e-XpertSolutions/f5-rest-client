@@ -52,7 +52,7 @@ func (r *CryptoCertResource) ListAll() (*CryptoCertConfigList, error) {
 // Get a single CryptoCert configuration identified by id.
 func (r *CryptoCertResource) Get(id string) (*CryptoCertConfig, error) {
 	var item CryptoCertConfig
-	if err := r.c.ReadQuery(BasePath+CryptoCertEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+CryptoCertEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
