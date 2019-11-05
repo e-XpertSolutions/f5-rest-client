@@ -7,6 +7,7 @@ package ltm
 import (
 	"encoding/json"
 	"net/http"
+	"net/url"
 
 	"github.com/e-XpertSolutions/f5-rest-client/f5"
 )
@@ -65,6 +66,7 @@ type VirtualServer struct {
 	RateLimitSrcMask         int64                    `json:"rateLimitSrcMask,omitempty" pretty:",expanded"`
 	Rules                    []string                 `json:"rules,omitempty"`
 	SelfLink                 string                   `json:"selfLink,omitempty" pretty:",expanded"`
+	SecurityLogProfiles      []string                 `json:"securityLogProfiles,omitempty" pretty:",expanded"`
 	Source                   string                   `json:"source,omitempty"`
 	SourceAddressTranslation SourceAddressTranslation `json:"sourceAddressTranslation,omitempty"`
 	SourcePort               string                   `json:"sourcePort,omitempty"`
@@ -103,6 +105,26 @@ type VirtualResource struct {
 // ListAll lists all the virtual server urations.
 func (vr *VirtualResource) ListAll() (*VirtualServerList, error) {
 	resp, err := vr.doRequest("GET", "", nil)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if err := vr.readError(resp); err != nil {
+		return nil, err
+	}
+	var vsc VirtualServerList
+	dec := json.NewDecoder(resp.Body)
+	if err := dec.Decode(&vsc); err != nil {
+		return nil, err
+	}
+	return &vsc, nil
+}
+
+// ListAllWithParams lists all the virtual server urations.
+func (vr *VirtualResource) ListAllWithParams(v url.Values) (*VirtualServerList, error) {
+	params := v.Encode()
+
+	resp, err := vr.doRequest("GET", "?"+params, nil)
 	if err != nil {
 		return nil, err
 	}
