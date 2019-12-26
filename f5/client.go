@@ -209,6 +209,11 @@ func (c *Client) SetTimeout(timeout time.Duration) {
 	c.c.Timeout = timeout
 }
 
+// SetHTTPClient sets the underlying HTTP used to make requests.
+func (c *Client) SetHTTPClient(client http.Client) {
+	c.c = client
+}
+
 // UseProxy configures a proxy to use for outbound connections
 func (c *Client) UseProxy(proxy string) error {
 	proxyURL, err := url.Parse(proxy)
