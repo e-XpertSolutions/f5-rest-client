@@ -204,6 +204,11 @@ func (c *Client) RevokeToken() error {
 	return nil
 }
 
+// SetTimeout sets the HTTP timeout for the underlying HTTP client.
+func (c *Client) SetTimeout(timeout time.Duration) {
+	c.c.Timeout = timeout
+}
+
 // UseProxy configures a proxy to use for outbound connections
 func (c *Client) UseProxy(proxy string) error {
 	proxyURL, err := url.Parse(proxy)
