@@ -204,6 +204,16 @@ func (c *Client) RevokeToken() error {
 	return nil
 }
 
+// SetTimeout sets the HTTP timeout for the underlying HTTP client.
+func (c *Client) SetTimeout(timeout time.Duration) {
+	c.c.Timeout = timeout
+}
+
+// SetHTTPClient sets the underlying HTTP used to make requests.
+func (c *Client) SetHTTPClient(client http.Client) {
+	c.c = client
+}
+
 // UseProxy configures a proxy to use for outbound connections
 func (c *Client) UseProxy(proxy string) error {
 	proxyURL, err := url.Parse(proxy)
@@ -235,11 +245,16 @@ func (c *Client) MakeRequest(method, restPath string, data interface{}) (*http.R
 		err error
 	)
 	if data != nil {
-		bs, err := json.Marshal(data)
-		if err != nil {
-			return nil, fmt.Errorf("failed to marshal data into json: %v", err)
+		switch v := data.(type) {
+		case string:
+			req, err = http.NewRequest(method, c.makeURL(restPath), strings.NewReader(v))
+		default:
+			bs, err := json.Marshal(data)
+			if err != nil {
+				return nil, fmt.Errorf("failed to marshal data into json: %v", err)
+			}
+			req, err = http.NewRequest(method, c.makeURL(restPath), bytes.NewBuffer(bs))
 		}
-		req, err = http.NewRequest(method, c.makeURL(restPath), bytes.NewBuffer(bs))
 	} else {
 		req, err = http.NewRequest(method, c.makeURL(restPath), nil)
 	}
