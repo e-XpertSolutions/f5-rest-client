@@ -53,7 +53,7 @@ func (r *MonitorHTTPResource) ListAll() (*MonitorHTTPConfigList, error) {
 
 func (r *MonitorHTTPResource) Get(id string) (*MonitorHTTPConfig, error) {
 	var item MonitorHTTPConfig
-	if err := r.c.ReadQuery(BasePath+MonitorHTTPEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorHTTPEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
