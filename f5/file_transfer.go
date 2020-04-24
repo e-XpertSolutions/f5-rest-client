@@ -6,8 +6,13 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
+	"path/filepath"
 	"strconv"
 	"strings"
+
+	"github.com/pkg/sftp"
+	"golang.org/x/crypto/ssh"
 )
 
 // Paths for file upload.
@@ -30,8 +35,26 @@ const (
 // MaxChunkSize is the maximum chunk size allowed by the iControl REST
 const MaxChunkSize = 1048576
 
+// FileTransferOptions contains SSH configuration for downloading UCS using
+// SFTP.
+type FileTransferOptions struct {
+	UseSCP       bool
+	ClientConfig ssh.ClientConfig
+}
+
+// FileTransferOption is a function type to set the transfer options.
+type FileTransferOption func(*FileTransferOptions)
+
+// WithSFTP sets the ssh configuration for file transfer.
+func WithSFTP(config ssh.ClientConfig) FileTransferOption {
+	return func(o *FileTransferOptions) {
+		o.UseSCP = true
+		o.ClientConfig = config
+	}
+}
+
 // DownloadUCS downloads an UCS file and writes its content to w.
-func (c *Client) DownloadUCS(w io.Writer, filename string) (n int64, err error) {
+func (c *Client) DownloadUCS(w io.Writer, filename string, opts ...FileTransferOption) (n int64, err error) {
 	// BigIP 12.x.x only support download requests with a Content-Range header,
 	// thus, it is required to know the size of the file to download beforehand.
 	//
@@ -39,6 +62,15 @@ func (c *Client) DownloadUCS(w io.Writer, filename string) (n int64, err error) 
 	// Content-Range header with all information in the response, which is far
 	// more convenient. Unfortunately, we need to support BigIP 12 and as a
 	// result, we need to first retrieve the UCS file size information.
+	options := FileTransferOptions{}
+	for _, o := range opts {
+		o(&options)
+	}
+
+	if options.UseSCP {
+		return c.downloadUsingSSH(w, filename, options)
+	}
+
 	resp, err := c.SendRequest("GET", "/mgmt/tm/sys/ucs", nil)
 	if err != nil {
 		return 0, fmt.Errorf("cannot retrieve info for ucs file: %v", err)
@@ -85,6 +117,36 @@ func (c *Client) DownloadUCS(w io.Writer, filename string) (n int64, err error) 
 		return 0, fmt.Errorf("cannot download ucs file: %v", err)
 	}
 	return
+}
+
+func (c *Client) downloadUsingSSH(w io.Writer, filename string, opts FileTransferOptions) (int64, error) {
+
+	path := filepath.Join("var", "local", "ucs", filename)
+
+	parsedURL, err := url.Parse(c.baseURL)
+	if err != nil {
+		return 0, fmt.Errorf("downloadUsingSSH: cannot parse baseURL: %w", err)
+	}
+
+	conn, err := ssh.Dial("tcp", parsedURL.Hostname(), &opts.ClientConfig)
+	if err != nil {
+		return 0, fmt.Errorf("downloadUsingSSH: cannot connect via ssh: %w", err)
+	}
+	defer conn.Close()
+
+	sftpClient, err := sftp.NewClient(conn)
+	if err != nil {
+		return 0, fmt.Errorf("downloadUsingSSH: cannot create sftp client: %w", err)
+	}
+	defer sftpClient.Close()
+
+	file, err := sftpClient.Open(path)
+	if err != nil {
+		return 0, fmt.Errorf("downloadUsingSSH: cannot open file %q: %w", filename, err)
+	}
+	defer file.Close()
+
+	return io.Copy(w, file)
 }
 
 // DownloadImage downloads BIG-IP images from the API and writes it to w.
