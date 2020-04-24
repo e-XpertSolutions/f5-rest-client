@@ -55,13 +55,7 @@ func WithSFTP(config ssh.ClientConfig) FileTransferOption {
 
 // DownloadUCS downloads an UCS file and writes its content to w.
 func (c *Client) DownloadUCS(w io.Writer, filename string, opts ...FileTransferOption) (n int64, err error) {
-	// BigIP 12.x.x only support download requests with a Content-Range header,
-	// thus, it is required to know the size of the file to download beforehand.
-	//
-	// BigIP 13.x.x automatically download the first chunk and provide the
-	// Content-Range header with all information in the response, which is far
-	// more convenient. Unfortunately, we need to support BigIP 12 and as a
-	// result, we need to first retrieve the UCS file size information.
+
 	options := FileTransferOptions{}
 	for _, o := range opts {
 		o(&options)
@@ -71,6 +65,13 @@ func (c *Client) DownloadUCS(w io.Writer, filename string, opts ...FileTransferO
 		return c.downloadUsingSSH(w, filename, options)
 	}
 
+	// BigIP 12.x.x only support download requests with a Content-Range header,
+	// thus, it is required to know the size of the file to download beforehand.
+	//
+	// BigIP 13.x.x automatically download the first chunk and provide the
+	// Content-Range header with all information in the response, which is far
+	// more convenient. Unfortunately, we need to support BigIP 12 and as a
+	// result, we need to first retrieve the UCS file size information.
 	resp, err := c.SendRequest("GET", "/mgmt/tm/sys/ucs", nil)
 	if err != nil {
 		return 0, fmt.Errorf("cannot retrieve info for ucs file: %v", err)
@@ -128,7 +129,7 @@ func (c *Client) downloadUsingSSH(w io.Writer, filename string, opts FileTransfe
 		return 0, fmt.Errorf("downloadUsingSSH: cannot parse baseURL: %w", err)
 	}
 
-	conn, err := ssh.Dial("tcp", parsedURL.Hostname(), &opts.ClientConfig)
+	conn, err := ssh.Dial("tcp", parsedURL.Hostname()+":22", &opts.ClientConfig)
 	if err != nil {
 		return 0, fmt.Errorf("downloadUsingSSH: cannot connect via ssh: %w", err)
 	}
