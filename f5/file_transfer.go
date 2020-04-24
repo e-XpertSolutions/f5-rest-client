@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -122,7 +123,7 @@ func (c *Client) DownloadUCS(w io.Writer, filename string, opts ...FileTransferO
 
 func (c *Client) downloadUsingSSH(w io.Writer, filename string, opts FileTransferOptions) (int64, error) {
 
-	path := filepath.Join("var", "local", "ucs", filename)
+	path := string(os.PathSeparator) + filepath.Join("var", "local", "ucs", filename)
 
 	parsedURL, err := url.Parse(c.baseURL)
 	if err != nil {
@@ -331,7 +332,7 @@ func (c *Client) upload(r io.Reader, restPath, filename string, filesize int64, 
 
 func (c *Client) uploadUsingSSH(r io.Reader, filename string, opts FileTransferOptions) (int64, error) {
 
-	path := filepath.Join("var", "local", "ucs", filename)
+	path := string(os.PathSeparator) + filepath.Join("var", "local", "ucs", filename)
 
 	parsedURL, err := url.Parse(c.baseURL)
 	if err != nil {
