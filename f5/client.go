@@ -56,6 +56,8 @@ type Client struct {
 	makeAuth authFunc
 	t        *http.Transport
 
+	username, password string
+
 	token          string
 	tokenExpiresAt time.Time
 
@@ -69,9 +71,11 @@ type Client struct {
 func NewBasicClient(baseURL, user, password string) (*Client, error) {
 	t := &http.Transport{}
 	return &Client{
-		c:       http.Client{Transport: t, Timeout: DefaultTimeout},
-		baseURL: baseURL,
-		t:       t,
+		c:        http.Client{Transport: t, Timeout: DefaultTimeout},
+		baseURL:  baseURL,
+		t:        t,
+		username: user,
+		password: password,
 		makeAuth: authFunc(func(req *http.Request) error {
 			req.SetBasicAuth(user, password)
 			return nil
@@ -143,7 +147,13 @@ func CreateToken(baseURL, user, password, loginProvName string) (string, time.Ti
 // baseURL is the base URL of the F5 API server.
 func NewTokenClient(baseURL, user, password, loginProvName string) (*Client, error) {
 	t := &http.Transport{}
-	c := Client{c: http.Client{Transport: t, Timeout: DefaultTimeout}, baseURL: baseURL, t: t}
+	c := Client{
+		c:        http.Client{Transport: t, Timeout: DefaultTimeout},
+		baseURL:  baseURL,
+		t:        t,
+		username: user,
+		password: password,
+	}
 
 	// Create auth function for token based authentication.
 	c.makeAuth = authFunc(func(req *http.Request) (err error) {

@@ -40,14 +40,14 @@ const MaxChunkSize = 1048576
 // UCS using SFTP.
 type FileTransferOptions struct {
 	UseSFTP      bool
-	ClientConfig ssh.ClientConfig
+	ClientConfig *ssh.ClientConfig
 }
 
 // FileTransferOption is a function type to set the transfer options.
 type FileTransferOption func(*FileTransferOptions)
 
 // WithSFTP sets the ssh configuration for file transfer.
-func WithSFTP(config ssh.ClientConfig) FileTransferOption {
+func WithSFTP(config *ssh.ClientConfig) FileTransferOption {
 	return func(o *FileTransferOptions) {
 		o.UseSFTP = true
 		o.ClientConfig = config
@@ -63,6 +63,23 @@ func (c *Client) DownloadUCS(w io.Writer, filename string, opts ...FileTransferO
 	}
 
 	if options.UseSFTP {
+		if options.ClientConfig == nil {
+			fn := func(user, instruction string, questions []string, echos []bool) (answers []string, err error) {
+				for _, q := range questions {
+					if strings.Contains(q, "Password") {
+						return []string{c.password}, nil
+					}
+				}
+				return []string{}, nil
+			}
+			options.ClientConfig = &ssh.ClientConfig{
+				User: c.username,
+				Auth: []ssh.AuthMethod{
+					ssh.KeyboardInteractive(fn),
+				},
+				HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+			}
+		}
 		return c.downloadUsingSSH(w, filename, options)
 	}
 
@@ -130,7 +147,7 @@ func (c *Client) downloadUsingSSH(w io.Writer, filename string, opts FileTransfe
 		return 0, fmt.Errorf("downloadUsingSSH: cannot parse baseURL: %w", err)
 	}
 
-	conn, err := ssh.Dial("tcp", parsedURL.Hostname()+":22", &opts.ClientConfig)
+	conn, err := ssh.Dial("tcp", parsedURL.Hostname()+":22", opts.ClientConfig)
 	if err != nil {
 		return 0, fmt.Errorf("downloadUsingSSH: cannot connect via ssh: %w", err)
 	}
@@ -274,8 +291,8 @@ func (c *Client) UploadImage(r io.Reader, filename string, filesize int64) (*Upl
 // request.
 //
 // This method returns the latest upload response received.
-func (c *Client) UploadUCS(r io.Reader, filename string, filesize int64) (*UploadResponse, error) {
-	return c.upload(r, PathUploadUCS, filename, filesize)
+func (c *Client) UploadUCS(r io.Reader, filename string, filesize int64, opts ...FileTransferOption) (*UploadResponse, error) {
+	return c.upload(r, PathUploadUCS, filename, filesize, opts...)
 }
 
 func (c *Client) upload(r io.Reader, restPath, filename string, filesize int64, opts ...FileTransferOption) (*UploadResponse, error) {
@@ -287,6 +304,23 @@ func (c *Client) upload(r io.Reader, restPath, filename string, filesize int64, 
 	}
 
 	if options.UseSFTP {
+		if options.ClientConfig == nil {
+			fn := func(user, instruction string, questions []string, echos []bool) (answers []string, err error) {
+				for _, q := range questions {
+					if strings.Contains(q, "Password") {
+						return []string{c.password}, nil
+					}
+				}
+				return []string{}, nil
+			}
+			options.ClientConfig = &ssh.ClientConfig{
+				User: c.username,
+				Auth: []ssh.AuthMethod{
+					ssh.KeyboardInteractive(fn),
+				},
+				HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+			}
+		}
 		_, err := c.uploadUsingSSH(r, filename, options)
 		if err != nil {
 			return nil, err
@@ -339,7 +373,7 @@ func (c *Client) uploadUsingSSH(r io.Reader, filename string, opts FileTransferO
 		return 0, fmt.Errorf("uploadUsingSSH: cannot parse baseURL: %w", err)
 	}
 
-	conn, err := ssh.Dial("tcp", parsedURL.Hostname()+":22", &opts.ClientConfig)
+	conn, err := ssh.Dial("tcp", parsedURL.Hostname()+":22", opts.ClientConfig)
 	if err != nil {
 		return 0, fmt.Errorf("uploadUsingSSH: cannot connect via ssh: %w", err)
 	}
