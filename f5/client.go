@@ -259,11 +259,14 @@ func (c *Client) MakeRequest(method, restPath string, data interface{}) (*http.R
 		case string:
 			req, err = http.NewRequest(method, c.makeURL(restPath), strings.NewReader(v))
 		default:
-			bs, err := json.Marshal(data)
+			bf := bytes.NewBuffer([]byte{})
+			jsonEncoder := json.NewEncoder(bf)
+			jsonEncoder.SetEscapeHTML(false)
+			err := jsonEncoder.Encode(data)
 			if err != nil {
 				return nil, fmt.Errorf("failed to marshal data into json: %v", err)
 			}
-			req, err = http.NewRequest(method, c.makeURL(restPath), bytes.NewBuffer(bs))
+			req, err = http.NewRequest(method, c.makeURL(restPath), bf)
 		}
 	} else {
 		req, err = http.NewRequest(method, c.makeURL(restPath), nil)
