@@ -13,20 +13,25 @@ type MonitorRPCConfigList struct {
 }
 
 type MonitorRPCConfig struct {
-	Debug        string `json:"debug,omitempty"`
-	Destination  string `json:"destination,omitempty"`
-	FullPath     string `json:"fullPath,omitempty"`
-	Generation   int    `json:"generation,omitempty"`
-	Interval     int    `json:"interval,omitempty"`
-	Kind         string `json:"kind,omitempty"`
-	ManualResume string `json:"manualResume,omitempty"`
-	Mode         string `json:"mode,omitempty"`
-	Name         string `json:"name,omitempty"`
-	Partition    string `json:"partition,omitempty"`
-	SelfLink     string `json:"selfLink,omitempty"`
-	TimeUntilUp  int    `json:"timeUntilUp,omitempty"`
-	Timeout      int    `json:"timeout,omitempty"`
-	UpInterval   int    `json:"upInterval,omitempty"`
+	AppService    string `json:"appService,omitempty"`
+	Debug         string `json:"debug,omitempty"`
+	DefaultsFrom  string `json:"defaultsFrom,omitempty"`
+	Description   string `json:"description,omitempty"`
+	Destination   string `json:"destination,omitempty"`
+	FullPath      string `json:"fullPath,omitempty"`
+	Generation    int    `json:"generation,omitempty"`
+	Interval      int    `json:"interval,omitempty"`
+	Kind          string `json:"kind,omitempty"`
+	ManualResume  string `json:"manualResume,omitempty"`
+	Mode          string `json:"mode,omitempty"`
+	Name          string `json:"name,omitempty"`
+	Partition     string `json:"partition,omitempty"`
+	ProgramNumber string `json:"programNumber,omitempty"`
+	SelfLink      string `json:"selfLink,omitempty"`
+	TimeUntilUp   int    `json:"timeUntilUp,omitempty"`
+	Timeout       int    `json:"timeout,omitempty"`
+	UpInterval    int    `json:"upInterval,omitempty"`
+	VersionNumber string `json:"versionNumber,omitempty"`
 }
 
 const MonitorRPCEndpoint = "/monitor/rpc"
@@ -45,7 +50,7 @@ func (r *MonitorRPCResource) ListAll() (*MonitorRPCConfigList, error) {
 
 func (r *MonitorRPCResource) Get(id string) (*MonitorRPCConfig, error) {
 	var item MonitorRPCConfig
-	if err := r.c.ReadQuery(BasePath+MonitorRPCEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorRPCEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

@@ -13,8 +13,12 @@ type MonitorMySQLConfigList struct {
 }
 
 type MonitorMySQLConfig struct {
+	AppService   string `json:"appService,omitempty"`
 	Count        string `json:"count,omitempty"`
+	Database     string `json:"database,omitempty"`
 	Debug        string `json:"debug,omitempty"`
+	DefaultsFrom string `json:"defaultsFrom,omitempty"`
+	Description  string `json:"description,omitempty"`
 	Destination  string `json:"destination,omitempty"`
 	FullPath     string `json:"fullPath,omitempty"`
 	Generation   int    `json:"generation,omitempty"`
@@ -23,7 +27,11 @@ type MonitorMySQLConfig struct {
 	ManualResume string `json:"manualResume,omitempty"`
 	Name         string `json:"name,omitempty"`
 	Partition    string `json:"partition,omitempty"`
+	Recv         string `json:"recv,omitempty"`
+	RecvColumn   string `json:"recvColumn,omitempty"`
+	RecvRow      string `json:"recvRow,omitempty"`
 	SelfLink     string `json:"selfLink,omitempty"`
+	Send         string `json:"send,omitempty"`
 	TimeUntilUp  int    `json:"timeUntilUp,omitempty"`
 	Timeout      int    `json:"timeout,omitempty"`
 	UpInterval   int    `json:"upInterval,omitempty"`
@@ -45,7 +53,7 @@ func (r *MonitorMySQLResource) ListAll() (*MonitorMySQLConfigList, error) {
 
 func (r *MonitorMySQLResource) Get(id string) (*MonitorMySQLConfig, error) {
 	var item MonitorMySQLConfig
-	if err := r.c.ReadQuery(BasePath+MonitorMySQLEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorMySQLEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

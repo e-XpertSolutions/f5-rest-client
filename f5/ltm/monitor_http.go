@@ -19,6 +19,9 @@ type MonitorHTTPConfig struct {
 	AdaptiveDivergenceValue  int    `json:"adaptiveDivergenceValue,omitempty"`
 	AdaptiveLimit            int    `json:"adaptiveLimit,omitempty"`
 	AdaptiveSamplingTimespan int    `json:"adaptiveSamplingTimespan,omitempty"`
+	AppService               string `json:"appService,omitempty"`
+	DefaultsFrom             string `json:"defaultsFrom,omitempty"`
+	Description              string `json:"description,omitempty"`
 	Destination              string `json:"destination,omitempty"`
 	FullPath                 string `json:"fullPath,omitempty"`
 	Generation               int    `json:"generation,omitempty"`
@@ -27,10 +30,11 @@ type MonitorHTTPConfig struct {
 	Kind                     string `json:"kind,omitempty"`
 	ManualResume             string `json:"manualResume,omitempty"`
 	Partition                string `json:"partition,omitempty"`
+	Recv                     string `json:"recv,omitempty"`
+	RecvDisable              string `json:"recvDisable,omitempty"`
 	Reverse                  string `json:"reverse,omitempty"`
 	SelfLink                 string `json:"selfLink,omitempty"`
 	Send                     string `json:"send,omitempty"`
-	Recv                     string `json:"recv,omitempty"`
 	TimeUntilUp              int    `json:"timeUntilUp,omitempty"`
 	Timeout                  int    `json:"timeout,omitempty"`
 	Transparent              string `json:"transparent,omitempty"`
@@ -53,7 +57,7 @@ func (r *MonitorHTTPResource) ListAll() (*MonitorHTTPConfigList, error) {
 
 func (r *MonitorHTTPResource) Get(id string) (*MonitorHTTPConfig, error) {
 	var item MonitorHTTPConfig
-	if err := r.c.ReadQuery(BasePath+MonitorHTTPEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorHTTPEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

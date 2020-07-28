@@ -18,6 +18,9 @@ type MonitorGatewayICMPConfig struct {
 	AdaptiveDivergenceValue  int    `json:"adaptiveDivergenceValue,omitempty"`
 	AdaptiveLimit            int    `json:"adaptiveLimit,omitempty"`
 	AdaptiveSamplingTimespan int    `json:"adaptiveSamplingTimespan,omitempty"`
+	AppService               string `json:"appService,omitempty"`
+	DefaultsFrom             string `json:"defaultsFrom,omitempty"`
+	Description              string `json:"description,omitempty"`
 	Destination              string `json:"destination,omitempty"`
 	FullPath                 string `json:"fullPath,omitempty"`
 	Generation               int    `json:"generation,omitempty"`
@@ -49,7 +52,7 @@ func (r *MonitorGatewayICMPResource) ListAll() (*MonitorGatewayICMPConfigList, e
 
 func (r *MonitorGatewayICMPResource) Get(id string) (*MonitorGatewayICMPConfig, error) {
 	var item MonitorGatewayICMPConfig
-	if err := r.c.ReadQuery(BasePath+MonitorGatewayICMPEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorGatewayICMPEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

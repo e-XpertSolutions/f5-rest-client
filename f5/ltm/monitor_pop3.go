@@ -13,7 +13,10 @@ type MonitorPOP3ConfigList struct {
 }
 
 type MonitorPOP3Config struct {
+	AppService   string `json:"appService,omitempty"`
 	Debug        string `json:"debug,omitempty"`
+	DefaultsFrom string `json:"defaultsFrom,omitempty"`
+	Description  string `json:"description,omitempty"`
 	Destination  string `json:"destination,omitempty"`
 	FullPath     string `json:"fullPath,omitempty"`
 	Generation   int    `json:"generation,omitempty"`
@@ -44,7 +47,7 @@ func (r *MonitorPOP3Resource) ListAll() (*MonitorPOP3ConfigList, error) {
 
 func (r *MonitorPOP3Resource) Get(id string) (*MonitorPOP3Config, error) {
 	var item MonitorPOP3Config
-	if err := r.c.ReadQuery(BasePath+MonitorPOP3Endpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorPOP3Endpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

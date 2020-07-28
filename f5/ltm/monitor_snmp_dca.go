@@ -14,9 +14,13 @@ type MonitorSNMPDCAConfigList struct {
 
 type MonitorSNMPDCAConfig struct {
 	AgentType         string `json:"agentType,omitempty"`
+	AppService        string `json:"appService,omitempty"`
 	Community         string `json:"community,omitempty"`
 	CPUCoefficient    string `json:"cpuCoefficient,omitempty"`
 	CPUThreshold      string `json:"cpuThreshold,omitempty"`
+	DefaultsFrom      string `json:"defaultsFrom,omitempty"`
+	Description       string `json:"description,omitempty"`
+	Destination       string `json:"destination,omitempty"`
 	DiskCoefficient   string `json:"diskCoefficient,omitempty"`
 	DiskThreshold     string `json:"diskThreshold,omitempty"`
 	FullPath          string `json:"fullPath,omitempty"`
@@ -30,6 +34,7 @@ type MonitorSNMPDCAConfig struct {
 	SelfLink          string `json:"selfLink,omitempty"`
 	TimeUntilUp       int    `json:"timeUntilUp,omitempty"`
 	Timeout           int    `json:"timeout,omitempty"`
+	UserDefined       string `json:"userDefined,omitempty"`
 	Version           string `json:"version,omitempty"`
 }
 
@@ -49,7 +54,7 @@ func (r *MonitorSNMPDCAResource) ListAll() (*MonitorSNMPDCAConfigList, error) {
 
 func (r *MonitorSNMPDCAResource) Get(id string) (*MonitorSNMPDCAConfig, error) {
 	var item MonitorSNMPDCAConfig
-	if err := r.c.ReadQuery(BasePath+MonitorSNMPDCAEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorSNMPDCAEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

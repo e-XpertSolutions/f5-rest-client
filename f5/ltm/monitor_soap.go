@@ -13,21 +13,33 @@ type MonitorSOAPConfigList struct {
 }
 
 type MonitorSOAPConfig struct {
-	Debug        string `json:"debug,omitempty"`
-	Destination  string `json:"destination,omitempty"`
-	ExpectFault  string `json:"expectFault,omitempty"`
-	FullPath     string `json:"fullPath,omitempty"`
-	Generation   int    `json:"generation,omitempty"`
-	Interval     int    `json:"interval,omitempty"`
-	Kind         string `json:"kind,omitempty"`
-	ManualResume string `json:"manualResume,omitempty"`
-	Name         string `json:"name,omitempty"`
-	Partition    string `json:"partition,omitempty"`
-	Protocol     string `json:"protocol,omitempty"`
-	SelfLink     string `json:"selfLink,omitempty"`
-	TimeUntilUp  int    `json:"timeUntilUp,omitempty"`
-	Timeout      int    `json:"timeout,omitempty"`
-	UpInterval   int    `json:"upInterval,omitempty"`
+	AppService     string `json:"appService,omitempty"`
+	Debug          string `json:"debug,omitempty"`
+	DefaultsFrom   string `json:"defaultsFrom,omitempty"`
+	Description    string `json:"description,omitempty"`
+	Destination    string `json:"destination,omitempty"`
+	ExpectFault    string `json:"expectFault,omitempty"`
+	FullPath       string `json:"fullPath,omitempty"`
+	Generation     int    `json:"generation,omitempty"`
+	Interval       int    `json:"interval,omitempty"`
+	Kind           string `json:"kind,omitempty"`
+	ManualResume   string `json:"manualResume,omitempty"`
+	Method         string `json:"method,omitempty"`
+	Name           string `json:"name,omitempty"`
+	Namespace      string `json:"namespace,omitempty"`
+	ParameterName  string `json:"parameterName,omitempty"`
+	ParameterType  string `json:"parameterType,omitempty"`
+	ParameterValue string `json:"parameterValue,omitempty"`
+	Partition      string `json:"partition,omitempty"`
+	Protocol       string `json:"protocol,omitempty"`
+	ReturnType     string `json:"returnType,omitempty"`
+	ReturnValue    string `json:"returnValue,omitempty"`
+	SelfLink       string `json:"selfLink,omitempty"`
+	SoapAction     string `json:"soapAction,omitempty"`
+	TimeUntilUp    int    `json:"timeUntilUp,omitempty"`
+	Timeout        int    `json:"timeout,omitempty"`
+	UpInterval     int    `json:"upInterval,omitempty"`
+	UrlPath        string `json:"urlPath,omitempty"`
 }
 
 const MonitorSOAPEndpoint = "/monitor/soap"
@@ -46,7 +58,7 @@ func (r *MonitorSOAPResource) ListAll() (*MonitorSOAPConfigList, error) {
 
 func (r *MonitorSOAPResource) Get(id string) (*MonitorSOAPConfig, error) {
 	var item MonitorSOAPConfig
-	if err := r.c.ReadQuery(BasePath+MonitorSOAPEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorSOAPEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

@@ -13,6 +13,9 @@ type MonitorTCPHalfOpenConfigList struct {
 }
 
 type MonitorTCPHalfOpenConfig struct {
+	AppService   string `json:"appService,omitempty"`
+	DefaultsFrom string `json:"defaultsFrom,omitempty"`
+	Description  string `json:"description,omitempty"`
 	Destination  string `json:"destination,omitempty"`
 	FullPath     string `json:"fullPath,omitempty"`
 	Generation   int    `json:"generation,omitempty"`
@@ -44,7 +47,7 @@ func (r *MonitorTCPHalfOpenResource) ListAll() (*MonitorTCPHalfOpenConfigList, e
 
 func (r *MonitorTCPHalfOpenResource) Get(id string) (*MonitorTCPHalfOpenConfig, error) {
 	var item MonitorTCPHalfOpenConfig
-	if err := r.c.ReadQuery(BasePath+MonitorTCPHalfOpenEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorTCPHalfOpenEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

@@ -13,7 +13,10 @@ type MonitorRadiusConfigList struct {
 }
 
 type MonitorRadiusConfig struct {
+	AppService   string `json:"appService,omitempty"`
 	Debug        string `json:"debug,omitempty"`
+	DefaultsFrom string `json:"defaultsFrom,omitempty"`
+	Description  string `json:"description,omitempty"`
 	Destination  string `json:"destination,omitempty"`
 	FullPath     string `json:"fullPath,omitempty"`
 	Generation   int    `json:"generation,omitempty"`
@@ -21,6 +24,7 @@ type MonitorRadiusConfig struct {
 	Kind         string `json:"kind,omitempty"`
 	ManualResume string `json:"manualResume,omitempty"`
 	Name         string `json:"name,omitempty"`
+	NasIpAddress string `json:"nasIpAddress,omitempty"`
 	Partition    string `json:"partition,omitempty"`
 	SelfLink     string `json:"selfLink,omitempty"`
 	TimeUntilUp  int    `json:"timeUntilUp,omitempty"`
@@ -44,7 +48,7 @@ func (r *MonitorRadiusResource) ListAll() (*MonitorRadiusConfigList, error) {
 
 func (r *MonitorRadiusResource) Get(id string) (*MonitorRadiusConfig, error) {
 	var item MonitorRadiusConfig
-	if err := r.c.ReadQuery(BasePath+MonitorRadiusEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorRadiusEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

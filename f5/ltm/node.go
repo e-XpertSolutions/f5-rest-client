@@ -23,6 +23,7 @@ type Node struct {
 		Autopopulate  string `json:"autopopulate,omitempty"`
 		DownInterval  int    `json:"downInterval,omitempty"`
 		Interval      string `json:"interval,omitempty"`
+		Name          string `json:"tmName,omitempty"`
 	} `json:"fqdn,omitempty"`
 	FullPath   string `json:"fullPath,omitempty" pretty:",expanded"`
 	Generation int    `json:"generation,omitempty" pretty:",expanded"`

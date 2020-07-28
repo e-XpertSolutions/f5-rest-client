@@ -81,6 +81,7 @@ type VirtualServer struct {
 
 type SourceAddressTranslation struct {
 	Type string `json:"type,omitempty"`
+	Pool string `json:"pool,omitempty"`
 }
 
 type Profile struct {

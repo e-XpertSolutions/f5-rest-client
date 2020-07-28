@@ -13,16 +13,22 @@ type MonitorSMBConfigList struct {
 }
 
 type MonitorSMBConfig struct {
+	AppService   string `json:"appService,omitempty"`
 	Debug        string `json:"debug,omitempty"`
+	DefaultsFrom string `json:"defaultsFrom,omitempty"`
+	Description  string `json:"description,omitempty"`
 	Destination  string `json:"destination,omitempty"`
 	FullPath     string `json:"fullPath,omitempty"`
 	Generation   int    `json:"generation,omitempty"`
+	Get          string `json:"get,omitempty"`
 	Interval     int    `json:"interval,omitempty"`
 	Kind         string `json:"kind,omitempty"`
 	ManualResume string `json:"manualResume,omitempty"`
 	Name         string `json:"name,omitempty"`
 	Partition    string `json:"partition,omitempty"`
 	SelfLink     string `json:"selfLink,omitempty"`
+	Server       string `json:"server,omitempty"`
+	Service      string `json:"service,omitempty"`
 	TimeUntilUp  int    `json:"timeUntilUp,omitempty"`
 	Timeout      int    `json:"timeout,omitempty"`
 	UpInterval   int    `json:"upInterval,omitempty"`
@@ -44,7 +50,7 @@ func (r *MonitorSMBResource) ListAll() (*MonitorSMBConfigList, error) {
 
 func (r *MonitorSMBResource) Get(id string) (*MonitorSMBConfig, error) {
 	var item MonitorSMBConfig
-	if err := r.c.ReadQuery(BasePath+MonitorSMBEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorSMBEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

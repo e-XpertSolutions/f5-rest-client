@@ -18,6 +18,9 @@ type MonitorTCPConfig struct {
 	AdaptiveDivergenceValue  int    `json:"adaptiveDivergenceValue,omitempty"`
 	AdaptiveLimit            int    `json:"adaptiveLimit,omitempty"`
 	AdaptiveSamplingTimespan int    `json:"adaptiveSamplingTimespan,omitempty"`
+	AppService               string `json:"appService,omitempty"`
+	DefaultsFrom             string `json:"defaultsFrom,omitempty"`
+	Description              string `json:"description,omitempty"`
 	Destination              string `json:"destination,omitempty"`
 	FullPath                 string `json:"fullPath,omitempty"`
 	Generation               int    `json:"generation,omitempty"`
@@ -27,8 +30,11 @@ type MonitorTCPConfig struct {
 	ManualResume             string `json:"manualResume,omitempty"`
 	Name                     string `json:"name,omitempty"`
 	Partition                string `json:"partition,omitempty"`
+	Recv                     string `json:"recv,omitempty"`
+	RecvDisable              string `json:"recvDisable,omitempty"`
 	Reverse                  string `json:"reverse,omitempty"`
 	SelfLink                 string `json:"selfLink,omitempty"`
+	Send                     string `json:"send,omitempty"`
 	TimeUntilUp              int    `json:"timeUntilUp,omitempty"`
 	Timeout                  int    `json:"timeout,omitempty"`
 	Transparent              string `json:"transparent,omitempty"`
@@ -51,7 +57,7 @@ func (r *MonitorTCPResource) ListAll() (*MonitorTCPConfigList, error) {
 
 func (r *MonitorTCPResource) Get(id string) (*MonitorTCPConfig, error) {
 	var item MonitorTCPConfig
-	if err := r.c.ReadQuery(BasePath+MonitorTCPEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorTCPEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
