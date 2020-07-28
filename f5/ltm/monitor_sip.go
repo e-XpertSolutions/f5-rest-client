@@ -13,18 +13,27 @@ type MonitorSIPConfigList struct {
 }
 
 type MonitorSIPConfig struct {
+	AppService    string `json:"appService,omitempty"`
+	Cert          string `json:"cert,omitempty"`
 	Cipherlist    string `json:"cipherlist,omitempty"`
 	Compatibility string `json:"compatibility,omitempty"`
 	Debug         string `json:"debug,omitempty"`
+	DefaultsFrom  string `json:"defaultsFrom,omitempty"`
+	Description   string `json:"description,omitempty"`
 	Destination   string `json:"destination,omitempty"`
 	FullPath      string `json:"fullPath,omitempty"`
+	Filter        string `json:"filter,omitempty"`
+	FilterNeg     string `json:"filterNeg,omitempty"`
 	Generation    int    `json:"generation,omitempty"`
+	Headers       string `json:"headers,omitempty"`
 	Interval      int    `json:"interval,omitempty"`
+	Key           string `json:"key,omitempty"`
 	Kind          string `json:"kind,omitempty"`
 	ManualResume  string `json:"manualResume,omitempty"`
 	Mode          string `json:"mode,omitempty"`
 	Name          string `json:"name,omitempty"`
 	Partition     string `json:"partition,omitempty"`
+	Request       string `json:"request,omitempty"`
 	SelfLink      string `json:"selfLink,omitempty"`
 	TimeUntilUp   int    `json:"timeUntilUp,omitempty"`
 	Timeout       int    `json:"timeout,omitempty"`
@@ -47,7 +56,7 @@ func (r *MonitorSIPResource) ListAll() (*MonitorSIPConfigList, error) {
 
 func (r *MonitorSIPResource) Get(id string) (*MonitorSIPConfig, error) {
 	var item MonitorSIPConfig
-	if err := r.c.ReadQuery(BasePath+MonitorSIPEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorSIPEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

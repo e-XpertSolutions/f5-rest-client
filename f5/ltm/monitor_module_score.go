@@ -13,15 +13,21 @@ type MonitorModuleScoreConfigList struct {
 }
 
 type MonitorModuleScoreConfig struct {
+	AppService    string `json:"appService,omitempty"`
 	Debug         string `json:"debug,omitempty"`
+	DefaultsFrom  string `json:"defaultsFrom,omitempty"`
+	Description   string `json:"description,omitempty"`
+	Destination   string `json:"destination,omitempty"`
 	FullPath      string `json:"fullPath,omitempty"`
 	Generation    int    `json:"generation,omitempty"`
 	Interval      int    `json:"interval,omitempty"`
 	Kind          string `json:"kind,omitempty"`
 	Name          string `json:"name,omitempty"`
 	Partition     string `json:"partition,omitempty"`
+	Pool          string `json:"pool,omitempty"`
 	SelfLink      string `json:"selfLink,omitempty"`
 	SnmpCommunity string `json:"snmpCommunity,omitempty"`
+	SnmpIpAddress string `json:"snmpIpAddress,omitempty"`
 	SnmpPort      int    `json:"snmpPort,omitempty"`
 	SnmpVersion   string `json:"snmpVersion,omitempty"`
 	TimeUntilUp   int    `json:"timeUntilUp,omitempty"`
@@ -45,7 +51,7 @@ func (r *MonitorModuleScoreResource) ListAll() (*MonitorModuleScoreConfigList, e
 
 func (r *MonitorModuleScoreResource) Get(id string) (*MonitorModuleScoreConfig, error) {
 	var item MonitorModuleScoreConfig
-	if err := r.c.ReadQuery(BasePath+MonitorModuleScoreEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorModuleScoreEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

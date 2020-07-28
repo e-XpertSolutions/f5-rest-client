@@ -22,3 +22,6 @@ resgen.exe
 
 # VSCode
 .vscode
+
+# IntelliJ etc
+.idea/

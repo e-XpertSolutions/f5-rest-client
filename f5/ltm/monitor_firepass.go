@@ -13,8 +13,11 @@ type MonitorFirepassConfigList struct {
 }
 
 type MonitorFirepassConfig struct {
+	AppService       string `json:"appService,omitempty"`
 	Cipherlist       string `json:"cipherlist,omitempty"`
 	ConcurrencyLimit int    `json:"concurrencyLimit,omitempty"`
+	DefaultsFrom     string `json:"defaultsFrom,omitempty"`
+	Description      string `json:"description,omitempty"`
 	Destination      string `json:"destination,omitempty"`
 	FullPath         string `json:"fullPath,omitempty"`
 	Generation       int    `json:"generation,omitempty"`
@@ -46,7 +49,7 @@ func (r *MonitorFirepassResource) ListAll() (*MonitorFirepassConfigList, error) 
 
 func (r *MonitorFirepassResource) Get(id string) (*MonitorFirepassConfig, error) {
 	var item MonitorFirepassConfig
-	if err := r.c.ReadQuery(BasePath+MonitorFirepassEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorFirepassEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

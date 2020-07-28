@@ -18,7 +18,10 @@ type MonitorUDPConfig struct {
 	AdaptiveDivergenceValue  int    `json:"adaptiveDivergenceValue,omitempty"`
 	AdaptiveLimit            int    `json:"adaptiveLimit,omitempty"`
 	AdaptiveSamplingTimespan int    `json:"adaptiveSamplingTimespan,omitempty"`
+	AppService               string `json:"appService,omitempty"`
 	Debug                    string `json:"debug,omitempty"`
+	DefaultsFrom             string `json:"defaultsFrom,omitempty"`
+	Description              string `json:"description,omitempty"`
 	Destination              string `json:"destination,omitempty"`
 	FullPath                 string `json:"fullPath,omitempty"`
 	Generation               int    `json:"generation,omitempty"`
@@ -27,6 +30,8 @@ type MonitorUDPConfig struct {
 	ManualResume             string `json:"manualResume,omitempty"`
 	Name                     string `json:"name,omitempty"`
 	Partition                string `json:"partition,omitempty"`
+	Recv                     string `json:"recv,omitempty"`
+	RecvDisable              string `json:"recvDisable,omitempty"`
 	Reverse                  string `json:"reverse,omitempty"`
 	SelfLink                 string `json:"selfLink,omitempty"`
 	Send                     string `json:"send,omitempty"`
@@ -52,7 +57,7 @@ func (r *MonitorUDPResource) ListAll() (*MonitorUDPConfigList, error) {
 
 func (r *MonitorUDPResource) Get(id string) (*MonitorUDPConfig, error) {
 	var item MonitorUDPConfig
-	if err := r.c.ReadQuery(BasePath+MonitorUDPEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorUDPEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

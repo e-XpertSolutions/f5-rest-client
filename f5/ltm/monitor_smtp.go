@@ -13,8 +13,12 @@ type MonitorSMTPConfigList struct {
 }
 
 type MonitorSMTPConfig struct {
-	Debug        string `json:"debug,omitempty,omitempty"`
+	AppService   string `json:"appService,omitempty"`
+	Debug        string `json:"debug,omitempty"`
+	DefaultsFrom string `json:"defaultsFrom,omitempty"`
+	Description  string `json:"description,omitempty"`
 	Destination  string `json:"destination,omitempty,omitempty"`
+	Domain       string `json:"domain,omitempty,omitempty"`
 	FullPath     string `json:"fullPath,omitempty,omitempty"`
 	Generation   int    `json:"generation,omitempty,omitempty"`
 	Interval     int    `json:"interval,omitempty,omitempty"`
@@ -44,7 +48,7 @@ func (r *MonitorSMTPResource) ListAll() (*MonitorSMTPConfigList, error) {
 
 func (r *MonitorSMTPResource) Get(id string) (*MonitorSMTPConfig, error) {
 	var item MonitorSMTPConfig
-	if err := r.c.ReadQuery(BasePath+MonitorSMTPEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorSMTPEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

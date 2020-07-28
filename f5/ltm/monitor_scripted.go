@@ -13,8 +13,12 @@ type MonitorScriptedConfigList struct {
 }
 
 type MonitorScriptedConfig struct {
+	AppService   string `json:"appService,omitempty"`
 	Debug        string `json:"debug,omitempty"`
+	DefaultsFrom string `json:"defaultsFrom,omitempty"`
+	Description  string `json:"description,omitempty"`
 	Destination  string `json:"destination,omitempty"`
+	Filename     string `json:"filename,omitempty"`
 	FullPath     string `json:"fullPath,omitempty"`
 	Generation   int    `json:"generation,omitempty"`
 	Interval     int    `json:"interval,omitempty"`
@@ -44,7 +48,7 @@ func (r *MonitorScriptedResource) ListAll() (*MonitorScriptedConfigList, error) 
 
 func (r *MonitorScriptedResource) Get(id string) (*MonitorScriptedConfig, error) {
 	var item MonitorScriptedConfig
-	if err := r.c.ReadQuery(BasePath+MonitorScriptedEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorScriptedEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil

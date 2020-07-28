@@ -17,6 +17,7 @@ type PoolList struct {
 type Pool struct {
 	AllowNat              string   `json:"allowNat,omitempty" pretty:",expanded"`
 	AllowSnat             string   `json:"allowSnat,omitempty" pretty:",expanded"`
+	Description           string   `json:"description,omitempty"`
 	FullPath              string   `json:"fullPath,omitempty" pretty:",expanded"`
 	Generation            int64    `json:"generation,omitempty" pretty:",expanded"`
 	IgnorePersistedWeight string   `json:"ignorePersistedWeight,omitempty" pretty:",expanded"`
@@ -26,7 +27,7 @@ type Pool struct {
 	LinkQosToClient       string   `json:"linkQosToClient,omitempty" pretty:",expanded"`
 	LinkQosToServer       string   `json:"linkQosToServer,omitempty" pretty:",expanded"`
 	LoadBalancingMode     string   `json:"loadBalancingMode,omitempty"`
-	Members               []string `json:"items,omitempty"`
+	Members               []string `json:"members,omitempty"`
 	MembersReference      struct {
 		IsSubcollection bool          `json:"isSubcollection,omitempty"`
 		Link            string        `json:"link,omitempty"`

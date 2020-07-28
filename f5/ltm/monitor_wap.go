@@ -13,19 +13,30 @@ type MonitorWAPConfigList struct {
 }
 
 type MonitorWAPConfig struct {
-	Debug        string `json:"debug,omitempty"`
-	Destination  string `json:"destination,omitempty"`
-	FullPath     string `json:"fullPath,omitempty"`
-	Generation   int    `json:"generation,omitempty"`
-	Interval     int    `json:"interval,omitempty"`
-	Kind         string `json:"kind,omitempty"`
-	ManualResume string `json:"manualResume,omitempty"`
-	Name         string `json:"name,omitempty"`
-	Partition    string `json:"partition,omitempty"`
-	SelfLink     string `json:"selfLink,omitempty"`
-	TimeUntilUp  int    `json:"timeUntilUp,omitempty"`
-	Timeout      int    `json:"timeout,omitempty"`
-	UpInterval   int    `json:"upInterval,omitempty"`
+	AccountingNode string `json:"accountingNode,omitempty"`
+	AccountingPort string `json:"accountingPort,omitempty"`
+	AppService     string `json:"appService,omitempty"`
+	CallId         string `json:"callId,omitempty"`
+	Debug          string `json:"debug,omitempty"`
+	DefaultsFrom   string `json:"defaultsFrom,omitempty"`
+	Description    string `json:"description,omitempty"`
+	Destination    string `json:"destination,omitempty"`
+	FramedAddress  string `json:"framedAddress,omitempty"`
+	FullPath       string `json:"fullPath,omitempty"`
+	Generation     int    `json:"generation,omitempty"`
+	Interval       int    `json:"interval,omitempty"`
+	Kind           string `json:"kind,omitempty"`
+	ManualResume   string `json:"manualResume,omitempty"`
+	Name           string `json:"name,omitempty"`
+	Partition      string `json:"partition,omitempty"`
+	Recv           string `json:"recv,omitempty"`
+	SelfLink       string `json:"selfLink,omitempty"`
+	Send           string `json:"send,omitempty"`
+	ServerId       string `json:"serverId,omitempty"`
+	SessionId      string `json:"sessionId,omitempty"`
+	TimeUntilUp    int    `json:"timeUntilUp,omitempty"`
+	Timeout        int    `json:"timeout,omitempty"`
+	UpInterval     int    `json:"upInterval,omitempty"`
 }
 
 const MonitorWAPEndpoint = "/monitor/wap"
@@ -44,7 +55,7 @@ func (r *MonitorWAPResource) ListAll() (*MonitorWAPConfigList, error) {
 
 func (r *MonitorWAPResource) Get(id string) (*MonitorWAPConfig, error) {
 	var item MonitorWAPConfig
-	if err := r.c.ReadQuery(BasePath+MonitorWAPEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+MonitorWAPEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
