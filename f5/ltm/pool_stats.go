@@ -126,3 +126,107 @@ func (r *PoolStatsResource) All() (*PoolStatsList, error) {
 	}
 	return &list, nil
 }
+
+/*
+   Get the stats of member specified in the pool.
+   @Author zhangfeng
+   @Email  980252055@qq.com
+*/
+type MemberStatsList struct {
+	Entries  map[string]MemberStatsEntries `json:"entries,omitempty"`
+	Kind     string                        `json:"kind,omitempty" pretty:",expanded"`
+	SelfLink string                        `json:"selflink,omitempty" pretty:",expanded"`
+}
+
+type MemberStatsEntries struct {
+	MemberNestedStats MemberStats `json:"nestedStats,omitempty"`
+}
+
+type MemberStats struct {
+	Kind     string `json:"kind,omitempty" pretty:",expanded"`
+	SelfLink string `json:"selflink,omitempty" pretty:",expanded"`
+	Entries  struct {
+		Addr struct {
+			Description string `json:"description"`
+		} `json:"addr,omitempty"`
+		ConnqAgeEdm struct {
+			Value int `json:"value"`
+		} `json:"connq.ageEdm,omitempty"`
+		ConnqAgeEma struct {
+			Value int `json:"value"`
+		} `json:"connq.ageEma,omitempty"`
+		ConnqAgeHead struct {
+			Value int `json:"value"`
+		} `json:"connq.ageHead,omitempty"`
+		ConnqAgeMax struct {
+			Value int `json:"value"`
+		} `json:"connq.ageMax,omitempty"`
+		ConnqDepth struct {
+			Value int `json:"value"`
+		} `json:"connq.depth,omitempty"`
+		ConnqServiced struct {
+			Value int `json:"value"`
+		} `json:"connq.serviced,omitempty"`
+		CurSessions struct {
+			Value int `json:"value"`
+		} `json:"curSessions,omitempty"`
+		MonitorRule struct {
+			Description string `json:"description,omitempty"`
+		} `json:"monitorRule,omitempty"`
+		MonitorStatus struct {
+			Description string `json:"description,omitempty"`
+		} `json:"monitorStatus,omitempty"`
+		NodeName struct {
+			Description string `json:"description,omitempty"`
+		} `json:"nodeName,omitempty"`
+		PoolName struct {
+			Description string `json:"description,omitempty"`
+		} `json:"poolName,omitempty"`
+		Port struct {
+			Value int `json:"value"`
+		} `json:"port,omitempty"`
+		ServersideBitsIn struct {
+			Value int `json:"value"`
+		} `json:"serverside.bitsIn,omitempty"`
+		ServersideBitsOut struct {
+			Value int `json:"value"`
+		} `json:"serverside.bitsOut,omitempty"`
+		ServersideCurConns struct {
+			Value int `json:"value"`
+		} `json:"serverside.curConns,omitempty"`
+		ServersideMaxConns struct {
+			Value int `json:"value"`
+		} `json:"serverside.maxConns,omitempty"`
+		ServersidePktsIn struct {
+			Value int `json:"value"`
+		} `json:"serverside.pktsIn,omitempty"`
+		ServersidePktsOut struct {
+			Value int `json:"value"`
+		} `json:"serverside.pktsOut,omitempty"`
+		ServersideTotConns struct {
+			Value int `json:"value"`
+		} `json:"serverside.totConns,omitempty"`
+		StatusAvailabilityState struct {
+			Description string `json:"description,omitempty"`
+		} `json:"status.availabilityState,omitempty"`
+		StatusEnabledState struct {
+			Description string `json:"description,omitempty"`
+		} `json:"status.enabledState,omitempty"`
+		StatusStatusReason struct {
+			Description string `json:"description,omitempty"`
+		} `json:"status.statusReason,omitempty"`
+		TotRequests struct {
+			Value int `json:"value"`
+		} `json:"totRequests,omitempty"`
+	} `json:"entries,omitempty"`
+}
+
+// Get the special member stats from the special pool
+// Example url: https://192.168.1.11/mgmt/tm/ltm/pool/~Common~cn_demo_book-api_pool/members/~Common~192.168.0.30:8125/stats
+func (r *PoolStatsResource) GetMemberStats(pool, id string) (*MemberStatsList, error) {
+	var list MemberStatsList
+	if err := r.c.ReadQuery(BasePath+PoolEndpoint+"/~Common~"+pool+"/members/~Common~"+id+"/stats", &list); err != nil {
+		return nil, err
+	}
+	return &list, nil
+}
