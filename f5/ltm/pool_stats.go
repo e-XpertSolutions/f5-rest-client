@@ -6,6 +6,11 @@ package ltm
 
 import "github.com/e-XpertSolutions/f5-rest-client/f5"
 
+/*
+   Gets only the stats for the specified pool itself, not include members of the pool.
+   Data source URL example: https://url-to-bigip/mgmt/tm/ltm/pool/stats
+*/
+
 type PoolStatsList struct {
 	Entries  map[string]PoolStatsEntries `json:"entries,omitempty"`
 	Kind     string                      `json:"kind,omitempty" pretty:",expanded"`
@@ -128,7 +133,24 @@ func (r *PoolStatsResource) All() (*PoolStatsList, error) {
 }
 
 /*
-   Get the stats of member specified in the pool.
+   Gets only the stats for the specified pool itself, not include members of the pool.
+   Data source URL example: https://url-to-bigip/mgmt/tm/ltm/pool/~Common~test_pool/stats
+   @Author zhangfeng
+   @Email  980252055@qq.com
+*/
+
+// Gets only the stats for the specified pool itself, not include members of the pool.
+func (r *PoolStatsResource) GetPoolStats(pool string) (*PoolStatsList, error) {
+	var list PoolStatsList
+	if err := r.c.ReadQuery(BasePath+PoolEndpoint+"/~Common~"+pool+"/stats", &list); err != nil {
+		return nil, err
+	}
+	return &list, nil
+}
+
+/*
+   Get the stats of member specified under the specified pool.
+   Data source URL example: https://url-to-bigip/mgmt/tm/ltm/pool/~Common~test_pool/members/~Common~192.168.0.30:8125/stats
    @Author zhangfeng
    @Email  980252055@qq.com
 */
@@ -221,11 +243,35 @@ type MemberStats struct {
 	} `json:"entries,omitempty"`
 }
 
-// Get the special member stats from the special pool
-// Example url: https://192.168.1.11/mgmt/tm/ltm/pool/~Common~cn_demo_book-api_pool/members/~Common~192.168.0.30:8125/stats
+// Specify pool and specify member, get the specified member stats.
 func (r *PoolStatsResource) GetMemberStats(pool, id string) (*MemberStatsList, error) {
 	var list MemberStatsList
 	if err := r.c.ReadQuery(BasePath+PoolEndpoint+"/~Common~"+pool+"/members/~Common~"+id+"/stats", &list); err != nil {
+		return nil, err
+	}
+	return &list, nil
+}
+
+/*
+   Get stats on all members under pool, not include pool itself.
+   Data source URL example: https://url-to-bigip/mgmt/tm/ltm/pool/~Common~test_pool/members/stats
+   @Author zhangfeng
+   @Email  980252055@qq.com
+*/
+type PoolAllMemberStatsList struct {
+	Entries  map[string]PoolAllMemberStatsEntries `json:"entries,omitempty"`
+	Kind     string                               `json:"kind,omitempty" pretty:",expanded"`
+	SelfLink string                               `json:"selflink,omitempty" pretty:",expanded"`
+}
+
+type PoolAllMemberStatsEntries struct {
+	NestedPoolAllMemberStats MemberStats `json:"nestedStats,omitempty"`
+}
+
+// Get stats on all members under pool, not include pool itself.
+func (r *PoolStatsResource) GetPoolAllMemberStats(pool string) (*PoolAllMemberStatsList, error) {
+	var list PoolAllMemberStatsList
+	if err := r.c.ReadQuery(BasePath+PoolEndpoint+"/~Common~"+pool+"/members/stats", &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
