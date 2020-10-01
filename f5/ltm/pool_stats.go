@@ -134,7 +134,7 @@ func (r *PoolStatsResource) All() (*PoolStatsList, error) {
 
 /*
    Gets only the stats for the specified pool itself, not include members of the pool.
-   Data source URL example: https://url-to-bigip/mgmt/tm/ltm/pool/~Common~test_pool/stats
+   Data source URL example: https://url-to-bigip/mgmt/tm/ltm/pool/test_pool/stats
    @Author zhangfeng
    @Email  980252055@qq.com
 */
@@ -142,7 +142,7 @@ func (r *PoolStatsResource) All() (*PoolStatsList, error) {
 // Gets only the stats for the specified pool itself, not include members of the pool.
 func (r *PoolStatsResource) GetPoolStats(pool string) (*PoolStatsList, error) {
 	var list PoolStatsList
-	if err := r.c.ReadQuery(BasePath+PoolEndpoint+"/~Common~"+pool+"/stats", &list); err != nil {
+	if err := r.c.ReadQuery(BasePath+PoolEndpoint+"/"+pool+"/stats", &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
@@ -254,7 +254,7 @@ func (r *PoolStatsResource) GetMemberStats(pool, id string) (*MemberStatsList, e
 
 /*
    Get stats on all members under pool, not include pool itself.
-   Data source URL example: https://url-to-bigip/mgmt/tm/ltm/pool/~Common~test_pool/members/stats
+   Data source URL example: https://url-to-bigip/mgmt/tm/ltm/pool/test_pool/members/stats
    @Author zhangfeng
    @Email  980252055@qq.com
 */
@@ -271,7 +271,7 @@ type PoolAllMemberStatsEntries struct {
 // Get stats on all members under pool, not include pool itself.
 func (r *PoolStatsResource) GetPoolAllMemberStats(pool string) (*PoolAllMemberStatsList, error) {
 	var list PoolAllMemberStatsList
-	if err := r.c.ReadQuery(BasePath+PoolEndpoint+"/~Common~"+pool+"/members/stats", &list); err != nil {
+	if err := r.c.ReadQuery(BasePath+PoolEndpoint+"/"+pool+"/members/stats", &list); err != nil {
 		return nil, err
 	}
 	return &list, nil
