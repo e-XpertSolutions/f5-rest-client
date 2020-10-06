@@ -8,6 +8,7 @@ import (
 // Cluster Management REST paths.
 const (
 	PathDeviceInfo = "/mgmt/tm/cm/device"
+	PathSyncStatus = "/mgmt/tm/cm/sync-status"
 )
 
 // IsActive returns true whether the BigIP is active and the iControl REST are
@@ -58,4 +59,31 @@ func (c *Client) FailoverState(host, ip string) (string, error) {
 		}
 	}
 	return "invalid hostname", fmt.Errorf("hostname %q and management ip %q mismatch the ones retrieved", host, ip)
+}
+
+// SSyncStatus returns the sync status of the BIG-IP along with the status
+// color.
+func (c *Client) SyncStatus() (status string, color string, err error) {
+	var data struct {
+		Entries struct {
+			Entry struct {
+				NestedStats struct {
+					Entries struct {
+						Color struct {
+							Description string `json:"description"`
+						} `json:"color"`
+						Status struct {
+							Description string `json:"description"`
+						} `json:"status"`
+					} `json:"entries"`
+				} `json:"nestedStats"`
+			} `json:"https://localhost/mgmt/tm/cm/sync-status/0"`
+		} `json:"entries"`
+	}
+	if err := c.ReadQuery(PathSyncStatus, &data); err != nil {
+		return "", "", fmt.Errorf("cannot retrieve sync status: %v", err)
+	}
+	status = data.Entries.Entry.NestedStats.Entries.Status.Description
+	color = data.Entries.Entry.NestedStats.Entries.Color.Description
+	return
 }
