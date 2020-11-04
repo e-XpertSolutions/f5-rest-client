@@ -179,7 +179,7 @@ func (c *Client) DisableCertCheck() {
 // CheckAuth verifies that the credentials provided at the client initialization
 // are correct.
 func (c *Client) CheckAuth() error {
-	if _, err := c.SendRequest("GET", "/mgmt/tm", nil); err != nil {
+	if _, err := c.SendRequest("GET", "/mgmt/tm/ltm/available", nil); err != nil {
 		return fmt.Errorf("authentication verification failed: %v", err)
 	}
 	return nil
