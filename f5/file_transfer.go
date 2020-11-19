@@ -261,8 +261,8 @@ type UploadResponse struct {
 // request.
 //
 // This method returns the latest upload response received.
-func (c *Client) UploadFile(r io.Reader, filename string, filesize int64) (*UploadResponse, error) {
-	return c.upload(r, PathUploadFile, filename, filesize)
+func (c *Client) UploadFile(r io.Reader, filename string, filesize int64, opts ...FileTransferOption) (*UploadResponse, error) {
+	return c.upload(r, PathUploadFile, filename, filesize, opts...)
 }
 
 // UploadImage reads the content of an disk image from r and uploads it to the
@@ -276,8 +276,8 @@ func (c *Client) UploadFile(r io.Reader, filename string, filesize int64) (*Uplo
 // request.
 //
 // This method returns the latest upload response received.
-func (c *Client) UploadImage(r io.Reader, filename string, filesize int64) (*UploadResponse, error) {
-	return c.upload(r, PathUploadImage, filename, filesize)
+func (c *Client) UploadImage(r io.Reader, filename string, filesize int64, opts ...FileTransferOption) (*UploadResponse, error) {
+	return c.upload(r, PathUploadImage, filename, filesize, opts...)
 }
 
 // UploadUCS reads the content of an UCS archive from r and uploads it to the
