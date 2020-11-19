@@ -129,7 +129,7 @@ func (r *FileSSLCertResource) Get(id string) (*FileSSLCertConfig, error) {
 }
 
 // Create a new FileSSLCert configuration.
-func (r *FileSSLCertResource) Create(name, path string) error {
+func (r *FileSSLCertResource) Create(name, path string, opts ...f5.FileTransferOption) error {
 	info, err := os.Stat(path)
 	if err != nil {
 		return fmt.Errorf("failed to gather information about '%s': %v", path, err)
@@ -140,7 +140,7 @@ func (r *FileSSLCertResource) Create(name, path string) error {
 	}
 	defer f.Close()
 
-	if _, err = r.c.UploadFile(f, filepath.Base(path), info.Size()); err != nil {
+	if _, err = r.c.UploadFile(f, filepath.Base(path), info.Size(), opts...); err != nil {
 		return fmt.Errorf("failed to upload ssl certificate file: %v", err)
 	}
 
@@ -156,7 +156,7 @@ func (r *FileSSLCertResource) Create(name, path string) error {
 }
 
 // Edit a FileSSLCert configuration identified by id.
-func (r *FileSSLCertResource) Edit(id, path string) error {
+func (r *FileSSLCertResource) Edit(id, path string, opts ...f5.FileTransferOption) error {
 	info, err := os.Stat(path)
 	if err != nil {
 		return fmt.Errorf("failed to gather information about '%s': %v", path, err)
@@ -167,7 +167,7 @@ func (r *FileSSLCertResource) Edit(id, path string) error {
 	}
 	defer f.Close()
 
-	if _, err := r.c.UploadFile(f, filepath.Base(path), info.Size()); err != nil {
+	if _, err := r.c.UploadFile(f, filepath.Base(path), info.Size(), opts...); err != nil {
 		return fmt.Errorf("failed to create upload request: %v", err)
 	}
 
@@ -181,9 +181,10 @@ func (r *FileSSLCertResource) Edit(id, path string) error {
 	return nil
 }
 
-// CreateFromFile uploads a CRL file in PEM and create or update its value.
-func (r *FileSSLCertResource) CreateFromFile(name string, certPEMFile io.Reader, filesize int64) error {
-	uploadResp, err := r.c.UploadFile(certPEMFile, name+".crt", filesize)
+// CreateFromFile uploads a certficate file (encoded in PEM) and creates a
+// system object.
+func (r *FileSSLCertResource) CreateFromFile(name string, certPEMFile io.Reader, filesize int64, opts ...f5.FileTransferOption) error {
+	uploadResp, err := r.c.UploadFile(certPEMFile, name+".crt", filesize, opts...)
 	if err != nil {
 		return fmt.Errorf("failed to create upload request: %v", err)
 	}
@@ -197,8 +198,10 @@ func (r *FileSSLCertResource) CreateFromFile(name string, certPEMFile io.Reader,
 	return nil
 }
 
-func (r *FileSSLCertResource) EditFromFile(name string, certPEMFile io.Reader, filesize int64) error {
-	uploadResp, err := r.c.UploadFile(certPEMFile, name+".crt", filesize)
+// EditFromFile uploads a certificate file (encoded in PEM) and updates the
+// corresponding system object.
+func (r *FileSSLCertResource) EditFromFile(name string, certPEMFile io.Reader, filesize int64, opts ...f5.FileTransferOption) error {
+	uploadResp, err := r.c.UploadFile(certPEMFile, name+".crt", filesize, opts...)
 	if err != nil {
 		return fmt.Errorf("failed to create upload request: %v", err)
 	}

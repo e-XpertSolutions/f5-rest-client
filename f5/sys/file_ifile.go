@@ -64,8 +64,8 @@ func (r *FileIFileResource) Get(id string) (*FileIFileConfig, error) {
 
 // CreateFromFile uploads an iFile and create a new entry in the
 // iFiles list.
-func (r *FileIFileResource) CreateFromFile(filename string, file io.Reader, filesize int64) error {
-	uploadResp, err := r.c.UploadFile(file, filename, filesize)
+func (r *FileIFileResource) CreateFromFile(filename string, file io.Reader, filesize int64, opts ...f5.FileTransferOption) error {
+	uploadResp, err := r.c.UploadFile(file, filename, filesize, opts...)
 	if err != nil {
 		return fmt.Errorf("failed to create upload request: %v", err)
 	}
@@ -81,8 +81,8 @@ func (r *FileIFileResource) CreateFromFile(filename string, file io.Reader, file
 
 // EditFromFile uploads an iFile and update an existing entry in the
 // iFiles list.
-func (r *FileIFileResource) EditFromFile(filename string, file io.Reader, filesize int64) error {
-	uploadResp, err := r.c.UploadFile(file, filename, filesize)
+func (r *FileIFileResource) EditFromFile(filename string, file io.Reader, filesize int64, opts ...f5.FileTransferOption) error {
+	uploadResp, err := r.c.UploadFile(file, filename, filesize, opts...)
 	if err != nil {
 		return fmt.Errorf("failed to create upload request: %v", err)
 	}

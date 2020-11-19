@@ -63,9 +63,9 @@ func (r *FileSSLCRLResource) Get(id string) (*FileSSLCRLConfig, error) {
 	return &item, nil
 }
 
-// CreateFromFile uploads a CRL file in PEM and create or update its value.
-func (r *FileSSLCRLResource) CreateFromFile(name string, crlPEMFile io.Reader, filesize int64) error {
-	uploadResp, err := r.c.UploadFile(crlPEMFile, name+".crl", filesize)
+// CreateFromFile uploads a CRL file (encoded in PEM) and creates a system object.
+func (r *FileSSLCRLResource) CreateFromFile(name string, crlPEMFile io.Reader, filesize int64, opts ...f5.FileTransferOption) error {
+	uploadResp, err := r.c.UploadFile(crlPEMFile, name+".crl", filesize, opts...)
 	if err != nil {
 		return fmt.Errorf("failed to create upload request: %v", err)
 	}
@@ -79,7 +79,9 @@ func (r *FileSSLCRLResource) CreateFromFile(name string, crlPEMFile io.Reader, f
 	return nil
 }
 
-func (r *FileSSLCRLResource) EditFromFile(name string, crlPEMFile io.Reader, filesize int64) error {
+// EditFromFile uploads a CRL file (encoded in PEM) and updates the
+// corresponding system object.
+func (r *FileSSLCRLResource) EditFromFile(name string, crlPEMFile io.Reader, filesize int64, opts ...f5.FileTransferOption) error {
 	uploadResp, err := r.c.UploadFile(crlPEMFile, name+".crl", filesize)
 	if err != nil {
 		return fmt.Errorf("failed to create upload request: %v", err)
@@ -95,7 +97,7 @@ func (r *FileSSLCRLResource) EditFromFile(name string, crlPEMFile io.Reader, fil
 }
 
 // Edit a FileSSLCRL configuration identified by id.
-func (r *FileSSLCRLResource) Edit(id, path string) error {
+func (r *FileSSLCRLResource) Edit(id, path string, opts ...f5.FileTransferOption) error {
 	info, err := os.Stat(path)
 	if err != nil {
 		return fmt.Errorf("failed to gather information about '%s': %v", path, err)
@@ -106,7 +108,7 @@ func (r *FileSSLCRLResource) Edit(id, path string) error {
 	}
 	defer f.Close()
 
-	uploadResp, err := r.c.UploadFile(f, filepath.Base(path), info.Size())
+	uploadResp, err := r.c.UploadFile(f, filepath.Base(path), info.Size(), opts...)
 	if err != nil {
 		return fmt.Errorf("failed to upload file %q: %v", path, err)
 	}
