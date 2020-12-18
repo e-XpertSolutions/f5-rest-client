@@ -15,10 +15,10 @@ const (
 
 // ConfigSyncOptions represents available parameters for config-sync query.
 type ConfigSyncOptions struct {
-	FromGroup         string `mapstructure:",omitempty"`
-	ToGroup           string `mapstructure:",omitempty"`
-	RecoverSync       bool   `mapstructure:",omitempty"`
-	ForceFullLoadPush bool   `mapstructure:",omitempty"`
+	FromGroup         string `mapstructure:"from-group,omitempty"`
+	ToGroup           string `mapstructure:"to-group,omitempty"`
+	RecoverSync       bool   `mapstructure:"recover-sync,omitempty"`
+	ForceFullLoadPush bool   `mapstructure:"force-full-load-push,omitempty"`
 }
 
 // ConfigSyncOption is a function prototype that sets the
@@ -63,17 +63,17 @@ func (c *Client) ConfigSync(opts ...ConfigSyncOption) error {
 	}
 
 	var reqOptions = struct {
-		Command string
-		Options []map[string]string
-	}{Command: "run", Options: make([]map[string]string, 0)}
+		Command string                   `json:"command"`
+		Options []map[string]interface{} `json:"options"`
+	}{Command: "run", Options: make([]map[string]interface{}, 0)}
 
-	mapOpts := make(map[string]string)
+	mapOpts := make(map[string]interface{})
 	err := mapstructure.Decode(options, &mapOpts)
 	if err != nil {
 		return fmt.Errorf("f5#ConfigSync: failed to transform options: %w", err)
 	}
 	for k, v := range mapOpts {
-		reqOptions.Options = append(reqOptions.Options, map[string]string{k: v})
+		reqOptions.Options = append(reqOptions.Options, map[string]interface{}{k: v})
 	}
 
 	resp, err := c.SendRequest("POST", PathConfigSync, reqOptions)
