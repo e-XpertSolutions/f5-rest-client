@@ -16,15 +16,27 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
+// FileTransferPath holds the REST path and the corresponding remote directory
+// for file transfer.
+type FileTransferPath struct {
+	URI       string
+	RemoteDir string
+}
+
 // Paths for file upload.
 const (
-	PathUploadImage = "/mgmt/cm/autodeploy/software-image-uploads"
-	PathUploadFile  = "/mgmt/shared/file-transfer/uploads"
-	PathUploadUCS   = "mgmt/shared/file-transfer/ucs-uploads"
-
 	// For backward compatibility
 	// DEPRECATED
-	UploadRESTPath = PathUploadFile
+	UploadRESTPath = "/mgmt/shared/file-transfer/uploads"
+)
+
+// File transfer path, according to:
+//    https://devcentral.f5.com/s/articles/demystifying-icontrol-rest-part-5-transferring-files
+var (
+	// Upload paths
+	PathUploadImage = FileTransferPath{"/mgmt/cm/autodeploy/software-image-uploads", "/shared/images"}
+	PathUploadFile  = FileTransferPath{"/mgmt/shared/file-transfer/uploads", "/var/config/rest/downloads"}
+	PathUploadUCS   = FileTransferPath{"mgmt/shared/file-transfer/ucs-uploads", "/var/local/ucs"}
 )
 
 // Paths for file download.
@@ -295,7 +307,7 @@ func (c *Client) UploadUCS(r io.Reader, filename string, filesize int64, opts ..
 	return c.upload(r, PathUploadUCS, filename, filesize, opts...)
 }
 
-func (c *Client) upload(r io.Reader, restPath, filename string, filesize int64, opts ...FileTransferOption) (*UploadResponse, error) {
+func (c *Client) upload(r io.Reader, restPath FileTransferPath, filename string, filesize int64, opts ...FileTransferOption) (*UploadResponse, error) {
 	var uploadResp UploadResponse
 
 	options := FileTransferOptions{}
@@ -321,10 +333,11 @@ func (c *Client) upload(r io.Reader, restPath, filename string, filesize int64, 
 				HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 			}
 		}
-		_, err := c.uploadUsingSSH(r, filename, options)
+		_, err := c.uploadUsingSSH(r, filename, restPath.RemoteDir, options)
 		if err != nil {
 			return nil, err
 		}
+		uploadResp.LocalFilePath = filepath.Join(restPath.RemoteDir, filename)
 		return &uploadResp, nil
 	}
 
@@ -336,7 +349,7 @@ func (c *Client) upload(r io.Reader, restPath, filename string, filesize int64, 
 			chunk = remainingBytes
 		}
 
-		req, err := c.makeUploadRequest(restPath+"/"+filename, io.LimitReader(r, chunk), bytesSent, chunk, filesize)
+		req, err := c.makeUploadRequest(restPath.URI+"/"+filename, io.LimitReader(r, chunk), bytesSent, chunk, filesize)
 		if err != nil {
 			return nil, err
 		}
@@ -364,9 +377,9 @@ func (c *Client) upload(r io.Reader, restPath, filename string, filesize int64, 
 	return &uploadResp, nil
 }
 
-func (c *Client) uploadUsingSSH(r io.Reader, filename string, opts FileTransferOptions) (int64, error) {
+func (c *Client) uploadUsingSSH(r io.Reader, filename, destDir string, opts FileTransferOptions) (int64, error) {
 
-	path := string(os.PathSeparator) + filepath.Join("var", "local", "ucs", filename)
+	path := string(os.PathSeparator) + filepath.Join(destDir, filename)
 
 	parsedURL, err := url.Parse(c.baseURL)
 	if err != nil {

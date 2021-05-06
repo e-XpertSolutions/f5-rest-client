@@ -82,7 +82,7 @@ func (r *FileSSLCRLResource) CreateFromFile(name string, crlPEMFile io.Reader, f
 // EditFromFile uploads a CRL file (encoded in PEM) and updates the
 // corresponding system object.
 func (r *FileSSLCRLResource) EditFromFile(name string, crlPEMFile io.Reader, filesize int64, opts ...f5.FileTransferOption) error {
-	uploadResp, err := r.c.UploadFile(crlPEMFile, name+".crl", filesize)
+	uploadResp, err := r.c.UploadFile(crlPEMFile, name+".crl", filesize, opts...)
 	if err != nil {
 		return fmt.Errorf("failed to create upload request: %v", err)
 	}
