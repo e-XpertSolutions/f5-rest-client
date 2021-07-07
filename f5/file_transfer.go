@@ -53,6 +53,8 @@ const MaxChunkSize = 1048576
 type FileTransferOptions struct {
 	UseSFTP      bool
 	ClientConfig *ssh.ClientConfig
+	RemotePath   string           // for download only
+	Target       FileTransferPath // for upload only
 }
 
 // FileTransferOption is a function type to set the transfer options.
@@ -66,9 +68,23 @@ func WithSFTP(config *ssh.ClientConfig) FileTransferOption {
 	}
 }
 
+// WithRemotePath sets the source directory on the remote F5 for file download.
+func WithRemotePath(path string) FileTransferOption {
+	return func(o *FileTransferOptions) {
+		o.RemotePath = path
+	}
+}
+
+// WithTarget overrides the default FileTransferPath. This options has effects
+// only on upload methods.
+func WithTarget(target FileTransferPath) FileTransferOption {
+	return func(o *FileTransferOptions) {
+		o.Target = target
+	}
+}
+
 // DownloadUCS downloads an UCS file and writes its content to w.
 func (c *Client) DownloadUCS(w io.Writer, filename string, opts ...FileTransferOption) (n int64, err error) {
-
 	options := FileTransferOptions{}
 	for _, o := range opts {
 		o(&options)
@@ -151,8 +167,10 @@ func (c *Client) DownloadUCS(w io.Writer, filename string, opts ...FileTransferO
 }
 
 func (c *Client) downloadUsingSSH(w io.Writer, filename string, opts FileTransferOptions) (int64, error) {
-
 	path := string(os.PathSeparator) + filepath.Join("var", "local", "ucs", filename)
+	if opts.RemotePath != "" {
+		path = opts.RemotePath
+	}
 
 	parsedURL, err := url.Parse(c.baseURL)
 	if err != nil {
@@ -183,7 +201,33 @@ func (c *Client) downloadUsingSSH(w io.Writer, filename string, opts FileTransfe
 // DownloadImage downloads BIG-IP images from the API and writes it to w.
 //
 // Download can take some time due to the size of the image files.
-func (c *Client) DownloadImage(w io.Writer, filename string) (n int64, err error) {
+func (c *Client) DownloadImage(w io.Writer, filename string, opts ...FileTransferOption) (n int64, err error) {
+	options := FileTransferOptions{}
+	for _, o := range opts {
+		o(&options)
+	}
+
+	if options.UseSFTP {
+		if options.ClientConfig == nil {
+			fn := func(user, instruction string, questions []string, echos []bool) (answers []string, err error) {
+				for _, q := range questions {
+					if strings.Contains(q, "Password") {
+						return []string{c.password}, nil
+					}
+				}
+				return []string{}, nil
+			}
+			options.ClientConfig = &ssh.ClientConfig{
+				User: c.username,
+				Auth: []ssh.AuthMethod{
+					ssh.KeyboardInteractive(fn),
+				},
+				HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+			}
+		}
+		return c.downloadUsingSSH(w, filename, options)
+	}
+
 	// This is necessary to get the filesize first using bash command in order
 	// to support BIG-IP 12.x.x.
 	out, err := c.Exec("wc -c /shared/images/" + filename)
@@ -310,7 +354,7 @@ func (c *Client) UploadUCS(r io.Reader, filename string, filesize int64, opts ..
 func (c *Client) upload(r io.Reader, restPath FileTransferPath, filename string, filesize int64, opts ...FileTransferOption) (*UploadResponse, error) {
 	var uploadResp UploadResponse
 
-	options := FileTransferOptions{}
+	options := FileTransferOptions{Target: restPath}
 	for _, o := range opts {
 		o(&options)
 	}
@@ -349,7 +393,7 @@ func (c *Client) upload(r io.Reader, restPath FileTransferPath, filename string,
 			chunk = remainingBytes
 		}
 
-		req, err := c.makeUploadRequest(restPath.URI+"/"+filename, io.LimitReader(r, chunk), bytesSent, chunk, filesize)
+		req, err := c.makeUploadRequest(options.Target.URI+"/"+filename, io.LimitReader(r, chunk), bytesSent, chunk, filesize)
 		if err != nil {
 			return nil, err
 		}
