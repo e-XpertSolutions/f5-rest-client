@@ -109,7 +109,8 @@ func (c *Client) DownloadUCS(w io.Writer, filename string, opts ...FileTransferO
 				HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 			}
 		}
-		return c.downloadUsingSSH(w, filename, options)
+		path := string(os.PathSeparator) + filepath.Join("var", "local", "ucs", filename)
+		return c.downloadUsingSSH(w, path, options)
 	}
 
 	// BigIP 12.x.x only support download requests with a Content-Range header,
@@ -167,8 +168,7 @@ func (c *Client) DownloadUCS(w io.Writer, filename string, opts ...FileTransferO
 	return
 }
 
-func (c *Client) downloadUsingSSH(w io.Writer, filename string, opts FileTransferOptions) (int64, error) {
-	path := string(os.PathSeparator) + filepath.Join("var", "local", "ucs", filename)
+func (c *Client) downloadUsingSSH(w io.Writer, path string, opts FileTransferOptions) (int64, error) {
 	if opts.RemotePath != "" {
 		path = opts.RemotePath
 	}
@@ -192,7 +192,7 @@ func (c *Client) downloadUsingSSH(w io.Writer, filename string, opts FileTransfe
 
 	file, err := sftpClient.Open(path)
 	if err != nil {
-		return 0, fmt.Errorf("downloadUsingSSH: cannot open file %q: %w", filename, err)
+		return 0, fmt.Errorf("downloadUsingSSH: cannot open file %q: %w", path, err)
 	}
 	defer file.Close()
 
@@ -226,7 +226,8 @@ func (c *Client) DownloadImage(w io.Writer, filename string, opts ...FileTransfe
 				HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 			}
 		}
-		return c.downloadUsingSSH(w, filename, options)
+		path := string(os.PathSeparator) + filepath.Join("shared", "images", filename)
+		return c.downloadUsingSSH(w, path, options)
 	}
 
 	// This is necessary to get the filesize first using bash command in order
@@ -278,7 +279,9 @@ func (c *Client) DownloadQKView(w io.Writer, filename string, opts ...FileTransf
 				HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 			}
 		}
-		return c.downloadUsingSSH(w, filename, options)
+		path := string(os.PathSeparator) + filepath.Join("shared", "tmp", "qkviews", filename)
+
+		return c.downloadUsingSSH(w, path, options)
 	}
 
 	// This is necessary to get the filesize first using bash command in order
