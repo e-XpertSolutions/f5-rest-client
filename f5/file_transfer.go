@@ -41,8 +41,9 @@ var (
 
 // Paths for file download.
 const (
-	PathDownloadUCS   = "/mgmt/shared/file-transfer/ucs-downloads"
-	PathDownloadImage = "/mgmt/cm/autodeploy/software-image-downloads"
+	PathDownloadUCS    = "/mgmt/shared/file-transfer/ucs-downloads"
+	PathDownloadImage  = "/mgmt/cm/autodeploy/software-image-downloads"
+	PathDownloadQKView = "/mgmt/cm/autodeploy/qkview-downloads"
 )
 
 // MaxChunkSize is the maximum chunk size allowed by the iControl REST
@@ -245,6 +246,58 @@ func (c *Client) DownloadImage(w io.Writer, filename string, opts ...FileTransfe
 	}
 
 	if n, err = c.download(w, PathDownloadImage+"/"+filename, fileSize, MaxChunkSize); err != nil {
+		return 0, fmt.Errorf("cannot download image file: %v", err)
+	}
+	return
+}
+
+// DownloadQKView downloads qkview from the API and writes it to w.
+//
+// Download can take some time due to the size of the file.
+func (c *Client) DownloadQKView(w io.Writer, filename string, opts ...FileTransferOption) (n int64, err error) {
+	options := FileTransferOptions{}
+	for _, o := range opts {
+		o(&options)
+	}
+
+	if options.UseSFTP {
+		if options.ClientConfig == nil {
+			fn := func(user, instruction string, questions []string, echos []bool) (answers []string, err error) {
+				for _, q := range questions {
+					if strings.Contains(q, "Password") {
+						return []string{c.password}, nil
+					}
+				}
+				return []string{}, nil
+			}
+			options.ClientConfig = &ssh.ClientConfig{
+				User: c.username,
+				Auth: []ssh.AuthMethod{
+					ssh.KeyboardInteractive(fn),
+				},
+				HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+			}
+		}
+		return c.downloadUsingSSH(w, filename, options)
+	}
+
+	// This is necessary to get the filesize first using bash command in order
+	// to support BIG-IP 12.x.x.
+	out, err := c.Exec("wc -c /shared/tmp/qkviews/" + filename)
+	if err != nil {
+		return 0, fmt.Errorf("cannot get file size: %v", err)
+	}
+	fileSizeStr := strings.TrimSpace(out.CommandResult)
+	pos := strings.Index(fileSizeStr, " ")
+	if pos != -1 {
+		fileSizeStr = fileSizeStr[:pos]
+	}
+	fileSize, err := strconv.ParseInt(fileSizeStr, 10, 64)
+	if err != nil {
+		return 0, fmt.Errorf("cannot read file size: %v", err)
+	}
+
+	if n, err = c.download(w, PathDownloadQKView+"/"+filename, fileSize, MaxChunkSize); err != nil {
 		return 0, fmt.Errorf("cannot download image file: %v", err)
 	}
 	return
