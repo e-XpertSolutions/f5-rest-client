@@ -63,7 +63,7 @@ func (r *WideipAResource) ListAll() (*WideipList, error) {
 // Get a single WideipA configuration identified by id.
 func (r *WideipAResource) Get(id string) (*Wideip, error) {
 	var item Wideip
-	if err := r.c.ReadQuery(BasePath+WideipAEndpoint, &item); err != nil {
+	if err := r.c.ReadQuery(BasePath+WideipAEndpoint+"/"+id, &item); err != nil {
 		return nil, err
 	}
 	return &item, nil
