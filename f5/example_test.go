@@ -98,15 +98,7 @@ func Example_transaction() {
 		SourceAddressTranslation: ltm.SourceAddressTranslation{
 			Type: "automap",
 		},
-		Profiles: []ltm.Profile{
-			{
-				Name:    "tcp-mobile-optimized",
-				Context: "all",
-			},
-			{
-				Name: "http",
-			},
-		},
+        Profiles: []string{"tcp-mobile-optimized"},
 	}
 
 	if err := ltmClient.Virtual().Create(vsConfig); err != nil {
