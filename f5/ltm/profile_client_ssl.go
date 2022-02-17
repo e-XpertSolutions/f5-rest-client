@@ -1,11 +1,35 @@
 package ltm
 
-import "github.com/e-XpertSolutions/f5-rest-client/f5"
+import (
+	"strings"
+
+	"github.com/e-XpertSolutions/f5-rest-client/f5"
+)
 
 type ProfileClientSSLList struct {
 	Items    []ProfileClientSSL `json:"items,omitempty"`
 	Kind     string             `json:"kind,omitempty" pretty:",expanded"`
 	SelfLink string             `json:"selflink,omitempty" pretty:",expanded"`
+}
+
+// TMOptions is a slice of strings. We define it as it's own type so that we can handle the JSON marshalling in a custom
+// way. When the API returns the TMOptions, it does so as a string wrapped in { }. However, when posting back to the API,
+// an array of strings is expected.
+type TMOptions []string
+
+// UnmarshalJSON converts a byte stream into a populated TMOptions slice
+func (tm *TMOptions) UnmarshalJSON(data []byte) error {
+	// "{ dont-insert-empty-fragments no-tlsv1.3 }"
+	asString := string(data)
+
+	asString = strings.ReplaceAll(asString, "\"", "")
+	asString = strings.TrimSpace(asString)
+	asString = strings.TrimPrefix(asString, "{")
+	asString = strings.TrimSuffix(asString, "}")
+	asString = strings.TrimSpace(asString)
+
+	*tm = strings.Split(asString, " ")
+	return nil
 }
 
 type ProfileClientSSL struct {
@@ -65,44 +89,44 @@ type ProfileClientSSL struct {
 	KeyReference                    struct {
 		Link string `json:"link,omitempty"`
 	} `json:"keyReference,omitempty"`
-	Kind                               string `json:"kind,omitempty"`
-	MaxActiveHandshakes                string `json:"maxActiveHandshakes,omitempty"`
-	MaxAggregateRenegotiationPerMinute string `json:"maxAggregateRenegotiationPerMinute,omitempty"`
-	MaxRenegotiationsPerMinute         int    `json:"maxRenegotiationsPerMinute,omitempty"`
-	MaximumRecordSize                  int    `json:"maximumRecordSize,omitempty"`
-	ModSslMethods                      string `json:"modSslMethods,omitempty"`
-	Mode                               string `json:"mode,omitempty"`
-	Name                               string `json:"name,omitempty"`
-	NotifyCertStatusToVirtualServer    string `json:"notifyCertStatusToVirtualServer,omitempty"`
-	OCSPStapling                       string `json:"ocspStapling,omitempty"`
-	Partition                          string `json:"partition,omitempty"`
-	PeerCertMode                       string `json:"peerCertMode,omitempty"`
-	PeerNoRenegotiateTimeout           string `json:"peerNoRenegotiateTimeout,omitempty"`
-	ProxyCACert                        string `json:"proxyCaCert,omitempty"`
-	ProxyCAKey                         string `json:"proxyCaKey,omitempty"`
-	ProxySSL                           string `json:"proxySsl,omitempty"`
-	ProxySSLPassthrough                string `json:"proxySslPassthrough,omitempty"`
-	RenegotiateMaxRecordDelay          string `json:"renegotiateMaxRecordDelay,omitempty"`
-	RenegotiatePeriod                  string `json:"renegotiatePeriod,omitempty"`
-	RenegotiateSize                    string `json:"renegotiateSize,omitempty"`
-	Renegotiation                      string `json:"renegotiation,omitempty"`
-	RetainCertificate                  string `json:"retainCertificate,omitempty"`
-	SecureRenegotiation                string `json:"secureRenegotiation,omitempty"`
-	SelfLink                           string `json:"selfLink,omitempty"`
-	ServerName                         string `json:"serverName,omitempty"`
-	SessionMirroring                   string `json:"sessionMirroring,omitempty"`
-	SessionTicket                      string `json:"sessionTicket,omitempty"`
-	SessionTicketTimeout               int    `json:"sessionTicketTimeout,omitempty"`
-	SNIDefault                         string `json:"sniDefault,omitempty"`
-	SNIRequire                         string `json:"sniRequire,omitempty"`
-	SourceIPBlacklist                  string `json:"sourceIpBlacklist,omitempty"`
-	SourceIPWhitelist                  string `json:"sourceIpWhitelist,omitempty"`
-	SSLForwardProxy                    string `json:"sslForwardProxy,omitempty"`
-	SSLForwardProxyBypass              string `json:"sslForwardProxyBypass,omitempty"`
-	SSLSignHash                        string `json:"sslSignHash,omitempty"`
-	StrictResume                       string `json:"strictResume,omitempty"`
-	TMOptions                          string `json:"tmOptions,omitempty"`
-	UncleanShutdown                    string `json:"uncleanShutdown,omitempty"`
+	Kind                               string    `json:"kind,omitempty"`
+	MaxActiveHandshakes                string    `json:"maxActiveHandshakes,omitempty"`
+	MaxAggregateRenegotiationPerMinute string    `json:"maxAggregateRenegotiationPerMinute,omitempty"`
+	MaxRenegotiationsPerMinute         int       `json:"maxRenegotiationsPerMinute,omitempty"`
+	MaximumRecordSize                  int       `json:"maximumRecordSize,omitempty"`
+	ModSslMethods                      string    `json:"modSslMethods,omitempty"`
+	Mode                               string    `json:"mode,omitempty"`
+	Name                               string    `json:"name,omitempty"`
+	NotifyCertStatusToVirtualServer    string    `json:"notifyCertStatusToVirtualServer,omitempty"`
+	OCSPStapling                       string    `json:"ocspStapling,omitempty"`
+	Partition                          string    `json:"partition,omitempty"`
+	PeerCertMode                       string    `json:"peerCertMode,omitempty"`
+	PeerNoRenegotiateTimeout           string    `json:"peerNoRenegotiateTimeout,omitempty"`
+	ProxyCACert                        string    `json:"proxyCaCert,omitempty"`
+	ProxyCAKey                         string    `json:"proxyCaKey,omitempty"`
+	ProxySSL                           string    `json:"proxySsl,omitempty"`
+	ProxySSLPassthrough                string    `json:"proxySslPassthrough,omitempty"`
+	RenegotiateMaxRecordDelay          string    `json:"renegotiateMaxRecordDelay,omitempty"`
+	RenegotiatePeriod                  string    `json:"renegotiatePeriod,omitempty"`
+	RenegotiateSize                    string    `json:"renegotiateSize,omitempty"`
+	Renegotiation                      string    `json:"renegotiation,omitempty"`
+	RetainCertificate                  string    `json:"retainCertificate,omitempty"`
+	SecureRenegotiation                string    `json:"secureRenegotiation,omitempty"`
+	SelfLink                           string    `json:"selfLink,omitempty"`
+	ServerName                         string    `json:"serverName,omitempty"`
+	SessionMirroring                   string    `json:"sessionMirroring,omitempty"`
+	SessionTicket                      string    `json:"sessionTicket,omitempty"`
+	SessionTicketTimeout               int       `json:"sessionTicketTimeout,omitempty"`
+	SNIDefault                         string    `json:"sniDefault,omitempty"`
+	SNIRequire                         string    `json:"sniRequire,omitempty"`
+	SourceIPBlacklist                  string    `json:"sourceIpBlacklist,omitempty"`
+	SourceIPWhitelist                  string    `json:"sourceIpWhitelist,omitempty"`
+	SSLForwardProxy                    string    `json:"sslForwardProxy,omitempty"`
+	SSLForwardProxyBypass              string    `json:"sslForwardProxyBypass,omitempty"`
+	SSLSignHash                        string    `json:"sslSignHash,omitempty"`
+	StrictResume                       string    `json:"strictResume,omitempty"`
+	TMOptions                          TMOptions `json:"tmOptions,omitempty"`
+	UncleanShutdown                    string    `json:"uncleanShutdown,omitempty"`
 }
 
 const ProfileClientSSLEndpoint = "/profile/client-ssl"
@@ -135,7 +159,7 @@ func (r *ProfileClientSSLResource) Create(item ProfileClientSSL) error {
 }
 
 func (r *ProfileClientSSLResource) Edit(id string, item ProfileClientSSL) error {
-	if err := r.c.ModQuery("PUT", BasePath+ProfileClientSSLEndpoint+"/"+id, item); err != nil {
+	if err := r.c.ModQuery("PATCH", BasePath+ProfileClientSSLEndpoint+"/"+id, item); err != nil {
 		return err
 	}
 	return nil
