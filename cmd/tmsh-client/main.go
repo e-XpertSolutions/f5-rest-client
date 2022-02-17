@@ -1,16 +1,15 @@
 package main
 
 import (
-	"e-xpert_solutions/f5-rest-client/cmd/tmsh-client/ltm"
 	"fmt"
 	"io/ioutil"
 	"os"
 
-	"github.com/BurntSushi/toml"
 	"github.com/e-XpertSolutions/f5-rest-client/f5"
-	"github.com/howeyc/gopass"
 
-	"github.com/urfave/cli"
+	"github.com/BurntSushi/toml"
+	"github.com/howeyc/gopass"
+	"github.com/urfave/cli/v2"
 )
 
 type config struct {
@@ -23,40 +22,40 @@ type config struct {
 func main() {
 	app := cli.NewApp()
 	app.Flags = []cli.Flag{
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:  "json,j",
 			Usage: "pretty print output using JSON format",
 		},
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:  "insecure,k",
 			Usage: "Allow connections to unsecure F5 iControl APIs",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "proxy,x",
 			Value: "",
 			Usage: "use a proxy",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "host,H",
 			Value: "",
 			Usage: "hostname or IP address of the F5 device",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "port,P",
 			Value: "443",
 			Usage: "hostname or IP address of the F5 device",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "user,u",
 			Value: "admin",
 			Usage: "Administrative user",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "password,p",
 			Value: "",
 			Usage: "Administrative user",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "config,c",
 			Value: "",
 			Usage: "CONFIGURATION_FILE Path to configuration file",
@@ -67,7 +66,7 @@ func main() {
 	app.Before = func(c *cli.Context) error {
 		var cfg config
 
-		if configPath := c.GlobalString("config"); configPath != "" {
+		if configPath := c.String("config"); configPath != "" {
 			tomlData, err := ioutil.ReadFile(configPath)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, "cannot read configuration file: ", err)
@@ -107,30 +106,31 @@ func main() {
 			return err
 		}
 
-		insecure := c.GlobalBool("insecure")
+		insecure := c.Bool("insecure")
 		if insecure {
 			f5Client.DisableCertCheck()
 		}
 		return nil
 	}
 
-	app.Commands = []cli.Command{
-		{
+	app.Commands = []*cli.Command{
+		&cli.Command{
 			Name:     "node",
 			Category: "Local Traffic Manager",
 			Usage:    "Query or modify node objects",
 			Aliases:  []string{"n"},
-			Subcommands: []cli.Command{
-				{
+			Subcommands: []*cli.Command{
+				&cli.Command{
 					Name: "create",
 					Action: func(c *cli.Context) error {
-						return ltm.CreateNode(c, f5Client)
+						//return ltm.CreateNode(c, f5Client)
+						return nil
 					},
 					Flags: []cli.Flag{
-						cli.StringFlag{
+						&cli.StringFlag{
 							Name: "name,n",
 						},
-						cli.StringFlag{
+						&cli.StringFlag{
 							Name: "address,a",
 						},
 					},
@@ -138,37 +138,43 @@ func main() {
 				{
 					Name: "delete",
 					Action: func(c *cli.Context) error {
-						return ltm.DeleteNode(c, f5Client)
+						//return ltm.DeleteNode(c, f5Client)
+						return nil
 					},
 				},
 				{
 					Name: "stats",
 					Action: func(c *cli.Context) error {
-						return ltm.StatsNode(c, f5Client)
+						//return ltm.StatsNode(c, f5Client)
+						return nil
 					},
 				},
 				{
 					Name: "enable",
 					Action: func(c *cli.Context) error {
-						return ltm.EnableNode(c, f5Client)
+						//return ltm.EnableNode(c, f5Client)
+						return nil
 					},
 				},
 				{
 					Name: "disable",
 					Action: func(c *cli.Context) error {
-						return ltm.DisableNode(c, f5Client)
+						//return ltm.DisableNode(c, f5Client)
+						return nil
 					},
 				},
 				{
 					Name: "offline",
 					Action: func(c *cli.Context) error {
-						return ltm.OfflineNode(c, f5Client)
+						//return ltm.OfflineNode(c, f5Client)
+						return nil
 					},
 				},
 				{
 					Name: "list",
 					Action: func(c *cli.Context) error {
-						return ltm.ListNode(c, f5Client)
+						//return ltm.ListNode(c, f5Client)
+						return nil
 					},
 				},
 			},
@@ -178,17 +184,18 @@ func main() {
 			Category: "Local Traffic Manager",
 			Usage:    "Query or modify Virtual Server objects",
 			Aliases:  []string{"n"},
-			Subcommands: []cli.Command{
-				{
+			Subcommands: []*cli.Command{
+				&cli.Command{
 					Name: "create",
 					Action: func(c *cli.Context) error {
-						return ltm.CreateVS(c, f5Client)
+						//return ltm.CreateVS(c, f5Client)
+						return nil
 					},
 					Flags: []cli.Flag{
-						cli.StringFlag{
+						&cli.StringFlag{
 							Name: "name,n",
 						},
-						cli.StringFlag{
+						&cli.StringFlag{
 							Name: "address,a",
 						},
 					},
@@ -196,31 +203,36 @@ func main() {
 				{
 					Name: "delete",
 					Action: func(c *cli.Context) error {
-						return ltm.DeleteVS(c, f5Client)
+						//return ltm.DeleteVS(c, f5Client)
+						return nil
 					},
 				},
 				{
 					Name: "stats",
 					Action: func(c *cli.Context) error {
-						return ltm.StatsVS(c, f5Client)
+						//return ltm.StatsVS(c, f5Client)
+						return nil
 					},
 				},
 				{
 					Name: "enable",
 					Action: func(c *cli.Context) error {
-						return ltm.EnableVS(c, f5Client)
+						//return ltm.EnableVS(c, f5Client)
+						return nil
 					},
 				},
 				{
 					Name: "disable",
 					Action: func(c *cli.Context) error {
-						return ltm.DisableVS(c, f5Client)
+						//return ltm.DisableVS(c, f5Client)
+						return nil
 					},
 				},
 				{
 					Name: "list",
 					Action: func(c *cli.Context) error {
-						return ltm.ListVS(c, f5Client)
+						//return ltm.ListVS(c, f5Client)
+						return nil
 					},
 				},
 			},
