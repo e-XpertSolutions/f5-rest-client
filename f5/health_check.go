@@ -159,7 +159,11 @@ func (c *Client) SyncStatusDetails() (SyncStatusResp, error) {
 		return syncStat, fmt.Errorf("could not retrieve group name")
 	}
 
-	syncStat.GroupName = description[:strings.Index(description, "(")-1]
+	if pos := strings.Index(description, "("); pos > 0 {
+		syncStat.GroupName = description[:pos-1]
+	} else {
+		syncStat.GroupName = "unknown"
+	}
 
 	return syncStat, nil
 }
