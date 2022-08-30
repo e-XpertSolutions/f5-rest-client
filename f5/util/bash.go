@@ -5,8 +5,6 @@
 package util
 
 import (
-	"encoding/json"
-
 	"github.com/e-XpertSolutions/f5-rest-client/f5"
 )
 
@@ -24,16 +22,6 @@ type BashResource struct {
 	c *f5.Client
 }
 
-func (br *BashResource) Run(item BashCommand) (*BashCommand, error) {
-	resp, err := br.c.MakeRequest("POST", BasePath+BashEndpoint, item)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	var respItem BashCommand
-	dec := json.NewDecoder(resp.Body)
-	if err := dec.Decode(&respItem); err != nil {
-		return nil, err
-	}
-	return &respItem, nil
+func (br *BashResource) Run(cmd string) (*f5.ExecOutput, error) {
+	return br.c.Exec(cmd)
 }
