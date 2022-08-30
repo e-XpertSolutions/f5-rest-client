@@ -22,6 +22,8 @@ resgen.exe
 
 # VSCode
 .vscode
+.history/*
+.dccache
 
 # IntelliJ etc
 .idea/
