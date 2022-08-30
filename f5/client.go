@@ -113,7 +113,6 @@ func CreateToken(baseURL, user, password, loginProvName string) (string, time.Ti
 	}
 
 	tokReq.Header.Add("Content-Type", "application/json")
-	tokReq.SetBasicAuth(user, password)
 
 	resp, err := c.c.Do(tokReq)
 	if err != nil {
