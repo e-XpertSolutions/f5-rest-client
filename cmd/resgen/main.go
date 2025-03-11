@@ -19,7 +19,7 @@ import (
 	"strings"
 	"text/template"
 
-	gojson "github.com/ChimeraCoder/gojson"
+	"github.com/ChimeraCoder/gojson"
 
 	"github.com/e-XpertSolutions/f5-rest-client/f5"
 )
@@ -294,7 +294,10 @@ func main() {
 			continue
 		}
 		defer resp.Body.Close()
-		listDef, err := gojson.Generate(resp.Body, name, *pkgName)
+		// Fix the gojson.Generate call
+		parser := gojson.ParseJson
+		tags := []string{"json"}
+		listDef, err := gojson.Generate(resp.Body, parser, name, *pkgName, tags, false, true)
 		if err != nil {
 			log.Print("failed to generate structure for ", restPath, ": ", err)
 			continue
