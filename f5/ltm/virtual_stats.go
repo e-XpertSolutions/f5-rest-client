@@ -162,3 +162,11 @@ func (r *VirtualStatsResource) All() (*VirtualStatsList, error) {
 	}
 	return &list, nil
 }
+
+func (r *VirtualStatsResource) Get(id string) (*VirtualStatsList, error) {
+	var list VirtualStatsList
+	if err := r.c.ReadQuery(BasePath+VirtualEndpoint+"/"+id+"/stats", &list); err != nil {
+		return nil, err
+	}
+	return &list, nil
+}
