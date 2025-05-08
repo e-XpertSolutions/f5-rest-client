@@ -31,7 +31,8 @@ const (
 )
 
 // File transfer path, according to:
-//    https://devcentral.f5.com/s/articles/demystifying-icontrol-rest-part-5-transferring-files
+//
+//	https://devcentral.f5.com/s/articles/demystifying-icontrol-rest-part-5-transferring-files
 var (
 	// Upload paths
 	PathUploadImage = FileTransferPath{"/mgmt/cm/autodeploy/software-image-uploads", "/shared/images"}
@@ -92,21 +93,26 @@ func (c *Client) DownloadUCS(w io.Writer, filename string, opts ...FileTransferO
 	}
 
 	if options.UseSFTP {
-		if options.ClientConfig == nil {
-			fn := func(user, instruction string, questions []string, echos []bool) (answers []string, err error) {
-				for _, q := range questions {
-					if strings.Contains(q, "Password") {
-						return []string{c.password}, nil
-					}
+		fn := func(user, instruction string, questions []string, echos []bool) (answers []string, err error) {
+			for _, q := range questions {
+				if strings.Contains(q, "Password") {
+					return []string{c.password}, nil
 				}
-				return []string{}, nil
 			}
+			return []string{}, nil
+		}
+		if options.ClientConfig == nil {
 			options.ClientConfig = &ssh.ClientConfig{
 				User: c.username,
 				Auth: []ssh.AuthMethod{
 					ssh.KeyboardInteractive(fn),
 				},
 				HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+			}
+		} else {
+			options.ClientConfig.User = c.username
+			options.ClientConfig.Auth = []ssh.AuthMethod{
+				ssh.KeyboardInteractive(fn),
 			}
 		}
 		path := string(os.PathSeparator) + filepath.Join("var", "local", "ucs", filename)
@@ -209,21 +215,26 @@ func (c *Client) DownloadImage(w io.Writer, filename string, opts ...FileTransfe
 	}
 
 	if options.UseSFTP {
-		if options.ClientConfig == nil {
-			fn := func(user, instruction string, questions []string, echos []bool) (answers []string, err error) {
-				for _, q := range questions {
-					if strings.Contains(q, "Password") {
-						return []string{c.password}, nil
-					}
+		fn := func(user, instruction string, questions []string, echos []bool) (answers []string, err error) {
+			for _, q := range questions {
+				if strings.Contains(q, "Password") {
+					return []string{c.password}, nil
 				}
-				return []string{}, nil
 			}
+			return []string{}, nil
+		}
+		if options.ClientConfig == nil {
 			options.ClientConfig = &ssh.ClientConfig{
 				User: c.username,
 				Auth: []ssh.AuthMethod{
 					ssh.KeyboardInteractive(fn),
 				},
 				HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+			}
+		} else {
+			options.ClientConfig.User = c.username
+			options.ClientConfig.Auth = []ssh.AuthMethod{
+				ssh.KeyboardInteractive(fn),
 			}
 		}
 		path := string(os.PathSeparator) + filepath.Join("shared", "images", filename)
@@ -262,21 +273,26 @@ func (c *Client) DownloadQKView(w io.Writer, filename string, opts ...FileTransf
 	}
 
 	if options.UseSFTP {
-		if options.ClientConfig == nil {
-			fn := func(user, instruction string, questions []string, echos []bool) (answers []string, err error) {
-				for _, q := range questions {
-					if strings.Contains(q, "Password") {
-						return []string{c.password}, nil
-					}
+		fn := func(user, instruction string, questions []string, echos []bool) (answers []string, err error) {
+			for _, q := range questions {
+				if strings.Contains(q, "Password") {
+					return []string{c.password}, nil
 				}
-				return []string{}, nil
 			}
+			return []string{}, nil
+		}
+		if options.ClientConfig == nil {
 			options.ClientConfig = &ssh.ClientConfig{
 				User: c.username,
 				Auth: []ssh.AuthMethod{
 					ssh.KeyboardInteractive(fn),
 				},
 				HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+			}
+		} else {
+			options.ClientConfig.User = c.username
+			options.ClientConfig.Auth = []ssh.AuthMethod{
+				ssh.KeyboardInteractive(fn),
 			}
 		}
 		path := string(os.PathSeparator) + filepath.Join("shared", "tmp", "qkviews", filename)
@@ -416,21 +432,26 @@ func (c *Client) upload(r io.Reader, restPath FileTransferPath, filename string,
 	}
 
 	if options.UseSFTP {
-		if options.ClientConfig == nil {
-			fn := func(user, instruction string, questions []string, echos []bool) (answers []string, err error) {
-				for _, q := range questions {
-					if strings.Contains(q, "Password") {
-						return []string{c.password}, nil
-					}
+		fn := func(user, instruction string, questions []string, echos []bool) (answers []string, err error) {
+			for _, q := range questions {
+				if strings.Contains(q, "Password") {
+					return []string{c.password}, nil
 				}
-				return []string{}, nil
 			}
+			return []string{}, nil
+		}
+		if options.ClientConfig == nil {
 			options.ClientConfig = &ssh.ClientConfig{
 				User: c.username,
 				Auth: []ssh.AuthMethod{
 					ssh.KeyboardInteractive(fn),
 				},
 				HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+			}
+		} else {
+			options.ClientConfig.User = c.username
+			options.ClientConfig.Auth = []ssh.AuthMethod{
+				ssh.KeyboardInteractive(fn),
 			}
 		}
 		_, err := c.uploadUsingSSH(r, filename, restPath.RemoteDir, options)
