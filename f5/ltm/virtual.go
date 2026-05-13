@@ -46,6 +46,7 @@ type VirtualServer struct {
 	Mirror              string        `json:"mirror,omitempty"`
 	MobileAppTunnel     string        `json:"mobileAppTunnel,omitempty" pretty:",expanded"`
 	Name                string        `json:"name,omitempty"`
+	SubPath             string        `json:"subPath,omitempty"`
 	Nat64               string        `json:"nat64,omitempty" pretty:",expanded"`
 	Partition           string        `json:"partition,omitempty"`
 	Persistences        []Persistence `json:"persist,omitempty"`

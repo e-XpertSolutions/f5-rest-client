@@ -39,6 +39,7 @@ type Pool struct {
 	MinUpMembersChecking   string `json:"minUpMembersChecking,omitempty"`
 	Monitor                string `json:"monitor,omitempty"`
 	Name                   string `json:"name,omitempty"`
+	SubPath                string `json:"subPath,omitempty"`
 	QueueDepthLimit        int64  `json:"queueDepthLimit,omitempty" pretty:",expanded"`
 	QueueOnConnectionLimit string `json:"queueOnConnectionLimit,omitempty" pretty:",expanded"`
 	QueueTimeLimit         int64  `json:"queueTimeLimit,omitempty" pretty:",expanded"`

@@ -223,6 +223,19 @@ func (c *Client) SetHTTPClient(client http.Client) {
 	c.c = client
 }
 
+// HTTPClient returns the underlying *http.Client used to make requests.
+// Callers may inspect or mutate the returned client (for example to install
+// a proxy or a custom dialer on its transport); mutations take effect on
+// subsequent requests. When the transport is an *http.Transport — which is
+// the case for clients created via NewBasicClient, NewTokenClient or
+// TokenClientConnection — mutating that transport in place is preferable to
+// replacing the client entirely, since the internal transport reference
+// used by DisableCertCheck, UseProxy and UseSystemProxy is otherwise not
+// kept in sync with the new client's transport.
+func (c *Client) HTTPClient() *http.Client {
+	return &c.c
+}
+
 // UseProxy configures a proxy to use for outbound connections
 func (c *Client) UseProxy(proxy string) error {
 	proxyURL, err := url.Parse(proxy)
